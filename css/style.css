@@ -165,6 +165,18 @@ section {
 .btn-small {
 	font-size: 10px;
 }
+.typerec{
+	box-shadow: none;
+	border: 1px solid #f7f7f7;
+	border-radius: 0px;
+	width: 200px;
+	height:40px;
+	align : right ;
+}
+.typerec:focus {
+	border: none;
+	box-shadow: none;
+}
 .btn-dark {
 	color: #272727;
 	border-color: #272727;
@@ -183,6 +195,13 @@ section {
 	background: none;
 	color: #fff;
 	border: 1px solid #fff;
+}
+.form-reclamation
+{
+	box-shadow: none;
+	border: 1px solid #f7f7f7;
+	border-radius: 0px;
+	height: 20px;
 }
 .form-control {
 	box-shadow: none;
