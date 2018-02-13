@@ -1221,7 +1221,7 @@ header .ownmenu .look-book .media-body a {
 .popurlar_product .items-in {
 	position: relative;
 	overflow: hidden;
-	margin-top: 40px;
+	margin-top: 0px;
 }
 .popurlar_product .over-item {
 	position: absolute;
@@ -1689,38 +1689,38 @@ header .ownmenu .look-book .media-body a {
     Hot Tags
 ===========================================*/
 .hot-tag {
-	height: 58px;
-	width: 58px;
+	height: 35px;
+	width: 35px;
 	float: right;
 	position: absolute;
 	background: #af5875;
-	line-height: 58px;
+	line-height: 25px;
 	text-align: center;
 	color: #fff;
 	font-size: 11px;
 	font-family: 'Montserrat', sans-serif;
 	z-index: 999;
-	right: 20px;
-	top: 20px;
+	right: 0px;
+	top: 0px;
 	border-radius: 50%;
 }
 /*===========================================
     New Tags
 ===========================================*/
 .new-tag {
-	height: 58px;
-	width: 58px;
+	height: 35px;
+	width: 35px;
 	float: right;
 	position: absolute;
 	background: #ababab;
-	line-height: 58px;
+	line-height: 25px;
 	text-align: center;
 	color: #fff;
 	font-size: 11px;
 	font-family: 'Montserrat', sans-serif;
 	z-index: 999;
-	right: 20px;
-	top: 20px;
+	right: 0px;
+	top: 0px;
 	border-radius: 50%;
 }
 /*===========================================
