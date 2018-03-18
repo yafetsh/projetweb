@@ -185,64 +185,59 @@
       <div class="container">
               <!-- Tittle -->
         <div class="tittle">
-          <h5>Réclamez vous</h5>
-          <p>N'hésiter pas à passer vos réclamations <br>
-            Nous essayons a répondre à tous!</p>
+          <h5>Réservez vous</h5>
+          <p>Laissez-vous maquiller par des mains expertes !  <br></p>
         </div>
 		 <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
 		    <!--======= FORM  =========-->
             <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="return false">
-              <div class="row">
-                <div class="col-md-6">
-                  <ul class="row">
-                    <li class="col-sm-12">
-                      <label> Nom:*
-                        <input type="text" class="form-control" name="name" id="name" >
-                      </label>
-                    </li>
-                    <li class="col-sm-12">
-                      <label> Adresse mail:*
-                        <input type="text" class="form-control" name="email" id="email" >
-                      </label>
-                    </li>
-                    <li class="col-sm-12">
-                      <label>
-Type de réclamation:*
-<select  class="form-control" name="réclamation" id="réclamation"  >
-<option value="choix1">Fonctionnalité de site</option>
-<option value="choix2">Prix</option>
-<option value="choix3">Produit</option></select></label>  </li>
-                  </ul>
-                </div>
-                <div class="col-md-6">
-                  <ul class="row">
-                    <li class="col-sm-12">
-                      <label>Catégorie:*
-                    <select  class="form-control" name="catégorie" id="catégorie" >
-                    <option value="choix1">Visage</option>
-                    <option value="choix2">Yeux</option>
-                    <option value="choix3">Lèvres</option>
-                    <option value="choix4">Ongles</option>
-                    <option value="choix5">Accessoires</option>
-                    </select></td></tr></label></li>
-                    <li class="col-sm-12">
-                      <label>Produit:*
-                        <input type="text" class="form-control" name="produit" id="produit" >
+                <div class="row">
+                  <div class="col-md-6">
+                    <ul class="row">
+                      <li class="col-sm-12">
+                        <label> Nom:*
+                          <input type="text" class="form-control" name="name" id="name" >
+                        </label>
+                      </li>
+                      <li class="col-sm-12">
+                        <label> Prénom:*
+                          <input type="text" class="form-control" name="prénom" id="prénom" >
+                        </label>
+                      </li>
+                      <li class="col-sm-12">
+                        <label> Numéro téléphone:*
+                          <input type="text" class="form-control" name="prénom" id="prénom" >
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <ul class="row">
+                      <li class="col-sm-12">
+                        <label>
+                    Type de maquillage:*
+                    <select  class="form-control" name="maquillage" id="maquillage"  >
+                    <option value="choix1">Maquillage de jour</option>
+                    <option value="choix2">Maquillage de soirée</option>
+                    <option value="choix3">Maquillage de mariage</option></select></label>  </li>
 
-                      </label>
-</li>
-                    <li class="col-sm-12">
-                      <label> Cause de réclamation:*
-                        <textarea class="form-control" name="message" id="message" rows="5" ></textarea>
-                      </label>
-                    </li>
-                    <li class="col-sm-12 no-margin">
-                      <button type="submit" value="submit" class="btn" id="btn_submit" onClick="proceed();">Passer la réclamation</button> <p>
-                    </li>
-                  </ul>
+
+                      <li class="col-sm-12">
+                        <label>Date et l'heure:*
+                          <input type="datetime-local" class="form-control" name="datetime" id="datetime" >
+
+
+                        </label>
+  </li>
+
+                      <li class="col-sm-12 no-margin">
+                        <button type="submit" value="submit" class="btn" id="btn_submit" onClick="proceed();">Réservez vous</button> <p>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+
             </form>
           </div>
         </div>
