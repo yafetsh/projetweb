@@ -1,3 +1,29 @@
+<?php
+include "../entities/utilisateur.php";
+include "../core/utilisateurCore.php";
+
+
+global $erreur;
+if(isset($_POST['forminscription']))
+   { 
+  
+    if(!empty($_POST['pseudo']) AND !empty($_POST['mail']) AND !empty($_POST['mail2']) AND !empty($_POST['mdp'] AND !empty($_POST['mdp2']))) 
+    {
+       $pseudo=$_POST['pseudo'];
+       $mail=$_POST['mail'];
+       $mdp=$_POST['mdp'];
+
+                        $utilisateur1 = new utilisateur($pseudo,$mail,$mdp);
+                        $utilisateur1C = new utilisateurCore();
+                        $utilisateur1C->inscritption($utilisateur1);
+                        $erreur="votre comptre à était bien crée";
+
+      
+    }
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,31 +102,30 @@
                                     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 
                                     <!-- Modal Content -->
-                                    <form class="modal-content animate" action="/action_page.php">
+                                    <form class="modal-content animate" method="POST">
                                         <div class="imgcontainer">
                                         </div>
 
                                         <div class="fields">
                                             <label for="uname" style="font-size: 16px;"><b>USERNAME</b></label>
-                                            <input type="text" placeholder="Enter Username" name="uname" class="inputs" class="shakeInput" required>
+                                            <input type="email" placeholder="Enter Username" name="mailconnect" class="inputs" class="shakeInput" required>
                                             </br>
                                             <label for="psw" style="font-size: 16px;" style="font-family: montserrat"><b>PASSWORD</b></label>
-                                            <input type="password" placeholder="Enter Password" name="psw" class="inputs" required>
+                                            <input type="password" placeholder="Enter Password" name="mdpconnect" class="inputs" required>
                                         </div>
 
                                         <div class="continer" style="background-color:dimgrey">
-                                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="btn">LOGIN</button>
-                                            <button class="btn">
-  Login with Facebook
-</button>
+                                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="btn">ANNULER</button>
+                                            <input type="submit" class="btn" name="formconnexion" value="SE CONNECTER">
+  
+</input>
 
                                         </div>
 
 
                                     </form>
                                 </div>
-                                <!-- input shaking -->
-                                <!-- input shaking -->
+                               
 
 
 
@@ -243,17 +268,17 @@
                                     <ul class="row">
                                         <li class="col-sm-12">
                                             <label>
-                        <input type="text" class="form-control" placeholder="*PSEUDO" name="pseudo" id="pseudo">
+                        <input type="text" class="form-control" placeholder="*PSEUDO" name="pseudo" id="pseudo" value="<?php if(isset($pseudo)){ echo($pseudo);}?>">
                       </label>
                                         </li>
                                         <li class="col-sm-12">
                                             <label>
-                        <input type="email" class="form-control"  placeholder="*ADRESSE MAIL" name="mail" id="mail">
+                        <input type="email" class="form-control"  placeholder="*ADRESSE MAIL" name="mail" id="mail" value="<?php if(isset($mail)){ echo($mail);}?>">
                       </label>
                                         </li>
                                         <li class="col-sm-12">
                                             <label>
-                        <input type="email" class="form-control" placeholder="*CONFIRMER VOTRE MAIL" name="mail2" id="mail2">
+                        <input type="email" class="form-control" placeholder="*CONFIRMER VOTRE MAIL" name="mail2" id="mail2" value="<?php if(isset($mail2)){ echo($mail2);}?>">
                       </label>
                                         </li>
                                         
@@ -288,6 +313,14 @@
         </div>
         </section>
         
+         <?php 
+         
+         if(isset($erreur))
+             {
+                echo '<font color="red">'.$erreur."</font>";
+             }
+
+         ?>
 
 
         <!--======= BOXES =========-->
