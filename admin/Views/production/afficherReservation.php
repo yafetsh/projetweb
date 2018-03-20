@@ -1,3 +1,22 @@
+<?php
+    require 'config.php';
+    $id = null;
+    if ( !empty($_GET['id'])) {
+        $id = $_REQUEST['id'];
+    }
+
+    if ( null==$id ) {
+        header("Location: reservationadmin.php");
+    } else {
+        $pdo = Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT * FROM reservation where id = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($id));
+        $data = $q->fetch(PDO::FETCH_ASSOC);
+        Database::disconnect();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -274,50 +293,55 @@
                 <h3>Réservations</h3>
                 <li>Liste des réservations</li>
               </div>
-              <div class="row">
-                <p>
-                    <a href="create.php" class="btn btn-success">Create</a>
-                </p>
-                  <table class="table table-striped table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Telephone</th>
-                        <th>Type</th>
-                        <th>Date</th>
-                        <th>Action</th>
 
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                     include 'config.php';
-                     $pdo = Database::connect();
-                     $sql = 'SELECT * FROM reservation ORDER BY id DESC';
-                     foreach ($pdo->query($sql) as $row) {
-                              echo '<tr>';
-                              echo '<td>'. $row['nom'] . '</td>';
-                              echo '<td>'. $row['prenom'] . '</td>';
-                              echo '<td>'. $row['telephone'] . '</td>';
-                              echo '<td>'. $row['type'] . '</td>';
-                              echo '<td>'. $row['date'] . '</td>';
+              <div class="form-horizontal" >
+                              <div class="control-group">
+                                <label class="control-label">Nom:</label>
+                                <div class="controls">
+                                    <label class="checkbox">
+                                        <?php echo $data['nom'];?>
+                                    </label>
+                                </div>
+                              </div>
+                              <div class="control-group">
+                                <label class="control-label">Prénom:</label>
+                                <div class="controls">
+                                    <label class="checkbox">
+                                        <?php echo $data['prenom'];?>
+                                    </label>
+                                </div>
+                              </div>
+                              <div class="control-group">
+                                <label class="control-label">Numéro télephone:</label>
+                                <div class="controls">
+                                    <label class="checkbox">
+                                        <?php echo $data['telephone'];?>
+                                    </label>
+                                </div>
+                              </div>
+                              <div class="control-group">
+                                <label class="control-label">Type:</label>
+                                <div class="controls">
+                                    <label class="checkbox">
+                                        <?php echo $data['type'];?>
+                                    </label>
+                                </div>
+                                <div class="control-group">
+                                  <label class="control-label">Date:</label>
+                                  <div class="controls">
+                                      <label class="checkbox">
+                                          <?php echo $data['date'];?>
+                                      </label>
+                                  </div>
+                                </div>
+                              </div>
+                                <div class="form-actions">
+                                  <a class="btn" href="reservationadmin.php">Back</a>
+                               </div>
 
 
-                              echo '<td width=auto>';
-                                           echo '<a class="btn" href="afficherReservation.php?id='.$row['id'].'">Afficher</a>';
-                                                 echo ' ';
-                                     echo '<a class="btn btn-success" href="update.php?id='.$row['id'].'">Modifier</a>';
-                                        echo ' ';
-                                     echo '<a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Supprimer</a>';
-                                 echo '</td>';
-                                    echo '</tr>';
-                     }
-                     Database::disconnect();
-                    ?>
-                    </tbody>
-              </table>
-          </div>
+                            </div>
+
                 </div>
               </div>
               </div>
