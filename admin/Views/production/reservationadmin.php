@@ -274,43 +274,52 @@
                 <h3>Réservations</h3>
                 <li>Liste des réservations</li>
               </div>
-              <?PHP
-              include "../Core/ReservationCore.php";
-              $ReservationCore=new ReservationCore();
-              $listeReservations=$ReservationCore->afficherReservations();
-              ?>
-              <table border="1">
-              <tr>
-              <td>Nom</td>
-              <td>Prénom</td>
-              <td>Type</td>
-              <td>Telephone</td>
-              <td>Date</td>
-              <td>supprimer</td>
-              <td>modifier</td>
-              </tr>
+              <div class="row">
+                <p>
+                    <a href="create.php" class="btn btn-success">Create</a>
+                </p>
+                  <table class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Telephone</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Action</th>
 
-              <?PHP
-              foreach($listeReservations as $row){
-              	?>
-              	<tr>
-              	<td><?PHP echo $row['nom']; ?></td>
-              	<td><?PHP echo $row['prenom']; ?></td>
-                <td><?PHP echo $row['telephone']; ?></td>
-              	<td><?PHP echo $row['type']; ?></td>
-              	<td><?PHP echo $row['date']; ?></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                     include 'config.php';
+                     $pdo = Database::connect();
+                     $sql = 'SELECT * FROM reservation ORDER BY id DESC';
+                     foreach ($pdo->query($sql) as $row) {
+                              echo '<tr>';
+                              echo '<td>'. $row['id'] . '</td>';
+                              echo '<td>'. $row['nom'] . '</td>';
+                              echo '<td>'. $row['prenom'] . '</td>';
+                              echo '<td>'. $row['telephone'] . '</td>';
+                              echo '<td>'. $row['type'] . '</td>';
+                              echo '<td>'. $row['date'] . '</td>';
 
-              	<td><form method="POST" action="../Production/supprimerReservation.php">
-              	<input type="submit" name="supprimer" value="supprimer">
-              	</form>
-              	</td>
-              	<td><a href="modifierReservation.php?nom=<?PHP echo $row['nom']; ?>">
-              	Modifier</a></td>
-              	</tr>
-              	<?PHP
-              }
-              ?>
+
+                              echo '<td width=auto>';
+                                           echo '<a class="btn" href="read.php?id='.$row['id'].'">Afficher</a>';
+                                                 echo ' ';
+                                     echo '<a class="btn btn-success" href="update.php?id='.$row['id'].'">Modifier</a>';
+                                        echo ' ';
+                                     echo '<a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Supprimer</a>';
+                                 echo '</td>';
+                                    echo '</tr>';
+                     }
+                     Database::disconnect();
+                    ?>
+                    </tbody>
               </table>
+          </div>
                 </div>
               </div>
               </div>
