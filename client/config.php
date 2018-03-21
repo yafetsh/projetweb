@@ -7,7 +7,7 @@ public static function getConnexion(){
   try{
 if (!isset(self::$db)) {
 self::$db=new PDO(
-  'mysql:host=localhost;dbname=commerce',
+  'mysql:host=localhost;dbname=projet',
   'root', //login
   '' //password
 );
