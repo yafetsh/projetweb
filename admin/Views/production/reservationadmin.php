@@ -275,9 +275,7 @@
                 <li>Liste des réservations</li>
               </div>
               <div class="row">
-                <p>
-                    <a href="create.php" class="btn btn-success">Create</a>
-                </p>
+            
                   <table class="table table-striped table-bordered">
                     <thead>
                       <tr>
@@ -309,7 +307,7 @@
                                                  echo ' ';
                                      echo '<a class="btn btn-success" href="update.php?id='.$row['id'].'">Modifier</a>';
                                         echo ' ';
-                                     echo '<a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Supprimer</a>';
+                                     echo '<a class="btn btn-danger" href="supprimerReservation.php?id='.$row['id'].'">Supprimer</a>';
                                  echo '</td>';
                                     echo '</tr>';
                      }
