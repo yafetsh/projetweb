@@ -2,19 +2,19 @@
 class livraison
 {
   private $type;
+  private $region;
   private $ville;
   private $rue;
-  private $codepostal;
   private $numero;
   private $pseudoLivreur;
   private $idUtilisateur;
 
-  function __construct($type,$ville,$rue,$codepostal,$numero,$pseudoLivreur,$idUtilisateur)
+  function __construct($type,$region,$ville,$rue,$numero,$pseudoLivreur,$idUtilisateur)
   {
 $this->type=$type;
+$this->region=$region;
 $this->ville=$ville;
 $this->rue=$rue;
-$this->codepostal=$codepostal;
 $this->numero=$numero;
 $this->pseudoLivreur=$pseudoLivreur;
 $this->idUtilisateur=$idUtilisateur;
@@ -38,11 +38,11 @@ $this->idUtilisateur=$idUtilisateur;
   function setRue($type){
     $this->rue=$rue;
   }
-  function getCodepostal(){
-    return $this->codepostal;
+  function getRegion(){
+    return $this->region;
   }
-  function setCodepostal($codepostal){
-    $this->codepostal=$codepostal;
+  function setRegion($region){
+    $this->region=$region;
   }
   function getNumero(){
     return $this->numero;

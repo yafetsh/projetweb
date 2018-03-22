@@ -40,7 +40,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>Manel Ammara</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -181,7 +181,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt="">Manel Ammara
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -323,8 +323,8 @@
                           <th>#</th>
                           <th>ID</th>
                           <th>Nom</th>
-                          <th>Prenom</th>
-                          <th>Date de livraison</th>
+                          <th>Ville</th>
+                          <th>Adresse</th>
                           <th>Numero de telephone</th>
                         </tr>
                       </thead>
@@ -333,13 +333,15 @@
                         foreach($listeLivraisons as $row){
                           ?>
                           <tr>
-                             <th scope="row">1</th>
+                          <th scope="row">1</th>
                           <td><?PHP echo $row['id']; ?></td>
-                          
+                          <td><?PHP echo $row['region']; ?></td>
+                          <td><?PHP echo $row['ville']; ?></td>
+                          <td><?PHP echo $row['rue']; ?></td>
                           <td><?PHP echo $row['numero']; ?></td>
-  <td><form method="POST" action="supprimerEmploye.php">
+  <td><form method="POST" action="supprimerlivraison.php">
   <input type="submit" name="supprimer" value="supprimer">
-  <input type="hidden" value="<?PHP echo $row['cin']; ?>" name="cin">
+  <input type="hidden" value="<?PHP echo $row['id']; ?>" name="id">
   </form>
   </td>
   <td><a href="modifierEmploye.php?cin=<?PHP echo $row['cin']; ?>">
