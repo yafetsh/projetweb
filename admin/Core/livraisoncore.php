@@ -17,8 +17,7 @@ class livraisoncore
 		echo "Numero: " .$numero. "<br>";
 	}
 	function afficherLivraisons(){
-
-		$c=config::getConnexion();
+		$c=Config::getConnexion();
 		$sql="SELECT * FROM livraison";
 		try{
 			$liste=$c->query($sql);
@@ -31,18 +30,29 @@ class livraisoncore
 	}
 }
 function supprimerlivraison($id){
-		$sql="DELETE FROM livraison where id= :id";
-		$db = config::getConnexion();
-        $req=$db->prepare($sql);
-		try{
-            $req->execute();
-           // header('Location: index.php');
-        }
-        catch (Exception $e){
-            die('Erreur: '.$e->getMessage());
-        }
-	}
-function ajouterLivraison($l){
+  $sql="DELETE FROM livraison where id= :id";
+      $req=$db->prepare($sql);
+  $req->bindValue(':id',$id);
+  try{
+          $req->execute();
+         // header('Location: index.php');
+      }
+      catch (Exception $e){
+          die('Erreur: '.$e->getMessage());
+      }
+}
+
+
+
+
+
+
+
+
+
+
+
+ function ajouterLivraison($l){
 	$sql="INSERT INTO `livraison`(`type`,`region`, `ville`, `rue`, `numero`) VALUES (:t,:re,:v,:r,:n)";
 	$db=config::getConnexion();
 	try{
@@ -58,3 +68,8 @@ function ajouterLivraison($l){
 		die ('Erreur : '.$e->getMessage());
 	}
 }
+
+
+ ?>
+
+

@@ -84,7 +84,7 @@
                   </li>
                   <li><a><i class="fa fa-table"></i> Gestion de livraison <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="listedeslivraisons.html">Liste des livraisons</a></li>
+                      <li><a href="afficherlivraisons.php">Liste des livraisons</a></li>
                       <li><a href="tables.html">Modifier l'etat de la livraison</a></li>
                     </ul>
                   </li>
@@ -339,9 +339,16 @@
                           <td><?PHP echo $row['ville']; ?></td>
                           <td><?PHP echo $row['rue']; ?></td>
                           <td><?PHP echo $row['numero']; ?></td>
-  <td><form method="POST" action="supprimerlivraison.php">
+
+                          <td >
+    <form action='supprimerlivraison.php?name="<?php echo $contact['id']; ?>"' method="post">
+        <input type="hidden" name="name" value="<?php echo $contact['id']; ?>">
+        <input type="submit" name="submit" value="Delete">
+    </form>
+</td>
+  <td><form method="POST" action="afficherlivraisons.php">
   <input type="submit" name="supprimer" value="supprimer">
-  <input type="hidden" value="<?PHP echo $row['id']; ?>" name="id">
+  <input type="hidden" value="<?php echo $id;?>" name="id">
   </form>
   </td>
   <td><a href="modifierEmploye.php?cin=<?PHP echo $row['cin']; ?>">
