@@ -85,7 +85,7 @@
                   <li><a><i class="fa fa-table"></i> Gestion de livraison <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="afficherlivraisons.php">Liste des livraisons</a></li>
-                      <li><a href="tables.html">Modifier l'etat de la livraison</a></li>
+                      <li><a href="afficherlivreurs.php">Liste des livreurs</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
@@ -385,29 +385,32 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Username</th>
+                          <th>ID</th>
+                          <th>Nom</th>
+                          <th>Ville</th>
+                          <th>Adresse</th>
+                          <th>Numero de telephone</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
+                          <th scope="row"></th>
+                         
+
+
                         </tr>
                         <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
+                          <th scope="row"></th>
+                          
+
+
                         </tr>
                         <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
+                          <th scope="row"></th>
+                          
+
+
+
                         </tr>
                       </tbody>
                     </table>
@@ -444,29 +447,34 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Username</th>
+                          <th>ID</th>
+                          <th>Nom</th>
+                          <th>Ville</th>
+                          <th>Adresse</th>
+                          <th>Numero de telephone</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
+                          <th scope="row"></th>
+                          
+
+
+
                         </tr>
                         <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
+                          <th scope="row"></th>
+                          
+
+
+
                         </tr>
                         <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
+                          <th scope="row"></th>
+                          
+
+
+
                         </tr>
                       </tbody>
                     </table>
@@ -503,29 +511,32 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Username</th>
+                          <th>ID</th>
+                          <th>Nom</th>
+                          <th>Ville</th>
+                          <th>Adresse</th>
+                          <th>Numero de telephone</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
+                          <th scope="row"></th>
+                          
+
+
                         </tr>
                         <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
+                          <th scope="row"></th>
+                          
+
+
                         </tr>
                         <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
+                          <th scope="row"></th>
+                          
+
+
+
                         </tr>
                       </tbody>
                     </table>
@@ -569,15 +580,14 @@
                             <th>
                               <input type="checkbox" id="check-all" class="flat">
                             </th>
-                            <th class="column-title">Invoice </th>
-                            <th class="column-title">Invoice Date </th>
-                            <th class="column-title">Order </th>
-                            <th class="column-title">Bill to Name </th>
-                            <th class="column-title">Status </th>
-                            <th class="column-title">Amount </th>
-                            <th class="column-title no-link last"><span class="nobr">Action</span>
+                            <th class="column-title">ID </th>
+                            <th class="column-title">Nom </th>
+                            <th class="column-title">Ville </th>
+                            <th class="column-title">adresse </th>
+                            <th class="column-title">Numero de telephone </th>
+                            <th class="column-title no-link last"><span class="nobr">Etat</span>
                             </th>
-                            <th class="bulk-actions" colspan="7">
+                            <th class="bulk-actions" colspan="6">
                               <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                             </th>
                           </tr>
