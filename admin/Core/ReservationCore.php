@@ -2,24 +2,30 @@
 include_once "../Config.php";
 class ReservationCore
 {
-
-function afficherReservation(){
-  include 'config.php';
-  $pdo = Database::connect();
-  $sql = 'SELECT * FROM reservation ORDER BY id DESC';
-  foreach ($pdo->query($sql) as $row) {
-           echo '<tr>';
-           echo '<td>'. $row['nom'] . '</td>';
-           echo '<td>'. $row['prenom'] . '</td>';
-           echo '<td>'. $row['telephone'] . '</td>';
-           echo '<td>'. $row['type'] . '</td>';
-           echo '<td>'. $row['date'] . '</td>';
-
-         }
-        
+function afficherReservation($r){
+  $nom=$r->getNom();
+  $prenom=$r->getPrenom();
+  $telephone=$r->getTelephone();
+  $type=$r->getType();
+  $date=$r->getDate();
+  echo "Nom : " .$nom.  "</br>";
+  echo "Prénom : " .$prenom. "</br>";
+  echo "Telephone : " .$telephone. "</br>";
+  echo "Type : " .$type. "</br>";
+  echo "Date : " .$date. "</br>";
+}
+function afficherReservations(){
+  $c=Config::getConnexion();
+$sql="SELECT * FROM reservation";
+try {
+  $liste=$c->query($sql);
+  return $liste;
+} catch (\Exception $r) {
+die('Erreur :'.$r.getMessage());
+}
 
 }
-function ajouterReservation($res){
+/*function ajouterReservation($reservationreservation){
   $sql="insert into reservation (nom,prenom,telephone,type,date) values (:nom, :prenom,:telephone,:type,:date)";
   $db = config::getConnexion();
   try{

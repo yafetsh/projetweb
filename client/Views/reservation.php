@@ -1,3 +1,54 @@
+<?php
+
+    require 'config.php';
+
+    if ( !empty($_POST)) {
+        // keep track validation errors
+        $nomError = null;
+        $prenomError = null;
+        $telephoneError = null;
+        $typeError = null;
+        $dateError = null;
+
+        // keep track post values
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $telephone = $_POST['telephone'];
+        $type = $_POST['type'];
+        $date = $_POST['date'];
+
+        // validate input
+        $valid = true;
+        if (empty($nom)) {
+            $nomError = 'Please enter Name';
+            $valid = false;
+        }
+        if (empty($prenom)) {
+            $nomError = 'Please enter Surname';
+            $valid = false;
+        }
+        if (empty($telephone)) {
+            $telephoneError = 'Please enter Name';
+            $valid = false;
+        }
+        if (empty($date)) {
+            $dateError = 'Please enter Name';
+            $valid = false;
+        }
+
+
+        // insert data
+        if ($valid) {
+            $pdo = Database::connect();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "INSERT INTO reservation (nom,prenom,telephone,type,date) values(?, ?, ?,?,?)";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($nom,$prenom,$telephone,$type,$date));
+            Database::disconnect();
+            header("Location: reservation.php");
+        }
+    }
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -191,23 +242,32 @@
 		 <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
 		    <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="POST" action="ajoutReservation.php">
+            <form role="form" id="contact_form" class="contact-form" method="POST" action="reservation.php">
                 <div class="row">
                   <div class="col-md-6">
                     <ul class="row">
                       <li class="col-sm-12">
                         <label> Nom:*
-                          <input type="text" class="form-control" name="nom"  >
+                          <input type="text" class="form-control" name="nom" value="<?php echo !empty($nom)?$nom:'';?>">
+                          <?php if (!empty($nomError)): ?>
+                              <span class="help-inline"><?php echo $nomError;?></span>
+                          <?php endif; ?>
                         </label>
                       </li>
                       <li class="col-sm-12">
                         <label> Prénom:*
-                          <input type="text" class="form-control" name="prenom"  >
+                          <input type="text" class="form-control" name="prenom" value="<?php echo !empty($prenom)?$prenom:'';?>" >
+                          <?php if (!empty($prenomError)): ?>
+                              <span class="help-inline"><?php echo $prenomError;?></span>
+                          <?php endif; ?>
                         </label>
                       </li>
                       <li class="col-sm-12">
                         <label> Numéro téléphone:*
-                          <input type="text" class="form-control" name="telephone"  >
+                          <input type="text" class="form-control" name="telephone" value="<?php echo !empty($telephone)?$telephone:'';?>">
+                          <?php if (!empty($telephoneError)): ?>
+                              <span class="help-inline"><?php echo $telephoneError;?></span>
+                          <?php endif; ?>
                         </label>
                       </li>
                     </ul>
@@ -218,21 +278,24 @@
                         <label>
                     Type de maquillage:*
                     <select  class="form-control" name="type"   >
-                    <option value="choix1">Maquillage de jour</option>
-                    <option value="choix2">Maquillage de soirée</option>
-                    <option value="choix3">Maquillage de mariage</option></select></label>  </li>
+                    <option value="Maquillage de jour">Maquillage de jour</option>
+                    <option value="Maquillage de soirée">Maquillage de soirée</option>
+                    <option value="Maquillage de mariage">Maquillage de mariage</option></select></label>  </li>
 
 
                       <li class="col-sm-12">
                         <label>Date et l'heure:*
-                          <input type="datetime-local" class="form-control" name="date" >
+                          <input type="datetime-local" class="form-control" name="date" value="<?php echo !empty($date)?$date:'';?>" >
+                          <?php if (!empty($dateError)): ?>
+                              <span class="help-inline"><?php echo $dateError;?></span>
+                          <?php endif; ?>
 
 
                         </label>
   </li>
 
                       <li class="col-sm-12 no-margin">
-                        <input type="submit" value="ajouter" name="ajouter" class="btn" id="btn_submit">Réservez vous</button> <p>
+                        <input type="submit" value="Réservez vous" name="ajouter" class="btn" id="btn_submit"></button> <p>
                       </li>
                     </ul>
                   </div>

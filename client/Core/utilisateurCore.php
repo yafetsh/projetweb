@@ -1,4 +1,4 @@
-<?php 
+<?php
 include "../config.php";
 class utilisateurCore{
  function inscritption($utilisateur)
@@ -7,22 +7,22 @@ class utilisateurCore{
         $db = config::getConnexion();
         try{
         $req=$db->prepare($sql);
-        
+
         $pseudo=$utilisateur->getPseudo();
         $mail=$utilisateur->getEmail();
         $motdepasse=$utilisateur->getMotdepasse();
         $req->bindValue(':pseudo',$pseudo);
         $req->bindValue(':mail',$mail);
         $req->bindValue(':motdepasse',$motdepasse);
-        
+
             $req->execute();
-           
+
         }
         catch (Exception $e){
             echo 'Erreur: '.$e->getMessage();
         }
 }
-function connection($utilisateur){   
+function connection($utilisateur){
     $db = config::getConnexion();
     $mailconnect=$utilisateur->getPseudo();
     $mdpconnect=$utilisateur->getEmail();

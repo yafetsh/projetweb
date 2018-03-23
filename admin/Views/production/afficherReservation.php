@@ -296,47 +296,27 @@
 
               <div class="form-horizontal" >
                               <div class="control-group">
-                                <label class="control-label">Nom:</label>
-                                <div class="controls">
-                                    <label class="checkbox">
-                                        <?php echo $data['nom'];?>
-                                    </label>
-                                </div>
+                                <label class="control-label">Nom: </label>
+                                <?php echo $data['nom'];?>
                               </div>
                               <div class="control-group">
-                                <label class="control-label">Prénom:</label>
-                                <div class="controls">
-                                    <label class="checkbox">
-                                        <?php echo $data['prenom'];?>
-                                    </label>
-                                </div>
+                                <label class="control-label">Prénom: </label>
+                                <?php echo $data['prenom'];?>
                               </div>
                               <div class="control-group">
-                                <label class="control-label">Numéro télephone:</label>
-                                <div class="controls">
-                                    <label class="checkbox">
-                                        <?php echo $data['telephone'];?>
-                                    </label>
-                                </div>
+                                <label class="control-label">Numéro télephone: </label>
+                                <?php echo $data['telephone'];?>
                               </div>
                               <div class="control-group">
-                                <label class="control-label">Type:</label>
-                                <div class="controls">
-                                    <label class="checkbox">
-                                        <?php echo $data['type'];?>
-                                    </label>
-                                </div>
+                                <label class="control-label">Type: </label>
+                                <?php echo $data['type'];?>
                                 <div class="control-group">
-                                  <label class="control-label">Date:</label>
-                                  <div class="controls">
-                                      <label class="checkbox">
-                                          <?php echo $data['date'];?>
-                                      </label>
-                                  </div>
+                                  <label class="control-label">Date: </label>
+                                  <?php echo $data['date'];?>
                                 </div>
                               </div>
                                 <div class="form-actions">
-                                  <a class="btn" href="reservationadmin.php">Back</a>
+                                <button class="btn">  <a  href="reservationadmin.php">Back</a></button>
                                </div>
 
 
