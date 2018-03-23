@@ -339,13 +339,6 @@
                           <td><?PHP echo $row['ville']; ?></td>
                           <td><?PHP echo $row['rue']; ?></td>
                           <td><?PHP echo $row['numero']; ?></td>
-
-                          <td >
-    <form action='supprimerlivraison.php?name="<?php echo $contact['id']; ?>"' method="post">
-        <input type="hidden" name="name" value="<?php echo $contact['id']; ?>">
-        <input type="submit" name="submit" value="Delete">
-    </form>
-</td>
   <td><form method="POST" action="afficherlivraisons.php">
   <input type="submit" name="supprimer" value="supprimer">
   <input type="hidden" value="<?php echo $id;?>" name="id">
