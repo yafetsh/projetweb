@@ -5,23 +5,61 @@ include "../core/utilisateurCore.php";
 
 global $erreur;
 if(isset($_POST['forminscription']))
-   { 
+{
   
     if(!empty($_POST['pseudo']) AND !empty($_POST['mail']) AND !empty($_POST['mail2']) AND !empty($_POST['mdp'] AND !empty($_POST['mdp2']))) 
     {
-       $pseudo=$_POST['pseudo'];
-       $mail=$_POST['mail'];
-       $mdp=$_POST['mdp'];
 
+      $pseudo =htmlspecialchars($_POST['pseudo']);
+      $mail =htmlspecialchars($_POST['mail']);
+      $mail2 =htmlspecialchars($_POST['mail2']);
+      $mdp = sha1($_POST['mdp']);
+      $mdp2 = sha1($_POST['mdp2']);
+
+      $pseudolength =strlen($pseudo);
+      if($pseudolength<=255)
+        { 
+            if($mail == $mail2)
+            {   
+
+        if(filter_var($mail,FILTER_VALIDATE_EMAIL))
+           {
+
+                if($mdp == $mdp2)
+                {
                         $utilisateur1 = new utilisateur($pseudo,$mail,$mdp);
                         $utilisateur1C = new utilisateurCore();
                         $utilisateur1C->inscritption($utilisateur1);
+
+
                         $erreur="votre comptre à était bien crée";
 
-      
+                }
+                else{
+                    $erreur="vos mot de passes ne correspond pas";
+                }
+             }
+             else{
+                $erreur="votre adresse mail n est pas valide !";
+             }
+
+            }
+            else{
+                $erreur="votre mail ne corresond pas";
+            }
+
+        }
+      else{
+        $erreur ="votre pseudo a depasser 255 erreurs";
+      }
+    
+    }
+    else
+    {
+        $erreur = "tous les champs doivent etre complétes";
+
     }
 }
-
 
 ?>
 <!DOCTYPE html>
