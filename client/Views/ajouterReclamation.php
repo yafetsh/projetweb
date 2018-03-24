@@ -1,3 +1,66 @@
+<?php
+
+    require 'config.php';
+
+    if ( !empty($_POST)) {
+        // keep track validation errors
+        $nomError = null;
+        $prenomError = null;
+        $mailError = null;
+        $telephoneError = null;
+        $typeError = null;
+        $causeError = null;
+        $pieceError = null;
+
+
+        // keep track post values
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $mail = $_POST['mail'];
+        $telephone = $_POST['telephone'];
+        $type = $_POST['type'];
+        $cause = $_POST['cause'];
+        $piece = $_POST['piece'];
+
+
+        // validate input
+        $valid = true;
+        if (empty($nom)) {
+            $nomError = '*Please enter Name';
+            $valid = false;
+        }
+        if (empty($prenom)) {
+            $nomError = '*Please enter Surname';
+            $valid = false;
+        }
+        if (empty($telephone)) {
+            $telephoneError = '*Please enter Phone number';
+            $valid = false;
+        }
+        if (empty($mail)) {
+            $mailError = '*Please enter Adresse mail';
+            $valid = false;
+        }
+        if (empty($cause)) {
+            $causeError = '*Please enter Adresse mail';
+            $valid = false;
+        }
+
+
+        // insert data
+        if ($valid) {
+            $pdo = Database::connect();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "INSERT INTO reclamation (nom,prenom,mail,telephone,type,cause,piece) values(?, ?, ?,?,?,?,?)";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($nom,$prenom,$mail,$telephone,$type,$cause,$piece));
+            Database::disconnect();
+            header("Location: ajouterReclamation.php");
+            echo "Reclamation effectué";
+
+        }
+    }
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -192,7 +255,7 @@
 		 <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
 		    <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="return false">
+            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="ajouterReclamation.php">
               <div class="row">
                 <div class="col-md-6">
                   <ul class="row">
@@ -224,22 +287,23 @@
                     <li class="col-sm-12">
                       <label>
                   Type de réclamation:*
-                  <select  class="form-control" name="réclamation" id="réclamation"  >
-                  <option value="choix1">Fonctionnalité de site</option>
-                  <option value="choix2">Prix</option>
-                  <option value="choix3">Produit</option></select></label>  </li>
+                  <select  class="form-control" name="type">
+                  <option value="Fonctionnalité de site">Fonctionnalité de site</option>
+                  <option value="Prix">Prix</option>
+                  <option value="Produit">Produit</option></select></label>  </li>
                     <li class="col-sm-12">
                       <label> Cause de réclamation:*
-                        <textarea class="form-control" name="message" id="message" rows="5" ></textarea>
+                        <textarea class="form-control" name="cause" rows="5" ></textarea>
                       </label>
                     </li>
                     <li class="col-sm-12">
                       <label> Pièce jointe:(optional)
-                        <input type="file" class="form-control" name="piece" >
+                        <form action="upload.php" method="post" enctype="multipart/form-data">
+                        <input type="file" class="form-control" name="piece" > </form>
                       </label>
                     </li>
                     <li class="col-sm-12 no-margin">
-                      <button type="submit" value="submit" class="btn" id="btn_submit" onClick="proceed();">Passer la réclamation</button> <p>
+                      <input type="submit" value="Passez la réclamation" name="ajouter" class="btn" id="btn_submit"> <p>
                     </li>
                   </ul>
                 </div>

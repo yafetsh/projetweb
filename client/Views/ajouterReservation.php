@@ -296,7 +296,7 @@
   </li>
 
                       <li class="col-sm-12 no-margin">
-                        <input type="submit" value="Réservez vous" name="ajouter" class="btn" id="btn_submit"></button> <p>
+                        <input type="submit" value="Réservez vous" name="ajouter" class="btn" id="btn_submit"> <p>
                       </li>
                     </ul>
                   </div>
