@@ -233,7 +233,7 @@
                         <?php
                          include 'config.php';
                          $pdo = Database::connect();
-                         $sql = 'SELECT * FROM reservation ORDER BY date DESC';
+                         $sql = 'SELECT * FROM reservation ORDER BY id DESC';
                          foreach ($pdo->query($sql) as $row) {
                                   echo '<tr>';
                                   echo '<td>'. $row['nom'] . '</td>';
@@ -248,7 +248,7 @@
                                                      echo ' ';
                                                      echo '<a  href="modifierReservation.php?id='.$row['id'].'">Modifier</a>';
                                             echo ' ';
-                                            echo '<a href="supprimerReservation.php?id='.$row['id'].'">Supprimer</a>';
+                                            echo '<a href="supprimerReservation.php?id='.$row['id'].'">Annuler</a>';
                                      echo '</td>';
                                         echo '</tr>';
                          }

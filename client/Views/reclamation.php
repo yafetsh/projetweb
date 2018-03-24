@@ -198,43 +198,44 @@
                   <ul class="row">
                     <li class="col-sm-12">
                       <label> Nom:*
-                        <input type="text" class="form-control" name="name" id="name" >
+                        <input type="text" class="form-control" name="nom"  >
+                      </label>
+                    </li>
+                    <li class="col-sm-12">
+                      <label> Prénom:*
+                        <input type="text" class="form-control" name="prenom" >
                       </label>
                     </li>
                     <li class="col-sm-12">
                       <label> Adresse mail:*
-                        <input type="text" class="form-control" name="email" id="email" >
+                        <input type="text" class="form-control" name="mail" >
                       </label>
                     </li>
                     <li class="col-sm-12">
-                      <label>
-Type de réclamation:*
-<select  class="form-control" name="réclamation" id="réclamation"  >
-<option value="choix1">Fonctionnalité de site</option>
-<option value="choix2">Prix</option>
-<option value="choix3">Produit</option></select></label>  </li>
+                      <label> Numéro téléphone:*
+                        <input type="text" class="form-control" name="telephone" >
+                      </label>
+                    </li>
+
                   </ul>
                 </div>
                 <div class="col-md-6">
                   <ul class="row">
                     <li class="col-sm-12">
-                      <label>Catégorie:*
-                    <select  class="form-control" name="catégorie" id="catégorie" >
-                    <option value="choix1">Visage</option>
-                    <option value="choix2">Yeux</option>
-                    <option value="choix3">Lèvres</option>
-                    <option value="choix4">Ongles</option>
-                    <option value="choix5">Accessoires</option>
-                    </select></td></tr></label></li>
-                    <li class="col-sm-12">
-                      <label>Produit:*
-                        <input type="text" class="form-control" name="produit" id="produit" >
-
-                      </label>
-</li>
+                      <label>
+                  Type de réclamation:*
+                  <select  class="form-control" name="réclamation" id="réclamation"  >
+                  <option value="choix1">Fonctionnalité de site</option>
+                  <option value="choix2">Prix</option>
+                  <option value="choix3">Produit</option></select></label>  </li>
                     <li class="col-sm-12">
                       <label> Cause de réclamation:*
                         <textarea class="form-control" name="message" id="message" rows="5" ></textarea>
+                      </label>
+                    </li>
+                    <li class="col-sm-12">
+                      <label> Pièce jointe:(optional)
+                        <input type="file" class="form-control" name="piece" >
                       </label>
                     </li>
                     <li class="col-sm-12 no-margin">

@@ -45,7 +45,8 @@
             $q = $pdo->prepare($sql);
             $q->execute(array($nom,$prenom,$telephone,$type,$date));
             Database::disconnect();
-            header("Location: reservation.php");
+            header("Location: reservationClient.php");
+            echo "Reservation effectué";
         }
     }
     ?>
@@ -242,7 +243,7 @@
 		 <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
 		    <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="POST" action="reservation.php">
+            <form role="form" id="contact_form" class="contact-form" method="POST" action="ajouterReservation.php">
                 <div class="row">
                   <div class="col-md-6">
                     <ul class="row">
