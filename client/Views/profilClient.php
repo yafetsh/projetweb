@@ -78,9 +78,9 @@
             </div>
 
             <div class="w3-bar w3-border w3-light-grey">
-            <div style="float: right">
+            <div style="float:left">
             <a href="#" class="w3-bar-item w3-button w3-border-right" class="top-links">ACCEUIL</a>
-            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links">EDITER MON PROFIL</a>
+            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links">PROFILE</a>
             <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links">PANIER</a>
             <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links">DÉCONNEXION</a>
            </div>
@@ -197,23 +197,21 @@
 
             <!--======= khedma =========-->
 
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>General</h3>
-                <ul class="nav side-menu">
-                  <li><a href="reservationclient.php"><i class="fa fa-home"></i> Réservation <span class="fa fa-chevron-down"></span></a>
+              <div style="margin-bottom="15px"">
+
+                  <a href="reservationclient.php" class="ownmenu">Réservation </a>
+
+                  <a href="reclamation.html"> Réclamation </a>
+
+                  <li><a href="#"> Livraison </a>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Réclamation <span class="fa fa-chevron-down"></span></a>
-                  </li>
-                  <li><a><i class="fa fa-desktop"></i> Livraison <span class="fa fa-chevron-down"></span></a>
-                  </li>
-                  <li><a><i class="fa fa-table"></i> Promotion <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="#"> Promotion </a>
 
                   </li>
 
               </div>
 
-            </div>
+
 
 
         <!--======= BOXES =========-->

@@ -20,19 +20,19 @@
         // validate input
         $valid = true;
         if (empty($nom)) {
-            $nomError = 'Please enter Name';
+            $nomError = '*Please enter Name';
             $valid = false;
         }
         if (empty($prenom)) {
-            $nomError = 'Please enter Surname';
+            $nomError = '*Please enter Surname';
             $valid = false;
         }
         if (empty($telephone)) {
-            $telephoneError = 'Please enter Name';
+            $telephoneError = '*Please enter Phone number';
             $valid = false;
         }
         if (empty($date)) {
-            $dateError = 'Please enter Name';
+            $dateError = '*Please enter Date';
             $valid = false;
         }
 

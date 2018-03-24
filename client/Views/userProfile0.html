@@ -1,7 +1,5 @@
-
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/04-contact-01.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:48:01 GMT -->
 
@@ -193,6 +191,7 @@
         <!--======= SUB BANNER =========-->
 
         <!-- CONTENT START -->
+        <div class="content">
 
             <!-- Map -->
 
@@ -200,64 +199,23 @@
 
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h5> <a href="reservationclient.php">Réservation</a>
-                     <a href="#"> Réclamation</a>
-                     <a href="#"> Livraison</a>
-                     <a href="#"> Promotion</a></h5>
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                  <li><a href="reservationclient.php"><i class="fa fa-home"></i> Réservation <span class="fa fa-chevron-down"></span></a>
+                  </li>
+                  <li><a><i class="fa fa-edit"></i> Réclamation <span class="fa fa-chevron-down"></span></a>
+                  </li>
+                  <li><a><i class="fa fa-desktop"></i> Livraison <span class="fa fa-chevron-down"></span></a>
+                  </li>
+                  <li><a><i class="fa fa-table"></i> Promotion <span class="fa fa-chevron-down"></span></a>
+
+                  </li>
+
               </div>
 
             </div>
 
 
-            <div  role="main" method="POST" action="afficherReservation.php">
-
-                  <div >
-                    <h6>Réservations</h6>
-                  </div>
-                  Liste des réservations
-                  <div >
-
-                      <table class="table table-striped table-bordered">
-                        <thead>
-                          <tr>
-                            <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>Telephone</th>
-                            <th>Type</th>
-                            <th>Date</th>
-                            <th>Action</th>
-
-                          </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                         include 'config.php';
-                         $pdo = Database::connect();
-                         $sql = 'SELECT * FROM reservation ORDER BY date DESC';
-                         foreach ($pdo->query($sql) as $row) {
-                                  echo '<tr>';
-                                  echo '<td>'. $row['nom'] . '</td>';
-                                  echo '<td>'. $row['prenom'] . '</td>';
-                                  echo '<td>'. $row['telephone'] . '</td>';
-                                  echo '<td>'. $row['type'] . '</td>';
-                                  echo '<td>'. $row['date'] . '</td>';
-
-
-                                  echo '<td width=auto>';
-                                               echo '<a  href="afficherReservation.php?id='.$row['id'].'">Afficher</a>';
-                                                     echo ' ';
-                                                     echo '<a  href="modifierReservation.php?id='.$row['id'].'">Modifier</a>';
-                                            echo ' ';
-                                            echo '<a href="supprimerReservation.php?id='.$row['id'].'">Supprimer</a>';
-                                     echo '</td>';
-                                        echo '</tr>';
-                         }
-                         Database::disconnect();
-                        ?>
-                        </tbody>
-                  </table>
-              </div>
-                    </div>
         <!--======= BOXES =========-->
         <section class="section-p-60px contact-box animate fadeInUp " data-wow-delay="0.4s ">
             <div class="container ">
