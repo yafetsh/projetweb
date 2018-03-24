@@ -11,9 +11,8 @@
 		private $couleur;
 		private $description;
 		private $nomCatalogue;
-		private $idPromotion;
 		
-		function __construct($reference,$nom,$quantite,$prix,$couleur,$description,$nomCatalogue,$idPromotion)
+		function __construct($reference,$nom,$quantite,$prix,$couleur,$description,$nomCatalogue)
 		{
 			$this->reference=$reference;
 			$this->nom=$nom;
@@ -22,7 +21,6 @@
 			$this->couleur=$couleur;
 			$this->description=$description;
 			$this->nomCatalogue=$nomCatalogue;
-			$this->idPromotion=$idPromotion;
 		}
 
 		function getReference(){
@@ -46,9 +44,6 @@
 		function getNomCatalogue(){
 			return $this->nomCatalogue;
 		}
-		function getIdPromotion(){
-			return $this->idPromotion;
-		}
 
 		function setReference($reference){
 			$this->reference=$reference;
@@ -70,9 +65,6 @@
 		}
 		function setNomCatalogue($nomCatalogue){
 			$this->nomCatalogue=$nomCatalogue;
-		}
-		function setIdPromotion($idPromotion){
-			$this->idPromotion=$idPromotion;
 		}
 	}
 

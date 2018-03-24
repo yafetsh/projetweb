@@ -1,3 +1,9 @@
+<?php  
+  include_once "../../Core/produitC.php";
+  $produitC=new produitC();
+  $listeProduit=$produitC->afficherproduit();
+  ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>FASHION MAKEUP </title>
+    <title>FASHION MAKEUP || Liste des produits</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,6 +21,14 @@
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -26,7 +40,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>FASHION MAKEUP!</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>FASHION MAKEUP</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -37,8 +51,8 @@
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>MANEL AMMARA</h2>
+                <span>Bienvenu,</span>
+                <h2>John Doe</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -57,16 +71,14 @@
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Gestion de produit <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i>Gestion de produit<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form_validation.html">Ajout Produit</a></li>
-                      <!--<li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
+                      <li><a href="AJOUTER PRODUIT.html">Ajout de Produits</a></li>
+                      <li><a href="LISTE PRODUIT.php">liste de Produits</a></li>
+                      <li><a href="GESTION PRODUIT.php">Gestion de Produits</a></li>
+                      <!--<li><a href="form_wizards.html">Form Wizard</a></li>
                       <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
-                      <li><a href="form_buttons.html">Réservations</a></li>-->
-
+                      <li><a href="form_buttons.html">Form Buttons</a></li>-->
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
@@ -143,7 +155,7 @@
                         <li><a href="#level1_2">Level One</a>
                         </li>
                     </ul>
-                  </li>
+                  </li>                  
                   <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
               </div>
@@ -268,31 +280,32 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main">
+        <div class="right_col" role="main" style="height: 1000px">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Gestion de produit</h3>
+                <h3>La liste des produits</h3>
               </div>
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" placeholder="Rechercher ...">
                     <span class="input-group-btn">
-                              <button class="btn btn-default" type="button">Go!</button>
-                          </span>
+                      <button class="btn btn-default" type="button">Valider!</button>
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="clearfix"></div>
 
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Ajouter Produit</h2>
+                    <h2>Affichage <small>Produits</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -311,153 +324,44 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-
-                    <form method="POST" action="Gestion Produit.php" class="form-horizontal form-label-left" novalidate>
-
-                      <span class="section">Concernant le produit .. </span>
-
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nom de produit <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nom" name="nom" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Reference<span>*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="Reference" name="Reference" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Couleur<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input  id="Couleur" name="Couleur" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Quantite<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="Quantite" name="Quantite" required="required" data-validate-minmax="0,1000000000" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Prix<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="Prix" name="Prix"  required="required" class="form-control col-md-7 col-xs-12" placeholder="dt">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="Description" name="Description" class="form-control col-md-7 col-xs-12" ></textarea>
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Id Promotion</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="IdPromotion" name="IdPromotion" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >catalogue<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select id="catalogue" name="catalogue" required="required" class="form-control col-md-7 col-xs-12" id="catalogue" name="catalogue">
-                              <option> </option>
-                            <optgroup label="YEUX">
-                              <option>OMBRE A PAUPIERE SOLO</option>
-                              <option>OMBRE A PAUPIERE TRIO</option>
-                              <option>OMBRE A PAUPIERES 6 CLASSIC</option>
-                              <option>OMBRE A PAUPIERES 6 VINTAGE</option>
-                              <option>OMBRE A PAUPIERES 8 VINTAGE</option>
-                              <option>OMBRE A PAUPIERE 6 STUDIO</option>
-                              <option>OMBRE A PAUPIERE 10 STUDIO</option>
-                              <option>MASCARA VOLUME</option>
-                              <option>MASCARA VOLUME WATERPROOF</option>
-                              <option>EYE LINER</option>
-                              <option>EYE LINER LIQUIDE</option>
-                              <option>EYELINER FEUTRE LONGUE TENUE</option>
-                              <option>CRAYON YEUX</option>
-                              <option>CRAYON YEUX RETRACTABLE</option>
-                              <option>DUO</option>
-                            </optgroup>
-                            <optgroup label="LEVRES">
-                              <option>ROUGES A LEVRES</option>
-                              <option>ROUGE A LEVRES CLASSIC</option>
-                              <option>BRILLANT A LEVRES</option>
-                              <option>CRAYON LEVRES</option>
-                              <option>CRAYON LEVRES RETRACTABLE</option>
-                            </optgroup>
-                            <optgroup label="TAINT">
-                              <option>FARD A JOUES</option>
-                              <option>POUDRE COMPACT</option>
-                              <option>POUDRE BRONZANTE</option>
-                              <option>ANTI-CERNES</option>
-                            </optgroup>
-                            <optgroup label="ONGLES">
-                              <option>VERNIS A ONGLES CLASSIC</option>
-                              <option>VERNIS A ONGLES PAILLETTES</option>
-                              <option>VERNIS A ONGLES TENTATION</option>
-                              <option>VERNIS A ONGLES FLUO UV</option>
-                              <option>VERNIS A ONGLES CHROME</option>
-                              <option>VERNIS A ONGLES EFFET UV</option>
-                              <option>VERNIS A ONGLES SOINS</option>
-                              <option>VERNIS A ONGLES 100% MAT</option>
-                              <option>VERNIS A ONGLES PLUMES</option>
-                              <option>VERNIS A ONGLES ECLATS</option>
-                              <option>VERNIS A ONGLES BIJOUX</option>
-                              <option>VERNIS A ONGLES BLACK & WHITE</option>
-                              <option>VERNIS A ONGLES EFFET MAT</option>
-                              <option>VERNIS A ONGLES BLOOM</option>
-                              <option>DISSOLVANT DOUX EXPRESS</option>
-                              <option>DISSOLVANT SANS ACETONE PROFESSIONNEL</option>
-                              <option>DISSOLVANT MOUSSE</option>
-                              <option>NUANCIERS VERNIS A ONGLES</option>
-                            </optgroup>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Image<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="Image" name="Image"  required="required" class="form-control col-md-7 col-xs-12" placeholder="Mettez le chemin d'image svp">
-                        </div>
-                      </div>
-
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">ANNULER</button>
-                          <button type="Reset" class="btn btn-primary" style="background-color: brown">Reset</button>
-                          <button id="send" type="submit" class="btn btn-success">Valider</button>
-                        </div>
-                      </div>
-                    </form>
+                    <table id="datatable" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Nom</th>
+                          <th>Image</th>
+                          <th>Reference</th>
+                          <th>Couleur</th>
+                          <th>Quantite</th>
+                          <th>Nom Catalogue</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                          foreach ($listeProduit as $row) {?>
+                          <tr>
+                            <td><?PHP echo $row['nom']; ?></td>
+                            <td><img src="<?php echo $row['Chemin']; ?>" style="height: 100px; width: 200px;"></td>
+                            <td><?PHP echo $row['reference']; ?></td>
+                            <td><?PHP echo $row['couleur']; ?></td>
+                            <td><?PHP echo $row['quantite']; ?></td>
+                            <td><?PHP echo $row['nomCatalogue']; ?></td>
+                            <td><?PHP echo $row['description']; ?></td>
+                          </tr>
+                          <?php
+                          }
+                          ?>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
+        
         <!-- /footer content -->
-      </div>
-    </div>
+      
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -467,8 +371,24 @@
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- validator -->
-    <script src="../vendors/validator/validator.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
