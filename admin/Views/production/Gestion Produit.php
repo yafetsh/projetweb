@@ -1,13 +1,10 @@
 <?php  
   include_once "../../Core/produitC.php";
-  $produitC=new produitC();
-  $listeProduit=$produitC->afficherproduit();
-  ?>
-
-<?php
-
-  include_once "../../core/produitC.php";
   include_once "../../entities/produit.php";
+
+
+  $produitC=new produitC();
+  $listeProduit=$produitC->afficherproduitsansimg();
   $pC=new produitC();
   if(isset($_GET['supprimer'])){
     $pC->supprimerproduit($_GET["reference"]);
@@ -16,7 +13,6 @@
     $p=$pC->reccupererproduit($_GET["reference"]);
     foreach ($p as $row) {
       $reference=$row['reference'];
-      $nom=$row['nom'];
       $quantite=$row['quantite'];
       $couleur=$row['couleur'];
       $prix=$row['prix'];
@@ -25,7 +21,7 @@
     }
   }
   elseif (isset($_GET['modif'])) {
-      $Produit=new Produit($_GET['Reference'],$_GET['nom'],$_GET['Quantite'],$_GET['Prix'],$_GET['Couleur'],$_GET['Description'],$_GET['catalogue']);
+      $Produit=new Produit($_GET['Reference'],$_GET['Quantite'],$_GET['Prix'],$_GET['Couleur'],$_GET['Description'],$_GET['catalogue']);
       $pC->modifierproduit($Produit,$_GET['Reference']);
   }
   ?>
@@ -102,6 +98,7 @@
                       <li><a href="AJOUTER PRODUIT.html">Ajout de Produits</a></li>
                       <li><a href="LISTE PRODUIT.php">liste de Produits</a></li>
                       <li><a href="GESTION PRODUIT.php">Gestion de Produits</a></li>
+                      <li><a href="GESTION IMAGE.php">Gestion d'Images</a></li>
                       <!--<li><a href="form_wizards.html">Form Wizard</a></li>
                       <li><a href="form_upload.html">Form Upload</a></li>
                       <li><a href="form_buttons.html">Form Buttons</a></li>-->
@@ -354,7 +351,6 @@
                       <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Nom</th>
                           <th>Reference</th>
                           <th>Quantite</th>
                           <th>Nom Catalogue</th>
@@ -365,7 +361,6 @@
                         <?php
                           foreach ($listeProduit as $row) {?>
                             <tr>
-                            <td><?PHP echo $row['nom']; ?></td>
                             <td><?PHP echo $row['reference']; ?></td>
                             <td><?PHP echo $row['quantite']; ?></td>
                             <td><?PHP echo $row['nomCatalogue']; ?></td>
@@ -422,17 +417,10 @@
                       <span class="section">Concernant le produit .. </span>
 
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nom de produit <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nom" name="nom" class="form-control col-md-7 col-xs-12" required="required" type="text" value="<?PHP echo $nom ?>">
-                        </div>
-                      </div>
-                      <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" >Reference<span>*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="Reference" name="Reference" required="required" class="form-control col-md-7 col-xs-12" value="<?PHP echo $reference ?>">
+                          <input id="Reference" name="Reference" required="required" class="form-control col-md-7 col-xs-12" value="<?PHP echo $reference ?>" disabled>
                         </div>
                       </div>
                       <div class="item form-group">
@@ -466,7 +454,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">catalogue<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select id="catalogue" name="catalogue" required="required" class="form-control col-md-7 col-xs-12" id="catalogue" name="catalogue">
+                          <select id="catalogue" name="catalogue" required="required" class="form-control col-md-7 col-xs-12" id="catalogue" name="catalogue" value="<?php echo $nomC ?>">
                               <option> </option>
                             <optgroup label="YEUX">
                               <option>OMBRE A PAUPIERE SOLO</option>

@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
@@ -125,7 +125,6 @@ CREATE TABLE IF NOT EXISTS `panier` (
 DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
   `reference` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL,
   `quantite` int(11) NOT NULL,
   `prix` double NOT NULL,
   `couleur` varchar(255) NOT NULL,
@@ -136,6 +135,30 @@ CREATE TABLE IF NOT EXISTS `produit` (
   KEY `nomCatalogue` (`nomCatalogue`),
   KEY `idPromotion` (`idPromotion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+--Structure de la table `image`
+
+--
+
+
+
+DROP TABLE IF EXISTS `image`;
+CREATE TABLE IF NOT EXISTS `image` (
+
+  `Chemin` varchar(255) NOT NULL,
+
+  `reference` int(11) NOT NULL,
+
+ PRIMARY KEY (`Chemin`),
+
+  UNIQUE KEY `Chemin` (`Chemin`),
+
+  KEY `reference` (`reference`)
+
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 

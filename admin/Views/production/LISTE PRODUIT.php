@@ -1,7 +1,7 @@
 <?php  
   include_once "../../Core/produitC.php";
   $produitC=new produitC();
-  $listeProduit=$produitC->afficherproduit();
+  $listeProduit=$produitC->afficherproduitsansimg();
   ?>
 
 <!DOCTYPE html>
@@ -76,6 +76,7 @@
                       <li><a href="AJOUTER PRODUIT.html">Ajout de Produits</a></li>
                       <li><a href="LISTE PRODUIT.php">liste de Produits</a></li>
                       <li><a href="GESTION PRODUIT.php">Gestion de Produits</a></li>
+                      <li><a href="GESTION IMAGE.php">Gestion d'Images</a></li>
                       <!--<li><a href="form_wizards.html">Form Wizard</a></li>
                       <li><a href="form_upload.html">Form Upload</a></li>
                       <li><a href="form_buttons.html">Form Buttons</a></li>-->
@@ -327,7 +328,6 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Nom</th>
                           <th>Image</th>
                           <th>Reference</th>
                           <th>Couleur</th>
@@ -340,8 +340,16 @@
                         <?php
                           foreach ($listeProduit as $row) {?>
                           <tr>
-                            <td><?PHP echo $row['nom']; ?></td>
-                            <td><img src="<?php echo $row['Chemin']; ?>" style="height: 100px; width: 200px;"></td>
+                            <td>
+                              <?php
+                                $image=$produitC->reccupererimage($row['reference']);
+                                    foreach ($image as $key) {
+                                    ?>
+                                    <img src="<?php echo $key['Chemin']; ?>" style="width: 100px;height: 100px">
+                                    <?php
+                                    }
+                                    ?>
+                            </td>
                             <td><?PHP echo $row['reference']; ?></td>
                             <td><?PHP echo $row['couleur']; ?></td>
                             <td><?PHP echo $row['quantite']; ?></td>

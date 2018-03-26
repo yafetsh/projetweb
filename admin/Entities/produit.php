@@ -5,17 +5,15 @@
 	class Produit
 	{
 		private $reference;
-		private $nom;
 		private $quantite;
 		private $prix;
 		private $couleur;
 		private $description;
 		private $nomCatalogue;
 		
-		function __construct($reference,$nom,$quantite,$prix,$couleur,$description,$nomCatalogue)
+		function __construct($reference,$quantite,$prix,$couleur,$description,$nomCatalogue)
 		{
 			$this->reference=$reference;
-			$this->nom=$nom;
 			$this->quantite=$quantite;
 			$this->prix=$prix;
 			$this->couleur=$couleur;
@@ -25,9 +23,6 @@
 
 		function getReference(){
 			return $this->reference;
-		}
-		function getNom(){
-			return $this->nom;
 		}
 		function getQuantite(){
 			return $this->quantite;
@@ -47,9 +42,6 @@
 
 		function setReference($reference){
 			$this->reference=$reference;
-		}
-		function setNom($nom){
-			$this->nom=$nom;
 		}
 		function setQuantite($quantite){
 			$this->quantite=$quantite;
