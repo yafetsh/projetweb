@@ -1,15 +1,18 @@
 <?php
-include "../Core/livraisoncore.php";
-include "../Entities/livraison.php";
-if (isset($_POST['ajouter'])){
-	if (isset($_POST['type']) and isset($_POST['ville']) and isset($_POST['rue']) and isset($_POST['codepostal']) and isset($_POST['numero'])){
-		$core=new employecore();
-		$emp=new employe($_POST['type'],$_POST['ville'],$_POST['rue'],$_POST['codepostal'],$_POST['numero']);
-		$core->ajouterLivraison($emp);
-		//header("Location:afficheremploye.php");
-	}
-	else{
-		echo "Verifier champs";
-	}
-}
-?>
+
+  include_once "../Core/livraisoncore.php";
+  include_once "../Entities/livraison.php";
+
+  if(isset($_POST['rue']) and isset($_POST['numero']) and isset($_POST['region']) and isset($_POST['ville'])){
+    $livraison=new livraison($_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
+    $livraisonc=new livraisoncore();
+    $livraisonc->ajouterlivraison($l);
+
+    header('location: calendar.html');
+
+  }
+  else {
+    echo "Verifier les champs";
+  }
+
+  ?>

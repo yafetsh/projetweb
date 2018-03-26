@@ -30,15 +30,14 @@ class employecore
 
 	}
 }
-function ajouterLivraison($l){
-	$sql="INSERT INTO `livraison`(`type`, `ville`, `rue`, `codepostal`, `numero`) VALUES (:t,:v,:r,:c,:n)";
+function ajouterlivraison($l){
+	$sql="INSERT INTO `livraison`(`region`, `ville`, `rue`, `numero`) VALUES (:r,:v,:ru,:n)";
 	$db=config::getConnexion();
 	try{
 		$req=$db->prepare($sql);
-		$req->bindValue(":t",$e->getType());
+		$req->bindValue(":r",$e->getRegion());
 		$req->bindValue(":v",$e->getVille());
-		$req->bindValue(":r",$e->getRue());
-		$req->bindValue(":c",$e->getCodepostal());
+		$req->bindValue(":ru",$e->getRue());
 		$req->bindValue(":n",$e->getNumero());
 
 		$req->execute();
