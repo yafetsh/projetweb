@@ -268,11 +268,11 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main" method="POST" action="afficherReservation.php">
+        <div class="right_col" role="main" method="POST" action="afficherReclamation.php">
 
               <div class="title_left">
-                <h3>Réservations</h3>
-                <li>Liste des réservations</li>
+                <h3>Réclamations</h3>
+                <li>Liste des réclamations</li>
               </div>
               <div class="row">
 
@@ -281,9 +281,10 @@
                       <tr>
                         <th>Nom</th>
                         <th>Prénom</th>
+                        <th>Adresse mail</th>
                         <th>Telephone</th>
                         <th>Type</th>
-                        <th>Date</th>
+                        <th>Cause</th>
                         <th>Action</th>
 
                       </tr>
@@ -292,14 +293,16 @@
                     <?php
                      include 'config.php';
                      $pdo = Database::connect();
-                     $sql = 'SELECT * FROM reservation ORDER BY id DESC';
+                     $sql = 'SELECT * FROM reclamation ORDER BY id DESC';
                      foreach ($pdo->query($sql) as $row) {
                               echo '<tr>';
                               echo '<td>'. $row['nom'] . '</td>';
                               echo '<td>'. $row['prenom'] . '</td>';
+                              echo '<td>'. $row['mail'] . '</td>';
                               echo '<td>'. $row['telephone'] . '</td>';
                               echo '<td>'. $row['type'] . '</td>';
-                              echo '<td>'. $row['date'] . '</td>';
+                              echo '<td>'. $row['cause'] . '</td>';
+
 
 
                               echo '<td width=auto>';
@@ -307,7 +310,7 @@
                                                  echo ' ';
                                      echo '<a class="btn btn-success" >Modifier</a>';
                                         echo ' ';
-                                     echo '<a class="btn btn-danger" href="supprimerReclamation.php?id='.$row['id'].'">Supprimer</a>';
+                                     echo '<a class="btn btn-danger" ">Supprimer</a>';
                                  echo '</td>';
                                     echo '</tr>';
                      }

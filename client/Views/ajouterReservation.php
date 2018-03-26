@@ -24,7 +24,7 @@
             $valid = false;
         }
         if (empty($prenom)) {
-            $nomError = '*Please enter Surname';
+            $prenomError = '*Please enter Surname';
             $valid = false;
         }
         if (empty($telephone)) {
@@ -251,7 +251,7 @@
                         <label> Nom:*
                           <input type="text" class="form-control" name="nom" value="<?php echo !empty($nom)?$nom:'';?>">
                           <?php if (!empty($nomError)): ?>
-                              <span class="help-inline"><?php echo $nomError;?></span>
+                              <span class="help-inline" style="color:Red"><?php echo $nomError;?></span>
                           <?php endif; ?>
                         </label>
                       </li>
@@ -259,7 +259,7 @@
                         <label> Prénom:*
                           <input type="text" class="form-control" name="prenom" value="<?php echo !empty($prenom)?$prenom:'';?>" >
                           <?php if (!empty($prenomError)): ?>
-                              <span class="help-inline"><?php echo $prenomError;?></span>
+                              <span class="help-inline" style="color:Red"><?php echo $prenomError;?></span>
                           <?php endif; ?>
                         </label>
                       </li>
@@ -267,7 +267,7 @@
                         <label> Numéro téléphone:*
                           <input type="text" class="form-control" name="telephone" value="<?php echo !empty($telephone)?$telephone:'';?>">
                           <?php if (!empty($telephoneError)): ?>
-                              <span class="help-inline"><?php echo $telephoneError;?></span>
+                              <span class="help-inline" style="color:Red"><?php echo $telephoneError;?></span>
                           <?php endif; ?>
                         </label>
                       </li>
@@ -288,7 +288,7 @@
                         <label>Date et l'heure:*
                           <input type="datetime-local" class="form-control" name="date" value="<?php echo !empty($date)?$date:'';?>" >
                           <?php if (!empty($dateError)): ?>
-                              <span class="help-inline"><?php echo $dateError;?></span>
+                              <span class="help-inline" style="color:Red"><?php echo $dateError;?></span>
                           <?php endif; ?>
 
 
