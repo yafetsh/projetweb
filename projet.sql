@@ -1,9 +1,9 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 20 mars 2018 à 00:46
+-- Généré le :  mar. 27 mars 2018 à 11:51
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -66,6 +66,21 @@ CREATE TABLE IF NOT EXISTS `commande` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `image`
+--
+
+DROP TABLE IF EXISTS `image`;
+CREATE TABLE IF NOT EXISTS `image` (
+  `Chemin` varchar(255) NOT NULL,
+  `reference` int(11) NOT NULL,
+  PRIMARY KEY (`Chemin`),
+  UNIQUE KEY `Chemin` (`Chemin`),
+  KEY `reference` (`reference`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `livraison`
 --
 
@@ -83,6 +98,13 @@ CREATE TABLE IF NOT EXISTS `livraison` (
   KEY `idUtilisateur` (`idUtilisateur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `livraison`
+--
+
+INSERT INTO `livraison` (`id`, `numero`, `type`, `ville`, `rue`, `code postal`, `pseudoLivreur`, `idUtilisateur`) VALUES
+(5, '54', 'sfs', 'svsdf', 'eg', 24, 'zef', 454);
+
 -- --------------------------------------------------------
 
 --
@@ -99,6 +121,13 @@ CREATE TABLE IF NOT EXISTS `livreur` (
   `mdp` varchar(255) NOT NULL,
   PRIMARY KEY (`pseudo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `livreur`
+--
+
+INSERT INTO `livreur` (`pseudo`, `nom`, `prenom`, `tel`, `email`, `mdp`) VALUES
+('zef', 'fds', 'llk', '454', 'dssdf', 'sfdf');
 
 -- --------------------------------------------------------
 
@@ -125,6 +154,7 @@ CREATE TABLE IF NOT EXISTS `panier` (
 DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
   `reference` int(11) NOT NULL,
+  `nom` varchar(255) NOT NULL,
   `quantite` int(11) NOT NULL,
   `prix` double NOT NULL,
   `couleur` varchar(255) NOT NULL,
@@ -135,30 +165,6 @@ CREATE TABLE IF NOT EXISTS `produit` (
   KEY `nomCatalogue` (`nomCatalogue`),
   KEY `idPromotion` (`idPromotion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
---Structure de la table `image`
-
---
-
-
-
-DROP TABLE IF EXISTS `image`;
-CREATE TABLE IF NOT EXISTS `image` (
-
-  `Chemin` varchar(255) NOT NULL,
-
-  `reference` int(11) NOT NULL,
-
- PRIMARY KEY (`Chemin`),
-
-  UNIQUE KEY `Chemin` (`Chemin`),
-
-  KEY `reference` (`reference`)
-
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -183,15 +189,28 @@ DROP TABLE IF EXISTS `reclamation`;
 CREATE TABLE IF NOT EXISTS `reclamation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(100) NOT NULL,
-  `prenom` int(11) NOT NULL,
+  `prenom` varchar(100) NOT NULL,
   `mail` varchar(100) NOT NULL,
+  `telephone` int(20) NOT NULL,
   `type` varchar(100) NOT NULL,
-  `etat` varchar(100) NOT NULL,
   `cause` varchar(100) NOT NULL,
-  `pseudoUtilisateur` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pseudoUtilisateur` (`pseudoUtilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `etat` varchar(20) NOT NULL DEFAULT 'non traité',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `reclamation`
+--
+
+INSERT INTO `reclamation` (`id`, `nom`, `prenom`, `mail`, `telephone`, `type`, `cause`, `etat`) VALUES
+(1, 'vqsf', 'fsd', 'sdf', 544, 'FonctionnalitÃ© de site', 'zfsdf', 'non traité'),
+(2, 'sfs', 'lk', 'kj', 5454, 'FonctionnalitÃ© de site', 'sdfsdf', 'non traité'),
+(3, 'qf', 'sdf', 'sf', 87, 'FonctionnalitÃ© de site', 'sdf', 'non traité'),
+(4, 'qf', 'sdf', 'sf', 87, 'FonctionnalitÃ© de site', 'sdf', 'non traité'),
+(5, 'shil', 'yafet', 'fsdf', 5454, 'FonctionnalitÃ© de site', 'fsdf', 'non traité'),
+(6, 'sdf', 'sdf:s', 'qf', 454, 'FonctionnalitÃ© de site', 'fsdfs', 'non traité'),
+(7, 'sdf', 'sdf:s', 'qf', 454, 'FonctionnalitÃ© de site', 'fsdfs', 'non traité'),
+(8, 'sdf', 'sdf:s', 'qf', 454, 'FonctionnalitÃ© de site', 'fsdfs', 'non traité');
 
 -- --------------------------------------------------------
 
@@ -206,11 +225,18 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   `prenom` varchar(100) NOT NULL,
   `telephone` varchar(100) NOT NULL,
   `type` varchar(100) NOT NULL,
-  `date` date NOT NULL,
-  `pseudoUtilisateur` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `pseudoUtilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `pseudoUtilisateur` (`pseudoUtilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `reservation`
+--
+
+INSERT INTO `reservation` (`id`, `nom`, `prenom`, `telephone`, `type`, `date`, `pseudoUtilisateur`) VALUES
+(1, 'qsf', 'qef', '845', 'Maquillage de jour', '2018-02-18 14:24:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -221,7 +247,6 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id` int(11) NOT NULL,
-  `pseudo` varchar(255) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
   `age` int(11) NOT NULL,
@@ -231,6 +256,13 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `tel` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `age`, `email`, `mdp`, `role`, `tel`) VALUES
+(1, 'Yafet', 'Shil', 22, 'yafet.shil@esprit.tn', 'yafetsh1995', 'admin', '53254533');
 
 --
 -- Contraintes pour les tables déchargées
