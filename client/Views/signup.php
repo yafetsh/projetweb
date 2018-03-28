@@ -18,9 +18,9 @@ if(isset($_POST['forminscription']))
 
       $pseudolength =strlen($pseudo);
       if($pseudolength<=255)
-        { 
+        {
             if($mail == $mail2)
-            {   
+            {
 
         if(filter_var($mail,FILTER_VALIDATE_EMAIL))
            {

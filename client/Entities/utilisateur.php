@@ -6,6 +6,7 @@ class utilisateur
     private $motdepasse;
     private $pseudo;
 function __construct($pseudo,$email,$motdepasse){
+
           $this->pseudo=$pseudo;
           $this->email=$email;
           $this->motdepasse=$motdepasse;
