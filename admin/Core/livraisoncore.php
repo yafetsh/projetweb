@@ -44,25 +44,16 @@ function supprimerlivraison($id){
 
 
 
-
-
-
-
-
-
-
-
  function ajouterLivraison($l){
-	$sql="INSERT INTO `livraison`(`type`,`region`, `ville`, `rue`, `numero`) VALUES (:t,:re,:v,:r,:n)";
+	$sql="INSERT INTO `livraison`( `rue`, `numero`,`region`, `ville`,) VALUES (:r,:n,:re,:v)";
 	$db=config::getConnexion();
 	try{
 		$req=$db->prepare($sql);
-		$req->bindValue(":t",$e->getType());
-		$req->bindValue(":re",$e->getRegion());
-		$req->bindValue(":v",$e->getVille());
 		$req->bindValue(":r",$e->getRue());
 		$req->bindValue(":n",$e->getNumero());
-
+		$req->bindValue(":re",$e->getRegion());
+		$req->bindValue(":v",$e->getVille());
+		
 		$req->execute();
 	}catch(Exception $e){
 		die ('Erreur : '.$e->getMessage());
