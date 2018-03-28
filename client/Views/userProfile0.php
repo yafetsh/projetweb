@@ -201,9 +201,6 @@
                 <h3>MON COMPTE</h3>
                 <ul class="nav side-menu">
                   <li><a  href="#" style="text-transform:uppercase"><i ></i> Paramètres du compte </a>
-                  </li>
-                  <li><a href="#" style="text-transform:uppercase"><i ></i> informations personelles </a>
-                  </li>
                   <li><a href="#" style="text-transform:uppercase"><i ></i> mes adresses </a>
                   </li>
                   <li><a href="#" style="text-transform:uppercase"><i ></i> mes commandes </a>
@@ -226,8 +223,35 @@
 
             </div>
             <!--======= khedma =========-->
+<fieldset style="margin:70px 150px 100px 300px">
+  <legend style="border=2px;text-transform:uppercase;">
+Paramètres du compte
+  </legend>
+  <div>
+<li>
+  <?php
+   include 'config.php';
+   $pdo = Database::connect();
+   $sql = 'SELECT * FROM utilisateur Where id=1';
+   foreach ($pdo->query($sql) as $row1) {
+            echo  '<h5>'.$row1['nom'] . ' ' . $row1['prenom'].'</h5>';
 
-
+            //echo $row['prenom'];
+   }
+echo "</li>";
+echo "<li>";
+   $sql2 = 'SELECT * FROM utilisateur Where id=1';
+   foreach ($pdo->query($sql2) as $row2) {
+            echo  '<h5>'.$row2['email'].'</h5>' ;
+   }
+   Database::disconnect();
+  ?>
+</li>
+<li class="col-sm-12 no-margin">
+  <a href="#">Modifier les données</a>
+</li>
+  </div>
+</fieldset>
 
 
 
