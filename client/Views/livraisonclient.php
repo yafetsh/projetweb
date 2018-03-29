@@ -1,5 +1,7 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/04-contact-01.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:48:01 GMT -->
 
@@ -79,9 +81,10 @@
 
             <div class="w3-bar w3-border w3-light-grey">
             <div style="float: right">
-            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">MON COMPTE</a>
-            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">PANIER</a>
-            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">DÉCONNEXION</a>
+            <a href="#" class="w3-bar-item w3-button w3-border-right" class="top-links">ACCEUIL</a>
+            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links">EDITER MON PROFIL</a>
+            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links">PANIER</a>
+            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links">DÉCONNEXION</a>
            </div>
           </div>
 
@@ -190,145 +193,71 @@
         <!--======= SUB BANNER =========-->
 
         <!-- CONTENT START -->
-        <div class="content">
 
             <!-- Map -->
 
             <!--======= khedma =========-->
 
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section" style="float:left">
-                <h3>MON COMPTE</h3>
-                <ul class="nav side-menu">
-                  <li><a  href="#" style="text-transform:uppercase"><i ></i> Paramètres du compte </a>
-                  <li><a href="#" style="text-transform:uppercase"><i ></i> mes adresses </a>
-                  </li>
-                  <li><a href="livraisonclient.php" style="text-transform:uppercase"><i ></i> mes commandes </a>
-                  </li>
-                  <li><a href="#" style="text-transform:uppercase"><i ></i> Paramètres du compte </a>
-                  </li>
-                  <li><a href="reservationclient.php" style="text-transform:uppercase"><i ></i>  mes Réservations </a>
-                  </li>
-                  <li><a href="#" style="text-transform:uppercase"><i ></i> mes Réclamations </a>
-                  </li>
-                  <li><a href="#" style="text-transform:uppercase"><i></i> suivre ma commande </a>
-                  </li>
-                  <li><a href="#" style="text-transform:uppercase"><i ></i> liste des envies </a>
-                  </li>
-                  <li><a href="#" style="text-transform:uppercase"><i ></i> Promotion </a>
-                  </li>
-                </ul>
+              <div class="menu_section">
+                <h6>Aller à :</h6>
+                    <div style="padding:35px" ><a href="reservationclient.php"><u>Réservation</u></a>
+                     <a href="#"> <u>Réclamation</u></a>
+                     <a href="#"><u> Promotion</u></a></h5></div>
+              
 
+            </div>
+
+
+            <div  role="main" method="POST" action="afficherReservation.php">
+
+                  <div >
+                    <h6>Réservations</h6>
+                  </div>
+                  Liste des réservations
+                  <div >
+
+                      <table class="table table-striped table-bordered">
+                        <thead>
+                          <tr>
+                            <th>Id</th>
+                            <th>Prénom</th>
+                            <th>Telephone</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Action</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                         include 'config.php';
+                         $pdo = Database::connect();
+                         $sql = 'SELECT * FROM reservation ORDER BY id DESC';
+                         foreach ($pdo->query($sql) as $row) {
+                                  echo '<tr>';
+                                  echo '<td>'. $row['nom'] . '</td>';
+                                  echo '<td>'. $row['prenom'] . '</td>';
+                                  echo '<td>'. $row['telephone'] . '</td>';
+                                  echo '<td>'. $row['type'] . '</td>';
+                                  echo '<td>'. $row['date'] . '</td>';
+
+
+                                  echo '<td width=auto>';
+                                               echo '<a  href="afficherReservation.php?id='.$row['id'].'">Afficher</a>';
+                                                     echo ' ';
+                                                     echo '<a  href="modifierReservation.php?id='.$row['id'].'">Modifier</a>';
+                                            echo ' ';
+                                            echo '<a href="supprimerReservation.php?id='.$row['id'].'">Annuler</a>';
+                                     echo '</td>';
+                                        echo '</tr>';
+                         }
+                         Database::disconnect();
+                        ?>
+                        </tbody>
+                  </table>
               </div>
-
-            </div>
-            <!--======= khedma =========-->
-<fieldset style="margin:70px 150px 100px 300px">
-  <legend style="border=2px;text-transform:uppercase;">
-Paramètres du compte
-  </legend>
-  <div>
-<li>
-  <?php
-   include 'config.php';
-   $pdo = Database::connect();
-   $sql = 'SELECT * FROM utilisateur Where id=1';
-   foreach ($pdo->query($sql) as $row1) {
-            echo  '<h5>'.$row1['nom'] . ' ' . $row1['prenom'].'</h5>';
-
-            //echo $row['prenom'];
-   }
-echo "</li>";
-echo "<li>";
-   $sql2 = 'SELECT * FROM utilisateur Where id=1';
-   foreach ($pdo->query($sql2) as $row2) {
-            echo  '<h5>'.$row2['email'].'</h5>' ;
-   }
-   Database::disconnect();
-  ?>
-</li>
-<li class="col-sm-12 no-margin">
-  <a href="#">Modifier les données</a>
-</li>
-  </div>
-</fieldset>
-
-
-
-
-
-        <!--======= BOXES =========-->
-        <section class="section-p-60px contact-box animate fadeInUp " data-wow-delay="0.4s ">
-            <div class="container ">
-                <div class="row ">
-
-                    <!-- Shop Location -->
-                    <div class="col-md-4 animate fadeInLeft " data-wow-delay="0.4s ">
-                        <div class="boxes-in ">
-                            <h6>SHOP LOCATION</h6>
-                            <ul class="location ">
-                                <li> <i class="fa fa-location-arrow "></i>
-                                    <p>
-                                        5 RUE WINDERMER LA COUPOLE MEZZANINE LAC 1 1053 Tunis</p>
-                                </li>
-                                <li> <i class="fa fa-phone "></i>
-                                    <p>Phone: (+216) 52 973 213</p>
-                                </li>
-                                <li> <i class="fa fa-envelope "></i>
-                                    <p>MANEL.AMARA72@democompany.com</p>
-                                </li>
-                                <li> <i class="fa fa-clock-o "></i>
-                                    <p>OPEN: 9AM - 8PM</p>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
-
-                    <!-- NEWSLETTER -->
-                    <div class="col-md-4 animate fadeInUp " data-wow-delay="0.4s ">
-                        <div class="boxes-in ">
-                            <h6>NETWORKS</h6>
-
-                            <!--======= FOOTER ICONS =========-->
-                            <ul class="social_icons ">
-                                <li class="facebook "><a href="#. "> <i class="fa fa-facebook "></i></a></li>
-                                <li class="twitter "><a href="#. "> <i class="fa fa-twitter "></i></a></li>
-                                <li class="googleplus "><a href="#. "> <i class="fa fa-google "></i></a></li>
-                                <li class="skype "><a href="#. "> <i class="fa fa-skype "></i></a></li>
-                                <li class="pinterest "><a href="#. "> <i class="fa fa-pinterest "></i></a></li>
-                                <li class="dribbble "><a href="#. "> <i class="fa fa-dribbble "></i></a></li>
-                                <li class="flickr "><a href="#. "> <i class="fa fa-flickr "></i></a></li>
-                                <li class="behance "><a href="#. "> <i class="fa fa-behance "></i></a></li>
-                                <li class="linkedin "><a href="#. "> <i class="fa fa-linkedin "></i></a></li>
-                                <li class="youtube "><a href="#. "> <i class="fa fa-youtube "></i></a></li>
-                                <li class="instagram "><a href="#. "> <i class="fa fa-instagram "></i></a></li>
-                                <li class="stumbleupon "><a href="#. "> <i class="fa fa-stumbleupon "></i></a></li>
-                                <li class="soundcloud "><a href="#. "> <i class="fa fa-soundcloud "></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- TESTIMONIAL -->
-                    <div class="col-md-4 animate fadeInRight " data-wow-delay="0.4s ">
-                        <div class="boxes-in ">
-                            <h6>SUPPORT PEPOLE</h6>
-                            <div class="media ">
-                                <div class="media-left ">
-                                    <!--  Image -->
-                                    <div class="avatar "> <a href="# "> <img class="media-object " src="images/avatar-11.jpg " alt=" "> </a> </div>
-                                </div>
-                                <!--  Details -->
-                                <div class="media-body ">
-                                    <h5>YASIN_GHR</h5>
-                                    <p>Marketing Manager</p>
-                                    <span><i class="fa fa-skype "></i> yasine.ghr</span> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        </div>
 
         <!--======= Footer =========-->
         <footer>

@@ -1,12 +1,11 @@
 <?php
-
-  include_once "../Core/livraisoncore.php";
   include_once "../Entities/livraison.php";
+  include_once "../Core/livraisoncore.php";
 
   if(isset($_POST['rue']) and isset($_POST['numero']) and isset($_POST['region']) and isset($_POST['ville'])){
-    $livraison=new livraison($_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
-    $livraisonc=new livraisoncore();
-    $livraisonc->ajouterlivraison($l);
+    $livraison1=new livraison($_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
+    $livraison1c=new livraisoncore();
+    $livraison1c->ajouterlivraison($livraison1);
 
   }
   else {
@@ -275,7 +274,7 @@
                 <option value="6">Zaghouan</option>
                 </select>
                 <br><br><br><label>Ville:</label>
-                <input class="osh-input osh-opc-address-field ft-phone1-text-field" required="1" data-msg-required="Champs requis"   data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" data-internationalphonenumber-rule="" data-internationalphonenumber-msg="" name="ville" id="ville" type="text" aria-required="true" aria-describedby="ShippingAddressForm_phone-error" aria-invalid="true">
+                <input class="osh-input osh-opc-address-field ft-phone1-text-field" required="1" data-msg-required="Champs requis" data-internationalphonenumber-rule="" data-internationalphonenumber-msg="" name="ville" id="ville" type="text" aria-required="true" aria-describedby="ShippingAddressForm_phone-error" aria-invalid="true">
                
               <li class="col-sm-12 no-margin">
               <p style="text-align: center;">

@@ -4,13 +4,13 @@ class livraisoncore
 {
 	function afficherLivraison($l){
 		//var_dump($e);
-		$type=$e->getType();
+		$etat=$e->getEtat();
 		$region=$e->getRegion();
 		$ville=$e->getVille();
 		$rue=$e->getRue();
 		$numero=$e->getNumero();
 
-		echo "Type: " .$type. "<br>"; //ou bien echo("CIN :".$e->getCin. "<br>"); ou ma na3mlouch l init lfou9
+		echo "Etat: " .$etat. "<br>"; //ou bien echo("CIN :".$e->getCin. "<br>"); ou ma na3mlouch l init lfou9
 		echo "Region :" .$region. "<br>";
 		echo "Ville: " .$ville. "<br>";
 		echo "Rue: " .$rue. "<br>";
@@ -44,20 +44,28 @@ function supprimerlivraison($id){
 
 
 
- function ajouterLivraison($l){
-	$sql="INSERT INTO `livraison`( `rue`, `numero`,`region`, `ville`,) VALUES (:r,:n,:re,:v)";
-	$db=config::getConnexion();
-	try{
-		$req=$db->prepare($sql);
-		$req->bindValue(":r",$e->getRue());
-		$req->bindValue(":n",$e->getNumero());
-		$req->bindValue(":re",$e->getRegion());
-		$req->bindValue(":v",$e->getVille());
-		
-		$req->execute();
-	}catch(Exception $e){
-		die ('Erreur : '.$e->getMessage());
-	}
+ function ajouterlivraison($l){
+ 		$sql="insert into livraison (rue,numero,region,ville) values (:rue,:numero,:region,:ville)";
+        $db = config::getConnexion();
+        try{
+        $req=$db->prepare($sql);
+
+        $rue=$l->getRue();
+        $numero=$l->getNumero();
+        $region=$l->getRegion();
+        $ville=$l->getVille();
+        $req->bindValue(':rue',$rue);
+        $req->bindValue(':numero',$numero);
+        $req->bindValue(':region',$region);
+        $req->bindValue(':ville',$ville);
+
+            $req->execute();
+
+        }
+        catch (Exception $e){
+            echo 'Erreur: '.$e->getMessage();
+        }
+
 }
 
 

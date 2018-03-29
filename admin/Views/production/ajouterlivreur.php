@@ -1,4 +1,21 @@
-<!DOCTYPE html>
+<?php
+
+    include_once "../../Core/livreurcore.php";
+    include_once "../../Entities/livreur.php";
+
+    if(isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['tel']) and isset($_POST['email'])){
+        $livreur1=new livreur($_POST['nom'],$_POST['prenom'],$_POST['tel'],$_POST['email']);
+        $livreur1c=new livreurcore();
+        $livreur1c->ajouterlivreur($livreur1);
+
+    }
+    else {
+        echo "Verifier les champs";
+    }
+
+  ?>
+
+  <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -276,7 +293,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Livraisons</h3>
+                <h3>AJOUT LIVREUR</h3>
               </div>
 
               <div class="title_right">
@@ -284,215 +301,19 @@
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
+                              <button class="btn btn-default" type="button">Go!</button>
+                          </span>
                   </div>
                 </div>
               </div>
             </div>
-
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Nouveaux livreurs</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <?PHP
-                  include "../../Core/livreurcore.php";
-                  $livreur1C=new livreurcore();
-                  $listeLivreurs=$livreur1C->afficherLivreurs();
-                  ?>
-                  <div class="x_content">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Pseudo</th>
-                          <th>Nom</th>
-                          <th>Prenom</th>
-                          <th>Numero de telephone</th>
-                          <th>Email</th>
-
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?PHP
-                        foreach($listeLivreurs as $row){
-                          ?>
-                          <tr>
-                          <th scope="row">1</th>
-                          <td><?PHP echo $row['pseudo']; ?></td>
-                          <td><?PHP echo $row['nom']; ?></td>
-                          <td><?PHP echo $row['prenom']; ?></td>
-                          <td><?PHP echo $row['tel']; ?></td>
-                          <td><?PHP echo $row['email']; ?></td>
-  <td><form method="POST" action="afficherlivreurs.php">
-  <input type="submit" name="supprimer" value="supprimer">
-  <input type="hidden" value="<?php echo $id;?>" name="id">
-  </form>
-  </td>
-  <td><a href="modifierEmploye.php?cin=<?PHP echo $row['cin']; ?>">
-  Modifier</a></td>
-  </tr>
-  <?PHP
-}
-?>
-                      </tbody>
-                    </table>
-
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Livreurs disponibles</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>ID</th>
-                          <th>Nom</th>
-                          <th>Ville</th>
-                          <th>Adresse</th>
-                          <th>Numero de telephone</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row"></th>
-                         
-
-
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-
-                        </tr>
-                      </tbody>
-                    </table>
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Livreurss non disponibles </h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>ID</th>
-                          <th>Nom</th>
-                          <th>Ville</th>
-                          <th>Adresse</th>
-                          <th>Numero de telephone</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-
-                        </tr>
-                      </tbody>
-                    </table>
-
-                  </div>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Toutes les livraisons passées</h2>
+                    <h2>Ajouter un livreur</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -510,105 +331,53 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-
                   <div class="x_content">
 
-  
-                    <div class="table-responsive">
-                      <table class="table table-striped jambo_table bulk_action">
-                        <thead>
-                          <tr class="headings">
-                            <th>
-                              <input type="checkbox" id="check-all" class="flat">
-                            </th>
-                            <th class="column-title">PSEUDO </th>
-                            <th class="column-title">Nom </th>
-                            <th class="column-title">Prenom </th>
-                            <th class="column-title">Numero de telephone </th>
-                            <th class="column-title">Email </th>
-                            <th class="column-title no-link last"><span class="nobr">Action</span>
-                            </th>
-                            <th class="bulk-actions" colspan="7">
-                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                            </th>
-                          </tr>
-                        </thead>
+                    <form method="POST" action="AJOUTER_PRODUIT.php" class="form-horizontal form-label-left" novalidate>
 
-                        <tbody>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            
-                          
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            
-                            
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            
-                          </tr>
-
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                           
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-							
-						
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nom<span>*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="nom" name="nom" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Prenom<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input  id="prenom" name="prenom" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Telephone<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="telephone" name="telephone" required="required" data-validate-minmax="0,1000000000" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="email" name="email"  required="required" class="form-control col-md-7 col-xs-12" placeholder="dt">
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button type="RESET" class="btn btn-primary">RESET</button>
+                          <button id="send" type="submit" class="btn btn-success">VALIDER</button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <!-- /page content -->
 
         <!-- footer content -->

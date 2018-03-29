@@ -1,6 +1,6 @@
 <?php
 include_once "../Config.php";
-class employecore
+class livraisoncore
 {
 	function afficherLivraison($l){
 		//var_dump($e);

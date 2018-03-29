@@ -1,7 +1,7 @@
 <?php
 class livraison
 {
-  private $type;
+  private $etat;
   private $region;
   private $ville;
   private $rue;
@@ -9,9 +9,9 @@ class livraison
   private $pseudoLivreur;
   private $idUtilisateur;
 
-  function __construct($type,$region,$ville,$rue,$numero,$pseudoLivreur,$idUtilisateur)
+  function __construct($etat,$region,$ville,$rue,$numero,$pseudoLivreur,$idUtilisateur)
   {
-$this->type=$type;
+$this->etat=$etat;
 $this->region=$region;
 $this->ville=$ville;
 $this->rue=$rue;
@@ -20,11 +20,11 @@ $this->pseudoLivreur=$pseudoLivreur;
 $this->idUtilisateur=$idUtilisateur;
 
 }
-  function getType(){
-    return $this->type;
+  function getEtat(){
+    return $this->etat;
   }
-  function setType($type){
-    $this->type=$type;
+  function setEtat($etat){
+    $this->etat=$etat;
   }
   function getVille(){
     return $this->ville;
@@ -35,7 +35,7 @@ $this->idUtilisateur=$idUtilisateur;
   function getRue(){
     return $this->rue;
   }
-  function setRue($type){
+  function setRue($rue){
     $this->rue=$rue;
   }
   function getRegion(){
