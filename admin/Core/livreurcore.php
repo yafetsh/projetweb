@@ -1,11 +1,6 @@
 <?php
-
-	include_once "../../config.php";
-
-	/**
-	* 
-	*/
-	class livreurcore
+include_once "../../config.php";
+class livreurcore
 	{
 		function afficherLivreur($l){
 		//var_dump($e);
@@ -31,21 +26,38 @@
 		}
 
 	}
-}
+
 		
-		function ajouterlivreur($nom,$prenom,$tel,$email){
+		function ajouterlivreur($l){
 			$db = config::getConnexion();
 			$sql="insert into livreur (nom,prenom,tel,email) values (:nom,:prenom,:tel,:email)";
+			try{
 			$req=$db->prepare($sql);
 
-			$req->bindValue(':nom',$livreur->getNom());
-			$req->bindValue(':prenom',$livreur->getPrenom());
-			$req->bindValue(':tel',$livreur->getTel());
-			$req->bindValue(':email',$livreur->getEmail());
+			$req->bindValue(':nom',$l->getNom());
+			$req->bindValue(':prenom',$l->getPrenom());
+			$req->bindValue(':tel',$l->getTel());
+			$req->bindValue(':email',$l->getEmail());
 			
 			$req->execute();
+			 }
+        catch (Exception $e){
+            echo 'Erreur: '.$e->getMessage();
+        }
 
 		}
-	
+		function supprimerlivreur($nom){
+  		$sql="DELETE FROM livreur where nom= :nom";
+      	$req=$db->prepare($sql);
+  		$req->bindValue(':nom',$nom);
+  		try{
+          $req->execute();
+         // header('Location: index.php');
+      	}
+      	catch (Exception $e){
+          die('Erreur: '.$e->getMessage());
+      }
+}
 
+}
   ?>

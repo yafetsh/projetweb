@@ -104,7 +104,8 @@
                       <li><a href="afficherlivraisons.php">Liste des livraisons</a></li>
                       <li><a href="afficherlivreurs.php">Livreurs<span class="fa fa-chevron-down"></span></a>
                         <ul >
-                          <li><a href="ajouterlivreur.php">Ajouter livreur</a></li>
+                          <li><a href="ajouterlivreur.php">Ajouter un livreur</a></li>
+                          <li><a href="afficherlivreurs.php">Liste des livreurs</a></li>
                         </ul>
                       </li>
                     </ul>
@@ -333,7 +334,7 @@
                   </div>
                   <div class="x_content">
 
-                    <form method="POST" action="AJOUTER_PRODUIT.php" class="form-horizontal form-label-left" novalidate>
+                    <form method="POST" class="form-horizontal form-label-left" novalidate>
 
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nom<span>*</span>
@@ -353,14 +354,14 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Telephone<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="telephone" name="telephone" required="required" data-validate-minmax="0,1000000000" class="form-control col-md-7 col-xs-12">
+                          <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" data-msg-required="Champs requis"  data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" name="tel" id="tel" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" name="email"  required="required" class="form-control col-md-7 col-xs-12" placeholder="dt">
+                          <input id="email" name="email" data-rule-email="true" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="ln_solid"></div>
@@ -383,7 +384,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            Gentelella - Bootstrap Admin Template by ArtVision</a>
           </div>
           <div class="clearfix"></div>
         </footer>

@@ -5,15 +5,13 @@ class livreur
   private $prenom;
   private $tel;
   private $email;
-  private $mdp;
 
-  function __construct($nom,$prenom,$tel,$email,$mdp)
+  function __construct($nom,$prenom,$tel,$email)
   {
 $this->nom=$nom;
 $this->prenom=$prenom;
 $this->tel=$tel;
 $this->email=$email;
-$this->mdp=$mdp;
 
 }
   function getNom(){
@@ -40,12 +38,7 @@ $this->mdp=$mdp;
   function setEmail($email){
     $this->email=$email;
   }
-  function getMdp(){
-    return $this->mdp;
-  }
-  function setMdp($mdp){
-    $this->mdp=$mdp;
-  }
+ 
 }
 
 

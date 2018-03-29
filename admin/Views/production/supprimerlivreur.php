@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>FASHION MAKEUP | </title>
+    <title>DASHBOARD | </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,8 +15,6 @@
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-   <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -40,7 +38,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>Manel Ammara</h2>
+                <h2>Yafet Shil</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -67,6 +65,8 @@
                       <li><a href="form_wizards.html">Form Wizard</a></li>
                       <li><a href="form_upload.html">Form Upload</a></li>
                       <li><a href="form_buttons.html">Form Buttons</a></li>
+                      <li><a href="form_buttons.html">Réservations</a></li>
+
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
@@ -82,15 +82,10 @@
                       <li><a href="calendar.html">Calendar</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i> Gestion de livraison <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="afficherlivraisons.php">Liste des livraisons</a></li>
-                      <li><a href="afficherlivreurs.php">Livreurs<span class="fa fa-chevron-down"></span></a>
-                        <ul >
-                          <li><a href="ajouterlivreur.php">Ajouter un livreur</a></li>
-                          <li><a href="afficherlivreurs.php">Liste des livreurs</a></li>
-                        </ul>
-                      </li>
+                      <li><a href="tables.html">Tables</a></li>
+                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
@@ -148,7 +143,7 @@
                         <li><a href="#level1_2">Level One</a>
                         </li>
                     </ul>
-                  </li>                  
+                  </li>
                   <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
               </div>
@@ -186,7 +181,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">Manel Ammara
+                    <img src="images/img.jpg" alt="">Yafet Shil
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -270,107 +265,35 @@
             </nav>
           </div>
         </div>
-        <!-- /top navigation -->
-
         <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
+        <div class="right_col" role="main" method="POST" action="afficherReservation.php">
+
               <div class="title_left">
-                <h3>Livraisons</h3>
+                <h3>Réservations</h3>
+                <li>Liste des réservations</li>
               </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
+							<div class="span10 offset1">
+									<div class="row">
+											<h3>Supprimer une réservation</h3>
+									</div>
+									<form class="form-horizontal" action="supprimerReservation.php" method="post">
+										<input type="hidden" name="id" value="<?php echo $id;?>"/>
+										<p class="alert alert-error">Are you sure to delete ?</p>
+										<div class="form-actions">
+												<button type="submit" class="btn btn-danger">Yes</button>
+												<a class="btn" href="reservationadmin.php">No</a>
+											</div>
+									</form>
+							</div>
                 </div>
               </div>
-            </div>
-
-            <div class="clearfix"></div>
-
-            <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Nouveaux livreurs</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <?PHP
-                  include "../../Core/livreurcore.php";
-                  $livreur1C=new livreurcore();
-                  $listeLivreurs=$livreur1C->afficherLivreurs();
-                  ?>
-                  <div class="x_content">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Nom</th>
-                          <th>Prenom</th>
-                          <th>Numero de telephone</th>
-                          <th>Email</th>
-
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?PHP
-                        foreach($listeLivreurs as $row){
-                          ?>
-                          <tr>
-                          <th scope="row">1</th>
-                          <td><?PHP echo $row['nom']; ?></td>
-                          <td><?PHP echo $row['prenom']; ?></td>
-                          <td><?PHP echo $row['tel']; ?></td>
-                          <td><?PHP echo $row['email']; ?></td>
-  <td><form method="POST" action="afficherlivreurs.php">
-  <input type="submit" name="supprimer" value="supprimer">
-  <input type="hidden" value="<?php echo $id;?>" name="id">
-  </form>
-  </td>
-  <td><a href="modifierEmploye.php?cin=<?PHP echo $row['cin']; ?>">
-  Modifier</a></td>
-  </tr>
-  <?PHP
-}
-?>
-                      </tbody>
-                    </table>
-
-                  </div>
-                </div>
               </div>
 
-
-              
-           
-                
-        <!-- /page content -->
 
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by ArtVision</a>
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -384,10 +307,6 @@
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
