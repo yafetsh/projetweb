@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+  <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -277,7 +278,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Livreurs</h3>
+                <h3>Modification des informations de LIVREUR</h3>
               </div>
 
               <div class="title_right">
@@ -285,20 +286,19 @@
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
+                              <button class="btn btn-default" type="button">Go!</button>
+                          </span>
                   </div>
                 </div>
               </div>
             </div>
-
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Nouveaux livreurs</h2>
+                    <h2>Modifier un livreur</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -316,53 +316,53 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <?PHP
-                  include "../../Core/livreurcore.php";
-                  $livreur1C=new livreurcore();
-                  $listeLivreurs=$livreur1C->afficherLivreurs();
-                  ?>
                   <div class="x_content">
-                    <table class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Nom</th>
-                          <th>Prenom</th>
-                          <th>Numero de telephone</th>
-                          <th>Email</th>
 
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?PHP
-                        foreach($listeLivreurs as $row){
-                          ?>
-                          <tr>
-                          <th scope="row">1</th>
-                          <td><?PHP echo $row['nom']; ?></td>
-                          <td><?PHP echo $row['prenom']; ?></td>
-                          <td><?PHP echo $row['tel']; ?></td>
-                          <td><?PHP echo $row['email']; ?></td>
-  <td><form method="POST" action="afficherlivreurs.php">
-  </form>
-  <?PHP echo '<a  href="modifierlivreur.php?nom='.$row['nom'].'">Modifier</a>'; ?>
-  </td>
+                    <form method="POST" class="form-horizontal form-label-left" novalidate>
 
-                          </tr>
-  <?PHP
-}
-?>
-                      </tbody>
-                    </table>
-
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nom<span>*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="nom" name="nom" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Prenom<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input  id="prenom" name="prenom" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Telephone<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" data-msg-required="Champs requis"  data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" name="tel" id="tel" type="text">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="email" name="email" data-rule-email="true" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button type="RESET" class="btn btn-primary">RESET</button>
+                          <button id="send" type="submit" class="btn btn-success">VALIDER</button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
 
-
-              
-           
-                
         <!-- /page content -->
 
         <!-- footer content -->

@@ -27,6 +27,22 @@ class livreurcore
 
 	}
 
+
+	function modifierlivreur($l){
+			$db = config::getConnexion();
+			$sql="UPDATE livreur SET nom=:nom,prenom=:prenom,tel=:tel,email=:email WHERE nom=:n";
+			$req=$db->prepare($sql);
+			//$req1->bindValue(':ref',$ref);
+			$req->bindValue(':n',$n);
+			
+			$req->bindValue(':nom',$l->getNom());
+			$req->bindValue(':prenom',$l->getPrenom());
+			$req->bindValue(':tel',$l->getTel());
+			$req->bindValue(':email',$l->getEmail());
+			
+			$req->execute();
+
+		}
 		
 		function ajouterlivreur($l){
 			$db = config::getConnexion();
