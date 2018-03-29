@@ -303,7 +303,7 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main" style="height: 1000px">
+        <div class="right_col" role="main" style="min-height: 2000px">
           <div class="">
             <div class="page-title">
               <div class="title_left">
@@ -388,7 +388,7 @@
             
             <div class="clearfix"></div>
 
-            <div class="row" >
+            <div class="row" id="d">
               <div class="col-md-12 col-sm-12 col-xs-12"  >
                 <div class="x_panel" >
                   <div class="x_title">
@@ -410,7 +410,7 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
+                  <div class="x_content" hidden>
 
                     <form method="GET" class="form-horizontal form-label-left" novalidate>
 

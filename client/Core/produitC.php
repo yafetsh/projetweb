@@ -1,14 +1,48 @@
 <?php
 
-	include_once "../../config.php";
+	include_once "../config.php";
 
 	/**
 	* 
 	*/
 	class produitC
 	{
-		
-		function ajouterproduit($produit,$image){
+		function affichercategorie(){
+			$db = config::getConnexion();
+			$sql="SELECT * FROM catalogue";
+			$liste=$db->query($sql);
+			return $liste;
+		}
+
+		function affichercatalogue(){
+			$db = config::getConnexion();
+			$sql="SELECT * FROM catalogue";
+			$liste=$db->query($sql);
+			return $liste;
+		}
+
+		function reccupererproduit(){
+			$db = config::getConnexion();
+			$sql="SELECT * from produit";
+			$liste=$db->query($sql);
+			return $liste;
+		}
+
+		function reccupererimage($reference){
+			$db = config::getConnexion();
+			$sql="SELECT * from image where reference=$reference";
+			$liste=$db->query($sql);
+			return $liste;
+		}
+
+		function calculerproduit($repere){
+			$db = config::getConnexion();
+			$sql="SELECT count(reference) AS ref FROM produit WHERE nomCatalogue=$repere";
+			$liste=$db->query($sql);
+			return $liste;
+		}
+
+		/*function ajouterproduit($produit,$image){
 			$db = config::getConnexion();
 			$sql1="insert into produit (reference,quantite,prix,couleur,description,nomCatalogue) values (:reference,:quantite,:prix,:couleur,:description,:nomCatalogue)";
 			$sql2="insert into image (chemin,reference) values (:chemin,:reference)";
@@ -113,7 +147,7 @@
 			$req1=$db->prepare($sql1);
 			$req1->bindValue(':Chemin',$chemin);
 			$req1->execute();
-		}
+		}*/
 	}
 
   ?>
