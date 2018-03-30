@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -320,6 +321,7 @@
                   include "../../Core/livreurcore.php";
                   $livreur1C=new livreurcore();
                   $listeLivreurs=$livreur1C->afficherLivreurs();
+                  $lC=new livreurcore();
                   ?>
                   <div class="x_content">
                     <table class="table table-striped table-bordered">
@@ -330,6 +332,7 @@
                           <th>Prenom</th>
                           <th>Numero de telephone</th>
                           <th>Email</th>
+                          <th>Action</th>
 
                         </tr>
                       </thead>
@@ -343,13 +346,17 @@
                           <td><?PHP echo $row['prenom']; ?></td>
                           <td><?PHP echo $row['tel']; ?></td>
                           <td><?PHP echo $row['email']; ?></td>
-  <td><form method="POST" action="afficherlivreurs.php">
-  </form>
-  <?PHP echo '<a  href="modifierlivreur.php?nom='.$row['nom'].'">Modifier</a>'; ?>
-  <?PHP echo '<a  href="supprimerlivreur.php?nom'.$row['nom'].'">Supprimer</a>'; ?>
-  </td>
-
-                          </tr>
+                          <td>
+                              <form method="GET">
+                                <input type="submit" name="modifier" value="modifier" class="btn btn-success" style="height: 33px ;width:90px">
+                                <input type="hidden" name="reference" value="<?php echo $row['reference']; ?>">
+                              </form>
+                              <form method="GET">
+                                <input type="submit" name="supprimer" value="Supprimer" class="btn btn-success" style="background-color: blue;">
+                                <input type="hidden" value="<?PHP echo $row['reference']; ?>" name="reference">
+                              </form>
+                          </td>
+                        </tr>
   <?PHP
 }
 ?>

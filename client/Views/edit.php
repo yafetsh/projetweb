@@ -1,7 +1,7 @@
 <?PHP
 include "../entities/utilisateur.php";
 include "../core/utilisateurCore.php";
-$bdd = new PDO('mysql:host=127.0.0.1;dbname=espace_membre', 'root', '');
+$bdd = new PDO('mysql:host=127.0.0.1;dbname=projet', 'root', '');
 session_start();
 if(isset($_SESSION['id'])) {
 

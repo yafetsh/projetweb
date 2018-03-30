@@ -75,7 +75,16 @@ class livreurcore
       	catch (Exception $e){
           die('Erreur: '.$e->getMessage());
       }
-}
+		}
+
+
+		function reccupererinformations($pseudo){
+			$db = config::getConnexion();
+			$sql="SELECT * from livreur where pseudo=$pseudo";
+			$liste=$db->query($sql);
+			return $liste;
+		}
+
 
 }
   ?>
