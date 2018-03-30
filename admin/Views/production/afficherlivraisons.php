@@ -317,7 +317,7 @@
                   $listeLivraisons=$livraison1C->afficherLivraisons();
                   ?>
                   <div class="x_content">
-                    <table class="table">
+                    <table class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>#</th>

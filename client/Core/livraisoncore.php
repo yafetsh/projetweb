@@ -31,14 +31,15 @@ class livraisoncore
 	}
 }
 function ajouterlivraison($l){
-	$sql="INSERT INTO `livraison`(`region`, `ville`, `rue`, `numero`) VALUES (:r,:v,:ru,:n)";
 	$db=config::getConnexion();
+	$sql="insert into livraison (rue,numero,region,ville) values (:rue,:numero,:region,:ville)";
 	try{
 		$req=$db->prepare($sql);
-		$req->bindValue(":r",$e->getRegion());
-		$req->bindValue(":v",$e->getVille());
+
 		$req->bindValue(":ru",$e->getRue());
 		$req->bindValue(":n",$e->getNumero());
+		$req->bindValue(":r",$e->getRegion());
+		$req->bindValue(":v",$e->getVille());
 
 		$req->execute();
 	}catch(Exception $e){

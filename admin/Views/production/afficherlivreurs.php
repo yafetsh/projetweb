@@ -325,7 +325,7 @@
                     <table class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>#</th>
+                          <th>Pseudo</th>
                           <th>Nom</th>
                           <th>Prenom</th>
                           <th>Numero de telephone</th>
@@ -338,7 +338,7 @@
                         foreach($listeLivreurs as $row){
                           ?>
                           <tr>
-                          <th scope="row">1</th>
+                          <td><?PHP echo $row['pseudo']; ?></td>
                           <td><?PHP echo $row['nom']; ?></td>
                           <td><?PHP echo $row['prenom']; ?></td>
                           <td><?PHP echo $row['tel']; ?></td>
@@ -346,6 +346,7 @@
   <td><form method="POST" action="afficherlivreurs.php">
   </form>
   <?PHP echo '<a  href="modifierlivreur.php?nom='.$row['nom'].'">Modifier</a>'; ?>
+  <?PHP echo '<a  href="supprimerlivreur.php?nom'.$row['nom'].'">Supprimer</a>'; ?>
   </td>
 
                           </tr>

@@ -7,6 +7,7 @@
         $livreur1=new livreur($_POST['nom'],$_POST['prenom'],$_POST['tel'],$_POST['email']);
         $livreur1c=new livreurcore();
         $livreur1c->ajouterlivreur($livreur1);
+         header("Location: afficherlivreurs.php");
 
     }
     else {
@@ -354,7 +355,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Telephone<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" data-msg-required="Champs requis"  data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" name="tel" id="tel" type="text">
+                          <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis"  data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" name="tel" id="tel" type="text">
                         </div>
                       </div>
                       <div class="item form-group">

@@ -278,7 +278,7 @@
                
               <li class="col-sm-12 no-margin">
               <p style="text-align: center;">
-                <input type="submit" value="Passer ma commande" class="btn" id="btn_submit" ></p>
+                <button id="send" type="submit" class="btn">Passer ma commande</button></p>
             </li>
         </div>
       </form>

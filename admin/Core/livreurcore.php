@@ -4,11 +4,13 @@ class livreurcore
 	{
 		function afficherLivreur($l){
 		//var_dump($e);
+		$pseudo=$e->getPseudo();
 		$nom=$e->getNom();
 		$prenom=$e->getRegion();
 		$tel=$e->getTel();
 		$email=$e->getEmail();
 
+		echo "Pseudo" .$pseudo. "<br>";
 		echo "Nom: " .$nom. "<br>"; //ou bien echo("CIN :".$e->getCin. "<br>"); ou ma na3mlouch l init lfou9
 		echo "Prenom :" .$prenom. "<br>";
 		echo "Tel: " .$tel. "<br>";
@@ -30,10 +32,10 @@ class livreurcore
 
 	function modifierlivreur($l){
 			$db = config::getConnexion();
-			$sql="UPDATE livreur SET nom=:nom,prenom=:prenom,tel=:tel,email=:email WHERE nom=:n";
+			$sql="UPDATE livreur SET nom=:nom,prenom=:prenom,tel=:tel,email=:email WHERE pseudo=:pseudo";
 			$req=$db->prepare($sql);
 			//$req1->bindValue(':ref',$ref);
-			$req->bindValue(':n',$n);
+			$req->bindValue(':pseudo',$pseudo);
 			
 			$req->bindValue(':nom',$l->getNom());
 			$req->bindValue(':prenom',$l->getPrenom());

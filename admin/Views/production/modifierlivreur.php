@@ -1,4 +1,3 @@
-
   <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -318,41 +317,40 @@
                   </div>
                   <div class="x_content">
 
-                    <form method="POST" class="form-horizontal form-label-left" novalidate>
+                    <form method="POST" class="form-horizontal form-label-left"  action="modifierlivreur.php?pseudo=<?php echo $pseudo?>"novalidate>
 
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nom<span>*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nom" name="nom" required="required" class="form-control col-md-7 col-xs-12">
+                          <input class="form-control col-md-7 col-xs-12" id="nom" name="nom" required="required" value="<?php echo !empty($nom)?$nom:'';?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Prenom<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input  id="prenom" name="prenom" required="required" class="form-control col-md-7 col-xs-12">
+                          <input class="form-control col-md-7 col-xs-12"  id="prenom" name="prenom" required="required" value="<?php echo !empty($prenom)?$prenom:'';?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Telephone<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" data-msg-required="Champs requis"  data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" name="tel" id="tel" type="text">
+                          <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" data-msg-required="Champs requis"  data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" name="tel" id="tel" type="text" value="<?php echo !empty($tel)?$tel:'';?>" >
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" name="email" data-rule-email="true" required="required" class="form-control col-md-7 col-xs-12">
+                          <input id="email" name="email" data-rule-email="true" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo !empty($email)?$email:'';?>">
                         </div>
                       </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <button type="RESET" class="btn btn-primary">RESET</button>
-                          <button id="send" type="submit" class="btn btn-success">VALIDER</button>
+                          <button id="send" type="submit" class="btn btn-success">MODIFIER</button>
                         </div>
                       </div>
                     </form>
