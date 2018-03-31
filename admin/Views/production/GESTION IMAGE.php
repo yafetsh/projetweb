@@ -17,7 +17,7 @@
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    
+
     <!-- Custom styling plus plugins -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -59,29 +59,13 @@
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-desktop"></i> Réservation  <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="AJOUTER PRODUIT.html">Ajout de Produits</a></li>
-                      <li><a href="LISTE PRODUIT.php">liste de Produits</a></li>
-                      <li><a href="GESTION PRODUIT.php">Gestion de Produits</a></li>
-                      <li><a href="GESTION IMAGE.php">Gestion d'Images</a></li>
-                      <!--<li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
-                      <li><a href="form_buttons.html">Réservations</a></li>-->
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
-                      <li><a href="media_gallery.html">Media Gallery</a></li>
-                      <li><a href="typography.html">Typography</a></li>
-                      <li><a href="icons.html">Icons</a></li>
-                      <li><a href="glyphicons.html">Glyphicons</a></li>
-                      <li><a href="widgets.html">Widgets</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                      <li><a href="inbox.html">Inbox</a></li>
                       <li><a href="calendar.html">Calendar</a></li>
                     </ul>
+                  </li>
+                  <li><a href="reservationadmin.php"><i class="fa fa-desktop"></i> Réclamation </a>
+
                   </li>
                   <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -144,7 +128,7 @@
                         <li><a href="#level1_2">Level One</a>
                         </li>
                     </ul>
-                  </li>                  
+                  </li>
                   <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
               </div>
@@ -366,18 +350,18 @@
                                         <input type="text" name="reference"  value="<?php echo($row['reference']);?>" hidden>
                                     </div>
                                     <br><br><br><br>
-                                  </center>  
+                                  </center>
                                     <input class="btn btn-success" type="submit" name="ajouterr" value="Ajouter image">
-                                  </form>                    
+                                  </form>
                                 </td>
                               </tr>
 
-                            <?php 
+                            <?php
                               }
-                            ?>             
+                            ?>
                       </table>
-                      
-                      
+
+
                     </div>
                   </div>
                 </div>
@@ -388,7 +372,7 @@
         <!-- /page content -->
 
         <!-- footer content -->
-        
+
         <!-- /footer content -->
       </div>
     </div>

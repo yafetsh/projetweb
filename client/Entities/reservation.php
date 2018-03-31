@@ -1,19 +1,24 @@
 <?php
 class Reservation
 {
+  private $id;
   private $nom;
   private $prenom;
   private $telephone;
   private $type;
   private $date;
 
-  function __construct($nom,$prenom,$telephone,$type,$date)
+  function __construct($id,$nom,$prenom,$telephone,$type,$date)
   {
+$this->id=$id;
 $this->nom=$nom;
 $this->prenom=$prenom;
 $this->telephone=$telephone;
 $this->type=$type;
 $this->date=$date;
+}
+function getId(){
+  return $this->id;
 }
   function getNom(){
     return $this->nom;
@@ -44,6 +49,9 @@ $this->date=$date;
   }
   function setDate($date){
     $this->date=$date;
+  }
+  function setId($id){
+    $this->id=$id;
   }
 }
 

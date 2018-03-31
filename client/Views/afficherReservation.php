@@ -1,39 +1,42 @@
-<?PHP
-include "../Core/ReservationCore.php";
-$res=new ReservationCore();
-$listeReservations=$res->afficherReservations();
+<div >
 
-?>
-<table border="1">
-<tr>
-<td>Nom</td>
-<td>Prénom</td>
-<td>Telephone</td>
-<td>Type</td>
-<td>Date</td>
-<td>supprimer</td>
-<td>modifier</td>
-</tr>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Prénom</th>
+					<th>Telephone</th>
+					<th>Type</th>
+					<th>Date</th>
+					<th>Action</th>
 
-<?PHP
-foreach($listeReservations as $row){
-	?>
-	<tr>
-	<td><?PHP echo $row['nom']; ?></td>
-	<td><?PHP echo $row['prenom']; ?></td>
-	<td><?PHP echo $row['telephone']; ?></td>
-	<td><?PHP echo $row['type']; ?></td>
-	<td><?PHP echo $row['date']; ?></td>
+				</tr>
+			</thead>
+			<tbody>
+			<?php
+			 include 'config.php';
+			 $pdo = Database::connect();
+			 $sql = 'SELECT * FROM reservation ORDER BY id DESC';
+			 foreach ($pdo->query($sql) as $row) {
+								echo '<tr>';
+								echo '<td>'. $row['nom'] . '</td>';
+								echo '<td>'. $row['prenom'] . '</td>';
+								echo '<td>'. $row['telephone'] . '</td>';
+								echo '<td>'. $row['type'] . '</td>';
+								echo '<td>'. $row['date'] . '</td>';
 
-	<td><form method="POST" action="supprimerReservation.php">
-	<input type="submit" name="supprimer" value="supprimer">
-	<input type="hidden" value="<?PHP echo $row['nom']; ?>" name="nom">
-	</form>
-	</td>
-	<td><a href="modifierReservation.php?nom=<?PHP echo $row['nom']; ?>">
-	Modifier</a></td>
-	</tr>
-	<?PHP
-}
-?>
+
+								echo '<td width=auto>';
+														 echo '<a  href="afficherReservation.php?id='.$row['id'].'">Afficher</a>';
+																	 echo ' ';
+																	 echo '<a  href="modifierReservation.php?id='.$row['id'].'">Modifier</a>';
+													echo ' ';
+													echo '<a href="supprimerReservation.php?id='.$row['id'].'">Annuler</a>';
+									 echo '</td>';
+											echo '</tr>';
+			 }
+			 Database::disconnect();
+			?>
+			</tbody>
 </table>
+</div>
