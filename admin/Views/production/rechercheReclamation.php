@@ -7,7 +7,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
     <title>DASHBOARD | </title>
 
     <!-- Bootstrap -->
@@ -256,54 +259,31 @@
               <div class="title_left">
                 <h3>Réclamations</h3>
                 <li>Liste des réclamations</li>
+								<br>
+								<div class="form-actions">
+
+										<a  href="reservationClient.php">BACK</a>
+										<br>
+									</div>
               </div>
-              <a href="rechercheReclamation.php"> Recherche</a>
               <div class="row">
+								<br>
+								<div class="form-group">
+									<div class="input-group">
 
-                  <table class="table table-striped table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Adresse mail</th>
-                        <th>Telephone</th>
-                        <th>Type</th>
-                        <th>Cause</th>
-                        <th>Action</th>
+										<span class="input-group-addon">Search</span>
+										<input type="text" name="search_text" id="search_text" placeholder="Search by Customer Details" class="form-control" />
+									</div>
+								</div>
+								<br />
+								<div id="result"></div>
+							</div>
+							<div style="clear:both"></div>
+							<br />
 
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                     include 'config.php';
-                     $pdo = Database::connect();
-                     $sql = 'SELECT * FROM reclamation ORDER BY id DESC';
-                     foreach ($pdo->query($sql) as $row) {
-                              echo '<tr>';
-                              echo '<td>'. $row['nom'] . '</td>';
-                              echo '<td>'. $row['prenom'] . '</td>';
-                              echo '<td>'. $row['mail'] . '</td>';
-                              echo '<td>'. $row['telephone'] . '</td>';
-                              echo '<td>'. $row['type'] . '</td>';
-                              echo '<td>'. $row['cause'] . '</td>';
+							<br />
 
-
-
-                              echo '<td width=auto>';
-                                           echo '<a class="btn" href="afficherReclamation.php?id='.$row['id'].'">Afficher</a>';
-                                                 echo ' ';
-                                     echo '<a class="btn btn-success"href="validerReclamation.php?id='.$row['id'].'" >Valider</a>';
-                                        echo ' ';
-                                     echo '<a class="btn btn-danger" href="supprimerReclamation.php?id='.$row['id'].'">Supprimer</a>';
-                                 echo '</td>';
-                                    echo '</tr>';
-                     }
-                     Database::disconnect();
-                    ?>
-                    </tbody>
-              </table>
-          </div>
-                </div>
+					             </div>
               </div>
               </div>
 
@@ -330,3 +310,32 @@
     <script src="../build/js/custom.min.js"></script>
   </body>
 </html>
+<script>
+$(document).ready(function(){
+	load_data();
+	function load_data(query)
+	{
+		$.ajax({
+			url:"fetch.php",
+			method:"post",
+			data:{query:query},
+			success:function(data)
+			{
+				$('#result').html(data);
+			}
+		});
+	}
+
+	$('#search_text').keyup(function(){
+		var search = $(this).val();
+		if(search != '')
+		{
+			load_data(search);
+		}
+		else
+		{
+			load_data();
+		}
+	});
+});
+</script>
