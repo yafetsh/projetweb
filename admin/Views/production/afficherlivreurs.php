@@ -1,3 +1,31 @@
+<?php  
+  include_once "../../Core/livreurcore.php";
+  include_once "../../Entities/livreur.php";
+
+
+  $livreurC=new livreurcore();
+  $listeLivreurs=$livreurC->afficherLivreurs();
+  $lC=new livreurcore();
+  if(isset($_GET['supprimer'])){
+    $lC->supprimerlivreur($_GET["pseudo"]);
+  }
+  else if(isset($_GET['modifier'])){
+    $l=$lC->reccupererinformations($_GET["pseudo"]);
+    foreach ($l as $row) {
+      $pseudo=$row['pseudo'];
+      $nom=$row['nom'];
+      $prenom=$row['prenom'];
+      $tel=$row['tel'];
+      $email=$row['email'];
+    }
+  }
+  elseif (isset($_GET['modif'])) {
+      $livreur=new livreur($_GET['pseudo'],$_GET['nom'],$_GET['prenom'],$_GET['tel'],$_GET['email']);
+      $pC->modifierlivreur($livreur,$_GET['pseudo']);
+  }
+  ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -317,12 +345,7 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <?PHP
-                  include "../../Core/livreurcore.php";
-                  $livreur1C=new livreurcore();
-                  $listeLivreurs=$livreur1C->afficherLivreurs();
-                  $lC=new livreurcore();
-                  ?>
+                  
                   <div class="x_content">
                     <table class="table table-striped table-bordered">
                       <thead>
@@ -349,11 +372,11 @@
                           <td>
                               <form method="GET">
                                 <input type="submit" name="modifier" value="modifier" class="btn btn-success" style="height: 33px ;width:90px">
-                                <input type="hidden" name="reference" value="<?php echo $row['reference']; ?>">
+                                <input type="hidden" name="pseudo" value="<?php echo $row['pseudo']; ?>">
                               </form>
                               <form method="GET">
                                 <input type="submit" name="supprimer" value="Supprimer" class="btn btn-success" style="background-color: blue;">
-                                <input type="hidden" value="<?PHP echo $row['reference']; ?>" name="reference">
+                                <input type="hidden" value="<?PHP echo $row['pseudo']; ?>" name="pseudo">
                               </form>
                           </td>
                         </tr>
@@ -365,6 +388,88 @@
 
                   </div>
                 </div>
+              </div>
+
+
+              <div class="">
+            
+            <div class="clearfix"></div>
+
+            <div class="row" id="d">
+              <div class="col-md-12 col-sm-12 col-xs-12"  >
+                <div class="x_panel" >
+                  <div class="x_title">
+                    <h2>Informations du livreur à modifier</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content" hidden>
+
+                    <form method="GET" class="form-horizontal form-label-left" novalidate>
+
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Pseudo<span>*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="pseudo" name="pseudo" required="required" class="form-control col-md-7 col-xs-12" value="<?PHP echo $pseudo ?>" disabled>
+                        </div>
+                      </div>
+
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nom<span>*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="nom" name="nom" required="required" class="form-control col-md-7 col-xs-12" value="<?PHP echo $nom ?>" >
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Prenom<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input  id="prenom" name="prenom" required="required" class="form-control col-md-7 col-xs-12" value="<?PHP echo $prenom ?>" >
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Telephone<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis"  data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" name="tel" id="tel" type="text" value="<?PHP echo $tel ?>" >
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="email" name="email" data-rule-email="true" required="required" class="form-control col-md-7 col-xs-12" value="<?PHP echo $email ?>" >
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button type="RESET" class="btn btn-primary">RESET</button>
+                          <button id="send" type="submit" class="btn btn-success" name="modif">MODIFIER</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
               </div>
 
 

@@ -30,9 +30,9 @@ class livreurcore
 	}
 
 
-	function modifierlivreur($l){
+	function modifierlivreur($pseudo){
 			$db = config::getConnexion();
-			$sql="UPDATE livreur SET nom=:nom,prenom=:prenom,tel=:tel,email=:email WHERE pseudo=:pseudo";
+			$sql="UPDATE livreur SET pseudo=:pseudo,nom=:nom,prenom=:prenom,tel=:tel,email=:email WHERE pseudo=:pseudo";
 			$req=$db->prepare($sql);
 			//$req1->bindValue(':ref',$ref);
 			$req->bindValue(':pseudo',$pseudo);
@@ -64,10 +64,11 @@ class livreurcore
         }
 
 		}
-		function supprimerlivreur($nom){
-  		$sql="DELETE FROM livreur where nom= :nom";
+		function supprimerlivreur($pseudo){
+  		$sql="DELETE FROM livreur where pseudo= :pseudo";
+  		$db = config::getConnexion();
       	$req=$db->prepare($sql);
-  		$req->bindValue(':nom',$nom);
+  		$req->bindValue(':pseudo',$pseudo);
   		try{
           $req->execute();
          // header('Location: index.php');
