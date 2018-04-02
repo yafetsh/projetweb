@@ -8,6 +8,7 @@
   $lC=new livreurcore();
   if(isset($_GET['supprimer'])){
     $lC->supprimerlivreur($_GET["pseudo"]);
+    header("Location: afficherlivreurs.php");
   }
   else if(isset($_GET['modifier'])){
     $l=$lC->reccupererinformations($_GET["pseudo"]);
