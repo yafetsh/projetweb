@@ -320,12 +320,12 @@
                     <table class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>#</th>
                           <th>ID</th>
                           <th>Nom</th>
                           <th>Ville</th>
                           <th>Adresse</th>
                           <th>Numero de telephone</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -333,20 +333,22 @@
                         foreach($listeLivraisons as $row){
                           ?>
                           <tr>
-                          <th scope="row">1</th>
                           <td><?PHP echo $row['id']; ?></td>
                           <td><?PHP echo $row['region']; ?></td>
                           <td><?PHP echo $row['ville']; ?></td>
                           <td><?PHP echo $row['rue']; ?></td>
                           <td><?PHP echo $row['numero']; ?></td>
-  <td><form method="POST" action="afficherlivraisons.php">
-  <input type="submit" name="supprimer" value="supprimer">
-  <input type="hidden" value="<?php echo $id;?>" name="id">
-  </form>
-  </td>
-  <td><a href="modifierEmploye.php?cin=<?PHP echo $row['cin']; ?>">
-  Modifier</a></td>
-  </tr>
+                          <td>
+                              <form method="GET">
+                                <input type="submit" name="modifier" value="modifier" class="btn btn-success" style="height: 33px ;width:90px">
+                                <input type="hidden" name="pseudo" value="<?php echo $row['pseudo']; ?>">
+                              </form>
+                              <form method="GET">
+                                <input type="submit" name="supprimer" value="Supprimer" class="btn btn-success" style="background-color: blue;">
+                                <input type="hidden" value="<?PHP echo $row['pseudo']; ?>" name="pseudo">
+                              </form>
+                          </td>
+                          </tr>
   <?PHP
 }
 ?>

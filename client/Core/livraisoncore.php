@@ -36,10 +36,10 @@ function ajouterlivraison($l){
 	try{
 		$req=$db->prepare($sql);
 
-		$req->bindValue(":ru",$e->getRue());
-		$req->bindValue(":n",$e->getNumero());
-		$req->bindValue(":r",$e->getRegion());
-		$req->bindValue(":v",$e->getVille());
+		$req->bindValue(":rue",$l->getRue());
+		$req->bindValue(":numero",$l->getNumero());
+		$req->bindValue(":region",$l->getRegion());
+		$req->bindValue(":ville",$l->getVille());
 
 		$req->execute();
 	}catch(Exception $e){

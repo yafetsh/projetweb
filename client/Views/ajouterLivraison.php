@@ -242,9 +242,9 @@
               Merci de confirmer votre adresse ainsi que votre telephone
               <form method="POST"  class="form-horizontal form-label-left" novalidate>
               <br><br><br><label>Adresse:</label>
-              <textarea placeholder="Plus d'Infos" class="osh-input osh-opc-address-field -text-area ft-address1-text-field" required="1" data-msg-required="Champs requis" data-rule-minlength="2" data-rule-maxlength="255" data-msg-minlength="Adresse is too short" data-msg-maxlength="Adresse is too long" name="rue" id="rue" aria-required="true" aria-describedby="ShippingAddressForm_address1-error" aria-invalid="true"></textarea>
+              <input id="rue" name="rue" required="required" class="form-control col-md-7 col-xs-12"
               <br><br><br><label>Telephone:</label>
-              <input placeholder="00 000 000" class="osh-input osh-opc-address-field ft-phone1-text-field" required="1" data-msg-required="Champs requis" data-rule-phonenumber="1" data-isinternationalphonenumber="0" data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" data-internationalphonenumber-rule="" data-internationalphonenumber-msg="" name="numero" id="numero" type="text" aria-required="true" aria-describedby="ShippingAddressForm_phone-error" aria-invalid="true">
+               <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis"  data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" name="numero" id="numero" type="text">
                 <br><br><br><label>Region:</label>
                 <select data-default-region-id="" required="1" data-msg-required="Champs requis" class="ft-region-dropdown placeholder" name="region" id="region" aria-required="true" aria-invalid="true" aria-describedby="ShippingAddressForm_fk_customer_address_region-error">
                 <option value="" selected="selected">Sélectionner...</option>
@@ -281,7 +281,6 @@
                 <button id="send" type="submit" class="btn">Passer ma commande</button></p>
             </li>
         </div>
-      </form>
             </form>
         <div class="col-md-6">
         <p>
