@@ -6,7 +6,7 @@
     $livraison1=new livraison($_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
     $livraison1c=new livraisoncore();
     $livraison1c->ajouterlivraison($livraison1);
-
+     header("Location: afficherlivraisons.php");
   }
   else {
     echo "Verifier les champs";
@@ -229,7 +229,7 @@
      <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
         <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="return false">
+            <form role="form" id="contact_form" class="contact-form" onSubmit="return false">
       <div class="row">
       <h4 align="left"><b>Nouveau:</b></h4>
             <p align="left"><strong>Fashion  make up</strong> vous offre la possibilité de gagner votre temps et votre énergie 
@@ -274,7 +274,7 @@
                 <option value="6">Zaghouan</option>
                 </select>
                 <br><br><br><label>Ville:</label>
-                <input class="osh-input osh-opc-address-field ft-phone1-text-field" required="1" data-msg-required="Champs requis" data-internationalphonenumber-rule="" data-internationalphonenumber-msg="" name="ville" id="ville" type="text" aria-required="true" aria-describedby="ShippingAddressForm_phone-error" aria-invalid="true">
+                <input  required="1" data-msg-required="Champs requis" name="ville" id="ville" type="text" aria-required="true" aria-describedby="ShippingAddressForm_phone-error" aria-invalid="true">
                
               <li class="col-sm-12 no-margin">
               <p style="text-align: center;">
@@ -282,15 +282,13 @@
             </li>
         </div>
             </form>
+          </form>
         <div class="col-md-6">
         <p>
           <h3 ><b> Questions & réponses</b></h3>
           Vous avez des questions au sujet de la commande, la livraison, le paiement ou autres? La liste des questions les plus fréquemment posées et leurs réponses 
           vous aident.
           <li class="col-sm-12">
-            <p><h5>Puis-je modifier moi-même mon adresse et mes données d'utilisateur?</h5>
-            <p>Les données peuvent être modifiées sur «Mon compte». Remarque: Dès qu'une commande a été passée et qu'une adresse est à changer après 
-            coup, il faut contacter le service clients.
             <p><h5>Je ne peux plus accéder à mon compte client. Que puis-je faire?</h5>
             <p>Pour créer un nouveau mot de passe, veuillez cliquer dans l'identifiant «Mon compte» sur «Mot de passe oublié?», avant d'entrer votre adresse e-mail correspondant à votre compte client. 
             Vous recevrez un e-mail en retour avec le lien pour le changement du mot de passe.
@@ -301,7 +299,7 @@
             <p><h5>Si je ne suis pas satisfait avec l'article que j'ai commandé, puis-je le retourner?</h5>
             <p>...
             <p><h5>Puis-je annuler ma commande en ligne?</h5>
-            Vous aurez la possibilité d'annuler votre commande uniquement dans le cas ou l'effectuation de votre commande n'a pas dépassé 12 heures.
+            Vous aurez la possibilité d'annuler votre commande uniquement dans le cas ou l'effectuation de votre commande n'a pas dépassé 2 heures.
           </li>
           <div><b>N'hésitez pas à nous contacter pour plus d'informations</b></div>
         </div>

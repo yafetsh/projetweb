@@ -1,3 +1,30 @@
+ <?PHP
+include "../../Core/livraisoncore.php";
+$livraison1C=new livraisoncore();
+$listeLivraisons=$livraison1C->afficherLivraisons();
+$livraison2C=new livraisoncore();
+if(isset($_GET['supprimer'])){
+    $livraison2C->supprimerlivraison($_GET["id"]);
+    header("Location: afficherlivraisons.php");
+  }
+   else if(isset($_GET['modifier'])){
+    $l=$livraison2C->reccupererinformations($_GET["id"]);
+    foreach ($l as $row) {
+      $id=$row['id'];
+      $rue=$row['rue'];
+      $numero=$row['numero'];
+      $region=$row['region'];
+      $ville=$row['ville'];
+      $etat=$row['etat'];
+    }
+  }
+  elseif (isset($_GET['modif'])) {
+      $livreur=new livreur($_GET['pseudo'],$_GET['nom'],$_GET['prenom'],$_GET['tel'],$_GET['email']);
+      $pC->modifierlivreur($livreur,$_GET['pseudo']);
+  }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -290,7 +317,7 @@
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="col-md-8 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Nouvelles livraisons</h2>
@@ -311,20 +338,19 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <?PHP
-                  include "../../Core/livraisoncore.php";
-                  $livraison1C=new livraisoncore();
-                  $listeLivraisons=$livraison1C->afficherLivraisons();
-                  ?>
+                 
                   <div class="x_content">
                     <table class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>ID</th>
-                          <th>Nom</th>
-                          <th>Ville</th>
-                          <th>Adresse</th>
+                          <th>ID_livraison</th>
+                          <th>ID_utilisateur</th>
+                          <th>Rue</th>
                           <th>Numero de telephone</th>
+                          <th>Region</th>
+                          <th>Ville</th>
+                          <th>Pseudo_Livreur</th>
+                          <th>Etat</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -334,18 +360,22 @@
                           ?>
                           <tr>
                           <td><?PHP echo $row['id']; ?></td>
-                          <td><?PHP echo $row['region']; ?></td>
-                          <td><?PHP echo $row['ville']; ?></td>
+                          <td><?PHP echo $row['idUtilisateur']; ?></td>
                           <td><?PHP echo $row['rue']; ?></td>
                           <td><?PHP echo $row['numero']; ?></td>
+                          <td><?PHP echo $row['region']; ?></td>
+                          <td><?PHP echo $row['ville']; ?></td>
+                          <td><?PHP echo $row['pseudoLivreur']; ?></td>
+                          <td><?PHP echo $row['etat']; ?></td>
+                          
                           <td>
                               <form method="GET">
                                 <input type="submit" name="modifier" value="modifier" class="btn btn-success" style="height: 33px ;width:90px">
-                                <input type="hidden" name="pseudo" value="<?php echo $row['pseudo']; ?>">
+                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                               </form>
                               <form method="GET">
                                 <input type="submit" name="supprimer" value="Supprimer" class="btn btn-success" style="background-color: blue;">
-                                <input type="hidden" value="<?PHP echo $row['pseudo']; ?>" name="pseudo">
+                                <input type="hidden" value="<?PHP echo $row['id']; ?>" name="id">
                               </form>
                           </td>
                           </tr>
@@ -360,7 +390,7 @@
               </div>
 
 
-              <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="col-md-8 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Livraisons en cours de preparation</h2>

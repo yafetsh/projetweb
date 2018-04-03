@@ -18,6 +18,7 @@
       $prenom=$row['prenom'];
       $tel=$row['tel'];
       $email=$row['email'];
+      $etat=$row['etat'];
     }
   }
   elseif (isset($_GET['modif'])) {
@@ -325,7 +326,7 @@
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="col-md-8 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Nouveaux livreurs</h2>
@@ -356,6 +357,7 @@
                           <th>Prenom</th>
                           <th>Numero de telephone</th>
                           <th>Email</th>
+                          <th>Disponibilité</th>
                           <th>Action</th>
 
                         </tr>
@@ -370,6 +372,7 @@
                           <td><?PHP echo $row['prenom']; ?></td>
                           <td><?PHP echo $row['tel']; ?></td>
                           <td><?PHP echo $row['email']; ?></td>
+                          <td></td>
                           <td>
                               <form method="GET">
                                 <input type="submit" name="modifier" value="modifier" class="btn btn-success" style="height: 33px ;width:90px">
