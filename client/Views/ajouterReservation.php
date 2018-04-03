@@ -292,6 +292,7 @@ header('Location: afficherReservation.php');
                           <?php if (!empty($telephoneError)): ?>
                               <span class="help-inline" style="color:Red"><?php echo $telephoneError;?></span>
                           <?php endif; ?>
+
                         </label>
                       </li>
                     </ul>
