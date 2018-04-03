@@ -1,4 +1,24 @@
 <?php
+/*
+include "../Entities/reservation.php";
+include "../Core/ReservationCore.php";
+
+if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['date'])){
+$reservation1=new Reservation($_POST['nom'],$_POST['prenom'],$_POST['telephone'],$_POST['type'],$_POST['date']);
+//Partie2
+
+var_dump($employe1);
+}
+
+//Partie3
+$reservation1C=new ReservationCore();
+$reservation1C->ajouterReservation($reservation1);
+header('Location: afficherReservation.php');
+
+}else{
+	echo "vérifier les champs";
+}
+*/
 
     require 'config.php';
 
@@ -31,10 +51,13 @@
             $telephoneError = '*Please enter Phone number';
             $valid = false;
         }
+
         if (empty($date)) {
             $dateError = '*Please enter Date';
             $valid = false;
         }
+
+
 
 
         // insert data
@@ -286,7 +309,7 @@
 
                       <li class="col-sm-12">
                         <label>Date et l'heure:*
-                          <input type="datetime-local" class="form-control" name="date" value="<?php echo !empty($date)?$date:'';?>" >
+                          <input type="datetime-local" class="form-control" name="date" >
                           <?php if (!empty($dateError)): ?>
                               <span class="help-inline" style="color:Red"><?php echo $dateError;?></span>
                           <?php endif; ?>

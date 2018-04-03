@@ -10,7 +10,6 @@
         $telephoneError = null;
         $typeError = null;
         $causeError = null;
-        $pieceError = null;
 
 
         // keep track post values
@@ -20,7 +19,6 @@
         $telephone = $_POST['telephone'];
         $type = $_POST['type'];
         $cause = $_POST['cause'];
-        $piece = $_POST['piece'];
 
 
         // validate input
@@ -30,30 +28,31 @@
             $valid = false;
         }
         if (empty($prenom)) {
-            $nomError = '*Please enter Surname';
+            $prenomError = '*Please enter Surname';
             $valid = false;
         }
         if (empty($telephone)) {
             $telephoneError = '*Please enter Phone number';
             $valid = false;
         }
-        if (empty($mail)) {
+      /*  if (empty($mail)) {
             $mailError = '*Please enter Adresse mail';
             $valid = false;
-        }
+        }*/
         if (empty($cause)) {
-            $causeError = '*Please enter Adresse mail';
+            $causeError = '*Please enter Cause';
             $valid = false;
         }
+$
 
 
         // insert data
         if ($valid) {
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO reclamation (nom,prenom,mail,telephone,type,cause,piece) values(?, ?, ?,?,?,?,?)";
+            $sql = "INSERT INTO reclamation (nom,prenom,mail,telephone,type,cause) values(?, ?, ?,?,?,?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($nom,$prenom,$mail,$telephone,$type,$cause,$piece));
+            $q->execute(array($nom,$prenom,$mail,$telephone,$type,$cause));
             Database::disconnect();
             header("Location: ajouterReclamation.php");
             echo "Reclamation effectué";
@@ -261,22 +260,42 @@
                   <ul class="row">
                     <li class="col-sm-12">
                       <label> Nom:*
-                        <input type="text" class="form-control" name="nom"  >
+                        <input type="text" class="form-control" name="nom"  value="<?php echo !empty($nom)?$nom:'';?>">
+                        <?php if (!empty($nomError)): ?>
+                            <span class="help-inline" style="color:Red"><?php echo $nomError;?></span>
+                        <?php endif; ?>
                       </label>
                     </li>
                     <li class="col-sm-12">
                       <label> Prénom:*
-                        <input type="text" class="form-control" name="prenom" >
+                        <input type="text" class="form-control" name="prenom" value="<?php echo !empty($prenom)?$prenom:'';?>">
+                        <?php if (!empty($prenomError)): ?>
+                            <span class="help-inline" style="color:Red"><?php echo $prenomError;?></span>
+                        <?php endif; ?>
                       </label>
                     </li>
                     <li class="col-sm-12">
                       <label> Adresse mail:*
                         <input type="text" class="form-control" name="mail" >
+                        <?php
+                        if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {?>
+    <span class="help-inline" style="color:green"> <?php    echo '*Adresse mail correcte';?>
+      <?php
+} else {?>
+
+  <span class="help-inline" style="color:red">   <?php  echo '*Enter Valid Adress mail';
+}?>
+
+
                       </label>
                     </li>
                     <li class="col-sm-12">
                       <label> Numéro téléphone:*
-                        <input type="text" class="form-control" name="telephone" >
+                        <input type="text" class="form-control" name="telephone" value="<?php echo !empty($telephone)?$telephone:'';?>">
+                        <?php if (!empty($telephoneError)): ?>
+                            <span class="help-inline" style="color:Red"><?php echo $telephoneError;?></span>
+                        <?php endif; ?>
+
                       </label>
                     </li>
 
@@ -293,15 +312,14 @@
                   <option value="Produit">Produit</option></select></label>  </li>
                     <li class="col-sm-12">
                       <label> Cause de réclamation:*
-                        <textarea class="form-control" name="cause" rows="5" ></textarea>
+                        <textarea class="form-control" name="cause" rows="5" value="<?php echo !empty($cause)?$cause:''; ?>"></textarea>
+                        <?php if (!empty($causeError)): ?>
+                            <span class="help-inline" style="color:Red"><?php echo $causeError;?></span>
+                        <?php endif; ?>
+
                       </label>
                     </li>
-                    <li class="col-sm-12">
-                      <label> Pièce jointe:(optional)
-                        <form action="upload.php" method="post" enctype="multipart/form-data">
-                        <input type="file" class="form-control" name="piece" > </form>
-                      </label>
-                    </li>
+
                     <li class="col-sm-12 no-margin">
                       <input type="submit" value="Passez la réclamation" name="ajouter" class="btn" id="btn_submit"> <p>
                     </li>

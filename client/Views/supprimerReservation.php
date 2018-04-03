@@ -17,14 +17,14 @@
         $q = $pdo->prepare($sql);
         $q->execute(array($id));
         Database::disconnect();
-        header("Location: reservationClient.php");
+        header("Location: afficherReservation.php");
 
     }
 ?>
 
 
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/04-contact-01.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:48:01 GMT -->
 
@@ -104,10 +104,9 @@
 
             <div class="w3-bar w3-border w3-light-grey">
             <div style="float: right">
-            <a href="#" class="w3-bar-item w3-button w3-border-right" class="top-links">ACCEUIL</a>
-            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links">EDITER MON PROFIL</a>
-            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links">PANIER</a>
-            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links">DÉCONNEXION</a>
+            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">MON COMPTE</a>
+            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">PANIER</a>
+            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">DÉCONNEXION</a>
            </div>
           </div>
 
@@ -216,23 +215,43 @@
         <!--======= SUB BANNER =========-->
 
         <!-- CONTENT START -->
+        <div class="content">
 
             <!-- Map -->
 
             <!--======= khedma =========-->
 
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h5> <a href="reservationclient.php">Réservation</a>
-                     <a href="#"> Réclamation</a>
-                     <a href="#"> Livraison</a>
-                     <a href="#"> Promotion</a></h5>
+              <div class="menu_section" style="float:left">
+                <h3>MON COMPTE</h3>
+                <ul class="nav side-menu">
+                  <li><a  href="userProfile0.php" style="text-transform:uppercase"><i ></i> Paramètres du compte </a>
+                  <li><a href="#" style="text-transform:uppercase"><i ></i> mes adresses </a>
+                  </li>
+                  <li><a href="livraisonclient.php" style="text-transform:uppercase"><i ></i> mes commandes </a>
+
+                  <li><a href="afficherReservation.php" style="text-transform:uppercase"><i ></i>  mes Réservations </a>
+                  </li>
+                  <li><a href="#" style="text-transform:uppercase"><i ></i> mes Réclamations </a>
+                  </li>
+                  <li><a href="#" style="text-transform:uppercase"><i></i> suivre ma commande </a>
+                  </li>
+                  <li><a href="#" style="text-transform:uppercase"><i ></i> liste des envies </a>
+                  </li>
+                  <li><a href="#" style="text-transform:uppercase"><i ></i> Promotion </a>
+                  </li>
+                </ul>
+
               </div>
 
             </div>
+            <!--======= khedma =========-->
+<fieldset style="margin:70px 150px 100px 300px">
+  <legend style="border=2px;text-transform:uppercase;">
+Paramètres du compte
+  </legend>
 
-
-            <div  role="main" method="POST" action="afficherReservation.php">
+  <div  role="main" method="POST" action="afficherReservation.php">
 
                   <div >
                     <h6>Réservations</h6>
@@ -246,12 +265,18 @@ Supprimer cette réservation
 													<p class="alert alert-error">Are you sure to delete ?</p>
 													<div class="form-actions">
 															<button type="submit" >Yes</button>
-															<a  href="reservationClient.php">No</a>
+															<a  href="afficherReservation.php">No</a>
 														</div>
 												</form>
 										</div>
               </div>
                     </div>
+</fieldset>
+
+
+
+
+
         <!--======= BOXES =========-->
         <section class="section-p-60px contact-box animate fadeInUp " data-wow-delay="0.4s ">
             <div class="container ">

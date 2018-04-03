@@ -15,8 +15,8 @@ function afficherReservation($reservation){
 
 
 }
-function ajouterReservation($res){
-  $sql="insert into reservation (nom,prenom,telephone,type,date) values (:nom, :prenom,:telephone,:type,:date)";
+function ajouterReservation($reservation){
+  /*$sql="insert into reservation (nom,prenom,telephone,type,date) values (:nom, :prenom,:telephone,:type,:date)";
   $db = config::getConnexion();
   try{
       $req=$db->prepare($sql);
@@ -37,6 +37,55 @@ function ajouterReservation($res){
       }
       catch (Exception $e){
           echo 'Erreur: '.$e->getMessage();
+      }*/
+      require 'config.php';
+
+      if ( !empty($_POST)) {
+          // keep track validation errors
+          $nomError = null;
+          $prenomError = null;
+          $telephoneError = null;
+          $typeError = null;
+          $dateError = null;
+
+          // keep track post values
+          $nom = $_POST['nom'];
+          $prenom = $_POST['prenom'];
+          $telephone = $_POST['telephone'];
+          $type = $_POST['type'];
+          $date = $_POST['date'];
+
+          // validate input
+          $valid = true;
+          if (empty($nom)) {
+              $nomError = '*Please enter Name';
+              $valid = false;
+          }
+          if (empty($prenom)) {
+              $prenomError = '*Please enter Surname';
+              $valid = false;
+          }
+          if (empty($telephone)) {
+              $telephoneError = '*Please enter Phone number';
+              $valid = false;
+          }
+          if (empty($date)) {
+              $dateError = '*Please enter Date';
+              $valid = false;
+          }
+
+
+          // insert data
+          if ($valid) {
+              $pdo = Database::connect();
+              $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+              $sql = "INSERT INTO reservation (nom,prenom,telephone,type,date) values(?, ?, ?,?,?)";
+              $q = $pdo->prepare($sql);
+              $q->execute(array($nom,$prenom,$telephone,$type,$date));
+              Database::disconnect();
+              header("Location: reservationClient.php");
+              echo "Reservation effectué";
+          }
       }
 
 }

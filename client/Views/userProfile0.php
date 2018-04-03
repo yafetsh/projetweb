@@ -200,14 +200,12 @@
               <div class="menu_section" style="float:left">
                 <h3>MON COMPTE</h3>
                 <ul class="nav side-menu">
-                  <li><a  href="#" style="text-transform:uppercase"><i ></i> Paramètres du compte </a>
+                  <li><a  href="userProfile0.php" style="text-transform:uppercase"><i ></i> Paramètres du compte </a>
                   <li><a href="#" style="text-transform:uppercase"><i ></i> mes adresses </a>
                   </li>
                   <li><a href="livraisonclient.php" style="text-transform:uppercase"><i ></i> mes commandes </a>
-                  </li>
-                  <li><a href="#" style="text-transform:uppercase"><i ></i> Paramètres du compte </a>
-                  </li>
-                  <li><a href="reservationclient.php" style="text-transform:uppercase"><i ></i>  mes Réservations </a>
+
+                  <li><a href="afficherReservation.php" style="text-transform:uppercase"><i ></i>  mes Réservations </a>
                   </li>
                   <li><a href="#" style="text-transform:uppercase"><i ></i> mes Réclamations </a>
                   </li>
