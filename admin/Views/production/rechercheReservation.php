@@ -7,7 +7,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
     <title>DASHBOARD | </title>
 
     <!-- Bootstrap -->
@@ -71,7 +74,9 @@
                     </ul>
                   </li>
                   <li><a href="reservationAdmin.php"><i class="fa fa-desktop"></i> Réservation  </a>
-
+                    <ul class="nav child_menu">
+                      <li><a href="calendar.html">Calendar</a></li>
+                    </ul>
                   </li>
                   <li><a href="reclamationAdmin.php"><i class="fa fa-desktop"></i> Réclamation </a>
 
@@ -264,55 +269,32 @@
         <div class="right_col" role="main" method="POST" action="afficherReservation.php">
 
               <div class="title_left">
-                <h3>Réservations</h3>
+                <h3>Réclamations</h3>
+								<br>
+								<div class="form-actions">
+
+										<a  href="reservationAdmin.php">BACK</a>
+										<br>
+									</div>
               </div>
-              <br>
-              <a href="rechercheReservation.php" class="fa fa-search" style="font-size:18px;color:#191970"> Recherche</a>
-<br>
-<br>
               <div class="row">
+								<br>
+								<div class="form-group">
+									<div class="input-group">
 
-                  <table class="table table-striped table-bordered">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Telephone</th>
-                        <th>Type</th>
-                        <th>Date</th>
-                        <th>Action</th>
+										<span class="input-group-addon">Search</span>
+										<input type="text" name="search_text" id="search_text" placeholder="Search by Customer Details" class="form-control" />
+									</div>
+								</div>
+								<br />
+								<div id="result"></div>
+							</div>
+							<div style="clear:both"></div>
+							<br />
 
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                     include 'config.php';
-                     $pdo = Database::connect();
-                     $sql = 'SELECT * FROM reservation ORDER BY id DESC';
-                     foreach ($pdo->query($sql) as $row) {
-                              echo '<tr>';
-                              echo '<td>'. $row['id'] . '</td>';
-                              echo '<td>'. $row['nom'] . '</td>';
-                              echo '<td>'. $row['prenom'] . '</td>';
-                              echo '<td>'. $row['telephone'] . '</td>';
-                              echo '<td>'. $row['type'] . '</td>';
-                              echo '<td>'. $row['date'] . '</td>';
+							<br />
 
-
-                              echo '<td width=auto>';
-                                           echo '<a class="btn btn-primary" href="afficherReservation.php?id='.$row['id'].'">Afficher</a>';
-                                        echo ' ';
-                                     echo '<a class="btn btn-danger" href="supprimerReservation.php?id='.$row['id'].'">Supprimer</a>';
-                                 echo '</td>';
-                                    echo '</tr>';
-                     }
-                     Database::disconnect();
-                    ?>
-                    </tbody>
-              </table>
-          </div>
-                </div>
+					             </div>
               </div>
               </div>
 
@@ -339,3 +321,39 @@
     <script src="../build/js/custom.min.js"></script>
   </body>
 </html>
+<script>
+/*
+Dans un premier temps, envoi d'une requête au serveur afin d'obtenir les données qui seront affichées dans une partie bien précise de la page actuelle.
+
+Calcul des données demandées par le serveur et envoi de ces données au navigateur au format XML.
+
+Réception des données envoyées par le programme (on dit aussi moteur) AJAX qui les a demandées et affichage dans un endroit bien précis de la page actuelle sans toucher au reste de la page.
+*/
+$(document).ready(function(){ //run once the DOM
+	load_data(); // Load data from the server
+	function load_data(query)
+	{
+		$.ajax({ // appel ajax en jquery
+			url:"fetch1.php", //resource ciblé
+			method:"post", // type de requete http
+			data:{query:query}, // type de donnée a recevoir
+			success:function(data)
+			{
+				$('#result').html(data);
+			}
+		});
+	}
+
+	$('#search_text').keyup(function(){ //attach function when key released
+		var search = $(this).val(); //get the values from search
+		if(search != '')
+		{
+			load_data(search); // load page
+		}
+		else
+		{
+			load_data();
+		}
+	});
+});
+</script>

@@ -61,12 +61,24 @@
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-desktop"></i> Réservation  <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="form.html">General Form</a></li>
+                      <li><a href="form_advanced.html">Advanced Components</a></li>
+                      <li><a href="form_validation.html">Form Validation</a></li>
+                      <li><a href="form_wizards.html">Form Wizard</a></li>
+                      <li><a href="form_upload.html">Form Upload</a></li>
+                      <li><a href="form_buttons.html">Form Buttons</a></li>
+                      <li><a href="form_buttons.html">Réservations</a></li>
+
+                    </ul>
+                  </li>
+                  <li><a href="reservationAdmin.php"><i class="fa fa-desktop"></i> Réservation  </a>
                     <ul class="nav child_menu">
                       <li><a href="calendar.html">Calendar</a></li>
                     </ul>
                   </li>
-                  <li><a href="reservationadmin.php"><i class="fa fa-desktop"></i> Réclamation </a>
+                  <li><a href="reclamationAdmin.php"><i class="fa fa-desktop"></i> Réclamation </a>
 
                   </li>
                   <li><a><i class="fa fa-table"></i> Gestion de livraison <span class="fa fa-chevron-down"></span></a>
@@ -258,11 +270,10 @@
 
               <div class="title_left">
                 <h3>Réclamations</h3>
-                <li>Liste des réclamations</li>
 								<br>
 								<div class="form-actions">
 
-										<a  href="reservationClient.php">BACK</a>
+										<a  href="reclamationAdmin.php">BACK</a>
 										<br>
 									</div>
               </div>
@@ -311,14 +322,21 @@
   </body>
 </html>
 <script>
-$(document).ready(function(){
-	load_data();
+/*
+Dans un premier temps, envoi d'une requête au serveur afin d'obtenir les données qui seront affichées dans une partie bien précise de la page actuelle.
+
+Calcul des données demandées par le serveur et envoi de ces données au navigateur au format XML.
+
+Réception des données envoyées par le programme (on dit aussi moteur) AJAX qui les a demandées et affichage dans un endroit bien précis de la page actuelle sans toucher au reste de la page.
+*/
+$(document).ready(function(){ //run once the DOM
+	load_data(); // Load data from the server
 	function load_data(query)
 	{
-		$.ajax({
-			url:"fetch.php",
-			method:"post",
-			data:{query:query},
+		$.ajax({ // appel ajax en jquery
+			url:"fetch.php", //resource ciblé
+			method:"post", // type de requete http
+			data:{query:query}, // type de donnée a recevoir
 			success:function(data)
 			{
 				$('#result').html(data);
@@ -326,11 +344,11 @@ $(document).ready(function(){
 		});
 	}
 
-	$('#search_text').keyup(function(){
-		var search = $(this).val();
+	$('#search_text').keyup(function(){ //attach function when key released
+		var search = $(this).val(); //get the values from search
 		if(search != '')
 		{
-			load_data(search);
+			load_data(search); // load page
 		}
 		else
 		{

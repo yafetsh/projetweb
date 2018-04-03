@@ -58,12 +58,22 @@
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-desktop"></i> Réservation  <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="calendar.html">Calendar</a></li>
+                      <li><a href="form.html">General Form</a></li>
+                      <li><a href="form_advanced.html">Advanced Components</a></li>
+                      <li><a href="form_validation.html">Form Validation</a></li>
+                      <li><a href="form_wizards.html">Form Wizard</a></li>
+                      <li><a href="form_upload.html">Form Upload</a></li>
+                      <li><a href="form_buttons.html">Form Buttons</a></li>
+                      <li><a href="form_buttons.html">Réservations</a></li>
+
                     </ul>
                   </li>
-                  <li><a href="reservationadmin.php"><i class="fa fa-desktop"></i> Réclamation </a>
+                  <li><a href="reservationAdmin.php"><i class="fa fa-desktop"></i> Réservation  </a>
+
+                  </li>
+                  <li><a href="reclamationAdmin.php"><i class="fa fa-desktop"></i> Réclamation </a>
 
                   </li>
                   <li><a><i class="fa fa-table"></i> Gestion de livraison <span class="fa fa-chevron-down"></span></a>
@@ -255,9 +265,11 @@
 
               <div class="title_left">
                 <h3>Réclamations</h3>
-                <li>Liste des réclamations</li>
               </div>
-              <a href="rechercheReclamation.php"> Recherche</a>
+              <br>
+              <a href="rechercheReclamation.php" class="fa fa-search" style="font-size:18px;color:#191970"> Recherche</a>
+<br>
+<br>
               <div class="row">
 
                   <table class="table table-striped table-bordered">
@@ -269,6 +281,8 @@
                         <th>Telephone</th>
                         <th>Type</th>
                         <th>Cause</th>
+                        <th>Etat</th>
+
                         <th>Action</th>
 
                       </tr>
@@ -286,11 +300,9 @@
                               echo '<td>'. $row['telephone'] . '</td>';
                               echo '<td>'. $row['type'] . '</td>';
                               echo '<td>'. $row['cause'] . '</td>';
-
-
-
+                              echo '<td>'. $row['etat'] . '</td>';
                               echo '<td width=auto>';
-                                           echo '<a class="btn" href="afficherReclamation.php?id='.$row['id'].'">Afficher</a>';
+                                           echo '<a class="btn btn-primary" href="afficherReclamation.php?id='.$row['id'].'">Afficher</a>';
                                                  echo ' ';
                                      echo '<a class="btn btn-success"href="validerReclamation.php?id='.$row['id'].'" >Valider</a>';
                                         echo ' ';

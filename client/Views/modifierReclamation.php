@@ -28,6 +28,7 @@
         $cause = $_POST['cause'];
 
 
+
         // validate input
         $valid = true;
         if (empty($nom)) {
@@ -145,7 +146,7 @@
         <!-- Language -->
         <div class="top-links">
           <ul>
-            <li><a href="#.">MY ACCOUNT</a></li>
+            <li><a href="userProfile0.php">MY ACCOUNT</a></li>
             <li><a href="#.">MY WISHLIST</a></li>
 
           </ul>
@@ -294,15 +295,10 @@
                     </li>
                     <li class="col-sm-12">
                       <label> Adresse mail:*
-                        <input type="text" class="form-control" name="mail" >
-                        <?php
-                        if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {?>
-    <span class="help-inline" style="color:green"> <?php    echo '*Adresse mail correcte';?>
-      <?php
-} else {?>
-
-  <span class="help-inline" style="color:red">   <?php  echo '*Enter Valid Adress mail';
-}?>
+                        <input type="text" class="form-control" name="mail" value="<?php echo !empty($mail)?$mail:'';?>">
+                        <?php if (!empty($mailError)): ?>
+                            <span class="help-inline" style="color:Red"><?php echo $mailError;?></span>
+                        <?php endif; ?>
 
 
                       </label>
@@ -330,7 +326,7 @@
                   <option value="Produit">Produit</option></select></label>  </li>
                     <li class="col-sm-12">
                       <label> Cause de réclamation:*
-                        <textarea class="form-control" name="cause" rows="5" value="<?php echo !empty($cause)?$cause:''; ?>"></textarea>
+                        <textarea class="form-control" name="cause" rows="5"  value="<?php echo !empty($cause)?$cause:''; ?>"></textarea>
                         <?php if (!empty($causeError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $causeError;?></span>
                         <?php endif; ?>

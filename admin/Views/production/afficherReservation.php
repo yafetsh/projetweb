@@ -294,7 +294,7 @@
                 <li>Liste des réservations</li>
               </div>
 
-              <div class="form-horizontal" >
+              <div class="form-horizontal" style="font-size:18px;color:#708090 ">
                               <div class="control-group">
                                 <label class="control-label">Nom: </label>
                                 <?php echo $data['nom'];?>
@@ -315,8 +315,10 @@
                                   <?php echo $data['date'];?>
                                 </div>
                               </div>
+                              <br>
+                              <br>
                                 <div class="form-actions">
-                                <button class="btn">  <a  href="reservationadmin.php">Back</a></button>
+                                <button class="btn">  <a  href="reservationAdmin.php">Back</a></button>
                                </div>
 
 

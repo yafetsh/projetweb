@@ -5,20 +5,18 @@ if(isset($_POST["query"]))
 {
 	$search = mysqli_real_escape_string($connect, $_POST["query"]); //escapes special characters in a string for use in an SQL statement
 	$query = "
-	SELECT * FROM reclamation
+	SELECT * FROM reservation
 	WHERE nom LIKE '%".$search."%'
 	OR prenom LIKE '%".$search."%'
-	OR mail LIKE '%".$search."%'
 	OR telephone LIKE '%".$search."%'
 	OR type LIKE '%".$search."%'
-	OR etat LIKE '%".$search."%'
 
 	";
 }
 else
 {
 	$query = "
-	SELECT * FROM reclamation ORDER BY id";
+	SELECT * FROM reservation ORDER BY id";
 }
 $result = mysqli_query($connect, $query); //performs a query against the database
 if(mysqli_num_rows($result) > 0) //returns the number of rows in a result set, si il y a des données il va afficher ces donnés
@@ -28,11 +26,9 @@ if(mysqli_num_rows($result) > 0) //returns the number of rows in a result set, s
 						<tr>
 							<th>Nom</th>
 							<th>Prenom</th>
-							<th>Mail</th>
 							<th>Telephone</th>
 							<th>Type</th>
-							<th>Cause</th>
-							<th>Etat</th>
+							<th>Date</th>
 
 						</tr>';
 	while($row = mysqli_fetch_array($result)) //fetches a result row as an associative array
@@ -41,11 +37,9 @@ if(mysqli_num_rows($result) > 0) //returns the number of rows in a result set, s
 			<tr>
 				<td>'.$row["nom"].'</td>
 				<td>'.$row["prenom"].'</td>
-				<td>'.$row["mail"].'</td>
 				<td>'.$row["telephone"].'</td>
 				<td>'.$row["type"].'</td>
-				<td>'.$row["cause"].'</td>
-				<td>'.$row["etat"].'</td>
+				<td>'.$row["date"].'</td>
 
 
 			</tr>
