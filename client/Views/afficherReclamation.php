@@ -79,7 +79,7 @@
 
             <div class="w3-bar w3-border w3-light-grey">
             <div style="float: right">
-            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">MON COMPTE</a>
+            <a href="userProfile0.php" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">MON COMPTE</a>
             <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">PANIER</a>
             <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">DÉCONNEXION</a>
            </div>
@@ -221,36 +221,63 @@
 
             </div>
             <!--======= khedma =========-->
-<fieldset style="margin:70px 150px 100px 300px">
-  <legend style="border=2px;text-transform:uppercase;">
-Paramètres du compte
-  </legend>
-  <div>
-<li>
-  <?php
-   include 'config.php';
-   $pdo = Database::connect();
-   $sql = 'SELECT * FROM utilisateur Where id=1';
-   foreach ($pdo->query($sql) as $row1) {
-            echo  '<h5>'.$row1['nom'] . ' ' . $row1['prenom'].'</h5>';
+						<fieldset style="margin:70px 150px 100px 200px">
+						  <legend style="border=2px;text-transform:uppercase;">
+Mes réclamations
+						  </legend>
+							<a href="ajouterReclamation.php" class="menu_section" style="text-transform:uppercase;"> Passer une réclamation</a>
+							<br>
+							<br>
+						<div >
 
-            //echo $row['prenom'];
-   }
-echo "</li>";
-echo "<li>";
-   $sql2 = 'SELECT * FROM utilisateur Where id=1';
-   foreach ($pdo->query($sql2) as $row2) {
-            echo  '<h5>'.$row2['email'].'</h5>' ;
-   }
-   Database::disconnect();
-  ?>
-</li>
-<li class="col-sm-12 no-margin">
-  <a href="#">Modifier les données</a>
-</li>
-  </div>
+
+						<div >
+
+								<table class="table table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>Nom</th>
+											<th>Prénom</th>
+											<th>Adresse mail</th>
+											<th>Téléphone</th>
+											<th>Type</th>
+                      <th>Cause</th>
+                      <th>Etat</th>
+											<th>Action</th>
+
+										</tr>
+									</thead>
+									<tbody>
+									<?php
+									 include 'config.php';
+									 $pdo = Database::connect();
+									 $sql = 'SELECT * FROM reclamation ORDER BY id DESC ';
+									 foreach ($pdo->query($sql) as $row) {
+														echo '<tr>';
+														echo '<td>'. $row['nom'] . '</td>';
+														echo '<td>'. $row['prenom'] . '</td>';
+                            echo '<td>'. $row['mail'] . '</td>';
+														echo '<td>'. $row['telephone'] . '</td>';
+														echo '<td>'. $row['type'] . '</td>';
+														echo '<td>'. $row['cause'] . '</td>';
+                            echo '<td>'. $row['etat'] . '</td>';
+														echo '<td width=auto>';
+
+																							 echo '<a  href="modifierReclamation.php?id='.$row['id'].'">Modifier</a>';
+																			echo ' ';
+																			echo '<a href="supprimerReservation.php?id='.$row['id'].'">Annuler</a>';
+															 echo '</td>';
+																	echo '</tr>';
+									 }
+									 Database::disconnect();
+									?>
+									</tbody>
+						</table>
+						</div>
+
+	</div>
+
 </fieldset>
-
 
 
 
@@ -358,7 +385,7 @@ echo "<li>";
                             <li class="col-sm-6 ">
                                 <h5>MY ACCOUNT</h5>
                                 <ul class="f-links ">
-                                    <li><a href="#. ">MY ACCOUNT</a></li>
+                                    <li><a href="userProfile0.php ">MY ACCOUNT</a></li>
                                     <li><a href="#. "> LOGIN</a></li>
                                     <li><a href="#. "> MY CART</a></li>
                                     <li><a href="#. "> WISHLIST</a></li>

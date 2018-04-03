@@ -1,30 +1,31 @@
 <?php
-    require 'config.php';
 
+    require 'config.php';
     $id = null;
     if ( !empty($_GET['id'])) {
         $id = $_REQUEST['id'];
     }
 
     if ( null==$id ) {
-        header("Location: afficherReservation.php");
+        header("Location: afficherReclamation.php");
     }
-
     if ( !empty($_POST)) {
         // keep track validation errors
         $nomError = null;
         $prenomError = null;
-        $dateError = null;
+        $mailError = null;
         $telephoneError = null;
         $typeError = null;
+        $causeError = null;
+
 
         // keep track post values
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
+        $mail = $_POST['mail'];
         $telephone = $_POST['telephone'];
         $type = $_POST['type'];
-        $date = $_POST['date'];
-
+        $cause = $_POST['cause'];
 
 
         // validate input
@@ -33,49 +34,50 @@
             $nomError = '*Please enter Name';
             $valid = false;
         }
-
         if (empty($prenom)) {
-            $nomError = '*Please enter Surname';
+            $prenomError = '*Please enter Surname';
             $valid = false;
         }
         if (empty($telephone)) {
             $telephoneError = '*Please enter Phone number';
             $valid = false;
         }
-        if (empty($date)) {
-            $dateError = '*Please enter Date';
+      /*  if (empty($mail)) {
+            $mailError = '*Please enter Adresse mail';
+            $valid = false;
+        }*/
+        if (empty($cause)) {
+            $causeError = '*Please enter Cause';
             $valid = false;
         }
-
-
         // update data
         if ($valid) {
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "UPDATE reservation  set nom = ?, prenom = ?, telephone =?, type=?, date=? WHERE id = ?";
+            $sql = "UPDATE reclamation  set nom = ?, prenom = ?,mail = ?, telephone =?, type=?, cause=? WHERE id = ?";
             $q = $pdo->prepare($sql);
-            $q->execute(array($nom,$prenom,$telephone,$type,$date));
+            $q->execute(array($nom,$prenom,$mail,$telephone,$type,$cause));
             Database::disconnect();
-            header("Location: afficherReservation.php");
+            header("Location: afficherReclamation.php");
         }
     } else {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "SELECT * FROM reservation where id = ?";
+        $sql = "SELECT * FROM reclamation where id = ?";
         $q = $pdo->prepare($sql);
         $q->execute(array($id));
         $data = $q->fetch(PDO::FETCH_ASSOC);
         $nom = $data['nom'];
         $prenom = $data['prenom'];
+        $mail = $data['mail'];
         $telephone = $data['telephone'];
         $type = $data['type'];
-        $date = $data['date'];
+        $cause = $data['cause'];
         Database::disconnect();
 
     }
-?>
 
-
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -263,71 +265,85 @@
       <div class="container">
               <!-- Tittle -->
         <div class="tittle">
-          <h5>Réservez vous</h5>
-          <p>Laissez-vous maquiller par des mains expertes !  <br></p>
+          <h5>Réclamez vous</h5>
+          <p>N'hésiter pas à passer vos réclamations <br>
+            Nous essayons a répondre à tous!</p>
         </div>
 		 <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
 		    <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="POST" action="modifierReservation.php?id=<?php echo $id?>">
-                <div class="row">
-                  <div class="col-md-6">
-                    <ul class="row">
-                      <li class="col-sm-12">
-                        <label> Nom:*
-                          <input type="text" class="form-control" name="nom" value="<?php echo !empty($nom)?$nom:'';?>">
-                          <?php if (!empty($nomError)): ?>
-                              <span class="help-inline" style="color:Red"><?php echo $nomError;?></span>
-                          <?php endif; ?>
-                        </label>
-                      </li>
-                      <li class="col-sm-12">
-                        <label> Prénom:*
-                          <input type="text" class="form-control" name="prenom" value="<?php echo !empty($prenom)?$prenom:'';?>" >
-                          <?php if (!empty($prenomError)): ?>
-                              <span class="help-inline" style="color:Red"><?php echo $prenomError;?></span>
-                          <?php endif; ?>
-                        </label>
-                      </li>
-                      <li class="col-sm-12">
-                        <label> Numéro téléphone:*
-                          <input type="text" class="form-control" name="telephone" value="<?php echo !empty($telephone)?$telephone:'';?>">
-                          <?php if (!empty($telephoneError)): ?>
-                              <span class="help-inline" style="color:Red"><?php echo $telephoneError;?></span>
-                          <?php endif; ?>
-                        </label>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-md-6">
-                    <ul class="row">
-                      <li class="col-sm-12">
-                        <label>
-                    Type de maquillage:*
-                    <select  class="form-control" name="type"   >
-                    <option value="Maquillage de jour">Maquillage de jour</option>
-                    <option value="Maquillage de soirée">Maquillage de soirée</option>
-                    <option value="Maquillage de mariage">Maquillage de mariage</option></select></label>  </li>
+            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="ajouterReclamation.php">
+              <div class="row">
+                <div class="col-md-6">
+                  <ul class="row">
+                    <li class="col-sm-12">
+                      <label> Nom:*
+                        <input type="text" class="form-control" name="nom"  value="<?php echo !empty($nom)?$nom:'';?>">
+                        <?php if (!empty($nomError)): ?>
+                            <span class="help-inline" style="color:Red"><?php echo $nomError;?></span>
+                        <?php endif; ?>
+                      </label>
+                    </li>
+                    <li class="col-sm-12">
+                      <label> Prénom:*
+                        <input type="text" class="form-control" name="prenom" value="<?php echo !empty($prenom)?$prenom:'';?>">
+                        <?php if (!empty($prenomError)): ?>
+                            <span class="help-inline" style="color:Red"><?php echo $prenomError;?></span>
+                        <?php endif; ?>
+                      </label>
+                    </li>
+                    <li class="col-sm-12">
+                      <label> Adresse mail:*
+                        <input type="text" class="form-control" name="mail" >
+                        <?php
+                        if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {?>
+    <span class="help-inline" style="color:green"> <?php    echo '*Adresse mail correcte';?>
+      <?php
+} else {?>
+
+  <span class="help-inline" style="color:red">   <?php  echo '*Enter Valid Adress mail';
+}?>
 
 
-                      <li class="col-sm-12">
-                        <label>Date et l'heure:*
-                          <input type="datetime-local" class="form-control" name="date" value="<?php echo !empty($date)?$date:'';?>" >
-                          <?php if (!empty($dateError)): ?>
-                              <span class="help-inline" style="color:Red"><?php echo $dateError;?></span>
-                          <?php endif; ?>
+                      </label>
+                    </li>
+                    <li class="col-sm-12">
+                      <label> Numéro téléphone:*
+                        <input type="text" class="form-control" name="telephone" value="<?php echo !empty($telephone)?$telephone:'';?>">
+                        <?php if (!empty($telephoneError)): ?>
+                            <span class="help-inline" style="color:Red"><?php echo $telephoneError;?></span>
+                        <?php endif; ?>
 
+                      </label>
+                    </li>
 
-                        </label>
-  </li>
-
-                      <li class="col-sm-12 no-margin">
-                        <input type="submit" value="Modifier" name="ajouter" class="btn" id="btn_submit"></button> <p>
-                      </li>
-                    </ul>
-                  </div>
+                  </ul>
                 </div>
+                <div class="col-md-6">
+                  <ul class="row">
+                    <li class="col-sm-12">
+                      <label>
+                  Type de réclamation:*
+                  <select  class="form-control" name="type">
+                  <option value="Fonctionnalité de site">Fonctionnalité de site</option>
+                  <option value="Prix">Prix</option>
+                  <option value="Produit">Produit</option></select></label>  </li>
+                    <li class="col-sm-12">
+                      <label> Cause de réclamation:*
+                        <textarea class="form-control" name="cause" rows="5" value="<?php echo !empty($cause)?$cause:''; ?>"></textarea>
+                        <?php if (!empty($causeError)): ?>
+                            <span class="help-inline" style="color:Red"><?php echo $causeError;?></span>
+                        <?php endif; ?>
 
+                      </label>
+                    </li>
+
+                    <li class="col-sm-12 no-margin">
+                      <input type="submit" value="Passez la réclamation" name="ajouter" class="btn" id="btn_submit"> <p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </form>
           </div>
         </div>

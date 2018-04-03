@@ -1,3 +1,28 @@
+<?php
+    require 'config.php';
+    $id = 0;
+
+    if ( !empty($_GET['id'])) {
+        $id = $_REQUEST['id'];
+    }
+
+    if ( !empty($_POST)) {
+        // keep track post values
+        $id = $_POST['id'];
+
+        // delete data
+        $pdo = Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "DELETE FROM reclamation  WHERE id = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($id));
+        Database::disconnect();
+        header("Location: afficherReclamation.php");
+
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -225,30 +250,26 @@
   <legend style="border=2px;text-transform:uppercase;">
 Paramètres du compte
   </legend>
-  <div>
-<li>
-  <?php
-   include 'config.php';
-   $pdo = Database::connect();
-   $sql = 'SELECT * FROM utilisateur Where id=1';
-   foreach ($pdo->query($sql) as $row1) {
-            echo  '<h5>'.$row1['nom'] . ' ' . $row1['prenom'].'</h5>';
 
-            //echo $row['prenom'];
-   }
-echo "</li>";
-echo "<li>";
-   $sql2 = 'SELECT * FROM utilisateur Where id=1';
-   foreach ($pdo->query($sql2) as $row2) {
-            echo  '<h5>'.$row2['email'].'</h5>' ;
-   }
-   Database::disconnect();
-  ?>
-</li>
-<li class="col-sm-12 no-margin">
-  <a href="#">Modifier les données</a>
-</li>
-  </div>
+  <div  role="main" method="POST" action="afficherReclamation.php">
+
+                  <div >
+                  </div>
+Supprimer cette réclamation
+                  <div >
+										<div class="span10 offset1">
+
+												<form class="form-horizontal" action="supprimerReclamation.php" method="post">
+													<input type="hidden" name="id" value="<?php echo $id;?>"/>
+													<p class="alert alert-error">Are you sure to delete ?</p>
+													<div class="form-actions">
+															<button type="submit" >Yes</button>
+															<a  href="afficherReclamation.php">No</a>
+														</div>
+												</form>
+										</div>
+              </div>
+                    </div>
 </fieldset>
 
 

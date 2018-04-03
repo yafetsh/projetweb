@@ -43,7 +43,7 @@
             $causeError = '*Please enter Cause';
             $valid = false;
         }
-$
+
 
 
         // insert data
@@ -54,8 +54,7 @@ $
             $q = $pdo->prepare($sql);
             $q->execute(array($nom,$prenom,$mail,$telephone,$type,$cause));
             Database::disconnect();
-            header("Location: ajouterReclamation.php");
-            echo "Reclamation effectué";
+            header("Location: afficherReclamation.php");
 
         }
     }
@@ -127,7 +126,7 @@ $
         <!-- Language -->
         <div class="top-links">
           <ul>
-            <li><a href="#.">MY ACCOUNT</a></li>
+            <li><a href="userProfile0.php">MY ACCOUNT</a></li>
             <li><a href="#.">MY WISHLIST</a></li>
 
           </ul>
@@ -276,17 +275,10 @@ $
                     </li>
                     <li class="col-sm-12">
                       <label> Adresse mail:*
-                        <input type="text" class="form-control" name="mail" >
-                        <?php
-                        if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {?>
-    <span class="help-inline" style="color:green"> <?php    echo '*Adresse mail correcte';?>
-      <?php
-} else {?>
-
-  <span class="help-inline" style="color:red">   <?php  echo '*Enter Valid Adress mail';
-}?>
-
-
+                        <input type="text" class="form-control" name="mail" value="<?php echo !empty($mail)?$mail:'';?>" >
+                        <?php if (!empty($mailError)): ?>
+                            <span class="help-inline" style="color:Red"><?php echo $mailError;?></span>
+                        <?php endif; ?>
                       </label>
                     </li>
                     <li class="col-sm-12">

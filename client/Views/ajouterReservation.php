@@ -68,7 +68,7 @@ header('Location: afficherReservation.php');
             $q = $pdo->prepare($sql);
             $q->execute(array($nom,$prenom,$telephone,$type,$date));
             Database::disconnect();
-            header("Location: reservationClient.php");
+            header("Location: afficherReservation.php");
             echo "Reservation effectué";
         }
     }
@@ -140,7 +140,7 @@ header('Location: afficherReservation.php');
         <!-- Language -->
         <div class="top-links">
           <ul>
-            <li><a href="#.">MY ACCOUNT</a></li>
+            <li><a href="userProfile0.php">MY ACCOUNT</a></li>
             <li><a href="#.">MY WISHLIST</a></li>
 
           </ul>

@@ -232,7 +232,7 @@
 
                   <li><a href="afficherReservation.php" style="text-transform:uppercase"><i ></i>  mes Réservations </a>
                   </li>
-                  <li><a href="#" style="text-transform:uppercase"><i ></i> mes Réclamations </a>
+                  <li><a href="afficherReclamation.php" style="text-transform:uppercase"><i ></i> mes Réclamations </a>
                   </li>
                   <li><a href="#" style="text-transform:uppercase"><i></i> suivre ma commande </a>
                   </li>
@@ -254,7 +254,6 @@ Paramètres du compte
   <div  role="main" method="POST" action="afficherReservation.php">
 
                   <div >
-                    <h6>Réservations</h6>
                   </div>
 Supprimer cette réservation
                   <div >

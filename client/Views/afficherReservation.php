@@ -79,7 +79,7 @@
 
             <div class="w3-bar w3-border w3-light-grey">
             <div style="float: right">
-            <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">MON COMPTE</a>
+            <a href="userProfile0.php" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">MON COMPTE</a>
             <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">PANIER</a>
             <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links" style="margin:10px">DÉCONNEXION</a>
            </div>
@@ -207,7 +207,7 @@
 
                   <li><a href="afficherReservation.php" style="text-transform:uppercase"><i ></i>  mes Réservations </a>
                   </li>
-                  <li><a href="#" style="text-transform:uppercase"><i ></i> mes Réclamations </a>
+                  <li><a href="afficherReclamation.php" style="text-transform:uppercase"><i ></i> mes Réclamations </a>
                   </li>
                   <li><a href="#" style="text-transform:uppercase"><i></i> suivre ma commande </a>
                   </li>
@@ -221,11 +221,14 @@
 
             </div>
             <!--======= khedma =========-->
-						<fieldset style="margin:70px 150px 100px 300px">
+						<fieldset style="margin:70px 150px 100px 250px">
 						  <legend style="border=2px;text-transform:uppercase;">
 Mes réservations
 						  </legend>
-						<div class="">
+							<a href="ajouterReservation.php" class="menu_section" style="text-transform:uppercase;"> Réservez</a>
+							<br>
+							<br>
+						<div >
 
 
 						<div >
@@ -257,7 +260,7 @@ Mes réservations
 
 
 														echo '<td width=auto>';
-																				
+
 																							 echo '<a  href="modifierReservation.php?id='.$row['id'].'">Modifier</a>';
 																			echo ' ';
 																			echo '<a href="supprimerReservation.php?id='.$row['id'].'">Annuler</a>';
@@ -380,7 +383,7 @@ Mes réservations
                             <li class="col-sm-6 ">
                                 <h5>MY ACCOUNT</h5>
                                 <ul class="f-links ">
-                                    <li><a href="#. ">MY ACCOUNT</a></li>
+                                    <li><a href="userProfile0.php ">MY ACCOUNT</a></li>
                                     <li><a href="#. "> LOGIN</a></li>
                                     <li><a href="#. "> MY CART</a></li>
                                     <li><a href="#. "> WISHLIST</a></li>
