@@ -1,56 +1,38 @@
-<?php
-  include_once "../Entities/livraison.php";
-  include_once "../Core/livraisoncore.php";
-
-  if(isset($_POST['rue']) and isset($_POST['numero']) and isset($_POST['region']) and isset($_POST['ville'])){
-    $livraison1=new livraison($_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
-    $livraison1c=new livraisoncore();
-    $livraison1c->ajouterlivraison($livraison1);
-     header("Location: afficherlivraisons.php");
-  }
-  else {
-    echo "Verifier les champs";
-  }
-
-  ?>
-  <!DOCTYPE html>
-<html lang="en">
-
-<!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/02-shop-sidebar-right.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:47:06 GMT -->
+<HTML>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SEBIAN - Multi Purpose eCommerce HTML5 Template</title>
-<meta name="keywords" content="HTML5,CSS3,HTML,Template,Multi-Purpose,M_Adnan,Corporate Theme,SEBIAN Multi Purpose Care,eCommerce,SEBIAN - Multi Purpose eCommerce HTML5 Template">
-<meta name="description" content="SEBIAN - Multi Purpose eCommerce HTML5 Template">
-<meta name="author" content="M_Adnan">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FASHION MAKE-UP - Multi Purpose eCommerce HTML5 Template</title>
+	<meta name="keywords" content="HTML5,CSS3,HTML,Template,Multi-Purpose,M_Adnan,Corporate Theme,SEBIAN Multi Purpose Care,eCommerce,SEBIAN - Multi Purpose eCommerce HTML5 Template">
+	<meta name="description" content="SEBIAN - Multi Purpose eCommerce HTML5 Template">
+	<meta name="author" content="M_Adnan">
 
-<!-- FONTS ONLINE -->
-<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<!-- FONTS ONLINE -->
+	<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
-<!--MAIN STYLE-->
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="css/main.css" rel="stylesheet" type="text/css">
-<link href="css/style.css" rel="stylesheet" type="text/css">
-<link href="css/responsive.css" rel="stylesheet" type="text/css">
-<link href="css/animate.css" rel="stylesheet" type="text/css">
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<!-- ADD YOUR OWN STYLING HERE. AVOID TO USE STYLE.CSS AND MAIN.CSS. IT WILL BE HELPFUL FOR YOU IN FUTURE UPDATES -->
-<link href="css/custom.css" rel="stylesheet" type="text/css">
+	<!--MAIN STYLE-->
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="css/main.css" rel="stylesheet" type="text/css">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<link href="css/responsive.css" rel="stylesheet" type="text/css">
+	<link href="css/animate.css" rel="stylesheet" type="text/css">
+	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<!-- ADD YOUR OWN STYLING HERE. AVOID TO USE STYLE.CSS AND MAIN.CSS. IT WILL BE HELPFUL FOR YOU IN FUTURE UPDATES -->
+	<link href="css/custom.css" rel="stylesheet" type="text/css">
 
-<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
-<link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
+	<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+	<link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
 
-<!-- JavaScripts -->
-<script src="js/modernizr.js"></script>
+	<!-- JavaScripts -->
+	<script src="js/modernizr.js"></script>
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+	<![endif]-->
 
 </head>
 <body>
@@ -216,21 +198,21 @@
       </div>
     </div>
   </header>
-<!--======= Livraison =========-->
+  <!--======= Livraison =========-->
     <section class="section-p-30px conact-us no-padding-b animate fadeInUp" data-wow-delay="0.4s">
-      <!--======= Livraison =========-->
+    	<!--======= Livraison =========-->
       <div class="container">
-              <!-- Tittle -->
+    	<!-- Tittle -->
         <div class="tittle">
           <h5></h5>
           <p><br>
             </p>
         </div>
-     <div class="contact section-p-30px no-padding-b">
+        <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
-        <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" onSubmit="return false">
-              <h4 align="left"><b>Nouveau:</b></h4>
+ <!--======= FORM  =========-->
+<div id="contact_form" class="contact-form">
+<h4 align="left"><b>Nouveau:</b></h4>
               <p align="left"><strong>Fashion  make up</strong> vous offre la possibilité de gagner votre temps et votre énergie 
               grace à la livraison à domicile,elle vous permet de prendre votre commande à plus vite possible sans aucun effort (de 1 à 3 jours au maximum),
               de plus elle vous offre la possibilité de suivre l'acheminement de votre colis.
@@ -239,50 +221,22 @@
                 <h3 ><b>Vérification des données</b></h3>
                 <li class="col-sm-12">  
                 Merci de confirmer votre adresse ainsi que votre telephone
-                <form method="POST" class="form-horizontal form-label-left" novalidate>
-                  <br><br><br><label>Adresse:</label>
-                  <input id="rue" name="rue" required="required" class="form-control col-md-7 col-xs-12"
-                  <br><br><br><label>Telephone:</label>
-                  <input name="numero" id="numero" required="required" placeholder="00 000 000" class="form-control col-md-7 col-xs-12" >
-                  <br><br><br><label>Region:</label>
-                  <select data-default-region-id="" required="required" data-msg-required="Champs requis" class="ft-region-dropdown placeholder" name="region" id="region">
-                  <option value="" selected="selected">Sélectionner...</option>
-                  <option value="2">Ariana</option>
-                  <option value="3">Ben Arous</option>
-                  <option value="7">Bizerte</option>
-                  <option value="8">Béja</option>
-                  <option value="22">Gabes</option>
-                  <option value="19">Gafsa</option>
-                  <option value="9">Jendouba</option>
-                  <option value="12">Kairouan</option>
-                  <option value="13">Kasserine</option>
-                  <option value="21">Kebili</option>
-                  <option value="4">La Manouba</option>
-                  <option value="10">Le Kef</option>
-                  <option value="17">Mahdia</option>
-                  <option value="16">Monastir</option>  
-                  <option value="23">Médenine</option>
-                  <option value="5">Nabeul</option>
-                  <option value="18">Sfax</option>
-                  <option value="14">Sidi Bouzid</option>
-                  <option value="11">Siliana</option>
-                  <option value="15">Sousse</option>
-                  <option value="24">Tataouine</option>
-                  <option value="20">Tozeur</option>
-                  <option value="1">Tunis</option>
-                  <option value="6">Zaghouan</option>
-                  </select>
-                  <br><br><br><label>Ville:</label>
-                  <input  required="required" name="ville" id="ville" type="text" aria-required="true">
-                  <li class="col-sm-12 no-margin">
-                  <p style="text-align: center;">
-                  <input type="submit" value="PASSER MA COMMANDE" class="btn" id="btn_submit"></p>
-                  </li>
-                </form>
-                
-              </div>
-              
-        <div class="col-md-6">
+
+
+<form method="POST" class="form-horizontal form-label-left" action="ajoutLivraison.php" >
+<br><br><br><label>Adresse:</label>
+<input type="text" name="rue" required="required" class="form-control col-md-7 col-xs-12">
+<br><br><br><label>Numero</label>
+<input type="number" name="numero" required="required" class="form-control col-md-7 col-xs-12">
+<br><br><br><label>Region</label>
+<input type="text" name="region" required="required" class="form-control col-md-7 col-xs-12">
+<br><br><br><label>Ville</label>
+<input type="text" name="ville" required="required" class="form-control col-md-7 col-xs-12">
+<br><br><br><input type="submit" class="btn" id="btn_submit" name="ajouter" value="Passer ma commande">
+</form>
+</div>
+			</div>
+			<div class="col-md-6">
         <p>
           <h3 ><b> Questions & réponses</b></h3>
           Vous avez des questions au sujet de la commande, la livraison, le paiement ou autres? La liste des questions les plus fréquemment posées et leurs réponses 
@@ -302,8 +256,9 @@
           </li>
           <div><b>N'hésitez pas à nous contacter pour plus d'informations</b></div>
         </div>
-</form>
-    </section>
+
+
+</section>
       <!--  Footer Links -->
 <footer>
     <div class="container">
@@ -380,4 +335,5 @@
 <script type="text/javascript">
 
 <!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/02-shop-sidebar-right.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:47:10 GMT -->
-</html>
+</body>
+</HTMl>

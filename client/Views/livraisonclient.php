@@ -227,7 +227,6 @@
                       <table class="table table-striped table-bordered">
                         <thead>
                           <tr>
-                            <th>ID_livraison</th>
                           	<th>Rue</th>
                           	<th>Numero de telephone</th>
                           	<th>Region</th>
@@ -242,7 +241,6 @@
                         foreach($listeLivraisons as $row){
                           ?>
                           <tr>
-                          <td><?PHP echo $row['id']; ?></td>
                           <td><?PHP echo $row['rue']; ?></td>
                           <td><?PHP echo $row['numero']; ?></td>
                           <td><?PHP echo $row['region']; ?></td>
