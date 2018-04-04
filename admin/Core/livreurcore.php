@@ -30,20 +30,23 @@ class livreurcore
 	}
 
 
-	function modifierlivreur($pseudo){
+	function modifierlivreur($livreur,$nom){
 			$db = config::getConnexion();
-			$sql="UPDATE livreur SET pseudo=:pseudo,nom=:nom,prenom=:prenom,tel=:tel,email=:email WHERE pseudo=:pseudo";
+			$sql="UPDATE livreur SET nom=:nomm,prenom=:prenom,tel=:tel,email=:email WHERE nom=:nom";
 			$req=$db->prepare($sql);
-			//$req1->bindValue(':ref',$ref);
-			$req->bindValue(':pseudo',$pseudo);
-			
-			$req->bindValue(':nom',$l->getNom());
-			$req->bindValue(':prenom',$l->getPrenom());
-			$req->bindValue(':tel',$l->getTel());
-			$req->bindValue(':email',$l->getEmail());
-			
-			$req->execute();
 
+        	$nomm=$livreur->getNom();
+       		$prenom=$livreur->getPrenom();
+        $tel=$livreur->getTel();
+        $email=$livreur->getEmail();
+		$datas = array(':nomm'=>$nomm, ':nom'=>$nom,':prenom'=>$prenom,':tel'=>$tel,':email'=>$email);
+		$req->bindValue(':nomm',$nomm);
+		$req->bindValue(':nom',$nom);
+		$req->bindValue(':prenom',$prenom);
+		$req->bindValue(':tel',$tel);
+		$req->bindValue(':email',$email);
+		  $s=$req->execute();
+			
 		}
 		
 		function ajouterlivreur($l){

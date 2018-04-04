@@ -2,8 +2,8 @@
   include_once "../Entities/livraison.php";
   include_once "../Core/livraisoncore.php";
 
-  if(isset($_POST['rue']) and isset($_POST['numero']) and isset($_POST['region']) and isset($_POST['ville'])){
-    $livraison1=new livraison($_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
+  if(isset ($_GET['valider']) and isset($_GET['rue']) and isset($_GET['numero']) and isset($_GET['region']) and isset($_GET['ville'])){
+    $livraison1=new livraison($_GET['rue'],$_GET['numero'],$_GET['region'],$_GET['ville']);
     $livraison1c=new livraisoncore();
     $livraison1c->ajouterlivraison($livraison1);
      header("Location: afficherlivraisons.php");
@@ -240,7 +240,7 @@
             <h3 ><b>Vérification des données</b></h3>
             <li class="col-sm-12">  
               Merci de confirmer votre adresse ainsi que votre telephone
-              <form method="POST"  class="form-horizontal form-label-left" novalidate>
+              <form method="GET" action="" class="form-horizontal form-label-left" novalidate>
               <br><br><br><label>Adresse:</label>
               <input id="rue" name="rue" required="required" class="form-control col-md-7 col-xs-12"
               <br><br><br><label>Telephone:</label>
@@ -278,7 +278,7 @@
                
               <li class="col-sm-12 no-margin">
               <p style="text-align: center;">
-                <button id="send" type="submit" class="btn">Passer ma commande</button></p>
+                <button id="send" name ="valider" type="submit" class="btn">Passer ma commande</button></p>
             </li>
         </div>
             </form>
