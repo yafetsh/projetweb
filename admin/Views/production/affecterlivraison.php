@@ -11,6 +11,10 @@ if(isset($_GET['modifier'])){
       $pseudoLivreur=$row['pseudoLivreur'];
     }
   }
+include "../../Core/livreurcore.php";
+$livreur3C=new livreurcore();
+$listePseudos=$livreur3C->afficherPseudoslivreurs();
+
 
 ?>
 
@@ -408,10 +412,34 @@ if(isset($_GET['modifier'])){
 <td>ID_Livreur</td>
 <td><input type="text" name="idUtilisateur" value="<?PHP echo $idUtilisateur ?>"></td>
 </tr>
-<tr>
-<td>Pseudo_livreur</td>
-<td><input type="text" name="pseudoLivreur" value="<?PHP echo $pseudoLivreur ?>"></td>
-</tr>
+
+</table>
+
+  <table>
+    <tr>
+      <td>Pseudo_livreur</td>
+      <td>
+        <select>
+          <?PHP
+              foreach($listePseudos as $row){
+                ?>
+                <option>
+                <?PHP echo $row['pseudo']; ?>
+              </option>
+              
+          <?PHP
+            }
+?>
+  </td>
+  </tr>
+          </select>
+      
+    
+
+  </table>
+
+
+<table>
 <tr>
 <td><input type="submit" name="modif" value="modifier"></td>
 </tr>

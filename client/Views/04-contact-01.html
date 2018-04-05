@@ -494,6 +494,33 @@
   <!-- GO TO TOP End -->
 </div>
 <!-- Wrap End --> 
+<!-- FONTS ONLINE -->
+<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+<!--MAIN STYLE-->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/main.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/responsive.css" rel="stylesheet" type="text/css">
+<link href="css/animate.css" rel="stylesheet" type="text/css">
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!-- ADD YOUR OWN STYLING HERE. AVOID TO USE STYLE.CSS AND MAIN.CSS. IT WILL BE HELPFUL FOR YOU IN FUTURE UPDATES -->
+<link href="css/custom.css" rel="stylesheet" type="text/css">
+
+<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+<link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
+
+<!-- JavaScripts -->
+<script src="js/modernizr.js"></script>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<div id="map" class="animate fadeInUp" data-wow-delay="0.4s"></div>
 <script src="js/jquery-1.11.3.js"></script> 
 <script src="js/wow.min.js"></script> 
 <script src="js/bootstrap.min.js"></script> 
@@ -515,25 +542,25 @@
 var map;
 function initialize_map() {
 if ($('#map').length) {
-	var myLatLng = new google.maps.LatLng(36.8346589,10.2426542);
-	var mapOptions = {
-		zoom: 17,
-		center: myLatLng,
-		scrollwheel: false,
-		panControl: false,
-		zoomControl: true,
-		scaleControl: false,
-		mapTypeControl: false,
-		streetViewControl: false
-	};
-	map = new google.maps.Map(document.getElementById('map'), mapOptions);
-	var marker = new google.maps.Marker({
-		position: myLatLng,
-		map: map,
-		title:'FashionMake-up',
-	});
+  var myLatLng = new google.maps.LatLng(36.8346589,10.2426542);
+  var mapOptions = {
+    zoom: 17,
+    center: myLatLng,
+    scrollwheel: false,
+    panControl: false,
+    zoomControl: true,
+    scaleControl: false,
+    mapTypeControl: false,
+    streetViewControl: false
+  };
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title:'FashionMake-up',
+  });
 } else {
-	return false;
+  return false;
 }
 }
 google.maps.event.addDomListener(window, 'load', initialize_map);

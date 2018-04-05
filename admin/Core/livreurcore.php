@@ -28,6 +28,17 @@ class livreurcore
 		}
 
 	}
+	function afficherPseudoslivreurs(){
+		$c=Config::getConnexion();
+		$sql="SELECT pseudo FROM livreur";
+		try{
+			$liste=$c->query($sql);
+			return $liste;
+
+		}catch(Exception $e){
+			die('Erreur : ' .$e->getMessage());
+		}
+	}
 	function afficherLivreursselondisponibilité(){
 		$c=Config::getConnexion();
 		$sql="SELECT * FROM livreur where etat like 'disponible'";
