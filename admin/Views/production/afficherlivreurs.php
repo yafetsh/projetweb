@@ -119,6 +119,7 @@
                           <li><a href="afficherlivreurs.php">Liste des livreurs</a></li>
                         </ul>
                       </li>
+                      <li><a href="affecterlivraison.php">Affecter une livraison à un livreur</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
@@ -369,6 +370,7 @@
                           <td><?PHP echo $row['prenom']; ?></td>
                           <td><?PHP echo $row['tel']; ?></td>
                           <td><?PHP echo $row['email']; ?></td>
+                          <td><?PHP echo $row['etat']; ?></td>
                           <td></td>
                           <td>
                               <form method="GET">
@@ -444,7 +446,10 @@
 <td><input type="text" name="email" value="<?PHP echo $email ?>"></td>
 </tr>
 <tr>
-<td></td>
+<td>Etat</td>
+<td><input type="text" name="etat" value="<?PHP echo $etat ?>"></td>
+</tr>
+<tr>
 <td><input type="submit" name="modif" value="modifier"></td>
 </tr>
 <tr>

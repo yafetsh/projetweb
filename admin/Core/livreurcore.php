@@ -28,6 +28,17 @@ class livreurcore
 		}
 
 	}
+	function afficherLivreursselondisponibilité(){
+		$c=Config::getConnexion();
+		$sql="SELECT * FROM livreur where etat like 'disponible'";
+		try{
+			$liste=$c->query($sql);
+			return $liste;
+
+		}catch(Exception $e){
+			die('Erreur : ' .$e->getMessage());
+		}
+	}
 
 
 	function modifierlivreur($livreur,$nom){

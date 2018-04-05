@@ -28,6 +28,18 @@ class livraisoncore
 		}
 
 	}
+  function afficherLivraisonssanslivreurs(){
+    $c=Config::getConnexion();
+    $sql="SELECT * FROM livraison where pseudoLivreur is NULL";
+    try{
+      $liste=$c->query($sql);
+      return $liste;
+
+    }catch(Exception $e){
+      die('Erreur : ' .$e->getMessage());
+    }
+
+  }
 function supprimerlivraison($id){
       $sql="DELETE FROM livraison where id= :id";
       $db = config::getConnexion();
