@@ -287,6 +287,10 @@
               </div>
 
               <div class="form-horizontal" style="font-size:18px;color:#708090" >
+                <div class="control-group">
+                  <label class="control-label">ID: </label>
+                  <?php echo $data['id'];?>
+                </div>
                               <div class="control-group">
                                 <label class="control-label">Nom: </label>
                                 <?php echo $data['nom'];?>

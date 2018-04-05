@@ -8,6 +8,7 @@ if(isset($_POST["query"]))
 	SELECT * FROM reclamation
 	WHERE nom LIKE '%".$search."%'
 	OR prenom LIKE '%".$search."%'
+	OR id LIKE '%".$search."%'
 	OR mail LIKE '%".$search."%'
 	OR telephone LIKE '%".$search."%'
 	OR type LIKE '%".$search."%'
@@ -26,6 +27,7 @@ if(mysqli_num_rows($result) > 0) //returns the number of rows in a result set, s
 	$output .= '<div class="table-responsive">
 					<table class="table table bordered">
 						<tr>
+						<th>ID</th>
 							<th>Nom</th>
 							<th>Prenom</th>
 							<th>Mail</th>
@@ -39,6 +41,7 @@ if(mysqli_num_rows($result) > 0) //returns the number of rows in a result set, s
 	{
 		$output .= '
 			<tr>
+			<td>'.$row["id"].'</td>
 				<td>'.$row["nom"].'</td>
 				<td>'.$row["prenom"].'</td>
 				<td>'.$row["mail"].'</td>

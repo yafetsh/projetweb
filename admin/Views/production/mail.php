@@ -270,55 +270,24 @@
               <a href="rechercheReclamation.php" class="fa fa-search" style="font-size:18px;color:#191970"> Recherche</a>
 <br>
 <br>
+<br>
 <a href="mail.php" class="fa fa-envelope-o" style="font-size:18px;color:#191970"> Envoyer un mail</a>
 
-              <div class="row">
+<br>
 
-                  <table class="table table-striped table-bordered">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Adresse mail</th>
-                        <th>Telephone</th>
-                        <th>Type</th>
-                        <th>Cause</th>
-                        <th>Etat</th>
+        <form  method="post" action="send_mail.php">
+          <br>
+        To : <input class="form-control" type="text" name="mail_to"> <br/>
+        <br>
+        Subject :   <input class="form-control" type="text" name="mail_sub">
+       <br/>
+       <br>
+         Message:   <textarea class="form-control" type="text" name="mail_msg" rows="5"></textarea>
+        <br/>
+        <br>
+            <input type="submit" value="Send Email">
+        </form>
 
-                        <th>Action</th>
-
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                     include 'config.php';
-                     $pdo = Database::connect();
-                     $sql = 'SELECT * FROM reclamation ORDER BY id DESC';
-                     foreach ($pdo->query($sql) as $row) {
-                              echo '<tr>';
-                              echo '<td>'. $row['id'] . '</td>';
-                              echo '<td>'. $row['nom'] . '</td>';
-                              echo '<td>'. $row['prenom'] . '</td>';
-                              echo '<td>'. $row['mail'] . '</td>';
-                              echo '<td>'. $row['telephone'] . '</td>';
-                              echo '<td>'. $row['type'] . '</td>';
-                              echo '<td>'. $row['cause'] . '</td>';
-                              echo '<td>'. $row['etat'] . '</td>';
-                              echo '<td width=auto>';
-                                           echo '<a class="btn btn-primary" href="afficherReclamation.php?id='.$row['id'].'">Afficher</a>';
-                                                 echo ' ';
-                                     echo '<a class="btn btn-success"href="validerReclamation.php?id='.$row['id'].'" >Valider</a>';
-                                        echo ' ';
-                                     echo '<a class="btn btn-danger" href="supprimerReclamation.php?id='.$row['id'].'">Supprimer</a>';
-                                 echo '</td>';
-                                    echo '</tr>';
-                     }
-                     Database::disconnect();
-                    ?>
-                    </tbody>
-              </table>
-          </div>
                 </div>
               </div>
               </div>

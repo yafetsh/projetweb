@@ -253,7 +253,11 @@
 		 <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
 		    <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="ajouterReclamation.php">
+
+
+            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="ajouterReclamation.php" >
+              <form class="contact-form" onsubmit="send_mail.php" method="post" role="form" id="contact_form">
+
               <div class="row">
                 <div class="col-md-6">
                   <ul class="row">
@@ -312,12 +316,14 @@
                       </label>
                     </li>
 
+
                     <li class="col-sm-12 no-margin">
-                      <input type="submit" value="Passez la réclamation" name="ajouter" class="btn" id="btn_submit"> <p>
+                      <input type="submit"  value="Passez la réclamation" name="ajouter" class="btn" id="btn_submit"> <p>
                     </li>
                   </ul>
                 </div>
               </div>
+            </form>
             </form>
           </div>
         </div>
