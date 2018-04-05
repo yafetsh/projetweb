@@ -6,7 +6,7 @@
     $livraison1=new livraison($_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
     $livraison1c=new livraisoncore();
     $livraison1c->ajouterlivraison($livraison1);
-
+     header("Location: afficherlivraisons.php");
   }
   else {
     echo "Verifier les champs";
@@ -229,68 +229,65 @@
      <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
         <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="return false">
-      <div class="row">
-      <h4 align="left"><b>Nouveau:</b></h4>
-            <p align="left"><strong>Fashion  make up</strong> vous offre la possibilité de gagner votre temps et votre énergie 
-            grace à la livraison à domicile,elle vous permet de prendre votre commande à plus vite possible sans aucun effort (de 1 à 3 jours au maximum),
-            de plus elle vous offre la possibilité de suivre l'acheminement de votre colis.
-            <hr style="height:30px"></hr> 
-        <div class="col-md-6" >       
-            <h3 ><b>Vérification des données</b></h3>
-            <li class="col-sm-12">  
-              Merci de confirmer votre adresse ainsi que votre telephone
-              <form method="POST"  class="form-horizontal form-label-left" novalidate>
-              <br><br><br><label>Adresse:</label>
-              <input id="rue" name="rue" required="required" class="form-control col-md-7 col-xs-12"
-              <br><br><br><label>Telephone:</label>
-               <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis"  data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" name="numero" id="numero" type="text">
-                <br><br><br><label>Region:</label>
-                <select data-default-region-id="" required="1" data-msg-required="Champs requis" class="ft-region-dropdown placeholder" name="region" id="region" aria-required="true" aria-invalid="true" aria-describedby="ShippingAddressForm_fk_customer_address_region-error">
-                <option value="" selected="selected">Sélectionner...</option>
-                <option value="2">Ariana</option>
-                <option value="3">Ben Arous</option>
-                <option value="7">Bizerte</option>
-                <option value="8">Béja</option>
-                <option value="22">Gabes</option>
-                <option value="19">Gafsa</option>
-                <option value="9">Jendouba</option>
-                <option value="12">Kairouan</option>
-                <option value="13">Kasserine</option>
-                <option value="21">Kebili</option>
-                <option value="4">La Manouba</option>
-                <option value="10">Le Kef</option>
-                <option value="17">Mahdia</option>
-                <option value="16">Monastir</option>  
-                <option value="23">Médenine</option>
-                <option value="5">Nabeul</option>
-                <option value="18">Sfax</option>
-                <option value="14">Sidi Bouzid</option>
-                <option value="11">Siliana</option>
-                <option value="15">Sousse</option>
-                <option value="24">Tataouine</option>
-                <option value="20">Tozeur</option>
-                <option value="1">Tunis</option>
-                <option value="6">Zaghouan</option>
-                </select>
-                <br><br><br><label>Ville:</label>
-                <input class="osh-input osh-opc-address-field ft-phone1-text-field" required="1" data-msg-required="Champs requis" data-internationalphonenumber-rule="" data-internationalphonenumber-msg="" name="ville" id="ville" type="text" aria-required="true" aria-describedby="ShippingAddressForm_phone-error" aria-invalid="true">
-               
-              <li class="col-sm-12 no-margin">
-              <p style="text-align: center;">
-                <button id="send" type="submit" class="btn">Passer ma commande</button></p>
-            </li>
-        </div>
-            </form>
+            <form role="form" id="contact_form" class="contact-form" onSubmit="return false">
+              <h4 align="left"><b>Nouveau:</b></h4>
+              <p align="left"><strong>Fashion  make up</strong> vous offre la possibilité de gagner votre temps et votre énergie 
+              grace à la livraison à domicile,elle vous permet de prendre votre commande à plus vite possible sans aucun effort (de 1 à 3 jours au maximum),
+              de plus elle vous offre la possibilité de suivre l'acheminement de votre colis.
+              <hr style="height:30px"></hr> 
+              <div class="col-md-6" >       
+                <h3 ><b>Vérification des données</b></h3>
+                <li class="col-sm-12">  
+                Merci de confirmer votre adresse ainsi que votre telephone
+                <form method="POST" class="form-horizontal form-label-left" novalidate>
+                  <br><br><br><label>Adresse:</label>
+                  <input id="rue" name="rue" required="required" class="form-control col-md-7 col-xs-12"
+                  <br><br><br><label>Telephone:</label>
+                  <input name="numero" id="numero" required="required" placeholder="00 000 000" class="form-control col-md-7 col-xs-12" >
+                  <br><br><br><label>Region:</label>
+                  <select data-default-region-id="" required="required" data-msg-required="Champs requis" class="ft-region-dropdown placeholder" name="region" id="region">
+                  <option value="" selected="selected">Sélectionner...</option>
+                  <option value="2">Ariana</option>
+                  <option value="3">Ben Arous</option>
+                  <option value="7">Bizerte</option>
+                  <option value="8">Béja</option>
+                  <option value="22">Gabes</option>
+                  <option value="19">Gafsa</option>
+                  <option value="9">Jendouba</option>
+                  <option value="12">Kairouan</option>
+                  <option value="13">Kasserine</option>
+                  <option value="21">Kebili</option>
+                  <option value="4">La Manouba</option>
+                  <option value="10">Le Kef</option>
+                  <option value="17">Mahdia</option>
+                  <option value="16">Monastir</option>  
+                  <option value="23">Médenine</option>
+                  <option value="5">Nabeul</option>
+                  <option value="18">Sfax</option>
+                  <option value="14">Sidi Bouzid</option>
+                  <option value="11">Siliana</option>
+                  <option value="15">Sousse</option>
+                  <option value="24">Tataouine</option>
+                  <option value="20">Tozeur</option>
+                  <option value="1">Tunis</option>
+                  <option value="6">Zaghouan</option>
+                  </select>
+                  <br><br><br><label>Ville:</label>
+                  <input  required="required" name="ville" id="ville" type="text" aria-required="true">
+                  <li class="col-sm-12 no-margin">
+                  <p style="text-align: center;">
+                  <input type="submit" value="PASSER MA COMMANDE" class="btn" id="btn_submit"></p>
+                  </li>
+                </form>
+                
+              </div>
+              
         <div class="col-md-6">
         <p>
           <h3 ><b> Questions & réponses</b></h3>
           Vous avez des questions au sujet de la commande, la livraison, le paiement ou autres? La liste des questions les plus fréquemment posées et leurs réponses 
           vous aident.
           <li class="col-sm-12">
-            <p><h5>Puis-je modifier moi-même mon adresse et mes données d'utilisateur?</h5>
-            <p>Les données peuvent être modifiées sur «Mon compte». Remarque: Dès qu'une commande a été passée et qu'une adresse est à changer après 
-            coup, il faut contacter le service clients.
             <p><h5>Je ne peux plus accéder à mon compte client. Que puis-je faire?</h5>
             <p>Pour créer un nouveau mot de passe, veuillez cliquer dans l'identifiant «Mon compte» sur «Mot de passe oublié?», avant d'entrer votre adresse e-mail correspondant à votre compte client. 
             Vous recevrez un e-mail en retour avec le lien pour le changement du mot de passe.
@@ -301,15 +298,12 @@
             <p><h5>Si je ne suis pas satisfait avec l'article que j'ai commandé, puis-je le retourner?</h5>
             <p>...
             <p><h5>Puis-je annuler ma commande en ligne?</h5>
-            Vous aurez la possibilité d'annuler votre commande uniquement dans le cas ou l'effectuation de votre commande n'a pas dépassé 12 heures.
+            Vous aurez la possibilité d'annuler votre commande uniquement dans le cas ou l'effectuation de votre commande n'a pas dépassé 2 heures.
           </li>
           <div><b>N'hésitez pas à nous contacter pour plus d'informations</b></div>
         </div>
-        </div>
-      </div>
+</form>
     </section>
-
-
       <!--  Footer Links -->
 <footer>
     <div class="container">

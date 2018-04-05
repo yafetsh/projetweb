@@ -28,18 +28,31 @@ class livraisoncore
 		}
 
 	}
-}
+  function afficherLivraisonssanslivreurs(){
+    $c=Config::getConnexion();
+    $sql="SELECT * FROM livraison where pseudoLivreur is NULL";
+    try{
+      $liste=$c->query($sql);
+      return $liste;
+
+    }catch(Exception $e){
+      die('Erreur : ' .$e->getMessage());
+    }
+
+  }
 function supprimerlivraison($id){
-  $sql="DELETE FROM livraison where id= :id";
-      $req=$db->prepare($sql);
-  $req->bindValue(':id',$id);
-  try{
+      $sql="DELETE FROM livraison where id= :id";
+      $db = config::getConnexion();
+        $req=$db->prepare($sql);
+      $req->bindValue(':id',$id);
+      try{
           $req->execute();
          // header('Location: index.php');
-      }
-      catch (Exception $e){
+        }
+        catch (Exception $e){
           die('Erreur: '.$e->getMessage());
       }
+    
 }
 
 
@@ -66,8 +79,15 @@ function supprimerlivraison($id){
             echo 'Erreur: '.$e->getMessage();
         }
 
-}
+  } 
+  function reccupererinformations($id){
+      $db = config::getConnexion();
+      $sql="SELECT * from livraison where id=$id";
+      $liste=$db->query($sql);
+      return $liste;
+    }
 
+}
 
  ?>
 

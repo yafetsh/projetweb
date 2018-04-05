@@ -1,3 +1,30 @@
+ <?PHP
+include "../../Core/livraisoncore.php";
+$livraison1C=new livraisoncore();
+$listeLivraisons=$livraison1C->afficherLivraisons();
+$livraison2C=new livraisoncore();
+if(isset($_GET['supprimer'])){
+    $livraison2C->supprimerlivraison($_GET["id"]);
+    header("Location: afficherlivraisons.php");
+  }
+   else if(isset($_GET['modifier'])){
+    $l=$livraison2C->reccupererinformations($_GET["id"]);
+    foreach ($l as $row) {
+      $id=$row['id'];
+      $rue=$row['rue'];
+      $numero=$row['numero'];
+      $region=$row['region'];
+      $ville=$row['ville'];
+      $etat=$row['etat'];
+    }
+  }
+  elseif (isset($_GET['modif'])) {
+      $livreur=new livreur($_GET['pseudo'],$_GET['nom'],$_GET['prenom'],$_GET['tel'],$_GET['email']);
+      $pC->modifierlivreur($livreur,$_GET['pseudo']);
+  }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -86,6 +113,11 @@
                     <ul class="nav child_menu">
                       <li><a href="afficherlivraisons.php">Liste des livraisons</a></li>
                       <li><a href="afficherlivreurs.php">Liste des livreurs</a></li>
+                        <ul >
+                          <li><a href="ajouterlivreur.php">Ajouter un livreur</a></li>
+                          <li><a href="afficherlivreurs.php">Liste des livreurs</a></li>
+                        </ul>
+                      <li><a href="affecterlivraison.php">Affecter un livreur à une livraison</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
@@ -290,7 +322,7 @@
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="col-md-8 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Nouvelles livraisons</h2>
@@ -311,20 +343,19 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <?PHP
-                  include "../../Core/livraisoncore.php";
-                  $livraison1C=new livraisoncore();
-                  $listeLivraisons=$livraison1C->afficherLivraisons();
-                  ?>
+                 
                   <div class="x_content">
                     <table class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>ID</th>
-                          <th>Nom</th>
-                          <th>Ville</th>
-                          <th>Adresse</th>
+                          <th>ID_livraison</th>
+                          <th>ID_utilisateur</th>
+                          <th>Rue</th>
                           <th>Numero de telephone</th>
+                          <th>Region</th>
+                          <th>Ville</th>
+                          <th>Pseudo_Livreur</th>
+                          <th>Etat</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -334,18 +365,22 @@
                           ?>
                           <tr>
                           <td><?PHP echo $row['id']; ?></td>
-                          <td><?PHP echo $row['region']; ?></td>
-                          <td><?PHP echo $row['ville']; ?></td>
+                          <td><?PHP echo $row['idUtilisateur']; ?></td>
                           <td><?PHP echo $row['rue']; ?></td>
                           <td><?PHP echo $row['numero']; ?></td>
+                          <td><?PHP echo $row['region']; ?></td>
+                          <td><?PHP echo $row['ville']; ?></td>
+                          <td><?PHP echo $row['pseudoLivreur']; ?></td>
+                          <td><?PHP echo $row['etat']; ?></td>
+                          
                           <td>
                               <form method="GET">
                                 <input type="submit" name="modifier" value="modifier" class="btn btn-success" style="height: 33px ;width:90px">
-                                <input type="hidden" name="pseudo" value="<?php echo $row['pseudo']; ?>">
+                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                               </form>
                               <form method="GET">
                                 <input type="submit" name="supprimer" value="Supprimer" class="btn btn-success" style="background-color: blue;">
-                                <input type="hidden" value="<?PHP echo $row['pseudo']; ?>" name="pseudo">
+                                <input type="hidden" value="<?PHP echo $row['id']; ?>" name="id">
                               </form>
                           </td>
                           </tr>
@@ -360,7 +395,7 @@
               </div>
 
 
-              <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="col-md-8 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Livraisons en cours de preparation</h2>
@@ -573,7 +608,7 @@
 
                   <div class="x_content">
 
-                    <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p>
+                   
 
                     <div class="table-responsive">
                       <table class="table table-striped jambo_table bulk_action">
@@ -598,138 +633,8 @@
 
                         <tbody>
                           <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">May 23, 2014 11:47:56 PM </td>
-                            <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$7.45</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000039</td>
-                            <td class=" ">May 23, 2014 11:30:12 PM</td>
-                            <td class=" ">121000208 <i class="success fa fa-long-arrow-up"></i>
-                            </td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$741.20</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000038</td>
-                            <td class=" ">May 24, 2014 10:55:33 PM</td>
-                            <td class=" ">121000203 <i class="success fa fa-long-arrow-up"></i>
-                            </td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$432.26</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000037</td>
-                            <td class=" ">May 24, 2014 10:52:44 PM</td>
-                            <td class=" ">121000204</td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$333.21</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">May 24, 2014 11:47:56 PM </td>
-                            <td class=" ">121000210</td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$7.45</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000039</td>
-                            <td class=" ">May 26, 2014 11:30:12 PM</td>
-                            <td class=" ">121000208 <i class="error fa fa-long-arrow-down"></i>
-                            </td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$741.20</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000038</td>
-                            <td class=" ">May 26, 2014 10:55:33 PM</td>
-                            <td class=" ">121000203</td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$432.26</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000037</td>
-                            <td class=" ">May 26, 2014 10:52:44 PM</td>
-                            <td class=" ">121000204</td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$333.21</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">May 27, 2014 11:47:56 PM </td>
-                            <td class=" ">121000210</td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$7.45</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000039</td>
-                            <td class=" ">May 28, 2014 11:30:12 PM</td>
-                            <td class=" ">121000208</td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$741.20</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
+                           
+                             
                           </tr>
                         </tbody>
                       </table>

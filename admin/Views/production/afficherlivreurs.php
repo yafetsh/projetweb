@@ -18,12 +18,10 @@
       $prenom=$row['prenom'];
       $tel=$row['tel'];
       $email=$row['email'];
+      $etat=$row['etat'];
     }
   }
-  elseif (isset($_GET['modif'])) {
-      $livreur=new livreur($_GET['pseudo'],$_GET['nom'],$_GET['prenom'],$_GET['tel'],$_GET['email']);
-      $pC->modifierlivreur($livreur,$_GET['pseudo']);
-  }
+ 
   ?>
 
 
@@ -121,6 +119,7 @@
                           <li><a href="afficherlivreurs.php">Liste des livreurs</a></li>
                         </ul>
                       </li>
+                      <li><a href="affecterlivraison.php">Affecter une livraison à un livreur</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
@@ -325,7 +324,7 @@
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="col-md-8 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Nouveaux livreurs</h2>
@@ -356,6 +355,7 @@
                           <th>Prenom</th>
                           <th>Numero de telephone</th>
                           <th>Email</th>
+                          <th>Disponibilité</th>
                           <th>Action</th>
 
                         </tr>
@@ -370,6 +370,8 @@
                           <td><?PHP echo $row['prenom']; ?></td>
                           <td><?PHP echo $row['tel']; ?></td>
                           <td><?PHP echo $row['email']; ?></td>
+                          <td><?PHP echo $row['etat']; ?></td>
+                          <td></td>
                           <td>
                               <form method="GET">
                                 <input type="submit" name="modifier" value="modifier" class="btn btn-success" style="height: 33px ;width:90px">
@@ -420,52 +422,50 @@
                   </div>
                   <div class="x_content" hidden>
 
-                    <form method="GET" class="form-horizontal form-label-left" novalidate>
-
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Pseudo<span>*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="pseudo" name="pseudo" required="required" class="form-control col-md-7 col-xs-12" value="<?PHP echo $pseudo ?>" disabled>
-                        </div>
-                      </div>
-
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nom<span>*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nom" name="nom" required="required" class="form-control col-md-7 col-xs-12" value="<?PHP echo $nom ?>" >
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Prenom<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input  id="prenom" name="prenom" required="required" class="form-control col-md-7 col-xs-12" value="<?PHP echo $prenom ?>" >
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Telephone<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis"  data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" name="tel" id="tel" type="text" value="<?PHP echo $tel ?>" >
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" name="email" data-rule-email="true" required="required" class="form-control col-md-7 col-xs-12" value="<?PHP echo $email ?>" >
-                        </div>
-                      </div>
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-md-offset-3">
-                          <button type="RESET" class="btn btn-primary">RESET</button>
-                          <button id="send" type="submit" class="btn btn-success" name="modif">MODIFIER</button>
-                        </div>
-                      </div>
-                    </form>
+                    <form method="GET">
+<table>
+<caption>Modifier livreur</caption>
+<tr>
+<td>Pseudo</td>
+<td><input type="number" name="pseudo" value="<?PHP echo $pseudo ?>"></td>
+</tr>
+<tr>
+<td>Nom</td>
+<td><input type="text" name="nom" value="<?PHP echo $nom ?>"></td>
+</tr>
+<tr>
+<td>Prenom</td>
+<td><input type="text" name="prenom" value="<?PHP echo $prenom ?>"></td>
+</tr>
+<tr>
+<td>Numero de telephone</td>
+<td><input type="number" name="tel" value="<?PHP echo $tel ?>"></td>
+</tr>
+<tr>
+<td>Email</td>
+<td><input type="text" name="email" value="<?PHP echo $email ?>"></td>
+</tr>
+<tr>
+<td>Etat</td>
+<td><input type="text" name="etat" value="<?PHP echo $etat ?>"></td>
+</tr>
+<tr>
+<td><input type="submit" name="modif" value="modifier"></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="hidden" name="pseudo_ini" value="<?PHP echo $_GET['pseudo'];?>"></td>
+</tr>
+</table>
+</form>
+<?PHP
+if (isset($_POST['modif'])) {
+      $livreur=new livreur($_POST['pseudo'],$_POST['nom'],$_POST['prenom'],$_POST['tel'],$_POST['email']);
+      $lC->modifierlivreur($livreur,$_POST['pseudo_ini']);
+      echo $_POST['pseudo_ini'];
+    header('Location: afficherlivreurs.php');
+  }
+?>
                   </div>
                 </div>
               </div>

@@ -338,17 +338,19 @@
                     <form method="POST" class="form-horizontal form-label-left" novalidate>
 
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nom<span>*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nom <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nom" name="nom" required="required" class="form-control col-md-7 col-xs-12">
+                          <input id="nom" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nom" required="required" type="text">
                         </div>
                       </div>
+
+                     
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Prenom<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input  id="prenom" name="prenom" required="required" class="form-control col-md-7 col-xs-12">
+                          <input  id="prenom" name="prenom" required="required" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -362,7 +364,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" name="email" data-rule-email="true" required="required" class="form-control col-md-7 col-xs-12">
+                          <input id="email" name="email" data-rule-email="true" required="required" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis">
                         </div>
                       </div>
                       <div class="ln_solid"></div>

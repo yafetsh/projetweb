@@ -1,5 +1,16 @@
+<?php  
+  include_once "../Core/livraisoncore.php";
+  include_once "../Entities/livraison.php";
 
 
+  $livraisonC=new livraisoncore();
+  $listeLivraisons=$livraisonC->afficherLivraisons();
+  $lC=new livraisoncore();
+  if(isset($_GET['supprimer'])){
+    $lC->supprimerlivraison($_GET["id"]);
+    header("Location: livraisonclient.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -204,60 +215,54 @@
                     <div style="padding:35px" ><a href="reservationclient.php"><u>Réservation</u></a>
                      <a href="#"> <u>Réclamation</u></a>
                      <a href="#"><u> Promotion</u></a></h5></div>
-              
-
             </div>
 
 
-            <div  role="main" method="POST" action="afficherReservation.php">
-
                   <div >
-                    <h6>Réservations</h6>
+                    <h6>Livraisons</h6>
                   </div>
-                  Liste des réservations
+                  Liste des livraisons
                   <div >
 
                       <table class="table table-striped table-bordered">
                         <thead>
                           <tr>
-                            <th>Id</th>
-                            <th>Prénom</th>
-                            <th>Telephone</th>
-                            <th>Type</th>
-                            <th>Date</th>
-                            <th>Action</th>
+                          	<th>Rue</th>
+                          	<th>Numero de telephone</th>
+                          	<th>Region</th>
+                          	<th>Ville</th>
+                          	<th>Pseudo_Livreur</th>
+                          	<th>Etat</th>
+                          	<th>Action</th>
+                           </tr>
+                      	</thead>
+                      <tbody>
+                        <?PHP
+                        foreach($listeLivraisons as $row){
+                          ?>
+                          <tr>
+                          <td><?PHP echo $row['rue']; ?></td>
+                          <td><?PHP echo $row['numero']; ?></td>
+                          <td><?PHP echo $row['region']; ?></td>
+                          <td><?PHP echo $row['ville']; ?></td>
+                          <td><?PHP echo $row['pseudoLivreur']; ?></td>
+                          <td><?PHP echo $row['etat']; ?></td>
+                          <td>
+                          	 <?PHP echo '<a  href="modifierlivraison.php?id='.$row['id'].'">Modifier</a>'; ?>
+                          	<form method="GET">
+                                <input type="submit" name="supprimer" value="Supprimer">
+                                <input type="hidden" value="<?PHP echo $row['id']; ?>" name="id">
+                            </form>
 
+                          </td>
                           </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                         include 'config.php';
-                         $pdo = Database::connect();
-                         $sql = 'SELECT * FROM reservation ORDER BY id DESC';
-                         foreach ($pdo->query($sql) as $row) {
-                                  echo '<tr>';
-                                  echo '<td>'. $row['nom'] . '</td>';
-                                  echo '<td>'. $row['prenom'] . '</td>';
-                                  echo '<td>'. $row['telephone'] . '</td>';
-                                  echo '<td>'. $row['type'] . '</td>';
-                                  echo '<td>'. $row['date'] . '</td>';
-
-
-                                  echo '<td width=auto>';
-                                               echo '<a  href="afficherReservation.php?id='.$row['id'].'">Afficher</a>';
-                                                     echo ' ';
-                                                     echo '<a  href="modifierReservation.php?id='.$row['id'].'">Modifier</a>';
-                                            echo ' ';
-                                            echo '<a href="supprimerReservation.php?id='.$row['id'].'">Annuler</a>';
-                                     echo '</td>';
-                                        echo '</tr>';
-                         }
-                         Database::disconnect();
-                        ?>
-                        </tbody>
+<?PHP
+}
+?>
+                      </tbody>
                   </table>
+             
               </div>
-                    </div>
 
         <!--======= Footer =========-->
         <footer>
