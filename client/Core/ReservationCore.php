@@ -2,21 +2,37 @@
 include_once "../Config.php";
 class ReservationCore
 {
+  function afficherReservation($r){
+    //var_dump($e);
+    $nom=$e->getNom();
+    $prenom=$e->getPrenom();
+    $telephone=$e->getTelephone();
+    $type=$e->getType();
+    $date=$e->getDate();
 
-function afficherReservation($reservation){
-  echo "ID: ".$reservation->getId()."<br>";
-  echo "Nom: ".$reservation->getNom()."<br>";
-  echo "Prénom: ".$reservation->getPrenom()."<br>";
-  echo "Telephone: ".$reservation->getTelephone()."<br>";
-  echo "Type: ".$reservation->getType()."<br>";
-  echo "Date: ".$reservation->getDate()."<br>";
+    echo "Nom: " .$nom. "<br>"; //ou bien echo("CIN :".$e->getCin. "<br>"); ou ma na3mlouch l init lfou9
+    echo "Prenom :" .$prenom. "<br>";
+    echo "Telephone: " .$telephone. "<br>";
+    echo "Type: " .$type. "<br>";
+    echo "Date: " .$date. "<br>";
+  }
+function afficherReservations(){
+  $c=Config::getConnexion();
+  $sql="SELECT * FROM reservation";
+  try{
+    $liste=$c->query($sql);
+    return $liste;
+
+  }catch(Exception $e){
+    die('Erreur : ' .$e->getMessage());
+  }
 
          }
 
 
-}
+
 function ajouterReservation($reservation){
-  /*$sql="insert into reservation (nom,prenom,telephone,type,date) values (:nom, :prenom,:telephone,:type,:date)";
+  $sql="insert into reservation (nom,prenom,telephone,type,date) values (:nom, :prenom,:telephone,:type,:date)";
   $db = config::getConnexion();
   try{
       $req=$db->prepare($sql);
@@ -37,8 +53,8 @@ function ajouterReservation($reservation){
       }
       catch (Exception $e){
           echo 'Erreur: '.$e->getMessage();
-      }*/
-      require 'config.php';
+      }
+    /*  require 'config.php';
 
       if ( !empty($_POST)) {
           // keep track validation errors
@@ -86,20 +102,22 @@ function ajouterReservation($reservation){
               header("Location: reservationClient.php");
               echo "Reservation effectué";
           }
-      }
+      }*/
 
 }
 function supprimerReservation($id){
   $sql="DELETE FROM reservation where id= :id";
-      $req=$db->prepare($sql);
+  $db = config::getConnexion();
+    $req=$db->prepare($sql);
   $req->bindValue(':id',$id);
   try{
-          $req->execute();
-         // header('Location: index.php');
-      }
-      catch (Exception $e){
-          die('Erreur: '.$e->getMessage());
-      }
+      $req->execute();
+     // header('Location: index.php');
+    }
+    catch (Exception $e){
+      die('Erreur: '.$e->getMessage());
+  }
+
 }
 function modifierReservation($reservation,$id){
   $sql="UPDATE employe SET ID=:ID, nom=:nom,prenom=:prenom,telephone=:telephone,type=:type WHERE ID=:ID";
@@ -130,8 +148,12 @@ try{
           echo " Erreur ! ".$e->getMessage();
  echo " Les datas : " ;
 print_r($datas);
+}}
+      function reccupererinformations($id){
+        $db = config::getConnexion();
+        $sql="SELECT * from reservation where id=$id";
+        $liste=$db->query($sql);
+        return $liste;
       }
 
 }
-
- ?>

@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?PHP
+include "../Core/ReservationCore.php";
+$reservation1C=new ReservationCore();
+$listeReservations=$reservation1C->afficherReservations();
+
+?>
 <html lang="en">
 
 <!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/04-contact-01.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:48:01 GMT -->
@@ -247,10 +253,7 @@ Mes réservations
 									</thead>
 									<tbody>
 									<?php
-									 include 'config.php';
-									 $pdo = Database::connect();
-									 $sql = 'SELECT * FROM reservation ORDER BY id DESC ';
-									 foreach ($pdo->query($sql) as $row) {
+									 foreach ($listeReservations as $row) {
 														echo '<tr>';
 														echo '<td>'. $row['nom'] . '</td>';
 														echo '<td>'. $row['prenom'] . '</td>';
@@ -267,7 +270,6 @@ Mes réservations
 															 echo '</td>';
 																	echo '</tr>';
 									 }
-									 Database::disconnect();
 									?>
 									</tbody>
 						</table>

@@ -1,67 +1,58 @@
 <?php
-/*
+
 include "../Entities/reservation.php";
 include "../Core/ReservationCore.php";
 
+if ( !empty($_POST)) {
+    // keep track validation errors
+    $nomError = null;
+    $prenomError = null;
+    $telephoneError = null;
+    $typeError = null;
+    $dateError = null;
+
+    // keep track post values
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $telephone = $_POST['telephone'];
+    $type = $_POST['type'];
+    $date = $_POST['date'];
+
+    // validate input
+    $valid = true;
+    if (empty($nom)) {
+        $nomError = '*Please enter Name';
+        $valid = false;
+    }
+    if (empty($prenom)) {
+        $prenomError = '*Please enter Surname';
+        $valid = false;
+    }
+    if (empty($telephone)) {
+        $telephoneError = '*Please enter Phone number';
+        $valid = false;
+    }
+
+    if (empty($date)) {
+        $dateError = '*Please enter Date';
+        $valid = false;
+    }
+  }
 if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['date'])){
-$reservation1=new Reservation($_POST['nom'],$_POST['prenom'],$_POST['telephone'],$_POST['type'],$_POST['date']);
-//Partie2
-
-var_dump($employe1);
-}
-
-//Partie3
+$reservation1=new Reservation($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['telephone'],$_POST['type'],$_POST['date']);
 $reservation1C=new ReservationCore();
 $reservation1C->ajouterReservation($reservation1);
 header('Location: afficherReservation.php');
-
-}else{
-	echo "vérifier les champs";
 }
-*/
+else {
+  echo "vérifier les champs";
 
-    require 'config.php';
-
-    if ( !empty($_POST)) {
-        // keep track validation errors
-        $nomError = null;
-        $prenomError = null;
-        $telephoneError = null;
-        $typeError = null;
-        $dateError = null;
-
-        // keep track post values
-        $nom = $_POST['nom'];
-        $prenom = $_POST['prenom'];
-        $telephone = $_POST['telephone'];
-        $type = $_POST['type'];
-        $date = $_POST['date'];
-
-        // validate input
-        $valid = true;
-        if (empty($nom)) {
-            $nomError = '*Please enter Name';
-            $valid = false;
-        }
-        if (empty($prenom)) {
-            $prenomError = '*Please enter Surname';
-            $valid = false;
-        }
-        if (empty($telephone)) {
-            $telephoneError = '*Please enter Phone number';
-            $valid = false;
-        }
-
-        if (empty($date)) {
-            $dateError = '*Please enter Date';
-            $valid = false;
-        }
-
+}
 
 
 
         // insert data
-        if ($valid) {
+      /*  if ($valid) {
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = "INSERT INTO reservation (nom,prenom,telephone,type,date) values(?, ?, ?,?,?)";
@@ -70,8 +61,8 @@ header('Location: afficherReservation.php');
             Database::disconnect();
             header("Location: afficherReservation.php");
             echo "Reservation effectué";
-        }
-    }
+        }*/
+
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -266,7 +257,7 @@ header('Location: afficherReservation.php');
 		 <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
 		    <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="POST" action="ajouterReservation.php">
+            <form role="form" id="contact_form" class="contact-form" method="POST" novalidate>
                 <div class="row">
                   <div class="col-md-6">
                     <ul class="row">
