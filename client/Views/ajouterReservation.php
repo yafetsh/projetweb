@@ -38,7 +38,7 @@ if ( !empty($_POST)) {
         $valid = false;
     }
   }
-if (isset($_POST['id']) and isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['date'])){
+if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['date'])){
 $reservation1=new Reservation($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['telephone'],$_POST['type'],$_POST['date']);
 $reservation1C=new ReservationCore();
 $reservation1C->ajouterReservation($reservation1);
