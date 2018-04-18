@@ -279,10 +279,10 @@
           <br>
         To : <input class="form-control" type="text" name="mail_to"> <br/>
         <br>
-        Subject :   <input class="form-control" type="text" name="mail_sub">
+        Subject :   <input class="form-control" type="text" name="mail_sub" value="FASHION MAKEUP" disabled>
        <br/>
        <br>
-         Message:   <textarea class="form-control" type="text" name="mail_msg" rows="5"></textarea>
+         Message:   <textarea class="form-control" type="text" name="mail_msg" rows="5" >Votre Réclamation a été bien reçu, Merci!</textarea>
         <br/>
         <br>
             <input type="submit" value="Send Email">
