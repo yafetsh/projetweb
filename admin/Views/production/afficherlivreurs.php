@@ -371,17 +371,17 @@
                           <td><?PHP echo $row['tel']; ?></td>
                           <td><?PHP echo $row['email']; ?></td>
                           <td><?PHP echo $row['etat']; ?></td>
-                          <td></td>
                           <td>
-                              <form method="GET">
-                                <input type="submit" name="modifier" value="modifier" class="btn btn-success" style="height: 33px ;width:90px">
-                                <input type="hidden" name="pseudo" value="<?php echo $row['pseudo']; ?>">
-                              </form>
-                              <form method="GET">
+                          
+                            <a  href="modifierlivreur.php?pseudo=<?PHP echo $row['pseudo']; ?>" class="btn btn-success" style="height: 33px ;width:90px">
+                            Modifier</a>
+                            <form method="GET">
                                 <input type="submit" name="supprimer" value="Supprimer" class="btn btn-success" style="background-color: blue;">
                                 <input type="hidden" value="<?PHP echo $row['pseudo']; ?>" name="pseudo">
                               </form>
-                          </td>
+                          </td>  
+                              
+                          
                         </tr>
   <?PHP
 }

@@ -1,5 +1,5 @@
 <?php
-include_once "../../config.php";
+include "../../config.php";
 class livreurcore
 	{
 		function afficherLivreur($l){
@@ -52,24 +52,32 @@ class livreurcore
 	}
 
 
-	function modifierlivreur($livreur,$nom){
+	function modifierlivreur($livreur,$pseudo){
 			$db = config::getConnexion();
-			$sql="UPDATE livreur SET nom=:nomm,prenom=:prenom,tel=:tel,email=:email WHERE nom=:nom";
+			$sql="UPDATE livreur SET pseudo=:pseudoo,nom=:nom,prenom=:prenom,tel=:tel,email=:email WHERE pseudo=:pseudo";
+			try{
 			$req=$db->prepare($sql);
 
-        	$nomm=$livreur->getNom();
+			$pseudoo=$livreur->getPseudo();
+        	$nom=$livreur->getNom();
        		$prenom=$livreur->getPrenom();
         $tel=$livreur->getTel();
         $email=$livreur->getEmail();
-		$datas = array(':nomm'=>$nomm, ':nom'=>$nom,':prenom'=>$prenom,':tel'=>$tel,':email'=>$email);
-		$req->bindValue(':nomm',$nomm);
+		$datas = array(':pseudoo'=>$pseudoo, ':nom'=>$nom,':prenom'=>$prenom,':tel'=>$tel,':email'=>$email);
+		$req->bindValue(':pseudoo',$pseudoo);
 		$req->bindValue(':nom',$nom);
 		$req->bindValue(':prenom',$prenom);
 		$req->bindValue(':tel',$tel);
 		$req->bindValue(':email',$email);
 		  $s=$req->execute();
-			
 		}
+		    catch (Exception $e){
+            echo " Erreur ! ".$e->getMessage();
+   echo " Les datas : " ;
+  print_r($datas);
+        }
+		
+	}
 		
 		function ajouterlivreur($l){
 			$db = config::getConnexion();
@@ -107,8 +115,13 @@ class livreurcore
 		function reccupererinformations($pseudo){
 			$db = config::getConnexion();
 			$sql="SELECT * from livreur where pseudo=$pseudo";
-			$liste=$db->query($sql);
-			return $liste;
+			try{
+				$liste=$db->query($sql);
+				return $liste;
+				}
+        	catch (Exception $e){
+            	die('Erreur: '.$e->getMessage());
+        	}
 		}
 
 

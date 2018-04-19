@@ -1,18 +1,26 @@
 <?php
 class livreur
 {
+  private $pseudo;
   private $nom;
   private $prenom;
   private $tel;
   private $email;
 
-  function __construct($nom,$prenom,$tel,$email)
+  function __construct($pseudo,$nom,$prenom,$tel,$email)
   {
+$this->pseudo=$pseudo;
 $this->nom=$nom;
 $this->prenom=$prenom;
 $this->tel=$tel;
 $this->email=$email;
 
+}
+function getPseudo(){
+  return $this->pseudo;
+}
+function setPseudo($pseudo){
+  $this->pseudo=$pseudo;
 }
   function getNom(){
     return $this->nom;
