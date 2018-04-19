@@ -54,7 +54,34 @@ function supprimerlivraison($id){
       }
     
 }
+function modifierlivraison($livraison,$idd){
+      $db = config::getConnexion();
+      $sql="UPDATE livraison SET rue=:rue,numero=:numero,region=:region,ville=:ville,etat=:etat WHERE id=:idd";
+      try{
+      $req=$db->prepare($sql);
 
+    
+        $rue=$livraison->getRue();
+        $numero=$livraison->getNumero();
+        $region=$livraison->getRegion();
+        $ville=$livraison->getVille();
+        $etat=$livraison->getEtat();
+    
+      $req->bindValue(':idd',$idd);
+      $req->bindValue(':rue',$rue);
+      $req->bindValue(':numero',$numero);
+      $req->bindValue(':region',$region);
+      $req->bindValue(':ville',$ville);
+      $req->bindValue(':etat',$etat);
+      $s=$req->execute();
+    }
+        catch (Exception $e){
+            echo " Erreur ! ".$e->getMessage();
+   echo " Les datas : " ;
+  print_r($datas);
+        }
+    
+  }
 
 
  function ajouterlivraison($l){

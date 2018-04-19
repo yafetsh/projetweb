@@ -1,20 +1,8 @@
  <?PHP
 include "../../Core/livraisoncore.php";
 $livraison1C=new livraisoncore();
-$listeLivraisons=$livraison1C->afficherLivraisonssanslivreurs();
+$listeLivraisons=$livraison1C->afficherLivraisonssansLivreurs();
 $livraison2C=new livraisoncore();
-if(isset($_GET['modifier'])){
-    $l=$livraison2C->reccupererinformations($_GET["id"]);
-    foreach ($l as $row) {
-      $id=$row['id'];
-      $idUtilisateur=$row['idUtilisateur'];
-      $pseudoLivreur=$row['pseudoLivreur'];
-    }
-  }
-include "../../Core/livreurcore.php";
-$livreur3C=new livreurcore();
-$listePseudos=$livreur3C->afficherPseudoslivreurs();
-
 
 ?>
 
@@ -49,7 +37,7 @@ $listePseudos=$livreur3C->afficherPseudoslivreurs();
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Fashion MakeUp!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -301,22 +289,13 @@ $listePseudos=$livreur3C->afficherPseudoslivreurs();
                 <h3>Livraisons</h3>
               </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
+              
             </div>
 
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="col-md-10 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Liste des livraisons pas encore affectées par des livreurs</h2>
@@ -344,7 +323,12 @@ $listePseudos=$livreur3C->afficherPseudoslivreurs();
                         <tr>
                           <th>ID_livraison</th>
                           <th>ID_utilisateur</th>
+                          <th>Rue</th>
+                          <th>Numero de telephone</th>
+                          <th>Region</th>
+                          <th>Ville</th>
                           <th>Pseudo_Livreur</th>
+                          <th>Etat</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -355,13 +339,16 @@ $listePseudos=$livreur3C->afficherPseudoslivreurs();
                           <tr>
                           <td><?PHP echo $row['id']; ?></td>
                           <td><?PHP echo $row['idUtilisateur']; ?></td>
+                          <td><?PHP echo $row['rue']; ?></td>
+                          <td><?PHP echo $row['numero']; ?></td>
+                          <td><?PHP echo $row['region']; ?></td>
+                          <td><?PHP echo $row['ville']; ?></td>
                           <td><?PHP echo $row['pseudoLivreur']; ?></td>
+                          <td><?PHP echo $row['etat']; ?></td>
                           
                           <td>
-                              <form method="GET">
-                                <input type="submit" name="modifier" value="Choisir un livreur" class="btn btn-success" style="height: 33px ;width:120px">
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                              </form>
+                              <a  href="affecterlivraison2.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="height: 33px ;width:120px">
+                            Choisir un livreur</a>
                           </td>
                           </tr>
   <?PHP
@@ -373,109 +360,18 @@ $listePseudos=$livreur3C->afficherPseudoslivreurs();
                   </div>
                 </div>
               </div>
-<div class="">
-            
-            <div class="clearfix"></div>
-
-            <div class="row" id="d">
-              <div class="col-md-12 col-sm-12 col-xs-12"  >
-                <div class="x_panel" >
-                  <div class="x_title">
-                    <h2>Affectuer un livreur à une livraison</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content" hidden>
-
-                    <form method="POST">
-<table>
-<caption>Choisir un livreur</caption>
-<tr>
-<td>ID_Livraison</td>
-<td><input type="number" name="id" value="<?PHP echo $id ?>"></td>
-</tr>
-<tr>
-<td>ID_Livreur</td>
-<td><input type="text" name="idUtilisateur" value="<?PHP echo $idUtilisateur ?>"></td>
-</tr>
-
-</table>
-
-  <table>
-    <tr>
-      <td>Pseudo_livreur</td>
-      <td>
-        <select>
-          <?PHP
-              foreach($listePseudos as $row){
-                ?>
-                <option>
-                <?PHP echo $row['pseudo']; ?>
-              </option>
-              
-          <?PHP
-            }
-?>
-  </td>
-  </tr>
-          </select>
-      
-    
-
-  </table>
-
-
-<table>
-<tr>
-<td><input type="submit" name="modif" value="modifier"></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>"></td>
-</tr>
-</table>
-</form>
-<?PHP
-if (isset($_POST['modif'])) {
-      $livraison=new livraison($_POST['id'],$_POST['idUtilisateur'],$_POST['pseudoLivreur']);
-      $lC->modifierlivraison($livraison,$_POST['id_ini']);
-      echo $_POST['id_ini'];
-    header('Location: afficherlivraisons.php');
-  }
-?>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-              </div>
-
-
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+        
+        <!-- /footer content -->
+      </div>
+      <footer>
+          <div style:center class="pull-right">
+            Fashion MakeUp - Bootstrap Admin Template by ArtVision</a>
           </div>
           <div class="clearfix"></div>
         </footer>
-        <!-- /footer content -->
-      </div>
     </div>
 
     <!-- jQuery -->

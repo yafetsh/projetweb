@@ -41,7 +41,7 @@ class livreurcore
 	}
 	function afficherLivreursselondisponibilité(){
 		$c=Config::getConnexion();
-		$sql="SELECT * FROM livreur where etat like 'disponible'";
+		$sql="SELECT * FROM livreur where etat='disponible'";
 		try{
 			$liste=$c->query($sql);
 			return $liste;
@@ -52,19 +52,19 @@ class livreurcore
 	}
 
 
-	function modifierlivreur($livreur,$pseudo){
+	function modifierlivreur($livreur,$pse){
 			$db = config::getConnexion();
-			$sql="UPDATE livreur SET pseudo=:pseudoo,nom=:nom,prenom=:prenom,tel=:tel,email=:email WHERE pseudo=:pseudo";
+			$sql="UPDATE livreur SET nom=:nom,prenom=:prenom,tel=:tel,email=:email WHERE pseudo=:pse";
 			try{
 			$req=$db->prepare($sql);
 
-			$pseudoo=$livreur->getPseudo();
+		
         	$nom=$livreur->getNom();
        		$prenom=$livreur->getPrenom();
         $tel=$livreur->getTel();
         $email=$livreur->getEmail();
-		$datas = array(':pseudoo'=>$pseudoo, ':nom'=>$nom,':prenom'=>$prenom,':tel'=>$tel,':email'=>$email);
-		$req->bindValue(':pseudoo',$pseudoo);
+		
+		$req->bindValue(':pse',$pse);
 		$req->bindValue(':nom',$nom);
 		$req->bindValue(':prenom',$prenom);
 		$req->bindValue(':tel',$tel);

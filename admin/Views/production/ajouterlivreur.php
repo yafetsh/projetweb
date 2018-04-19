@@ -4,7 +4,7 @@
     include_once "../../Entities/livreur.php";
 
     if(isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['tel']) and isset($_POST['email'])){
-        $livreur1=new livreur($_POST['nom'],$_POST['prenom'],$_POST['tel'],$_POST['email']);
+        $livreur1=new livreur($_POST['pseudo'],$_POST['nom'],$_POST['prenom'],$_POST['tel'],$_POST['email']);
         $livreur1c=new livreurcore();
         $livreur1c->ajouterlivreur($livreur1);
          header("Location: afficherlivreurs.php");

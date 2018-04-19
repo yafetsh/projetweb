@@ -10,17 +10,7 @@
     $lC->supprimerlivreur($_GET["pseudo"]);
     header("Location: afficherlivreurs.php");
   }
-  else if(isset($_GET['modifier'])){
-    $l=$lC->reccupererinformations($_GET["pseudo"]);
-    foreach ($l as $row) {
-      $pseudo=$row['pseudo'];
-      $nom=$row['nom'];
-      $prenom=$row['prenom'];
-      $tel=$row['tel'];
-      $email=$row['email'];
-      $etat=$row['etat'];
-    }
-  }
+  
  
   ?>
 
@@ -394,86 +384,7 @@
               </div>
 
 
-              <div class="">
-            
-            <div class="clearfix"></div>
-
-            <div class="row" id="d">
-              <div class="col-md-12 col-sm-12 col-xs-12"  >
-                <div class="x_panel" >
-                  <div class="x_title">
-                    <h2>Informations du livreur à modifier</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content" hidden>
-
-                    <form method="GET">
-<table>
-<caption>Modifier livreur</caption>
-<tr>
-<td>Pseudo</td>
-<td><input type="number" name="pseudo" value="<?PHP echo $pseudo ?>"></td>
-</tr>
-<tr>
-<td>Nom</td>
-<td><input type="text" name="nom" value="<?PHP echo $nom ?>"></td>
-</tr>
-<tr>
-<td>Prenom</td>
-<td><input type="text" name="prenom" value="<?PHP echo $prenom ?>"></td>
-</tr>
-<tr>
-<td>Numero de telephone</td>
-<td><input type="number" name="tel" value="<?PHP echo $tel ?>"></td>
-</tr>
-<tr>
-<td>Email</td>
-<td><input type="text" name="email" value="<?PHP echo $email ?>"></td>
-</tr>
-<tr>
-<td>Etat</td>
-<td><input type="text" name="etat" value="<?PHP echo $etat ?>"></td>
-</tr>
-<tr>
-<td><input type="submit" name="modif" value="modifier"></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="hidden" name="pseudo_ini" value="<?PHP echo $_GET['pseudo'];?>"></td>
-</tr>
-</table>
-</form>
-<?PHP
-if (isset($_POST['modif'])) {
-      $livreur=new livreur($_POST['pseudo'],$_POST['nom'],$_POST['prenom'],$_POST['tel'],$_POST['email']);
-      $lC->modifierlivreur($livreur,$_POST['pseudo_ini']);
-      echo $_POST['pseudo_ini'];
-    header('Location: afficherlivreurs.php');
-  }
-?>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-              </div>
-
-
+    
               
            
                 

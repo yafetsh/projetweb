@@ -7,21 +7,7 @@ if(isset($_GET['supprimer'])){
     $livraison2C->supprimerlivraison($_GET["id"]);
     header("Location: afficherlivraisons.php");
   }
-   else if(isset($_GET['modifier'])){
-    $l=$livraison2C->reccupererinformations($_GET["id"]);
-    foreach ($l as $row) {
-      $id=$row['id'];
-      $rue=$row['rue'];
-      $numero=$row['numero'];
-      $region=$row['region'];
-      $ville=$row['ville'];
-      $etat=$row['etat'];
-    }
-  }
-  elseif (isset($_GET['modif'])) {
-      $livreur=new livreur($_GET['pseudo'],$_GET['nom'],$_GET['prenom'],$_GET['tel'],$_GET['email']);
-      $pC->modifierlivreur($livreur,$_GET['pseudo']);
-  }
+   
 ?>
 
 
@@ -55,7 +41,7 @@ if(isset($_GET['supprimer'])){
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Fashion MakeUp!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -307,16 +293,7 @@ if(isset($_GET['supprimer'])){
                 <h3>Livraisons</h3>
               </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
+              
             </div>
 
             <div class="clearfix"></div>
@@ -374,10 +351,8 @@ if(isset($_GET['supprimer'])){
                           <td><?PHP echo $row['etat']; ?></td>
                           
                           <td>
-                              <form method="GET">
-                                <input type="submit" name="modifier" value="modifier" class="btn btn-success" style="height: 33px ;width:90px">
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                              </form>
+                              <a  href="modifierlivraison.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="height: 33px ;width:90px">
+                            Modifier</a>
                               <form method="GET">
                                 <input type="submit" name="supprimer" value="Supprimer" class="btn btn-success" style="background-color: blue;">
                                 <input type="hidden" value="<?PHP echo $row['id']; ?>" name="id">
@@ -393,271 +368,18 @@ if(isset($_GET['supprimer'])){
                   </div>
                 </div>
               </div>
-
-
-              <div class="col-md-8 col-sm-6 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Livraisons en cours de preparation</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>ID</th>
-                          <th>Nom</th>
-                          <th>Ville</th>
-                          <th>Adresse</th>
-                          <th>Numero de telephone</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row"></th>
-                         
-
-
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-
-                        </tr>
-                      </tbody>
-                    </table>
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Livraisons données aux livreurs </h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>ID</th>
-                          <th>Nom</th>
-                          <th>Ville</th>
-                          <th>Adresse</th>
-                          <th>Numero de telephone</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-
-                        </tr>
-                      </tbody>
-                    </table>
-
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Livraisons effectuées</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-
-                    <table class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>ID</th>
-                          <th>Nom</th>
-                          <th>Ville</th>
-                          <th>Adresse</th>
-                          <th>Numero de telephone</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-                        </tr>
-                        <tr>
-                          <th scope="row"></th>
-                          
-
-
-
-                        </tr>
-                      </tbody>
-                    </table>
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Toutes les livraisons passées</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-
-                  <div class="x_content">
-
-                   
-
-                    <div class="table-responsive">
-                      <table class="table table-striped jambo_table bulk_action">
-                        <thead>
-                          <tr class="headings">
-                            <th>
-                              <input type="checkbox" id="check-all" class="flat">
-                            </th>
-                            <th class="column-title">ID </th>
-                            <th class="column-title">Nom </th>
-                            <th class="column-title">Ville </th>
-                            <th class="column-title"> </th>
-                            <th class="column-title">Status </th>
-                            <th class="column-title">Amount </th>
-                            <th class="column-title no-link last"><span class="nobr">Action</span>
-                            </th>
-                            <th class="bulk-actions" colspan="7">
-                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                            </th>
-                          </tr>
-                        </thead>
-
-                        <tbody>
-                          <tr class="even pointer">
-                           
-                             
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-							
-						
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+        
+        <!-- /footer content -->
+      </div>
+      <footer>
+          <div style:center class="pull-right">
+            Fashion MakeUp - Bootstrap Admin Template by ArtVision</a>
           </div>
           <div class="clearfix"></div>
         </footer>
-        <!-- /footer content -->
-      </div>
     </div>
 
     <!-- jQuery -->

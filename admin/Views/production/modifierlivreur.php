@@ -21,6 +21,7 @@
 <tr>
 <td>Pseudo</td>
 <td><input disabled type="number" name="pseudo" value="<?PHP echo $pseudo ?>"></td>
+<td><input  name="pseudo"  value="<?PHP echo $pseudo ?>" hidden></td>
 </tr>
 <tr>
 <td>Nom</td>
@@ -55,6 +56,6 @@ if (isset($_POST['modifier'])){
   $livreur=new livreur($_POST['pseudo'],$_POST['nom'],$_POST['prenom'],$_POST['tel'],$_POST['email']);
   $lC->modifierlivreur($livreur,$_POST['pseudo_ini']);
   echo $_POST['pseudo_ini'];
-  header('Location: afficherlivreurs.php');
+ header("Location: afficherlivreurs.php");
 }
 ?>
