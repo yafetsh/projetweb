@@ -1,7 +1,31 @@
 <?php  
   include_once "../../Core/produitC.php";
+  include_once "../../Core/imageC.php";
+  include_once "../../Entities/produit.php";
+
+  $ref = "";
+  $quantite_total = "";
+  $nom = "";
+  $desc = "";
+  $pr ="";
+  $date ="";
+  $sous = "";
+
   $produitC=new produitC();
-  $listeProduit=$produitC->afficherproduitsansimg();
+  $listeProduit=$produitC->afficherproduit();
+  if(isset($_POST['modifier'])){
+    $p = $produitC->recuperer_produit($_POST['ref']);
+    var_dump($p);
+    foreach ($p as $r) {
+      $ref = $r['reference'];
+      $quantite_total = $r['quantite_total'];
+      $nom = $r['nom'];
+      $desc = $r['description'];
+      $pr = $r['prix'];
+      $date = $r['date_ajout'];
+      $sous = $r['reference_sous_categorie'];
+    }
+  }
   ?>
 
 <!DOCTYPE html>
@@ -73,9 +97,8 @@
                   </li>
                   <li><a><i class="fa fa-edit"></i>Gestion de produit<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="AJOUTER PRODUIT.html">Ajout de Produits</a></li>
+                      <li><a href="AJOUTER PRODUIT.php">Ajout de Produits</a></li>
                       <li><a href="LISTE PRODUIT.php">liste de Produits</a></li>
-                      <li><a href="GESTION PRODUIT.php">Gestion de Produits</a></li>
                       <li><a href="GESTION IMAGE.php">Gestion d'Images</a></li>
                       <!--<li><a href="form_wizards.html">Form Wizard</a></li>
                       <li><a href="form_upload.html">Form Upload</a></li>
@@ -325,44 +348,149 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                    <form method="POST">
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Image</th>
+                          <th>Nom</th>
                           <th>Reference</th>
-                          <th>Couleur</th>
+                          <th>Couleur disponible</th>
                           <th>Quantite</th>
-                          <th>Nom Catalogue</th>
                           <th>Description</th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
+                          $imageC = new imageC();
                           foreach ($listeProduit as $row) {?>
                           <tr>
+                            <td><?php echo $row['nom']; ?></td>
+                            <td><?PHP echo $row['reference']; ?><input type="text" name="ref" value="<?PHP echo $row['reference']; ?>" hidden></td>
                             <td>
                               <?php
-                                $image=$produitC->reccupererimage($row['reference']);
+                                $image=$imageC->recupererimage($row['reference']);
                                     foreach ($image as $key) {
                                     ?>
-                                    <img src="<?php echo $key['Chemin']; ?>" style="width: 100px;height: 100px">
+                                      <input type="color" value="<?php echo $key['couleur']; ?>"  disabled>
+                                      
                                     <?php
                                     }
                                     ?>
                             </td>
-                            <td><?PHP echo $row['reference']; ?></td>
-                            <td><?PHP echo $row['couleur']; ?></td>
-                            <td><?PHP echo $row['quantite']; ?></td>
-                            <td><?PHP echo $row['nomCatalogue']; ?></td>
+                            <td><?PHP echo $row['quantite_total']; ?></td>
                             <td><?PHP echo $row['description']; ?></td>
+                            <td>
+                                <input type="submit" name="supprimer" value="Supprimer" class="btn btn-primary">
+                                <input type="submit" name="modifier" value="Modifier" class="btn btn-primary" style="background-color: green;">
+                            </td>
                           </tr>
                           <?php
                           }
                           ?>
                       </tbody>
+                      </form>
                     </table>
                   </div>
                 </div>
+                 <div class="clearfix"></div>
+
+            <div class="row" id="d">
+              <div class="col-md-12 col-sm-12 col-xs-12"  >
+                <div class="x_panel" >
+                  <div class="x_title">
+                    <h2>Produit a modifier</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content" >
+
+                    <form method="GET" class="form-horizontal form-label-left" novalidate>
+
+                      <span class="section">Concernant le produit .. </span>
+
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Reference
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input  class="form-control col-md-7 col-xs-12" value="<?PHP echo $ref ?>" disabled>
+                          <input  name="R"  value="<?PHP echo $ref ?>" hidden>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nom<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input  name="Nom" required="required" data-validate-minmax="0,1000000000" class="form-control col-md-7 col-xs-12" value="<?PHP echo $nom ?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Date d'ajout
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input  type="date" class="form-control col-md-7 col-xs-12" value="<?PHP echo $date ?>" disabled>
+                          <input  type="date" name="date"  value="<?PHP echo $date ?>" hidden>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Reference sous categorie
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input  name="sous"  class="form-control col-md-7 col-xs-12" value="<?PHP echo $sous ?>" hidden>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Quantite<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input  name="Quantite" required="required" data-validate-minmax="0,1000000000" class="form-control col-md-7 col-xs-12" value="<?PHP echo $quantite_total ?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Prix<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input  name="Prix"  required="required" class="form-control col-md-7 col-xs-12" placeholder="dt" value="<?PHP echo $pr ?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input  name="Description" class="form-control col-md-7 col-xs-12" value="<?PHP echo $desc ?>" >
+                        </div>
+                      </div>
+                      
+
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button type="RESET" class="btn btn-primary">RESET</button>
+                          <button id="send" type="submit" class="btn btn-success" name="modif">MODIFIER</button>
+                            <?php 
+                                
+                             ?>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
               </div>
         <!-- /page content -->
 
@@ -403,3 +531,17 @@
 
   </body>
 </html>
+
+<?php
+  
+  if(isset($_POST['supprimer'])){
+    $imageC->supprimer($_POST['ref']);
+    $produitC->supprimerproduit($_POST['ref']);
+  } 
+  else if (isset($_GET['modif'])) {
+
+    $Produit=new Produit($_GET['R'],$_GET['Nom'],$_GET['Quantite'],$_GET['Prix'],$_GET['date'],$_GET['Description'],$_GET['sous']);
+    var_dump($Produit);
+    $produitC->modifierproduit($Produit,$Produit->getReference());
+  }
+  ?>

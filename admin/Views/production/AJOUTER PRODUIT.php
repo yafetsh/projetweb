@@ -1,3 +1,13 @@
+<?php
+  
+  include_once "../../Core/categorieC.php";
+  include_once "../../Core/sous_categorieC.php";
+  $categorieC = new categorieC();
+  $liste_categorie = $categorieC->afficher();
+  ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>FASHION MAKEUP || AJOUT PRODUIT</title>
+    <title>FASHION MAKEUP || AJOUT PRODUIT </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -37,7 +47,7 @@
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
+                <span>Bienvenu,</span>
                 <h2>MANEL AMMARA</h2>
               </div>
             </div>
@@ -61,7 +71,6 @@
                     <ul class="nav child_menu">
                       <li><a href="AJOUTER PRODUIT.html">Ajout de Produits</a></li>
                       <li><a href="LISTE PRODUIT.php">liste de Produits</a></li>
-                      <li><a href="GESTION PRODUIT.php">Gestion de Produits</a></li>
                       <li><a href="GESTION IMAGE.php">Gestion d'Images</a></li>
                       <!--<li><a href="form_upload.html">Form Upload</a></li>
                       <li><a href="form_buttons.html">Form Buttons</a></li>
@@ -272,7 +281,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Gestion de produit</h3>
+                <h3>AJOUT PRODUIT</h3>
               </div>
 
               <div class="title_right">
@@ -286,11 +295,6 @@
                 </div>
               </div>
             </div>
-
-            <div>
-              <span style="color: gray; font-size: 30px; " ><img src="images/basic1-174_ok_success_check-512.png" class="img-circle profile_img" style="height: 200px; width: 200px"> PRODUIT AJOUTE AVEC SUCCES !</span>
-            </div>
-
             <div class="clearfix"></div>
 
             <div class="row">
@@ -301,9 +305,6 @@
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
@@ -312,6 +313,9 @@
                           <li><a href="#">Settings 2</a>
                           </li>
                         </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
                     </ul>
                     <div class="clearfix"></div>
                   </div>
@@ -319,115 +323,111 @@
 
                     <form method="POST" action="AJOUTER_PRODUIT.php" class="form-horizontal form-label-left" novalidate>
 
-                      <span class="section">Concernant le produit .. </span>
+                      <span class="section"> Produit  </span>
 
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Reference<span>*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nom de Produit<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="Reference" name="Reference" required="required" class="form-control col-md-7 col-xs-12">
+                          <input  id="nom_produit" name="nom_produit" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Couleur<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Quantite Total<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input  id="Couleur" name="Couleur" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Quantite<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="Quantite" name="Quantite" required="required" data-validate-minmax="0,1000000000" class="form-control col-md-7 col-xs-12">
+                          <input id="quantite_total" name="quantite_total" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Prix<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="Prix" name="Prix"  required="required" class="form-control col-md-7 col-xs-12" placeholder="dt">
+                          <input id="prix" name="prix"  required="required" class="form-control col-md-7 col-xs-12" placeholder="dt">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="Description" name="Description" class="form-control col-md-7 col-xs-12" ></textarea>
+                          <textarea id="description" name="description" class="form-control col-md-7 col-xs-12" ></textarea>
                         </div>
                       </div>
+                      <br>
+                      <span class="section"> Catégorie </span>
+                      <br>
+                      <small>choisissez ou ajoutez un sous-categorie </small>
+                      <br>
+                      <hr>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >catalogue<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Catégorie et Sous Catégorie<span class="required"></span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select id="catalogue" name="catalogue" required="required" class="form-control col-md-7 col-xs-12" id="catalogue" name="catalogue">
+                          <select id="sous_categorie" name="sous_categorie" class="form-control col-md-7 col-xs-12">
                               <option> </option>
-                            <optgroup label="YEUX">
-                              <option>OMBRE A PAUPIERE SOLO</option>
-                              <option>OMBRE A PAUPIERE TRIO</option>
-                              <option>OMBRE A PAUPIERES 6 CLASSIC</option>
-                              <option>OMBRE A PAUPIERES 6 VINTAGE</option>
-                              <option>OMBRE A PAUPIERES 8 VINTAGE</option>
-                              <option>OMBRE A PAUPIERE 6 STUDIO</option>
-                              <option>OMBRE A PAUPIERE 10 STUDIO</option>
-                              <option>MASCARA VOLUME</option>
-                              <option>MASCARA VOLUME WATERPROOF</option>
-                              <option>EYE LINER</option>
-                              <option>EYE LINER LIQUIDE</option>
-                              <option>EYELINER FEUTRE LONGUE TENUE</option>
-                              <option>CRAYON YEUX</option>
-                              <option>CRAYON YEUX RETRACTABLE</option>
-                              <option>DUO</option>
-                            </optgroup>
-                            <optgroup label="LEVRES">
-                              <option>ROUGES A LEVRES</option>
-                              <option>ROUGE A LEVRES CLASSIC</option>
-                              <option>BRILLANT A LEVRES</option>
-                              <option>CRAYON LEVRES</option>
-                              <option>CRAYON LEVRES RETRACTABLE</option>
-                            </optgroup>
-                            <optgroup label="TAINT">
-                              <option>FARD A JOUES</option>
-                              <option>POUDRE COMPACT</option>
-                              <option>POUDRE BRONZANTE</option>
-                              <option>ANTI-CERNES</option>
-                            </optgroup>
-                            <optgroup label="ONGLES">
-                              <option>VERNIS A ONGLES CLASSIC</option>
-                              <option>VERNIS A ONGLES PAILLETTES</option>
-                              <option>VERNIS A ONGLES TENTATION</option>
-                              <option>VERNIS A ONGLES FLUO UV</option>
-                              <option>VERNIS A ONGLES CHROME</option>
-                              <option>VERNIS A ONGLES EFFET UV</option>
-                              <option>VERNIS A ONGLES SOINS</option>
-                              <option>VERNIS A ONGLES 100% MAT</option>
-                              <option>VERNIS A ONGLES PLUMES</option>
-                              <option>VERNIS A ONGLES ECLATS</option>
-                              <option>VERNIS A ONGLES BIJOUX</option>
-                              <option>VERNIS A ONGLES BLACK & WHITE</option>
-                              <option>VERNIS A ONGLES EFFET MAT</option>
-                              <option>VERNIS A ONGLES BLOOM</option>
-                              <option>DISSOLVANT DOUX EXPRESS</option>
-                              <option>DISSOLVANT SANS ACETONE PROFESSIONNEL</option>
-                              <option>DISSOLVANT MOUSSE</option>
-                              <option>NUANCIERS VERNIS A ONGLES</option>
-                            </optgroup>
+                              <?php
+                                foreach ($liste_categorie as $key => $value) {
+
+                              ?>
+                                  <optgroup label="<?php echo $value['nom'];?>">
+                                    <?php 
+                                      $sous_categorie = new sous_categorieC(); 
+                                      $liste_sous_categorie = $sous_categorie->recuperer($value['reference']);
+                                      var_dump($liste_sous_categorie);
+                                      foreach ($liste_sous_categorie as $row => $l) {
+                                    ?>
+
+                                        <option><?php echo $l['nom'];?></option>
+
+                                      <?php
+                                      }
+                                     ?>
+                                  </optgroup>
+                              <?php    
+                                }
+                              ?>
+                          </select>
+                        </div>
+                      </div>
+                      <hr>
+
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Catégorie<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select id="categorie" name="categorie" class="form-control col-md-7 col-xs-12">
+                              <option> </option>
+                              <?php
+                                $liste_categorie=$categorieC->afficher();
+                                foreach ($liste_categorie as $key => $value) {
+                              ?>
+                                  <option><?php echo $value['nom'];?></option>
+                              <?php    
+                                }
+                              ?>
                           </select>
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Image Principal<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Sous Catégorie
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="Image" name="Image"  required="required" class="form-control col-md-7 col-xs-12" placeholder="Mettez le chemin d'image svp">
+                          <input type="text" id="sous_categorie2" name="sous_categorie2" class="form-control col-md-7 col-xs-12" placeholder="si vous ne trouvez pas votre sous categorie si dessus vous pouvez l'ajouter ici " >
+                        </div>
+                      </div>
+                      
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Reference
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="reference" name="reference" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
 
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">ANNULER</button>
-                          <button type="Reset" class="btn btn-primary" style="background-color: brown">Reset</button>
-                          <button id="send" type="submit" class="btn btn-success">Valider</button>
+                          <button type="RESET" class="btn btn-primary">RESET</button>
+                          <button id="send" type="submit" class="btn btn-success" >VALIDER</button>
                         </div>
                       </div>
                     </form>
@@ -437,12 +437,15 @@
             </div>
           </div>
         </div>
+
+        
+
         <!-- /page content -->
 
         <!-- footer content -->
-        
+       
         <!-- /footer content -->
-     
+      
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>

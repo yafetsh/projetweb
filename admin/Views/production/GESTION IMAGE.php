@@ -17,7 +17,7 @@
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-
+    
     <!-- Custom styling plus plugins -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -59,13 +59,28 @@
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-desktop"></i> Réservation  <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="calendar.html">Calendar</a></li>
+                      <li><a href="AJOUTER PRODUIT.php">Ajout de Produits</a></li>
+                      <li><a href="LISTE PRODUIT.php">liste de Produits</a></li>
+                      <li><a href="GESTION IMAGE.php">Gestion d'Images</a></li>
+                      <!--<li><a href="form_upload.html">Form Upload</a></li>
+                      <li><a href="form_buttons.html">Form Buttons</a></li>
+                      <li><a href="form_buttons.html">Réservations</a></li>-->
                     </ul>
                   </li>
-                  <li><a href="reservationadmin.php"><i class="fa fa-desktop"></i> Réclamation </a>
-
+                  <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="general_elements.html">General Elements</a></li>
+                      <li><a href="media_gallery.html">Media Gallery</a></li>
+                      <li><a href="typography.html">Typography</a></li>
+                      <li><a href="icons.html">Icons</a></li>
+                      <li><a href="glyphicons.html">Glyphicons</a></li>
+                      <li><a href="widgets.html">Widgets</a></li>
+                      <li><a href="invoice.html">Invoice</a></li>
+                      <li><a href="inbox.html">Inbox</a></li>
+                      <li><a href="calendar.html">Calendar</a></li>
+                    </ul>
                   </li>
                   <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -128,7 +143,7 @@
                         <li><a href="#level1_2">Level One</a>
                         </li>
                     </ul>
-                  </li>
+                  </li>                  
                   <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
               </div>
@@ -302,66 +317,72 @@
                       <table id="datatable" class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                          <th>REFERENCE</th>
-                          <th>NOM CATALOGUE</th>
-                          <th>IMAGE</th>
+                          <th>Reference</th>
+                          <th>Nom Produit</th>
+                          <th>IMAGES</th>
                           <th style="width: 200px">ACTION</th>
                         </tr>
                       </thead>
+                      
                             <?php
                               include_once "../../Core/produitC.php";
+                              include_once "../../Core/imageC.php";
 
-                              $produitC=new produitC();
-                              $listeProduit=$produitC->afficherproduitsansimg();
-                              foreach ($listeProduit as $row) {
+                              $produitC = new produitC();
+                              $listeProduit = $produitC->recupererproduit();
+                              foreach ($listeProduit as $key) {
+                                  $imageC = new imageC();
+                                  $listeimage = $imageC->recupererimage($key['reference']);
+                              ?>
+                                 <tr>
+                                    <td>
+                                      <?php echo($key['reference']) ; ?>
+                                    </td>
+                                    <td>  
+                                      <?php echo($key['nom']) ; ?>
+                                    </td>
+                                    <td>
+                                      <form method="POST">
+                                      <?php
+                                        foreach ($listeimage as $row) {
+                                      ?>
+                                        
+                                        <img src="images/<?php echo($row['chemin']); ?>" style="width: 50px; height: 150px;">
+                                        <input type="text" name="reference1"  value="<?php echo($key['reference']) ; ?>" hidden>
+                                        <input type="image" type="submit" name="sup" src="images/1420471234085Supprimer.png" style="width: 20px; height: 20px; position: relative; top: 60px; right: 80px ">
+                                        
+                                      <?php
+                                        
+                                        }
+                                        ?>
+                                        </form>
+                                    </td>
+                                    <td>
+                                      <center>
+                                         <form method="POST">
+                                               <div class="item form-group">
+                                                  <input type="file" id="Image" name="image"  required="required" class="form-control col-md-7 col-xs-12" >
+                                                  <p>..</p>
+                                                  <input type="text" name="reference"  value="<?php echo($key['reference']) ; ?>" hidden>
+                                                  <input type="color" name="couleur" required="required" class="form-control col-md-7 col-xs-12">
+                                              </div>
+                                              <br><br><br><br>
+                                        </center>  
+                                              <input class="btn btn-success" type="submit" name="ajouterr" value="Ajouter image">
+                                          </form>                    
+                                    </td>
+                                  </tr>
+                              <?php
+                                }
+                                ?>
+                              
+                              
                              ?>
-                              <tr>
-                                <td>
-                                  <?php echo($row['reference']);?>
-                                </td>
-                                <td>
-                                  <?php echo($row['nomCatalogue']);?>
-                                </td>
-                                <td>
-                                  <?php
-                                    $image=$produitC->reccupererimage($row['reference']);
-                                    foreach ($image as $key) {
-                                    ?>
-                                      <div class="col-md-55">
-                                          <div class="mask">
-                                            <img style="width: 100%; display: block;" src="<?php echo $key['Chemin']; ?>" alt="image" />
-                                            <form method="GET">
-                                               <input type="text" name="c" value="<?php echo($key['Chemin']);?>" hidden >
-                                            <center>
-                                               <a href="#"><i class="fa fa-times"><input type="submit" name="sup" value="SUPPRIMER"> </i></a>
-                                            </center>
-                                            </form>
-                                            </div>
-                                      </div>
-                                    <?php
-                                    }
-                                    ?>
-                                </td>
-                                <td>
-                                  <center>
-                                     <form method="GET">
-                                     <div class="item form-group">
-                                        <input id="Image" name="Image"  required="required" class="form-control col-md-7 col-xs-12" placeholder="Mettez le chemin d'image svp">
-                                        <input type="text" name="reference"  value="<?php echo($row['reference']);?>" hidden>
-                                    </div>
-                                    <br><br><br><br>
-                                  </center>
-                                    <input class="btn btn-success" type="submit" name="ajouterr" value="Ajouter image">
-                                  </form>
-                                </td>
-                              </tr>
-
-                            <?php
-                              }
-                            ?>
+                              
+                                        
                       </table>
-
-
+                      
+                      
                     </div>
                   </div>
                 </div>
@@ -372,7 +393,7 @@
         <!-- /page content -->
 
         <!-- footer content -->
-
+        
         <!-- /footer content -->
       </div>
     </div>
@@ -392,17 +413,15 @@
 </html>
 
 <?php
-include_once "../../entities/image.php";
-if(isset($_GET['ajouterr']) and isset($_GET['reference'])){
-  $im=new image($_GET['Image'],$_GET['reference']);
-  $produitC->ajouterimage($im);
-}
-else
-  echo("error");
+  include_once "../../Entities/image.php";
+  if (isset($_POST['image']) and isset($_POST['couleur']) and isset($_POST['ajouterr'])) {
+    $img = new image($_POST['image'],$_POST['reference'],$_POST['couleur']);
+    $imageC->ajouter($img);
+  }
 
-if(isset($_GET['sup'])){
-  $produitC->supprimerimage($_GET['c']);
-}
-
+  if (isset($_POST['sup'])) {
+      $imageC->supprimer($_POST['reference1']);
+  }
+  
 
   ?>

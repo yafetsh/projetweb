@@ -2,6 +2,7 @@
   include_once "../../Core/produitC.php";
   include_once "../../entities/produit.php";
 
+use Twilio\Rest\Client;
 
   $produitC=new produitC();
   $listeProduit=$produitC->afficherproduitsansimg();
@@ -20,10 +21,27 @@
       $nomC=$row['nomCatalogue']; 
     }
   }
-  elseif (isset($_GET['modif'])) {
-      $Produit=new Produit($_GET['Reference'],$_GET['Quantite'],$_GET['Prix'],$_GET['Couleur'],$_GET['Description'],$_GET['catalogue']);
-      $pC->modifierproduit($Produit,$_GET['Reference']);
-  }
+  /*require _DIR_ . '/twilio-php-master/Twilio/autoload.php';
+
+// Use the REST API Client to make requests to the Twilio REST API
+
+
+// Your Account SID and Auth Token from twilio.com/console
+$sid = 'AC49817a9470818a803b9dcf34c3236df7';
+$token = 'c50c84466fb75b0e8f722dbb2a76eddc';
+$client = new Client($sid, $token);
+
+// Use the client to do fun stuff like send text messages!
+$client->messages->create(
+    // the number you'd like to send the message to
+    '+216 55 124 551',
+    array(
+        // A Twilio phone number you purchased at twilio.com/console
+        'from' => '++15862033063',
+        // the body of the text message you'd like to send
+        'body' => "Bonjours !! Merci d'ajouter la facture! la date d'expiration est '$date_echeance_fin'"
+    )
+);*/
   ?>
 
 <!DOCTYPE html>
@@ -303,24 +321,13 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main" style="min-height: 2000px">
+        <div class="right_col" role="main" style="min-height: 3000px">
           <div class="">
             <div class="page-title">
               <div class="title_left">
                 <h3>La liste des produits</h3>
               </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Rechercher ...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Valider!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div class="clearfix"></div>
 
@@ -352,7 +359,6 @@
                       <thead>
                         <tr>
                           <th>Reference</th>
-                          <th>Quantite</th>
                           <th>Nom Catalogue</th>
                           <th>Action</th>
                         </tr>
@@ -362,7 +368,6 @@
                           foreach ($listeProduit as $row) {?>
                             <tr>
                             <td><?PHP echo $row['reference']; ?></td>
-                            <td><?PHP echo $row['quantite']; ?></td>
                             <td><?PHP echo $row['nomCatalogue']; ?></td>
                             <td>
                               <form method="GET">
@@ -383,7 +388,7 @@
                     </form>
                     </table>
                   </div>
-                </div>
+                
                 <div class="">
             
             <div class="clearfix"></div>
@@ -410,7 +415,7 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content" hidden>
+                  <div class="x_content" >
 
                     <form method="GET" class="form-horizontal form-label-left" novalidate>
 
@@ -515,12 +520,19 @@
                         <div class="col-md-6 col-md-offset-3">
                           <button type="RESET" class="btn btn-primary">RESET</button>
                           <button id="send" type="submit" class="btn btn-success" name="modif">MODIFIER</button>
+                            <?php 
+                                if (isset($_GET['modif'])) {
+                                  $Produit=new Produit($_GET['Reference'],$_GET['Quantite'],$_GET['Prix'],$_GET['Couleur'],$_GET['Description'],$_GET['catalogue']);
+                                  $pC->modifierproduit($Produit,$_GET['Reference']);
+                                }
+                             ?>
                         </div>
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
               </div>

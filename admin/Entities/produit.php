@@ -5,58 +5,66 @@
 	class Produit
 	{
 		private $reference;
-		private $quantite;
+		private $nom;
+		private $quantite_total;
 		private $prix;
-		private $couleur;
+		private $date_ajout;
 		private $description;
-		private $nomCatalogue;
+		private $reference_sous_categorie;
 		
-		function __construct($reference,$quantite,$prix,$couleur,$description,$nomCatalogue)
+		function __construct($reference,$nom,$quantite_total,$prix,$date_ajout,$description,$reference_sous_categorie)
 		{
 			$this->reference=$reference;
-			$this->quantite=$quantite;
+			$this->nom=$nom;
+			$this->quantite_total=$quantite_total;
 			$this->prix=$prix;
-			$this->couleur=$couleur;
+			$this->date_ajout=$date_ajout;
 			$this->description=$description;
-			$this->nomCatalogue=$nomCatalogue;
+			$this->reference_sous_categorie=$reference_sous_categorie;
 		}
 
 		function getReference(){
 			return $this->reference;
 		}
-		function getQuantite(){
-			return $this->quantite;
+		function getNom(){
+			return $this->nom;
+		}
+		function getQuantite_total(){
+			return $this->quantite_total;
 		}
 		function getPrix(){
 			return $this->prix;
 		}
-		function getCouleur(){
-			return $this->couleur;
+		function getDate_ajout(){
+			return $this->date_ajout;
 		}
 		function getDescription(){
 			return $this->description;
 		}
-		function getNomCatalogue(){
-			return $this->nomCatalogue;
+		function getReference_sous_categorie(){
+			return $this->reference_sous_categorie;
 		}
 
 		function setReference($reference){
 			$this->reference=$reference;
 		}
-		function setQuantite($quantite){
-			$this->quantite=$quantite;
+		function setNom($nom){
+			$this->nom=$nom;
+		}
+		function setQuantite_total($quantite_total){
+			$this->quantite_total=$quantite_total;
 		}
 		function setPrix($prix){
 			$this->prix=$prix;
 		}
-		function setCouleur($couleur){
-			$this->couleur=$couleur;
+		function setDate_ajout($date_ajout){
+			$this->date_ajout=$date_ajout;
 		}
 		function setDescription($description){
 			$this->description=$description;
 		}
-		function setNomCatalogue($nomCatalogue){
-			$this->nomCatalogue=$nomCatalogue;
+		function setReference_sous_categorie($reference_sous_categorie){
+			$this->reference_sous_categorie=$reference_sous_categorie;
 		}
 	}
 
