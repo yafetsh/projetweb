@@ -1,25 +1,10 @@
 <?php
-    require 'config.php';
-    $id = 0;
-
-    if ( !empty($_GET['id'])) {
-        $id = $_REQUEST['id'];
-    }
-
-    if ( !empty($_POST)) {
-        // keep track post values
-        $id = $_POST['id'];
-
-        // delete data
-        $pdo = Database::connect();
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "DELETE FROM reclamation  WHERE id = ?";
-        $q = $pdo->prepare($sql);
-        $q->execute(array($id));
-        Database::disconnect();
-        header("Location: afficherReclamation.php");
-
-    }
+include "../Core/ReclamationCore.php";
+$reclamationC=new ReclamationCore();
+if (isset($_POST["id"])){
+  $reclamationC->supprimerReclamation($_POST['id']);
+  header('Location: afficherReclamation.php');
+}
 ?>
 
 
@@ -260,7 +245,7 @@ Supprimer cette réclamation
 										<div class="span10 offset1">
 
 												<form class="form-horizontal" action="supprimerReclamation.php" method="post">
-													<input type="hidden" name="id" value="<?php echo $id;?>"/>
+													<input type="hidden" name="id" value="<?php echo $_GET['id'];;?>"/>
 													<p class="alert alert-error">Are you sure to delete ?</p>
 													<div class="form-actions">
 															<button type="submit" >Yes</button>

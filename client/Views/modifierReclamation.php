@@ -1,14 +1,6 @@
 <?php
-
-    require 'config.php';
-    $id = null;
-    if ( !empty($_GET['id'])) {
-        $id = $_REQUEST['id'];
-    }
-
-    if ( null==$id ) {
-        header("Location: afficherReclamation.php");
-    }
+include "../Entities/reclamation.php";
+include "../Core/ReclamationCore.php";
     if ( !empty($_POST)) {
         // keep track validation errors
         $nomError = null;
@@ -27,9 +19,6 @@
         $type = $_POST['type'];
         $cause = $_POST['cause'];
 
-
-
-        // validate input
         $valid = true;
         if (empty($nom)) {
             $nomError = '*Please enter Name';
@@ -51,32 +40,18 @@
             $causeError = '*Please enter Cause';
             $valid = false;
         }
-        // update data
-        if ($valid) {
-            $pdo = Database::connect();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "UPDATE reclamation  set nom = ?, prenom = ?,mail = ?, telephone =?, type=?, cause=? WHERE id = ?";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($nom,$prenom,$mail,$telephone,$type,$cause));
-            Database::disconnect();
-            header("Location: afficherReclamation.php");
-        }
-    } else {
-        $pdo = Database::connect();
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "SELECT * FROM reclamation where id = ?";
-        $q = $pdo->prepare($sql);
-        $q->execute(array($id));
-        $data = $q->fetch(PDO::FETCH_ASSOC);
-        $nom = $data['nom'];
-        $prenom = $data['prenom'];
-        $mail = $data['mail'];
-        $telephone = $data['telephone'];
-        $type = $data['type'];
-        $cause = $data['cause'];
-        Database::disconnect();
-
     }
+    if (isset($_GET['id'])){
+    	$reclamationC=new ReclamationCore();
+        $result=$reclamationC->reccupererinformations($_GET['id']);
+    	foreach($result as $row){
+    		$idd=$row['id'];
+    		$nomm=$row['nom'];
+    		$prenomm=$row['prenom'];
+        $maill=$row['mail'];
+    		$telephonee=$row['telephone'];
+    		$typee=$row['type'];
+        $causee=$row['cause'];
 
     ?>
 <!DOCTYPE html>
@@ -279,7 +254,7 @@
                   <ul class="row">
                     <li class="col-sm-12">
                       <label> Nom:*
-                        <input type="text" class="form-control" name="nom"  value="<?php echo !empty($nom)?$nom:'';?>">
+                        <input type="text" class="form-control" name="nom"  value="<?php echo $nomm ?>">
                         <?php if (!empty($nomError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $nomError;?></span>
                         <?php endif; ?>
@@ -287,7 +262,7 @@
                     </li>
                     <li class="col-sm-12">
                       <label> Prénom:*
-                        <input type="text" class="form-control" name="prenom" value="<?php echo !empty($prenom)?$prenom:'';?>">
+                        <input type="text" class="form-control" name="prenom" value="<?php  echo $prenomm ?>">
                         <?php if (!empty($prenomError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $prenomError;?></span>
                         <?php endif; ?>
@@ -295,7 +270,7 @@
                     </li>
                     <li class="col-sm-12">
                       <label> Adresse mail:*
-                        <input type="text" class="form-control" name="mail" value="<?php echo !empty($mail)?$mail:'';?>">
+                        <input type="text" class="form-control" name="mail" value="<?php  echo $maill ?>">
                         <?php if (!empty($mailError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $mailError;?></span>
                         <?php endif; ?>
@@ -305,7 +280,7 @@
                     </li>
                     <li class="col-sm-12">
                       <label> Numéro téléphone:*
-                        <input type="text" class="form-control" name="telephone" value="<?php echo !empty($telephone)?$telephone:'';?>">
+                        <input type="text" class="form-control" name="telephone" value="<?php  echo $telephonee ?>">
                         <?php if (!empty($telephoneError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $telephoneError;?></span>
                         <?php endif; ?>
@@ -320,13 +295,13 @@
                     <li class="col-sm-12">
                       <label>
                   Type de réclamation:*
-                  <select  class="form-control" name="type">
+                  <select  class="form-control" name="type" >
                   <option value="Fonctionnalité de site">Fonctionnalité de site</option>
                   <option value="Prix">Prix</option>
                   <option value="Produit">Produit</option></select></label>  </li>
                     <li class="col-sm-12">
                       <label> Cause de réclamation:*
-                        <textarea class="form-control" name="cause" rows="5"  value="<?php echo !empty($cause)?$cause:''; ?>"></textarea>
+                        <textarea class="form-control" name="cause" rows="5" ><?php echo $causee ?></textarea>
                         <?php if (!empty($causeError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $causeError;?></span>
                         <?php endif; ?>
@@ -335,12 +310,24 @@
                     </li>
 
                     <li class="col-sm-12 no-margin">
-                      <input type="submit" value="Passez la réclamation" name="ajouter" class="btn" id="btn_submit"> <p>
+                      <input type="submit" value="Modifier" name="modifier" class="btn" id="btn_submit"></button> <p>
                     </li>
+                    <td><input type="hidden" name="cin_ini" value="<?PHP echo $_GET['id'];?>"></td>
+
                   </ul>
                 </div>
               </div>
             </form>
+            <?PHP
+    }
+  }
+  if (isset($_POST['modifier'])){
+    $reclamation=new Reclamation($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause']);
+    $reclamationC->modifierReclamation($reclamation,$_POST['cin_ini']);
+    echo $_POST['cin_ini'];
+    header('Location: afficherReclamation.php');
+  }
+  ?>
           </div>
         </div>
       </div>

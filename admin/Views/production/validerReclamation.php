@@ -22,7 +22,7 @@ if ( !empty($_POST)) {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $n='validé';
-        $sql = "UPDATE reclamation  set etat ='$n' WHERE id = ?";
+        $sql = "UPDATE reclamation  set etat ='$n' WHERE id = $id";
         $q = $pdo->prepare($sql);
         $q->execute(array($etat));
         Database::disconnect();

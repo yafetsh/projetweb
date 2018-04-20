@@ -49,20 +49,6 @@ else {
 
 }
 
-
-
-        // insert data
-      /*  if ($valid) {
-            $pdo = Database::connect();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO reservation (nom,prenom,telephone,type,date) values(?, ?, ?,?,?)";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($nom,$prenom,$telephone,$type,$date));
-            Database::disconnect();
-            header("Location: afficherReservation.php");
-            echo "Reservation effectué";
-        }*/
-
     ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,15 +1,6 @@
 <?php
-    require 'config.php';
-
-    $id = null;
-    if ( !empty($_GET['id'])) {
-        $id = $_REQUEST['id'];
-    }
-
-    if ( null==$id ) {
-        header("Location: afficherReservation.php");
-    }
-
+include "../Entities/reservation.php";
+include "../Core/ReservationCore.php";
     if ( !empty($_POST)) {
         // keep track validation errors
         $nomError = null;
@@ -24,9 +15,6 @@
         $telephone = $_POST['telephone'];
         $type = $_POST['type'];
         $date = $_POST['date'];
-
-
-
         // validate input
         $valid = true;
         if (empty($nom)) {
@@ -46,34 +34,22 @@
             $dateError = '*Please enter Date';
             $valid = false;
         }
-
-
-        // update data
-        if ($valid) {
-            $pdo = Database::connect();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "UPDATE reservation  set nom = ?, prenom = ?, telephone =?, type=?, date=? WHERE id = ?";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($nom,$prenom,$telephone,$type,$date));
-            Database::disconnect();
-            header("Location: afficherReservation.php");
-        }
-    } else {
-        $pdo = Database::connect();
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "SELECT * FROM reservation where id = ?";
-        $q = $pdo->prepare($sql);
-        $q->execute(array($id));
-        $data = $q->fetch(PDO::FETCH_ASSOC);
-        $nom = $data['nom'];
-        $prenom = $data['prenom'];
-        $telephone = $data['telephone'];
-        $type = $data['type'];
-        $date = $data['date'];
-        Database::disconnect();
-
     }
+
+
+if (isset($_GET['id'])){
+	$reservationC=new ReservationCore();
+    $result=$reservationC->reccupererinformations($_GET['id']);
+	foreach($result as $row){
+		$idd=$row['id'];
+		$nomm=$row['nom'];
+		$prenomm=$row['prenom'];
+		$telephonee=$row['telephone'];
+		$typee=$row['type'];
+    $datee=$row['date'];
+
 ?>
+
 
 
 <!DOCTYPE html>
@@ -269,13 +245,13 @@
 		 <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
 		    <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="POST" action="modifierReservation.php?id=<?php echo $id?>">
+            <form role="form" id="contact_form" class="contact-form" method="POST" >
                 <div class="row">
                   <div class="col-md-6">
                     <ul class="row">
                       <li class="col-sm-12">
                         <label> Nom:*
-                          <input type="text" class="form-control" name="nom" value="<?php echo !empty($nom)?$nom:'';?>">
+                          <input type="text" class="form-control" name="nom" value="<?PHP echo $nomm ?>">
                           <?php if (!empty($nomError)): ?>
                               <span class="help-inline" style="color:Red"><?php echo $nomError;?></span>
                           <?php endif; ?>
@@ -283,7 +259,7 @@
                       </li>
                       <li class="col-sm-12">
                         <label> Prénom:*
-                          <input type="text" class="form-control" name="prenom" value="<?php echo !empty($prenom)?$prenom:'';?>" >
+                          <input type="text" class="form-control" name="prenom" value="<?PHP echo $prenomm ?>" >
                           <?php if (!empty($prenomError)): ?>
                               <span class="help-inline" style="color:Red"><?php echo $prenomError;?></span>
                           <?php endif; ?>
@@ -291,7 +267,7 @@
                       </li>
                       <li class="col-sm-12">
                         <label> Numéro téléphone:*
-                          <input type="text" class="form-control" name="telephone" value="<?php echo !empty($telephone)?$telephone:'';?>">
+                          <input type="text" class="form-control" name="telephone" value="<?PHP echo $telephonee ?>">
                           <?php if (!empty($telephoneError)): ?>
                               <span class="help-inline" style="color:Red"><?php echo $telephoneError;?></span>
                           <?php endif; ?>
@@ -304,15 +280,13 @@
                       <li class="col-sm-12">
                         <label>
                     Type de maquillage:*
-                    <select  class="form-control" name="type"   >
-                    <option value="Maquillage de jour">Maquillage de jour</option>
-                    <option value="Maquillage de soirée">Maquillage de soirée</option>
+                    <select  class="form-control" name="type" value="<?PHP echo $typee ?>" >
+                      <option value="Maquillage de jour">Maquillage de jour</option>
+                      <option value="Maquillage de soirée">Maquillage de soirée</option>
                     <option value="Maquillage de mariage">Maquillage de mariage</option></select></label>  </li>
-
-
                       <li class="col-sm-12">
                         <label>Date et l'heure:*
-                          <input type="datetime-local" class="form-control" name="date" value="<?php echo !empty($date)?$date:'';?>" >
+                          <input type="datetime-local" class="form-control" name="date" value="<?PHP echo $datee ?>" >
                           <?php if (!empty($dateError)): ?>
                               <span class="help-inline" style="color:Red"><?php echo $dateError;?></span>
                           <?php endif; ?>
@@ -322,13 +296,25 @@
   </li>
 
                       <li class="col-sm-12 no-margin">
-                        <input type="submit" value="Modifier" name="ajouter" class="btn" id="btn_submit"></button> <p>
+                        <input type="submit" value="Modifier" name="modifier" class="btn" id="btn_submit"></button> <p>
                       </li>
+                      <td><input type="hidden" name="cin_ini" value="<?PHP echo $_GET['id'];?>"></td>
+
                     </ul>
                   </div>
                 </div>
 
             </form>
+            <?PHP
+  	}
+  }
+  if (isset($_POST['modifier'])){
+  	$reservation=new Reservation($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['telephone'],$_POST['type'],$_POST['date']);
+  	$reservationC->modifierReservation($reservation,$_POST['cin_ini']);
+  	echo $_POST['cin_ini'];
+  	header('Location: afficherReservation.php');
+  }
+  ?>
           </div>
         </div>
       </div>

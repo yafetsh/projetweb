@@ -1,6 +1,7 @@
 <?php
 
-    require 'config.php';
+include "../Entities/reclamation.php";
+include "../Core/ReclamationCore.php";
 
     if ( !empty($_POST)) {
         // keep track validation errors
@@ -21,6 +22,7 @@
         $cause = $_POST['cause'];
 
 
+
         // validate input
         $valid = true;
         if (empty($nom)) {
@@ -35,28 +37,26 @@
             $telephoneError = '*Please enter Phone number';
             $valid = false;
         }
-      /*  if (empty($mail)) {
+      if (empty($mail)) {
             $mailError = '*Please enter Adresse mail';
             $valid = false;
-        }*/
+        }
         if (empty($cause)) {
             $causeError = '*Please enter Cause';
             $valid = false;
         }
 
 
+    }
+    if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['cause']) ){
+    $reclamation1=new Reclamation($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause'],$_POST['etat']);
+    $reclamation1C=new ReclamationCore();
+    $reclamation1C->ajouterReclamation($reclamation1);
+    header('Location: afficherReclamation.php');
+    }
+    else {
+      echo "vérifier les champs";
 
-        // insert data
-        if ($valid) {
-            $pdo = Database::connect();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO reclamation (nom,prenom,mail,telephone,type,cause) values(?, ?, ?,?,?,?)";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($nom,$prenom,$mail,$telephone,$type,$cause));
-            Database::disconnect();
-            header("Location: afficherReclamation.php");
-
-        }
     }
     ?>
 <!DOCTYPE html>
@@ -255,9 +255,7 @@
 		    <!--======= FORM  =========-->
 
 
-            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="ajouterReclamation.php" >
-              <form class="contact-form" onsubmit="send_mail.php" method="post" role="form" id="contact_form">
-
+            <form role="form" id="contact_form" class="contact-form" method="POST" novalidate >
               <div class="row">
                 <div class="col-md-6">
                   <ul class="row">
@@ -323,7 +321,6 @@
                   </ul>
                 </div>
               </div>
-            </form>
             </form>
           </div>
         </div>

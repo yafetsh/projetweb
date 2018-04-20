@@ -4,11 +4,11 @@ class ReservationCore
 {
   function afficherReservation($r){
     //var_dump($e);
-    $nom=$e->getNom();
-    $prenom=$e->getPrenom();
-    $telephone=$e->getTelephone();
-    $type=$e->getType();
-    $date=$e->getDate();
+    $nom=$r->getNom();
+    $prenom=$r->getPrenom();
+    $telephone=$r->getTelephone();
+    $type=$r->getType();
+    $date=$r->getDate();
 
     echo "Nom: " .$nom. "<br>"; //ou bien echo("CIN :".$e->getCin. "<br>"); ou ma na3mlouch l init lfou9
     echo "Prenom :" .$prenom. "<br>";
@@ -54,55 +54,7 @@ function ajouterReservation($reservation){
       catch (Exception $e){
           echo 'Erreur: '.$e->getMessage();
       }
-    /*  require 'config.php';
 
-      if ( !empty($_POST)) {
-          // keep track validation errors
-          $nomError = null;
-          $prenomError = null;
-          $telephoneError = null;
-          $typeError = null;
-          $dateError = null;
-
-          // keep track post values
-          $nom = $_POST['nom'];
-          $prenom = $_POST['prenom'];
-          $telephone = $_POST['telephone'];
-          $type = $_POST['type'];
-          $date = $_POST['date'];
-
-          // validate input
-          $valid = true;
-          if (empty($nom)) {
-              $nomError = '*Please enter Name';
-              $valid = false;
-          }
-          if (empty($prenom)) {
-              $prenomError = '*Please enter Surname';
-              $valid = false;
-          }
-          if (empty($telephone)) {
-              $telephoneError = '*Please enter Phone number';
-              $valid = false;
-          }
-          if (empty($date)) {
-              $dateError = '*Please enter Date';
-              $valid = false;
-          }
-
-
-          // insert data
-          if ($valid) {
-              $pdo = Database::connect();
-              $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-              $sql = "INSERT INTO reservation (nom,prenom,telephone,type,date) values(?, ?, ?,?,?)";
-              $q = $pdo->prepare($sql);
-              $q->execute(array($nom,$prenom,$telephone,$type,$date));
-              Database::disconnect();
-              header("Location: reservationClient.php");
-              echo "Reservation effectué";
-          }
-      }*/
 
 }
 function supprimerReservation($id){
@@ -120,35 +72,36 @@ function supprimerReservation($id){
 
 }
 function modifierReservation($reservation,$id){
-  $sql="UPDATE employe SET ID=:ID, nom=:nom,prenom=:prenom,telephone=:telephone,type=:type WHERE ID=:ID";
+  $sql="UPDATE reservation SET ID=:ID, nom=:nom,prenom=:prenom,telephone=:telephone,type=:type,date:=date, WHERE ID=:ID";
 
   $db = config::getConnexion();
   //$db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
 try{
       $req=$db->prepare($sql);
-  $cinn=$reservation->getId();
+  $idd=$reservation->getId();
       $nom=$reservation->getNom();
       $prenom=$reservation->getPrenom();
       $telephone=$reservation->getTelephone();
       $type=$reservation->getType();
-  $datas = array(':ID1'=>$ID1, ':ID'=>$ID, ':nom'=>$nom,':prenom'=>$prenom,':telephone'=>$telephone,':type'=>$type);
+      $date=$reservation->getDate();
+
+  $datas = array(':ID1'=>$ID1, ':ID'=>$ID, ':nom'=>$nom,':prenom'=>$prenom,':telephone'=>$telephone,':type'=>$type,':date'=>$date);
   $req->bindValue(':ID1',$ID1);
   $req->bindValue(':ID',$ID);
   $req->bindValue(':nom',$nom);
   $req->bindValue(':prenom',$prenom);
-  $req->bindValue(':telephone',$type);
+  $req->bindValue(':telephone',$telephone);
   $req->bindValue(':type',$type);
-
-
+  $req->bindValue(':date',$date);
           $s=$req->execute();
-
-         // header('Location: index.php');
       }
       catch (Exception $e){
           echo " Erreur ! ".$e->getMessage();
  echo " Les datas : " ;
 print_r($datas);
 }}
+
+
       function reccupererinformations($id){
         $db = config::getConnexion();
         $sql="SELECT * from reservation where id=$id";

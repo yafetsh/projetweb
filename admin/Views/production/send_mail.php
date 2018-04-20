@@ -19,13 +19,13 @@ try {
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.sendgrid.net';  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
-  $mail->Username = 'yafetsh';                 // SMTP username
+  $mail->Username = 'devyafet';                 // SMTP username
     $mail->Password = 'YAFETSHILbacmath2';                           // SMTP password
   $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                                    // TCP port to connect to
 
     //Recipients
-    $mail->setFrom('yafet.shil@esprit.tn', 'Yafet');
+    $mail->setFrom('yafet.shil@gmail.com', 'Yafet');
     $mail->addAddress($mailto);     // Add a recipient
 
 

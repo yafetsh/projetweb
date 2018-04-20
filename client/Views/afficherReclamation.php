@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?PHP
+include "../Core/ReclamationCore.php";
+$reclamation1C=new ReclamationCore();
+$listeReclamations=$reclamation1C->afficherReclamations();
+
+?>
 <html lang="en">
 
 <!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/04-contact-01.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:48:01 GMT -->
@@ -249,10 +255,7 @@ Mes réclamations
 									</thead>
 									<tbody>
 									<?php
-									 include 'config.php';
-									 $pdo = Database::connect();
-									 $sql = 'SELECT * FROM reclamation ORDER BY id DESC ';
-									 foreach ($pdo->query($sql) as $row) {
+									 foreach ($listeReclamations as $row) {
 														echo '<tr>';
 														echo '<td>'. $row['nom'] . '</td>';
 														echo '<td>'. $row['prenom'] . '</td>';
@@ -265,11 +268,10 @@ Mes réclamations
 
 																							 echo '<a  href="modifierReclamation.php?id='.$row['id'].'">Modifier</a>';
 																			echo ' ';
-																			echo '<a href="supprimerReservation.php?id='.$row['id'].'">Annuler</a>';
+																			echo '<a href="supprimerReclamation.php?id='.$row['id'].'">Annuler</a>';
 															 echo '</td>';
 																	echo '</tr>';
 									 }
-									 Database::disconnect();
 									?>
 									</tbody>
 						</table>

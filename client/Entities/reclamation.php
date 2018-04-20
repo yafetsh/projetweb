@@ -1,22 +1,32 @@
 <?php
 class Reclamation
 {
+  private $id;
   private $nom;
+  private $prenom;
   private $mail;
+  private $telephone;
   private $type;
-  private $categorie;
-  private $produit;
   private $cause;
+  private $etat;
 
-  function __construct($nom,$mail,$type,$categorie,$produit,$cause)
+  function __construct($id,$nom,$prenom,$mail,$telephone,$type,$cause,$etat)
   {
+$this->id=$id;
 $this->nom=$nom;
+$this->prenom=$prenom;
 $this->mail=$mail;
+$this->telephone=$telephone;
 $this->type=$type;
-$this->categorie=$categorie;
-$this->produit=$produit;
 $this->cause=$cause;
+$this->etat=$etat;
 
+}
+function getId(){
+  return $this->id;
+}
+function setId($id){
+  $this->id=$id;
 }
   function getNom(){
     return $this->nom;
@@ -24,11 +34,23 @@ $this->cause=$cause;
   function setNom($nom){
     $this->nom=$nom;
   }
+  function getPrenom(){
+    return $this->prenom;
+  }
+  function setPrenom($prenom){
+    $this->prenom=$prenom;
+  }
   function getMail(){
     return $this->mail;
   }
   function setMail($mail){
     $this->mail=$mail;
+  }
+  function getTelephone(){
+    return $this->telephone;
+  }
+  function setTelephone($telephone){
+    $this->telephone=$telephone;
   }
   function getType(){
     return $this->type;
@@ -36,23 +58,17 @@ $this->cause=$cause;
   function setType($type){
     $this->type=$type;
   }
-  function getCategorie(){
-    return $this->categorie;
-  }
-  function setCategorie($categorie){
-    $this->categorie=$categorie;
-  }
-  function getProduit(){
-    return $this->produit;
-  }
-  function setProduit($produit){
-    $this->produit=$produit;
-  }
   function getCause(){
     return $this->cause;
   }
-  function setProduit($cause){
+  function setCause($cause){
     $this->cause=$cause;
+  }
+  function getEtat(){
+    return $this->etat;
+  }
+  function setEtat($etat){
+    $this->etat=$etat;
   }
 }
 

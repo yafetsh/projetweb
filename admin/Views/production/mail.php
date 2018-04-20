@@ -279,7 +279,7 @@
           <br>
         To : <input class="form-control" type="text" name="mail_to"> <br/>
         <br>
-        Subject :   <input class="form-control" type="text" name="mail_sub" value="FASHION MAKEUP" disabled>
+        Subject :   <input class="form-control" type="text" name="mail_sub" value="FASHION MAKEUP" >
        <br/>
        <br>
          Message:   <textarea class="form-control" type="text" name="mail_msg" rows="5" >Votre Réclamation a été bien reçu, Merci!</textarea>
