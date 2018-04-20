@@ -7,8 +7,7 @@ class livraison
   private $ville;
   private $rue;
   private $numero;
-  private $pseudoLivreur;
-  private $idUtilisateur;
+
 
   function __construct($id,$rue,$numero,$region,$ville,$etat)
   {

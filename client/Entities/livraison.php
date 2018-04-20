@@ -1,17 +1,21 @@
 <?php
 class livraison
 {
-  private $rue;
-  private $numero;
+    private $id;
+  private $etat;
   private $region;
   private $ville;
+  private $rue;
+  private $numero;
 
-  function __construct($rue,$numero,$region,$ville)
+  function __construct($id,$rue,$numero,$region,$ville,$etat)
   {
-$this->rue=$rue;
-$this->numero=$numero;
+$this->id=$id;
+$this->etat=$etat;
 $this->region=$region;
 $this->ville=$ville;
+$this->rue=$rue;
+$this->numero=$numero;
 
 }
   function getRue(){
