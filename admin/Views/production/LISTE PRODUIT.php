@@ -15,7 +15,6 @@
   $listeProduit=$produitC->afficherproduit();
   if(isset($_POST['modifier'])){
     $p = $produitC->recuperer_produit($_POST['ref']);
-    var_dump($p);
     foreach ($p as $r) {
       $ref = $r['reference'];
       $quantite_total = $r['quantite_total'];
@@ -348,13 +347,13 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <form method="POST">
+                    
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>Nom</th>
                           <th>Reference</th>
-                          <th>Couleur disponible</th>
+                          <th>Couleur disponible et Quantite associe</th>
                           <th>Quantite</th>
                           <th>Description</th>
                           <th></th>
@@ -364,7 +363,9 @@
                         <?php
                           $imageC = new imageC();
                           foreach ($listeProduit as $row) {?>
+
                           <tr>
+                            <form method="POST">
                             <td><?php echo $row['nom']; ?></td>
                             <td><?PHP echo $row['reference']; ?><input type="text" name="ref" value="<?PHP echo $row['reference']; ?>" hidden></td>
                             <td>
@@ -373,7 +374,7 @@
                                     foreach ($image as $key) {
                                     ?>
                                       <input type="color" value="<?php echo $key['couleur']; ?>"  disabled>
-                                      
+                                      <input type="text" value="<?php echo $key['quantite']; ?>" style="height: 20px; width: 20px;" disabled>
                                     <?php
                                     }
                                     ?>
@@ -384,12 +385,14 @@
                                 <input type="submit" name="supprimer" value="Supprimer" class="btn btn-primary">
                                 <input type="submit" name="modifier" value="Modifier" class="btn btn-primary" style="background-color: green;">
                             </td>
+                            </form>
                           </tr>
+                          
                           <?php
                           }
                           ?>
                       </tbody>
-                      </form>
+                      
                     </table>
                   </div>
                 </div>
@@ -419,7 +422,7 @@
                   </div>
                   <div class="x_content" >
 
-                    <form method="GET" class="form-horizontal form-label-left" novalidate>
+                    <form method="GET" action="modif_produit.php" class="form-horizontal form-label-left" novalidate>
 
                       <span class="section">Concernant le produit .. </span>
 
@@ -532,16 +535,3 @@
   </body>
 </html>
 
-<?php
-  
-  if(isset($_POST['supprimer'])){
-    $imageC->supprimer($_POST['ref']);
-    $produitC->supprimerproduit($_POST['ref']);
-  } 
-  else if (isset($_GET['modif'])) {
-
-    $Produit=new Produit($_GET['R'],$_GET['Nom'],$_GET['Quantite'],$_GET['Prix'],$_GET['date'],$_GET['Description'],$_GET['sous']);
-    var_dump($Produit);
-    $produitC->modifierproduit($Produit,$Produit->getReference());
-  }
-  ?>

@@ -342,29 +342,31 @@
                                       <?php echo($key['nom']) ; ?>
                                     </td>
                                     <td>
-                                      <form method="POST">
+                                      
                                       <?php
                                         foreach ($listeimage as $row) {
                                       ?>
-                                        
+                                        <form method="POST" action="supprimer image.php">
                                         <img src="images/<?php echo($row['chemin']); ?>" style="width: 50px; height: 150px;">
-                                        <input type="text" name="reference1"  value="<?php echo($key['reference']) ; ?>" hidden>
+                                        <input type="text" name="chemin"  value="<?php echo($row['chemin']) ; ?>" hidden>
                                         <input type="image" type="submit" name="sup" src="images/1420471234085Supprimer.png" style="width: 20px; height: 20px; position: relative; top: 60px; right: 80px ">
+                                       </form>
                                         
                                       <?php
                                         
                                         }
                                         ?>
-                                        </form>
+                                         
                                     </td>
                                     <td>
                                       <center>
-                                         <form method="POST">
+                                         <form method="POST" action="ajouter image.php">
                                                <div class="item form-group">
                                                   <input type="file" id="Image" name="image"  required="required" class="form-control col-md-7 col-xs-12" >
                                                   <p>..</p>
                                                   <input type="text" name="reference"  value="<?php echo($key['reference']) ; ?>" hidden>
-                                                  <input type="color" name="couleur" required="required" class="form-control col-md-7 col-xs-12">
+                                                  <input type="color" name="couleur" required="required" class="form-control col-md-7 col-xs-12"><p>..</p>
+                                                  <input type="number" name="q" required="required" class="form-control col-md-7 col-xs-12" placeholder="Quantite disponible ">
                                               </div>
                                               <br><br><br><br>
                                         </center>  
@@ -376,8 +378,6 @@
                                 }
                                 ?>
                               
-                              
-                             ?>
                               
                                         
                       </table>
@@ -412,16 +412,4 @@
   </body>
 </html>
 
-<?php
-  include_once "../../Entities/image.php";
-  if (isset($_POST['image']) and isset($_POST['couleur']) and isset($_POST['ajouterr'])) {
-    $img = new image($_POST['image'],$_POST['reference'],$_POST['couleur']);
-    $imageC->ajouter($img);
-  }
 
-  if (isset($_POST['sup'])) {
-      $imageC->supprimer($_POST['reference1']);
-  }
-  
-
-  ?>
