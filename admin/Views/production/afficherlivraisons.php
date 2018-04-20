@@ -302,7 +302,7 @@ if(isset($_GET['supprimer'])){
               <div class="col-md-10 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Listes des livraisons</h2>
+                    <h2>Liste des livraisons</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -351,7 +351,7 @@ if(isset($_GET['supprimer'])){
                           <td><?PHP echo $row['etat']; ?></td>
                           
                           <td>
-                              <a  href="modifierlivraison.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="height: 33px ;width:90px">
+                              <a  href="modifierlivraison2.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="height: 33px ;width:90px">
                             Modifier</a>
                               <form method="GET">
                                 <input type="submit" name="supprimer" value="Supprimer" class="btn btn-success" style="background-color: blue;">

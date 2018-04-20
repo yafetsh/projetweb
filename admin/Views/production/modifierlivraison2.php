@@ -1,22 +1,6 @@
-<?php
 
-    include_once "../../Core/livreurcore.php";
-    include_once "../../Entities/livreur.php";
 
-    if(isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['tel']) and isset($_POST['email'])){
-        $livreur1=new livreur($_POST['pseudo'],$_POST['nom'],$_POST['prenom'],$_POST['tel'],$_POST['email']);
-        $livreur1c=new livreurcore();
-        $livreur1c->ajouterlivreur($livreur1);
-         header("Location: afficherlivreurs.php");
-
-    }
-    else {
-        echo "Verifier les champs";
-    }
-
-  ?>
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -46,7 +30,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Fashion MakeUp!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -103,12 +87,12 @@
                   <li><a><i class="fa fa-table"></i> Gestion de livraison <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="afficherlivraisons.php">Liste des livraisons</a></li>
-                      <li><a href="afficherlivreurs.php">Livreurs<span class="fa fa-chevron-down"></span></a>
+                      <li><a href="afficherlivreurs.php">Liste des livreurs</a></li>
                         <ul >
                           <li><a href="ajouterlivreur.php">Ajouter un livreur</a></li>
                           <li><a href="afficherlivreurs.php">Liste des livreurs</a></li>
                         </ul>
-                      </li>
+                      <li><a href="affecterlivraison.php">Affecter un livreur à une livraison</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
@@ -295,27 +279,19 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>LIVREUR</h3>
+                <h3>Livraisons</h3>
               </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                              <button class="btn btn-default" type="button">Go!</button>
-                          </span>
-                  </div>
-                </div>
-              </div>
+              
             </div>
+
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="col-md-10 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Ajouter un livreur</h2>
+                    <h2>Modifier une livraison</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -333,66 +309,117 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
+                 
                   <div class="x_content">
+                     <?PHP
+ include "../../Entities/livraison.php";
+    include "../../Core/livraisoncore.php";
+   
+    if(isset($_GET['id'])){
+      $lC=new livraisoncore();
+      $l=$lC->reccupererinformations($_GET["id"]);
+      foreach ($l as $row) {
+        $id=$row['id'];
+        $rue=$row['rue'];
+        $numero=$row['numero'];
+        $region=$row['region'];
+        $ville=$row['ville'];
+        $etat=$row['etat'];
+    
+  ?>
 
-                    <form method="POST" class="form-horizontal form-label-left" novalidate>
 
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nom <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nom" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nom" required="required" type="text">
-                        </div>
-                      </div>
+                    <form method="POST">
+                    <table>
+<caption></caption>
+<tr>
+<td>Id_livraison</td>
+<td><input disabled type="number" name="id" value="<?PHP echo $id ?>"></td>
+<td><input  name="id"  value="<?PHP echo $id ?>" hidden></td>
+</tr>
+<tr>
+<td>Rue</td>
+<td><input type="text" name="rue" value="<?PHP echo $rue ?>"></td>
+</tr>
+<tr>
+<td>Numero</td>
+<td><input type="number" name="numero" value="<?PHP echo $numero ?>"></td>
+</tr>
+<tr>
+<td>Region</td>
+ <td><select data-default-region-id="" required="required" data-msg-required="Champs requis" class="ft-region-dropdown placeholder" name="region" id="region">
+                  <option value="<?PHP echo $region ?>" selected="selected"><?PHP echo $region ?> </option>
+                  <option value="Ariana">Ariana</option>
+                          <option value="Ben arous">Ben Arous</option>
+                          <option value="Bizerte">Bizerte</option>
+                          <option value="Béja">Béja</option>
+                          <option value="Gabes">Gabes</option>
+                          <option value="Gafsa">Gafsa</option>
+                          <option value="Jendouba">Jendouba</option>
+                          <option value="Kairouan">Kairouan</option>
+                          <option value="Kasserine">Kasserine</option>
+                          <option value="Kebili">Kebili</option>
+                          <option value="La Manouba">La Manouba</option>
+                          <option value="Le Kef">Le Kef</option>
+                          <option value="Mahdia">Mahdia</option>
+                          <option value="Monastir">Monastir</option>  
+                          <option value="Médenine">Médenine</option>
+                          <option value="Nabeul">Nabeul</option>
+                          <option value="Sfax">Sfax</option>
+                          <option value="Sidi Bouzid">Sidi Bouzid</option>
+                          <option value="Siliana">Siliana</option>
+                          <option value="Sousse">Sousse</option>
+                          <option value="Tataouine">Tataouine</option>
+                          <option value="Tozeur">Tozeur</option>
+                          <option value="Tunis">Tunis</option>
+                          <option value="Zaghouan">Zaghouan</option>
+                  </select></td>
 
-                     
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Prenom<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input  id="prenom" name="prenom" required="required" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Telephone<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis"  data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" name="tel" id="tel" type="text">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" name="email" data-rule-email="true" required="required" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis">
-                        </div>
-                      </div>
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-md-offset-3">
-                          <button type="RESET" class="btn btn-primary">RESET</button>
-                          <button id="send" type="submit" class="btn btn-success">VALIDER</button>
-                        </div>
-                      </div>
-                    </form>
+</tr>
+<tr>
+<td>Ville</td>
+<td><input type="text" name="ville" value="<?PHP echo $ville ?>"></td>
+</tr>
+<tr>
+<td>Etat</td>
+<td><input type="text" name="etat" value="<?PHP echo $etat ?>"></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="submit" name="modifier" value="modifier"></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>"></td>
+</tr>
+</table>
+</form>
+<?PHP
+  }
+}
+if (isset($_POST['modifier'])){
+  $livraison=new livraison($_POST['id'],$_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville'],$_POST['etat']);
+  $lC->modifierlivraison($livraison,$_POST['id_ini']);
+  echo $_POST['id_ini'];
+ header("Location: afficherlivraisons.php");
+}
+?>
+
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by ArtVision</a>
+        
+        <!-- /footer content -->
+      </div>
+      <footer>
+          <div style:center class="pull-right">
+            Fashion MakeUp - Bootstrap Admin Template by ArtVision</a>
           </div>
           <div class="clearfix"></div>
         </footer>
-        <!-- /footer content -->
-      </div>
     </div>
 
     <!-- jQuery -->
