@@ -19,7 +19,7 @@
 <table>
 <caption>Modifier Livreur</caption>
 <tr>
-<td>Id</td>
+<td>Id_livraison</td>
 <td><input disabled type="number" name="id" value="<?PHP echo $id ?>"></td>
 <td><input  name="id"  value="<?PHP echo $id ?>" hidden></td>
 </tr>

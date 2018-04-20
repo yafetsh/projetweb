@@ -2,6 +2,7 @@
 include_once "../Config.php";
 class livraisoncore
 {
+  
 	function afficherLivraison($l){
 		//var_dump($e);
 		$etat=$e->getEtat();

@@ -237,9 +237,11 @@
                            </tr>
                       	</thead>
                       <tbody>
+                        
                         <?PHP
                         foreach($listeLivraisons as $row){
                           ?>
+                          <form method="GET">
                           <tr>
                           <td><?PHP echo $row['rue']; ?></td>
                           <td><?PHP echo $row['numero']; ?></td>
@@ -247,63 +249,25 @@
                           <td><?PHP echo $row['ville']; ?></td>
                           <td><?PHP echo $row['etat']; ?></td>
                           <td><?PHP echo $row['date']; ?></td>
+                          
                           <td>
                           	 <?PHP echo '<a  href="modifierlivraison.php?id='.$row['id'].'">Modifier</a>'; ?>
-                          	<form method="GET">
+                          	
                                 <input type="submit" name="supprimer" value="Supprimer">
                                 <input type="hidden" value="<?PHP echo $row['id']; ?>" name="id">
-                            </form>
                             <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-p {
-  text-align: center;
-  font-size: 15px;
-  margin-top:0px;
-}
-</style>
-</head>
-<body>
-
-<p id="demo"></p>
-
-<script>
-// Set the date we're counting down to
-var countDownDate = new Date("<?php echo $row['date']; ?>").getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-    // Get todays date and time
-    var now = new Date().getTime();
-    
-    // Find the distance between now an the count down date
-    var distance =  now-countDownDate ;
-    
-    // Time calculations for days, hours, minutes and seconds
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-    // Output the result in an element with id="demo"
-    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
-
-    
-    // If the count down is over, write some text 
-    if (distance >1000*60*60*2) {
-
-        clearInterval(x);
-        document.getElementById("demo").innerHTML = "Désolé,le temps de modification ou de suppression de la commande est expriré";
-    }
-}, 1000);
-</script>
+                            <p id="demo" style="text-align: center; font-size: 15px; margin-top: 0px;"></p> 
+                            <?php echo "string"; ?>
 
                           </td>
+                         
                           </tr>
+                           </form>
+                          
 <?PHP
 }
 ?>
+
                       </tbody>
                   </table>
              
@@ -400,39 +364,40 @@ var x = setInterval(function() {
         <script type="text/javascript " src="rs-plugin/js/jquery.themepunch.tools.min.js "></script>
         <script type="text/javascript " src="rs-plugin/js/jquery.themepunch.revolution.min.js "></script>
         <script src="js/main.js "></script>
-        <!-- begin map script-->
-        <script type='text/javascript' src='http://maps.google.com/maps/api/js?sensor=false'></script>
-        <script type="text/javascript ">
-            /*==========  Map  ==========*/
-            var map;
 
-            function initialize_map() {
-                if ($('#map').length) {
-                    var myLatLng = new google.maps.LatLng(-37.814199, 144.961560);
-                    var mapOptions = {
-                        zoom: 17,
-                        center: myLatLng,
-                        scrollwheel: false,
-                        panControl: false,
-                        zoomControl: true,
-                        scaleControl: false,
-                        mapTypeControl: false,
-                        streetViewControl: false
-                    };
-                    map = new google.maps.Map(document.getElementById('map'), mapOptions);
-                    var marker = new google.maps.Marker({
-                        position: myLatLng,
-                        map: map,
-                        tittle: 'Envato',
-                        icon: './images/map-locator.png'
-                    });
-                } else {
-                    return false;
-                }
-            }
-            google.maps.event.addDomListener(window, 'load', initialize_map);
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("<?php echo $row['date']; ?>").getTime();
 
-        </script>
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+    // Get todays date and time
+    var now = new Date().getTime();
+    
+    // Find the distance between now an the count down date
+    var distance =  now-countDownDate ;
+    
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Output the result in an element with id="demo"
+    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+
+    
+    // If the count down is over, write some text 
+    if (distance >1000*60*60*2) {
+
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "Désolé,le temps de modification ou de suppression de la commande est expriré";
+    }
+}, 1000);
+</script>
+
 </body>
 
 <!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/04-contact-01.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:48:02 GMT -->

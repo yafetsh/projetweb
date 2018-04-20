@@ -15,7 +15,7 @@
     }
       
   ?>
-
+<html>
   <form method="POST">
     <table>
 <caption>Modifier Livreur</caption>
@@ -30,17 +30,18 @@
 <tr>
 <td>Pseudo_Livreur</td>
 <td><select>
-          <?PHP
+          <?php
+          echo "string";
            include "../../Core/livreurcore.php";
           $livreur3C=new livreurcore();
           $listePseudos=$livreur3C->afficherLivreursselondisponibilité();
               foreach($listePseudos as $row){
                 ?>
                 <option>
-                <?PHP echo $row['pseudo']; ?>
+                <?php echo $row['pseudo']; ?>
               </option>
               
-          <?PHP
+          <?php
             }
 ?>
 
