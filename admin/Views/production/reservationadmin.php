@@ -265,6 +265,10 @@
 
               <div class="title_left">
                 <h3>Réservations</h3>
+                <div class="fa fa-calendar" style="text-align:center" >
+<a href="calendar.php"> Calendrier</a>
+
+                </div>
               </div>
               <br>
               <a href="rechercheReservation.php" class="fa fa-search" style="font-size:18px;color:#191970"> Recherche</a>

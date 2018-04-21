@@ -3,6 +3,14 @@
 include "../Entities/reclamation.php";
 include "../Core/ReclamationCore.php";
 
+
+
+    if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['cause']) ){
+    $reclamation1=new Reclamation($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause'],$_POST['etat']);
+    $reclamation1C=new ReclamationCore();
+    $reclamation1C->ajouterReclamation($reclamation1);
+    header('Location: afficherReclamation.php');
+    }
     if ( !empty($_POST)) {
         // keep track validation errors
         $nomError = null;
@@ -45,17 +53,10 @@ include "../Core/ReclamationCore.php";
             $causeError = '*Please enter Cause';
             $valid = false;
         }
+        if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
+          $maillError = '*Please enter Valid Adress mail';
+}
 
-
-    }
-    if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['cause']) ){
-    $reclamation1=new Reclamation($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause'],$_POST['etat']);
-    $reclamation1C=new ReclamationCore();
-    $reclamation1C->ajouterReclamation($reclamation1);
-    header('Location: afficherReclamation.php');
-    }
-    else {
-      echo "vérifier les champs";
 
     }
     ?>
@@ -278,8 +279,8 @@ include "../Core/ReclamationCore.php";
                     <li class="col-sm-12">
                       <label> Adresse mail:*
                         <input type="text" class="form-control" name="mail" value="<?php echo !empty($mail)?$mail:'';?>" >
-                        <?php if (!empty($mailError)): ?>
-                            <span class="help-inline" style="color:Red"><?php echo $mailError;?></span>
+                        <?php if (!empty($maillError)): ?>
+                            <span class="help-inline" style="color:Red"><?php echo $maillError;?></span>
                         <?php endif; ?>
                       </label>
                     </li>
@@ -316,7 +317,7 @@ include "../Core/ReclamationCore.php";
 
 
                     <li class="col-sm-12 no-margin">
-                      <input type="submit"  value="Passez la réclamation" name="ajouter" class="btn" id="btn_submit"> <p>
+                      <input type="submit"  value="Passez la réclamation" name="ajouter" class="btn" id="btn_submit" formaction="send"> <p>
                     </li>
                   </ul>
                 </div>

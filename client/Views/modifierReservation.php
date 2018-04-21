@@ -279,8 +279,8 @@ if (isset($_GET['id'])){
                     <ul class="row">
                       <li class="col-sm-12">
                         <label>
-                    Type de maquillage:*
-                    <select  class="form-control" name="type" value="<?PHP echo $typee ?>" >
+                    Type de maquillage sélectionné: <?PHP echo $typee ?>
+                    <select  class="form-control" name="type" >
                       <option value="Maquillage de jour">Maquillage de jour</option>
                       <option value="Maquillage de soirée">Maquillage de soirée</option>
                     <option value="Maquillage de mariage">Maquillage de mariage</option></select></label>  </li>
