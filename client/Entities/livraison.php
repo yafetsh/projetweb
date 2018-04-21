@@ -8,7 +8,7 @@ class livraison
   private $rue;
   private $numero;
 
-  function __construct($id,$rue,$numero,$region,$ville,$etat)
+  function __construct($id,$rue,$numero,$region,$ville)
   {
 $this->id=$id;
 $this->etat=$etat;

@@ -610,7 +610,7 @@
   }
 }
 if (isset($_POST['modifier'])){
-  $livraison=new livraison($_POST['id'],$_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville'],$_POST['etat']);
+  $livraison=new livraison($_POST['id'],$_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
   $lC->modifierlivraison($livraison,$_POST['id_ini']);
   echo $_POST['id_ini'];
  header("Location: livraisonclient.php");

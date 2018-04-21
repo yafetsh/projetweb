@@ -288,7 +288,7 @@
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-10 col-sm-6 col-xs-12">
+              <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Modifier une livraison</h2>
@@ -320,85 +320,42 @@
       $l=$lC->reccupererinformations($_GET["id"]);
       foreach ($l as $row) {
         $id=$row['id'];
-        $rue=$row['rue'];
-        $numero=$row['numero'];
-        $region=$row['region'];
-        $ville=$row['ville'];
         $etat=$row['etat'];
     
   ?>
 
 
                     <form method="POST">
-                    <table>
-<caption></caption>
-<tr>
-<td>Id_livraison</td>
-<td><input disabled type="number" name="id" value="<?PHP echo $id ?>"></td>
-<td><input  name="id"  value="<?PHP echo $id ?>" hidden></td>
-</tr>
-<tr>
-<td>Rue</td>
-<td><input type="text" name="rue" value="<?PHP echo $rue ?>"></td>
-</tr>
-<tr>
-<td>Numero</td>
-<td><input type="number" name="numero" value="<?PHP echo $numero ?>"></td>
-</tr>
-<tr>
-<td>Region</td>
- <td><select data-default-region-id="" required="required" data-msg-required="Champs requis" class="ft-region-dropdown placeholder" name="region" id="region">
-                  <option value="<?PHP echo $region ?>" selected="selected"><?PHP echo $region ?> </option>
-                  <option value="Ariana">Ariana</option>
-                          <option value="Ben arous">Ben Arous</option>
-                          <option value="Bizerte">Bizerte</option>
-                          <option value="Béja">Béja</option>
-                          <option value="Gabes">Gabes</option>
-                          <option value="Gafsa">Gafsa</option>
-                          <option value="Jendouba">Jendouba</option>
-                          <option value="Kairouan">Kairouan</option>
-                          <option value="Kasserine">Kasserine</option>
-                          <option value="Kebili">Kebili</option>
-                          <option value="La Manouba">La Manouba</option>
-                          <option value="Le Kef">Le Kef</option>
-                          <option value="Mahdia">Mahdia</option>
-                          <option value="Monastir">Monastir</option>  
-                          <option value="Médenine">Médenine</option>
-                          <option value="Nabeul">Nabeul</option>
-                          <option value="Sfax">Sfax</option>
-                          <option value="Sidi Bouzid">Sidi Bouzid</option>
-                          <option value="Siliana">Siliana</option>
-                          <option value="Sousse">Sousse</option>
-                          <option value="Tataouine">Tataouine</option>
-                          <option value="Tozeur">Tozeur</option>
-                          <option value="Tunis">Tunis</option>
-                          <option value="Zaghouan">Zaghouan</option>
-                  </select></td>
+                     <li class="col-md-12"> 
+<label>*Id_livraison
+<input disabled type="number" name="id" value="<?PHP echo $id ?>">
+<input  name="id"  value="<?PHP echo $id ?>" hidden>
+</label>
+</li>
 
-</tr>
-<tr>
-<td>Ville</td>
-<td><input type="text" name="ville" value="<?PHP echo $ville ?>"></td>
-</tr>
-<tr>
-<td>Etat</td>
-<td><input type="text" name="etat" value="<?PHP echo $etat ?>"></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="submit" name="modifier" value="modifier"></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>"></td>
-</tr>
-</table>
+<li class="col-md-12"> 
+<label>*Etat</td>
+ <select name="etat" class="selectpicker">
+                          <option disabled value="<?PHP echo $etat ?>" selected="selected"><?PHP echo $etat ?></option>
+                          <option value="Non traitee">Non traitee</option>
+                          <option value="En cours">En cours</option>
+                          <option value="Donnée au livreur">Donnée au livreur</option>
+                          <option value="Effectuée">Effectuée</option>
+                        </select>
+  </label>
+</li>
+ <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+<input  class="btn btn-success" type="submit" name="modifier" value="modifier"></td>
+<input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>"></td>
+</div>
+</div>
 </form>
 <?PHP
   }
 }
 if (isset($_POST['modifier'])){
-  $livraison=new livraison($_POST['id'],$_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville'],$_POST['etat']);
+  $livraison=new livraison($_POST['id'],'','','','',$_POST['etat']);
   $lC->modifierlivraison($livraison,$_POST['id_ini']);
   echo $_POST['id_ini'];
  header("Location: afficherlivraisons.php");

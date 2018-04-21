@@ -251,13 +251,13 @@
                           <td><?PHP echo $row['date']; ?></td>
                           
                           <td>
-                          	 <?PHP echo '<a  href="modifierlivraison.php?id='.$row['id'].'">Modifier</a>'; ?>
+                          	 <div id="Button"> <?PHP echo '<a  href="modifierlivraison.php?id='.$row['id'].'">Modifier</a>'; ?> 
                           	
-                                <input type="submit" name="supprimer" value="Supprimer">
+                                <input type="submit" name="supprimer" value="Supprimer"> </div>
                                 <input type="hidden" value="<?PHP echo $row['id']; ?>" name="id">
                             <meta name="viewport" content="width=device-width, initial-scale=1">
                             <p id="demo" style="text-align: center; font-size: 15px; margin-top: 0px;"></p> 
-                            <?php echo "string"; ?>
+                            
 
                           </td>
                          
@@ -391,7 +391,7 @@ var x = setInterval(function() {
     
     // If the count down is over, write some text 
     if (distance >1000*60*60*2) {
-
+        document.getElementById("Button").style.visibility = 'hidden';
         clearInterval(x);
         document.getElementById("demo").innerHTML = "Désolé,le temps de modification ou de suppression de la commande est expriré";
     }

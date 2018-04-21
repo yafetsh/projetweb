@@ -322,12 +322,10 @@ $livraison2C=new livraisoncore();
                       <thead>
                         <tr>
                           <th>ID_livraison</th>
-                          <th>ID_utilisateur</th>
                           <th>Rue</th>
                           <th>Numero de telephone</th>
                           <th>Region</th>
                           <th>Ville</th>
-                          <th>Pseudo_Livreur</th>
                           <th>Etat</th>
                           <th>Action</th>
                         </tr>
@@ -338,12 +336,10 @@ $livraison2C=new livraisoncore();
                           ?>
                           <tr>
                           <td><?PHP echo $row['id']; ?></td>
-                          <td><?PHP echo $row['idUtilisateur']; ?></td>
                           <td><?PHP echo $row['rue']; ?></td>
                           <td><?PHP echo $row['numero']; ?></td>
                           <td><?PHP echo $row['region']; ?></td>
                           <td><?PHP echo $row['ville']; ?></td>
-                          <td><?PHP echo $row['pseudoLivreur']; ?></td>
                           <td><?PHP echo $row['etat']; ?></td>
                           
                           <td>
