@@ -1,18 +1,19 @@
 <?php
 require '../Core/PanierCore.php' ;
+require '../Entities/panier.php';
 $Panier=new PanierCore();
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/02-shop-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:47:11 GMT -->
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SEBIAN - Multi Purpose eCommerce HTML5 Template</title>
-    <meta name="keywords" content="HTML5,CSS3,HTML,Template,Multi-Purpose,M_Adnan,Corporate Theme,SEBIAN Multi Purpose Care,eCommerce,SEBIAN - Multi Purpose eCommerce HTML5 Template">
+    <title>Fashion Make Up</title>
+    <meta name="keywords" content="HTML5,CSS3,HTML,Template,Multi-Purpose,M_Adnan,Corporate Theme,Fashion Make up">
     <meta name="description" content="SEBIAN - Multi Purpose eCommerce HTML5 Template">
     <meta name="author" content="M_Adnan">
 
@@ -189,8 +190,8 @@ $Panier=new PanierCore();
                                     </li>
                                     <li class="no-padding no-border">
                                         <div class="row">
-                                            <div class="col-xs-6"> <a href="#." class="btn btn-small">ANNULER</a></div>
-                                            <div class="col-xs-6 "> <a href="#." class="btn btn-1 btn-small">VALIDER</a></div>
+
+                                            <div class="col-xs-6 "> <a href="AddCommande.php" class="btn btn-1 btn-small">VALIDER</a></div>
                                         </div>
                                     </li>
                                 </ul>
@@ -223,76 +224,288 @@ $Panier=new PanierCore();
     <div class="content">
 
         <!--======= SUB BANNER =========-->
-        <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
-            <div class="container">
+        <!-- CONTENT START -->
+        <form method="POST" action="Panier.php">
+        <div class="content">
 
+            <!--======= SUB BANNER =========-->
+            <section class="sub-banner">
+                <div class="container">
+                    <h4>CHARIOT</h4>
+                    <!-- Breadcrumb -->
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li class="active">CHARIOT</li>
+                    </ol>
+                </div>
+            </section>
 
+            <!--======= PAGES INNER =========-->
+            <section class="section-p-30px pages-in chart-page">
+                <div class="container">
 
-                    <table width=91%>
+                    <!-- Payments Steps -->
+                    <div class="payment_steps">
+                        <ul class="row">
+                            <!-- SHOPPING CART -->
+                            <li class="col-sm-4 current"> <i class="fa fa-shopping-cart"></i>
+                                <h6>SHOPPING CART</h6>
+                            </li>
 
-                        <tr>
-                            <td>
-                                <h3 style="text-align: left">Votre panier</h3>
-                            </td>
-                            <td>
+                            <!-- CHECK OUT DETAIL -->
+                            <li class="col-sm-4"> <i class="fa fa-align-left"></i>
+                                <h6>CHECK OUT DETAIL</h6>
+                            </li>
 
-                            </td>
-                            <td >
-                               <p> Prix d'article</p>
-                            </td>
-                            <td>
-                                <p>Quantité</p>
-                            </td>
-                            <td>
-                                <p>Actions
-                                </p>
-                            </td>
-                        </tr>
-                    </table>
-                <hr>
+                            <!-- ORDER COMPLETE -->
+                            <li class="col-sm-4"> <i class="fa fa-check"></i>
+                                <h6>COMMANDE TERMINÉE</h6>
+                            </li>
+                        </ul>
+                    </div>
 
+                    <!-- Payments Steps -->
+                    <div class="shopping-cart text-center">
+                        <div class="cart-head">
+                            <ul class="row">
+                                <!-- PRODUCTS -->
+                                <li class="col-sm-3">
+                                    <h6>PRODUCTS</h6>
+                                </li>
+                                <!-- NAME -->
+                                <li class="col-sm-3">
+                                    <h6>NAME</h6>
+                                </li>
+                                <!-- QTY -->
+                                <li class="col-sm-1">
+                                    <h6>QTY</h6>
+                                </li>
+                                <!-- PRICE -->
+                                <li class="col-sm-2">
+                                    <h6>PRICE</h6>
+                                </li>
+                                <!-- TOTAL PRICE -->
+                                <li class="col-sm-2">
+                                    <h6>TOTAL PRICE</h6>
+                                </li>
+                                <li class="col-sm-1"> </li>
+                            </ul>
+                        </div>
+
+                        <!-- Cart Details -->
                         <?PHP
-                      $ids=array_keys($_SESSION['panier']);
-                      if(empty($ids))
-                      {
-                          $products=array();
+                        $ids=array_keys($_SESSION['panier']);
+                        if(empty($ids))
+                        {
+                            $products=array();
 
-                      }
-                      else {
-                          $products = $Panier->AfficherPanierSession("select * from produit where reference IN (" . implode(",", $ids) . ")");
-                      foreach($products as $row){
-                        ?>
-                <table width=102%>
-                    <tr>
-                        <td style="text-align: left">
-                            <img src="images/new-item-<?php echo $row->reference; ?>.jpg"
-                                 style="width:100px;height: 100px;">
-                        </td>
-
-
-                        <td>
-                            <span class="font-montserrat"><?php echo number_format($row->prix, 2, ',', ''); ?>
-                                TND </span>
-            </div>
-            </td>
-
-            <td>
-                <p><?php echo $_SESSION['panier'][$row->reference] ?></p>
-            </td>
-            <td>
-                <p><a href="Panier.php?delPanier=<?=$row->reference ?>">Supprimer</a></p>
-            </td>
-            </tr>
-            </table>
-            <hr>
-            <?PHP
-            }
                         }
-                        ?>
+                        else {
+                            $products = $Panier->AfficherPanierSession("select * from produit where reference IN (" . implode(",", $ids) . ")");
+                            foreach($products as $row){
+                                ?>
+                        <ul class="row cart-details">
+                            <li class="col-sm-6">
+                                <div class="media">
+                                    <!-- Media Image -->
 
-            </div>
-        </section>
-    </div>
+                                    <div class="media-left media-middle"> <a href="#." class="item-img"> <img class="media-object" src="images/new-item-<?php echo $row->reference; ?>.jpg" alt=""> </a> </div>
+
+                                    <!-- Item Name -->
+                                    <div class="media-body">
+                                        <div class="position-center-center">
+                                            <h6><?php echo $row->description; ?></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- QTY -->
+                            <li class="col-sm-1">
+                                <div class="position-center-center">
+                                    <input type="text" value="<?php echo $_SESSION['panier'][$row->reference]; ?>" name="panier[quantite][<?php echo $row->reference ?>]">
+                                </div>
+                            </li>
+
+                            <!-- PRICE -->
+                            <li class="col-sm-2">
+                                <div class="position-center-center"> <span><?php echo number_format($row->prix, 2, ',', ''); ?> TND</span> </div>
+                            </li>
+                            <!-- TOTAL PRICE -->
+                            <li class="col-sm-2">
+                                <div class="position-center-center"> <span><?php echo number_format($row->prix* $_SESSION['panier'][$row->reference], 2, ',', '') ; ?>TND</span> </div>
+                            </li>
+
+                            <!-- EDIT AND REMOVE -->
+                            <li class="col-sm-1">
+                                <div class="position-center-center"> <a href="#."><i class="fa fa-pencil-square-o"></i> </a> <a href="Panier.php?delPanier=<?=$row->reference ?>"><i class="fa fa-times"></i></a> </div>
+                            </li>
+                        </ul>
+                        <?php }
+                        }?>
+
+                        <!-- BTN INFO -->
+                        <div class="btn-sec">
+
+                            <!-- CLEAR SHOPPING CART -->
+                            <a href="#." class="btn btn-dark"> <i class="fa fa-trash-o"></i> CLEAR SHOPPING CART </a>
+
+                            <!-- UPDATE SHOPPING CART -->
+
+                                <button type="submit" class="btn btn-dark"><i class="fa fa-arrow-circle-o-up"></i>MISE À JOUR PANIER</button>
+                            </form>
+                            <!-- CONTINUE SHOPPING -->
+                            <a href="Produit.php" class="btn btn-dark right-btn"> <i class="fa fa-shopping-cart"></i> CONTINUE SHOPPING </a> </div>
+
+                        <!-- SHOPPING INFORMATION -->
+                        <div class="cart-ship-info">
+                            <div class="row">
+
+                                <!-- DISCOUNT CODE -->
+                                <div class="col-sm-4">
+                                    <h6>DISCOUNT CODE</h6>
+                                    <form>
+                                        <input type="text" value="" placeholder="ENTER YOUR CODE IF YOU HAVE ONE">
+                                        <button type="submit" class="btn btn-small btn-dark">APPLY CODE</button>
+                                    </form>
+                                </div>
+
+                                <!-- ESTIMATE SHIPPING & TAX -->
+                                <div class="col-sm-4">
+                                    <h6>ESTIMATE SHIPPING & TAX</h6>
+                                    <form>
+                                        <!-- *COUNTRY -->
+                                        <label> *Pays
+                                            <select class="selectpicker">
+                                                <option>UNITED KINGDOM</option>
+                                                <option>UNITED STATE</option>
+                                                <option>PAKISTAN</option>
+                                            </select>
+                                        </label>
+
+                                        <!-- STATE/PROVINCE -->
+                                        <label> ÉTAT / PROVINCE
+                                            <input type="text" value="" placeholder="">
+                                        </label>
+                                        <!-- ZIP/POSTAL CODE -->
+                                        <label> ZIP / CODE POSTAL
+                                            <input type="text" value="" placeholder="">
+                                        </label>
+                                        <button type="submit" class="btn btn-small btn-dark">Appliquer le code</button>
+                                    </form>
+                                </div>
+
+                                <!-- SUB TOTAL -->
+                                <div class="col-sm-4">
+                                    <div class="grand-total"> <span><?php echo number_format($Panier->total(), 2, ',', ''); ?> TND</span>
+                                        <h4>GRAND: <span><?php echo number_format($Panier->total(), 2, ',', ''); ?> TND</span></h4>
+                                        <a href="connexion.php" class="btn">PASSER À LA CAISSE</a>
+                                        <p>Commander avec plusieurs adresses</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--======= RELATED PRODUCTS =========-->
+                <section class="section-p-60px new-arrival new-arri-w-slide">
+                    <div class="container">
+
+                        <!--  Tittle -->
+                        <div class="tittle tittle-2">
+                            <h5>RELATED PRODUCTS</h5>
+                            <p class="font-playfair">Most haver in your Shop </p>
+                        </div>
+
+                        <!--  New Arrival Tabs Products  -->
+                        <div class="popurlar_product client-slide">
+
+                            <!--  New Arrival  -->
+                            <div class="items-in">
+                                <!-- Image -->
+                                <img src="images/new-item-1.jpg" alt="">
+                                <!-- Hover Details -->
+                                <div class="over-item">
+                                    <ul class="animated fadeIn">
+                                        <li> <a href="images/new-item-1.jpg" data-lighter><i class="ion-search"></i></a></li>
+                                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                                        <!-- Rating Stars -->
+                                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                                    </ul>
+                                </div>
+                                <!-- Item Name -->
+                                <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                            </div>
+
+                            <!--  New Arrival  -->
+                            <div class="items-in">
+                                <!-- Image -->
+                                <img src="images/new-item-2.jpg" alt="">
+                                <!-- Hover Details -->
+                                <div class="over-item">
+                                    <ul class="animated fadeIn">
+                                        <li> <a href="images/new-item-2.jpg" data-lighter><i class="ion-search"></i></a></li>
+                                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                                        <!-- Rating Stars -->
+                                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                                    </ul>
+                                </div>
+                                <!-- Item Name -->
+                                <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                            </div>
+
+                            <!--  New Arrival  -->
+                            <div class="items-in">
+                                <!--  Tags  -->
+                                <div class="new-tag"> NEW </div>
+
+                                <!-- Image -->
+                                <img src="images/new-item-3.jpg" alt="">
+                                <!-- Hover Details -->
+                                <div class="over-item">
+                                    <ul class="animated fadeIn">
+                                        <li> <a href="images/new-item-3.jpg" data-lighter><i class="ion-search"></i></a></li>
+                                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                                        <!-- Rating Stars -->
+                                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                                    </ul>
+                                </div>
+                                <!-- Item Name -->
+                                <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                            </div>
+
+                            <!--  New Arrival  -->
+                            <div class="items-in">
+                                <!--  Tags  -->
+                                <div class="hot-tag"> HOT </div>
+                                <!-- Image -->
+                                <img src="images/new-item-4.jpg" alt="">
+                                <!-- Hover Details -->
+                                <div class="over-item">
+                                    <ul class="animated fadeIn">
+                                        <li> <a href="images/new-item-4.jpg" data-lighter><i class="ion-search"></i></a></li>
+                                        <li> <a href="#."><i class="ion-shuffle"></i></a></li>
+                                        <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
+                                        <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
+                                        <!-- Rating Stars -->
+                                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                                    </ul>
+                                </div>
+                                <!-- Item Name -->
+                                <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </div>
     <!--======= Footer =========-->
     <footer>
         <div class="container">

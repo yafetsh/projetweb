@@ -12,7 +12,7 @@ $products=$Panier->AfficherProduits();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SEBIAN - Multi Purpose eCommerce HTML5 Template</title>
+    <title>Fashion Make Up</title>
     <meta name="keywords" content="HTML5,CSS3,HTML,Template,Multi-Purpose,M_Adnan,Corporate Theme,SEBIAN Multi Purpose Care,eCommerce,SEBIAN - Multi Purpose eCommerce HTML5 Template">
     <meta name="description" content="SEBIAN - Multi Purpose eCommerce HTML5 Template">
     <meta name="author" content="M_Adnan">
