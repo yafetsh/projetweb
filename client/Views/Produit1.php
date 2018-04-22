@@ -1,8 +1,18 @@
 <?php
+
+    include_once "../Entities/produit.php";
+    include_once "../Entities/image.php";
+    include_once "../Entities/categorie.php";
+    include_once "../Entities/sous_categorie.php";
     include_once "../Core/produitC.php";
-    $produitC=new produitC();
-    $listeproduit=$produitC->reccupererproduit();
-?>
+    include_once "../Core/imageC.php";
+    include_once "../Core/categorieC.php";
+    include_once "../Core/sous_categorieC.php";
+
+    $C = new categorieC();
+    $categorie = $C->afficher();
+
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +22,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SEBIAN - Multi Purpose eCommerce HTML5 Template</title>
+    <title>FASHION MAKEUP</title>
     <meta name="keywords" content="HTML5,CSS3,HTML,Template,Multi-Purpose,M_Adnan,Corporate Theme,SEBIAN Multi Purpose Care,eCommerce,SEBIAN - Multi Purpose eCommerce HTML5 Template">
     <meta name="description" content="SEBIAN - Multi Purpose eCommerce HTML5 Template">
     <meta name="author" content="M_Adnan">
@@ -49,7 +59,7 @@
     <!-- LOADER ===========================================-->
     <div id="loader">
         <div class="loader">
-            <div class="position-center-center"> <img src="images/LOGO/NB/Png/Logo_FM-Transp_02.png" style="width:300px;height:200px" alt="">
+            <div class="position-center-center"> <img src="images/Logo_FM-Transp_02.png" alt="" style="width: 250px; height: 150px;">
 
                 <p class="font-playfair text-center">Please Wait...</p>
                 <div class="loading">
@@ -85,7 +95,7 @@
 
                 <!-- Logo -->
                 <div class="container">
-                    <div class="logo"> <a href="#."><img src="images/LOGO/NB/Png/Logo_FM-Transp_02.png" style="width:300px;height:200px" alt=""></a> </div>
+                    <div class="logo"> <a href="#."><img src="images/Logo_FM-Transp_02.png" alt="" style="width: 250px; height: 150px;"></a> </div>
                 </div>
 
                 <!-- Nav -->
@@ -95,19 +105,40 @@
                             <ul id="ownmenu" class="ownmenu">
                                 <li class="active"><a href="index.html">ACCUEIL</a>
                                 </li>
-                                <li><a href="Produit.html">PRODUITS</a>
+                                <li><a href="Produit1.php">PRODUITS</a>
                                     <!--======= MEGA MENU =========-->
                                     <div class="megamenu full-width">
                                         <div class="row nav-post">
-                                            <div class="col-sm-3">
-                                                <h6>TEINT</h6>
-                                                <ul>
-                                                    <li><a href="Produit_FARD A JOUES.php">FARD A JOUES</a></li>
-                                                    <li><a href="Produit_POUDRE COMPACT.php">POUDRE COMPACT</a></li>
-                                                    <li><a href="Produit_POUDRE BRONZANTE.php">POUDRE BRONZANTE</a></li>
-                                                    <li><a href="Produit_ANTI CERNES.php">ANTI-CERNES</a></li>
-                                                </ul>
-                                            </div>
+                                            <form>
+                                            <?php
+
+                                                foreach ($categorie as $key) {
+                                            ?>
+                                                <div class="col-sm-3">
+                                                    <center>
+                                                        <h6><?php echo $key['nom'];?></h6>
+                                                    </center>
+                                                    
+                                                    <!--<li><a href="08-01-blog-mansory.html">Blog Mansory</a></li>-->
+                                                    <?php
+                                                        $sous_categorieC = new sous_categorieC();
+                                                        $liste = $sous_categorieC->recuperer($key['reference']);
+                                                        foreach ($liste as $row) {
+                                                    ?>
+                                                        <form method="POST" action="Produit2.php">
+                                                            <input type="text" name="type_produit" value="<?php echo $row['nom']; ?>" hidden>
+                                                            <li><input type="submit" value="<?php echo $row['nom']; ?>" style="width: 220px; background-color: #272727; color: white; margin : auto;"> </li>
+                                                        </form>
+                                                        
+                                                    <?php
+                                                        }
+                                                      ?>
+                                                </div>
+                                            <?php
+                                                }
+
+                                              ?>
+                                              </form>
                                         </div>
                                     </div>
                                 </li>
@@ -192,8 +223,7 @@
                     <!-- Breadcrumb -->
                     <ol class="breadcrumb">
                         <li><a href="#">ACCUEIL</a></li>
-                        <li class="active"><a href="Produit.html">PRODUIT</a></li>
-                        <li class="active">ANTI-CERNES</li>
+                        <li class="active"><a href="Produit1.php">PRODUIT</a></li>
                     </ol>
                 </div>
             </section>
@@ -215,12 +245,22 @@
 
                                 <!-- CATEGORIES -->
                                 <ul class="cate">
-                                    <li><a href="#.">TEINT <span>(32)</span></a></li>
-                                    <li><a href="#.">YEUX <span>(32)</span></a></li>
-                                    <li><a href="#.">LEVRES <span>(32)</span></a></li>
-                                    <li><a href="#.">ONGLES <span>(32)</span></a></li>
+                                    <?php
+                                        $cC = new categorieC();
+                                        $l = $cC->afficher();
+                                        foreach ($l as $k) {
+                                    ?>
+                                            <li><a href="#."><?php echo $k['nom']; ?> <span>
+                                                <?php
+                                                    $pC = new produitC();
+                                                    $compteur = $pC->compter($k['reference']);
+                                                  ?>
+                                            </span></a></li>
+                                    <?php  
+                                        }
+                                      ?>
+                                   <!-- <li><a href="#.">Men’s <span>(32)</span></a></li>-->
                                 </ul>
-
 
                                 <!-- HEADING -->
                                 <div class="heading">
@@ -232,9 +272,12 @@
                                     <span id="price-min" class="price-min">20</span> <span id="price-max" class="price-max">80</span> </div>
                                 <a href="#." class="btn btn-small btn-dark">FILTRER</a>
 
+
+                                
+
                                 <!-- ADS-->
-                                <div class="sider-bar-ads"> <img src="images/img_comment_mettre_du_fard_a_joue_7689_orig.jpg" style="width: 300px; height: 200px">
-                                    <div class="position-center-center full-width text-center">  <a href="#." class="btn btn-small btn-dark">ACHETEZ </a> </div>
+                                <div class="sider-bar-ads"> <img src="images/side-bar-ad.jpg" alt="">
+                                    <div class="position-center-center full-width text-center"> 1805 <a href="#." class="btn btn-small btn-dark">SHOP NOW</a> </div>
                                 </div>
                             </div>
                         </div>
@@ -252,63 +295,217 @@
 
                             <!--======= Products =========-->
                             <div class="popurlar_product">
-                                <h1 style="font-weight: normal; color: #333333; font-family: 'Montserrat', sans-serif; font-size: 24px ">Consulter Nos Produits<br> <small>ANTI-CERNES</small> </h1>
-                                <br>
+                                <h1 style="font-weight: normal; color: #333333; font-family: 'Montserrat', sans-serif; font-size: 24px ">NOUVEAU PRODUITS</h1>
                                 <ul class="row">
                                     <!--NOUVEAU-->
-                                    <!-- New Products -->
-                                   <?php
-                                        foreach ($listeproduit as $key => $value) {
-                                            if($value['nomCatalogue']=="ANTI-CERNES"){
-                                    ?>
-                                           
-                                              
-                                    <li class="col-sm-4 animate fadeIn" data-wow-delay="0.5s">
-                                        <div class="items-in" >
-                                            <!--  Tags  -->
-                                            <!-- Image -->
-                                            <?php
-                                                $image=$produitC->reccupererimage($value['reference']);
-                                                foreach ($image as $key) {
-                                            ?>
-                                                    <center>
-                                                        <img src="../../admin/Views/production/<?php echo $key['Chemin'];?>" style="height: 250px; width: 100px;">
-                                                    </center>
-                                                    <!-- Hover Details -->
+                                    <?php
+                                        $i=0;
+                                        $produitC = new produitC();
+                                        $datePs = $produitC->recupererprodord();
+                                        foreach ($datePs as $key) {
+                                            $imagesC = new imageC();
+                                            $listeimage = $imagesC->recupererimage($key['reference']);
+
+                                        ?>
+
+                                        <!-- New Products -->
+                                        <li class="col-sm-4 animate fadeIn" data-wow-delay="0.8s">
+                                            <div class="items-in" >
+                                                <!--  Tags  -->
+                                                <div class="new-tag"> NEW </div>
+                                                <!-- Image -->
+                                                <?php 
+                                                    foreach ($listeimage as $row) {
+                                                ?>
+                                                     <img src="../../admin/Views/production/images/<?php echo $row['chemin'] ;?>" alt="" style="max-height: 350px;" >
+                                                 <?php 
+                                                    break; 
+                                                   }
+                                                ?>
+                                                
+                                                
+                                                <!-- Hover Details -->
                                                 <div class="over-item">
                                                     <ul class="animated fadeIn">
-                                                        <li> <a href="../../admin/Views/production/<?php echo $key['Chemin']; ?>" data-lighter ><i class="ion-search"></i></a></li>
-                                                        <li> <a " datalighter><i class="fa fa-heart-o"></i></a></li>
-                                                        <li><a href="#." class="btn-dark"><i class="fa fa-shopping-cart"></i>></a></li>
-                                                        <br>
+                                                        <?php 
+                                                        foreach ($listeimage as $row) {
+                                                        ?>
+                                                            <li> <a href="../../admin/Views/production/images/<?php echo $row['chemin'] ;?>" data-lighter ><i class="ion-search">
+                                                         <?php 
+                                                            break; 
+                                                           }
+                                                        ?>
+                                                        </i></a></li>
+                                                        <li> <a datalighter><i class="fa fa-heart-o"></i></a></li>
+                                                        <li><a href="#." class="btn-dark" ><i class="fa fa-shopping-cart"></i>></a></li><br>
                                                         <!-- Rating Stars -->
                                                         <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
                                                     </ul>
-
                                                 </div>
-                                            <?php
-                                            break;
-                                               }
-                                            ?>
-                                            
-                                            <!-- Item Name -->
-                                            <div class="details-sec"> <a href="#."><?php echo($value['nomCatalogue']."<br>".$value['couleur'])  ?></a> <span class="font-montserrat"><?php echo($value['prix']."DT");?></span> </div>
+                                                <!-- Item Name -->
+                                                <div class="details-sec"> <a href="#."><?php echo $key['nom']; ?></a> <span class="font-montserrat"><?php echo $key['prix']."DT" ?></span></div>
                                             </div>
-                                            <br>
-                                            <hr>
-                                    </li>
-
+                                        </li>
 
 
                                     <?php
+                                            $i++;
+                                            if($i==3){
+                                                break;
                                             }
                                         }
+                                      ?>
+                                    
 
-                                     ?>
-                                    
-                                    
+                                   
                             </div>
-                            
+                            <div class="popurlar_product">
+                                <h1 style="font-weight: normal; color: #333333; font-family: 'Montserrat', sans-serif; font-size: 24px ">HOT</h1>
+                                <ul class="row">
+                                    <!-- New Products -->
+                                    <li class="col-sm-4 animate fadeIn" data-wow-delay="0.5s">
+                                        <div class="items-in">
+                                            <!--  Tags  -->
+                                            <div class="hot-tag"> HOT </div>
+                                            <!-- Image -->
+                                            <img src="images/new-item-1.jpg" alt="" style="max-height: 350px;">
+                                            <!-- Hover Details -->
+                                            <div class="over-item">
+                                                <ul class="animated fadeIn">
+                                                    <li> <a href="images/new-item-1.jpg" data-lighter ><i class="ion-search"></i></a></li>
+                                                    <li> <a  datalighter><i class="fa fa-heart-o"></i></a></li>
+                                                    <li><a href="#." class="btn-dark" ><i class="fa fa-shopping-cart"></i>></a></li>
+                                                    <!-- Rating Stars -->
+                                                    <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <!-- Item Name -->
+                                            <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                                        </div>
+                                    </li>
+
+                                    <!-- New Products -->
+                                    <li class="col-sm-4 animate fadeIn" data-wow-delay="0.5s">
+                                        <div class="items-in">
+                                            <!--  Tags  -->
+                                            <div class="hot-tag"> HOT </div>
+                                            <!-- Image -->
+                                            <img src="images/new-item-1.jpg" alt="" style="max-height: 350px;">
+                                            <!-- Hover Details -->
+                                            <div class="over-item">
+                                                <ul class="animated fadeIn">
+                                                    <li> <a href="images/new-item-1.jpg" data-lighter ><i class="ion-search"></i></a></li>
+                                                    <li> <a  datalighter><i class="fa fa-heart-o"></i></a></li>
+                                                    <li><a href="#." class="btn-dark" ><i class="fa fa-shopping-cart"></i>></a></li>
+                                                    <!-- Rating Stars -->
+                                                    <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <!-- Item Name -->
+                                            <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                                        </div>
+                                    </li>
+
+                                    <!-- New Products -->
+                                    <li class="col-sm-4 animate fadeIn" data-wow-delay="0.5s">
+                                        <div class="items-in">
+                                            <!--  Tags  -->
+                                            <div class="hot-tag"> HOT </div>
+                                            <!-- Image -->
+                                            <img src="images/new-item-1.jpg" alt="" style="max-height: 350px;">
+                                            <!-- Hover Details -->
+                                            <div class="over-item">
+                                                <ul class="animated fadeIn">
+                                                    <li> <a href="images/new-item-1.jpg" data-lighter ><i class="ion-search"></i></a></li>
+                                                    <li> <a  datalighter><i class="fa fa-heart-o"></i></a></li>
+                                                    <li><a href="#." class="btn-dark" ><i class="fa fa-shopping-cart"></i>></a></li>
+                                                    <!-- Rating Stars -->
+                                                    <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <!-- Item Name -->
+                                            <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
+                                        </div>
+                                    </li>
+                                    <br>
+
+                                    <div class="popurlar_product">
+                                        <h1 style="font-weight: normal; color: #333333; font-family: 'Montserrat', sans-serif; font-size: 24px ">PROMOTION</h1>
+                                        <ul class="row">
+                                            <!-- New Products -->
+                                            <?php 
+
+                                                $p = $produitC->recup_produit();
+                                                foreach ($p as $key) {
+                                                    $im = $imagesC->recupererimage($key['reference']);
+                                            ?>
+
+                                            <li class="col-sm-4 animate fadeIn" data-wow-delay="0.5s">
+                                                <div class="items-in" >
+                                                    <!-- Image -->
+                                                    <?php
+                                                        foreach ($im as $row) {
+                                                    ?>
+                                                        <img src="../../admin/Views/production/images/<?php echo $row['chemin'] ;?>" alt="" style="max-height: 350px;">
+                                                    <?php
+                                                        break;
+                                                        }
+
+                                                      ?>
+                                                    
+                                                    <!-- Hover Details -->
+                                                    <div class="over-item">
+                                                        <ul class="animated fadeIn">
+                                                            <?php
+                                                        foreach ($im as $row) {
+                                                        ?>
+                                                            <li> <a href="../../admin/Views/production/images/<?php echo $row['chemin'] ;?>" data-lighter ><i class="ion-search"></i></a></li>
+                                                        <?php
+                                                        break;
+                                                         }
+
+                                                      ?>
+                                                            
+                                                            <li> <a datalighter><i class="fa fa-heart-o"></i></a></li>
+                                                            <li><a href="#." class="btn-dark"><i class="fa fa-shopping-cart"></i>></a></li><br>
+                                                            <!-- Rating Stars -->
+                                                            <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <!-- Item Name -->
+                                                    <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">
+                                                        <?php 
+
+                                                            $prom = $produitC->recupererpromo($key['id_promotion']);
+                                                            foreach ($prom as $k) {
+                                                                $pourcentage = $k['promotion'];                                                                
+                                                            }
+                                                            echo "Promotion de : ".$pourcentage."%"."<br>";
+                                                            $prix = intval($key['prix']) - (intval($key['prix'])*intval($pourcentage)/100);
+                                                            echo $prix."DT";
+
+                                                          ?>
+                                                    </span><span class="text-line"><?php echo $key['prix']."DT"; ?></span></div>
+                                                </div>
+                                            </li>
+                                            <?php        
+                                                }
+                                            ?>
+                                            
+                                        </ul>
+                                    </div>
+
+                                    <!--======= PAGINATION =========-->
+                                    <ul class="pagination animate fadeInUp" data-wow-delay="0.4s">
+                                        <li><a href="#.">1</a></li>
+                                        <li><a href="#.">2</a></li>
+                                        <li><a href="#.">3</a></li>
+                                        <li><a href="#.">4</a></li>
+                                        <li><a href="#.">5</a></li>
+                                        <li><a href="#."><i class="fa fa-angle-right"></i></a></li>
+                                    </ul>
+                            </div>
+                        </div>
                     </div>
             </section>
             </div>
@@ -316,7 +513,7 @@
             <!--======= Footer =========-->
             <footer>
                 <div class="container">
-                    <div class="text-center"> <a href="#."><img src="images/LOGO/Negatif/Png/Logo_FM-Transp.png" style="width:300px;height:200px" alt=""></a><br>
+                    <div class="text-center"> <a href="#."><img src="images/logo-dark1.png" alt=""></a><br>
                         <img class="margin-t-40" src="images/hammer.png" alt="">
                         <p class="intro-small margin-t-40">Multipurpose E-Commerce Theme is suitable for furniture store, fashion shop, accessories, electric shop. We have included multiple layouts for home page to give you best selections in customization.</p>
                     </div>

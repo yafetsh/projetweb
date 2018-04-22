@@ -13,20 +13,36 @@
 
         if(!empty($_POST['categorie']) and !empty($_POST['sous_categorie2']) and !empty($_POST['reference'])){
             $sous_categorieC = new sous_categorieC();
-            $categorieC = new categorieC();
-            $l = $categorieC->recuperer($_POST['categorie']);
+            $l = $sous_categorieC->afficher();
             $l->execute();
-            foreach ($l as $key) {
-                $reference_categorie=$key['reference'];
+            foreach ($l as $r) {
+                if($_POST['reference']==$r['reference']){
+                    $a=1;
+                    break;
+                }
+                else
+                    $a=0;
+
             }
-            $sous_categorie = new sous_categorie($_POST['reference'],$_POST['sous_categorie2'],$_POST['reference']);
-            $sous_categorieC->ajouter($sous_categorie,$reference_categorie);
-            $produitC = new produitC();
-            $reference_produit = $sous_categorie->getReference().'001';
-            $date = date("d/m/y");
-            $produit = new produit($reference_produit,$_POST['nom_produit'],$_POST['quantite_total'],$_POST['prix'],$date,$_POST['description'],$_POST['reference']);
-            $produitC->ajouter($produit);
-            header('Location: AJOUTER PRODUIT_1.php');
+            if($a==1)
+                echo("cette reference existe deja !!");
+            else{
+                $categorieC = new categorieC();
+                $l = $categorieC->recuperer($_POST['categorie']);
+                $l->execute();
+                foreach ($l as $key) {
+                    $reference_categorie=$key['reference'];
+                }
+                $sous_categorie = new sous_categorie($_POST['reference'],$_POST['sous_categorie2'],$_POST['reference']);
+                $sous_categorieC->ajouter($sous_categorie,$reference_categorie);
+                $produitC = new produitC();
+                $reference_produit = $sous_categorie->getReference().'001';
+                $date = date("d/m/y");
+                $produit = new produit($reference_produit,$_POST['nom_produit'],$_POST['quantite_total'],$_POST['prix'],$date,$_POST['description'],$_POST['reference']);
+                $produitC->ajouter($produit);
+                header('Location: AJOUTER PRODUIT_1.php');
+            }
+            
         }
         else{
             if(!empty($_POST['sous_categorie'])){

@@ -7,86 +7,121 @@
 	*/
 	class produitC
 	{
-		function affichercategorie(){
+		
+		function ajouter($produit){
 			$db = config::getConnexion();
-			$sql="SELECT * FROM catalogue";
+			$sql = "INSERT INTO produit (reference,nom,quantite_total,prix,description,date_ajout,reference_sous_categorie) VALUES (:reference,:nom,:quantite_total,:prix,:description,:date_ajout,:reference_sous_categorie)";
+			$req = $db->prepare($sql);
+			$req->bindValue(':reference',$produit->getReference());
+			$req->bindValue(':nom',$produit->getNom());
+			$req->bindValue(':quantite_total',$produit->getQuantite_total());
+			$req->bindValue(':prix',$produit->getPrix());
+			$req->bindValue(':description',$produit->getDescription());
+			$req->bindValue(':date_ajout',$produit->getDate_ajout());
+			$req->bindValue(':reference_sous_categorie',$produit->getReference_sous_categorie());								
+			$req->execute();
+
+		}
+
+		function recuperer($reference_sous_categorie){
+			$db = config::getConnexion();
+			$sql = "SELECT reference FROM produit WHERE reference_sous_categorie = $reference_sous_categorie";
+			$liste=$db->query($sql);
+			return $liste;
+		}
+		
+		function afficherproduitavecimg(){
+			$db = config::getConnexion();
+			$sql="SElECT produit.nom,produit.reference,image.chemin from produit INNER JOIN image ON produit.reference=image.reference_produit ";
 			$liste=$db->query($sql);
 			return $liste;
 		}
 
-		function affichercatalogue(){
+		function recupererproduit(){
 			$db = config::getConnexion();
-			$sql="SELECT * FROM catalogue";
+			$sql="SELECT reference,nom FROM produit";
 			$liste=$db->query($sql);
 			return $liste;
 		}
 
-		function reccupererproduit(){
+		function afficherproduit(){
 			$db = config::getConnexion();
-			$sql="SELECT * from produit";
+			$sql="SELECT * FROM produit ";
 			$liste=$db->query($sql);
 			return $liste;
 		}
 
-		function reccupererimage($reference){
+		function supprimerproduit($reference){
 			$db = config::getConnexion();
-			$sql="SELECT * from image where reference=$reference";
+			$sql="DELETE FROM produit where reference= :reference";
+			$req=$db->prepare($sql);
+			$req->bindValue(':reference',$reference);
+	        $req->execute();
+		}
+
+		function modifierproduit($produit,$ref){
+			$db = config::getConnexion();
+			$sql="UPDATE produit SET nom=:nom,quantite_total=:quantite_total,prix=:prix,description=:description WHERE reference=:ref";
+			try{
+				$req=$db->prepare($sql);
+				$req->bindValue(':quantite_total',$produit->getQuantite_total());
+				$req->bindValue(':prix',$produit->getPrix());
+				$req->bindValue(':description',$produit->getDescription());
+				$req->bindValue(':nom',$produit->getNom());
+				$req->bindValue(':ref',$ref);
+				$s=$req->execute();
+			}
+			catch(Exception $e){
+				echo("Erreur".$e->getMessage());
+			}
+
+		}
+
+		function recuperer_produit($reference){
+			$db = config::getConnexion();
+			$sql="SELECT * FROM produit WHERE reference=$reference";
 			$liste=$db->query($sql);
 			return $liste;
 		}
 
-		function calculerproduit($repere){
+		function recup_produit(){
 			$db = config::getConnexion();
-			$sql="SELECT count(reference) AS ref FROM produit WHERE nomCatalogue=$repere";
+			$sql="SELECT * FROM produit WHERE id_promotion IS NOT NULL";
 			$liste=$db->query($sql);
 			return $liste;
 		}
 
-		/*function ajouterproduit($produit,$image){
+		function compter($ref){
 			$db = config::getConnexion();
-			$sql1="insert into produit (reference,quantite,prix,couleur,description,nomCatalogue) values (:reference,:quantite,:prix,:couleur,:description,:nomCatalogue)";
-			$sql2="insert into image (chemin,reference) values (:chemin,:reference)";
-			$req1=$db->prepare($sql1);
-			$req2=$db->prepare($sql2);
-
-			$req1->bindValue(':reference',$produit->getReference());
-			$req1->bindValue(':quantite',$produit->getQuantite());
-			$req1->bindValue(':prix',$produit->getPrix());
-			$req1->bindValue(':couleur',$produit->getCouleur());
-			$req1->bindValue(':description',$produit->getDescription());
-			$req1->bindValue(':nomCatalogue',$produit->getNomCatalogue());
-
-			$req2->bindValue(':reference',$produit->getReference());
-			$req2->bindValue(':chemin',$image->getChemin());
-
-			$req1->execute();
-			$req2->execute();
-
+			$sql="SELECT COUNT(reference) FROM produit WHERE reference LIKE $ref%";
+			$liste=$db->prepare($sql);
+			return $liste;
 		}
 
-		function ajouterimage($image){
+		function recupererprodord(){
 			$db = config::getConnexion();
-			$sql2="insert into image (chemin,reference) values (:chemin,:reference)";
-			$req2=$db->prepare($sql2);
-			$req2->bindValue(':reference',$image->getReference());
-			$req2->bindValue(':chemin',$image->getChemin());
-			$req2->execute();
-		}
-
-		function afficherproduit (){
-			$db = config::getConnexion();
-			$sql="SElECT produit.reference,produit.quantite,produit.prix,produit.couleur,produit.description,produit.nomCatalogue,image.Chemin from produit INNER JOIN image ON produit.reference=image.reference";
+			$sql = "SELECT * FROM produit ORDER BY date_ajout DESC";
 			$liste=$db->query($sql);
 			return $liste;
 		}
 
-		function afficherproduitsansimg(){
+		function recupererpromo($id){
 			$db = config::getConnexion();
-			$sql="SElECT * FROM produit";
+			$sql = "SELECT * FROM promotion where id=$id";
 			$liste=$db->query($sql);
 			return $liste;
 		}
 
+		function recproduit($nom){
+			$db = config::getConnexion();
+			$sql = "SELECT * FROM promotion WHERE nom LIKE :nom";
+			$req = $db->prepare($sql);
+			$p = "%".$nom."%";
+			$req->bindValue(':nom',$p);
+			$req->execute();
+		}
+
+/*
 		function afficherproduitseloncategorie($catalogue){
 			$db = config::getConnexion();
 			$sql="SElECT * FROM produit WHERE nomCatalogue=:catalogue";
@@ -95,25 +130,7 @@
 			return $liste;
 		}
 
-		function modifierproduit($produit,$ref){
-			$db = config::getConnexion();
-			//$sql1="UPDATE image SET reference=:reference, Chemin=:chemin WHERE reference=:ref";
-			$sql2="UPDATE produit SET reference=:reference,quantite=:quantite,prix=:prix,couleur=:couleur,description:=description,nomCatalogue=:nomCatalogue WHERE reference=:ref";
-			//$req1=$db->prepare($sql1);
-			$req2=$db->prepare($sql2);
-			//$req1->bindValue(':ref',$ref);
-			$req2->bindValue(':ref',$ref);
-			//$req1->bindValue(':chemin',$image->getChemin());
-			$req2->bindValue(':reference',$produit->getReference());
-			$req2->bindValue(':quantite',$produit->getQuantite());
-			$req2->bindValue(':prix',$produit->getPrix());
-			$req2->bindValue(':couleur',$produit->getCouleur());
-			$req2->bindValue(':description',$produit->getDescription());
-			$req2->bindValue(':nomCatalogue',$produit->getNomCatalogue());
-			//$req1->execute();
-			$req2->execute();
-
-		}
+		
 
 		function reccupererproduit($reference){
 			$db = config::getConnexion();
@@ -122,12 +139,7 @@
 			return $liste;
 		}
 
-		function reccupererimage($reference){
-			$db = config::getConnexion();
-			$sql="SELECT Chemin from image where reference=$reference";
-			$liste=$db->query($sql);
-			return $liste;
-		}
+		
 
 		function supprimerproduit($reference){
 			$sql1="DELETE FROM image where reference= :reference";
@@ -141,13 +153,7 @@
 	        $req->execute();
 		}
 
-		function supprimerimage($chemin){
-			$sql1="DELETE FROM image where Chemin= :Chemin";
-			$db = config::getConnexion();
-			$req1=$db->prepare($sql1);
-			$req1->bindValue(':Chemin',$chemin);
-			$req1->execute();
-		}*/
+		*/
 	}
 
   ?>

@@ -28,7 +28,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a href="index.html" class="site_title"><span>FASHION MAKEUP</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -36,11 +36,11 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="images/Untitled.png" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Bienvenu,</span>
+                <h2>MANEL AMMARA</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -52,14 +52,14 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                  <!--<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="index.html">Dashboard</a></li>
                       <li><a href="index2.html">Dashboard2</a></li>
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
-                  </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                  </li>-->
+                  <li><a><i class="fa fa-edit"></i> Gestion de produit <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="AJOUTER PRODUIT.php">Ajout de Produits</a></li>
                       <li><a href="LISTE PRODUIT.php">liste de Produits</a></li>
@@ -68,7 +68,7 @@
                       <li><a href="form_buttons.html">Form Buttons</a></li>
                       <li><a href="form_buttons.html">Réservations</a></li>-->
                     </ul>
-                  </li>
+                  <!--</li>
                   <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="general_elements.html">General Elements</a></li>
@@ -143,8 +143,8 @@
                         <li><a href="#level1_2">Level One</a>
                         </li>
                     </ul>
-                  </li>                  
-                  <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
+                  </li>
+                  <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>-->
                 </ul>
               </div>
 
@@ -181,7 +181,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/Untitled.png" alt="">MANEL AMMARA
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -205,56 +205,32 @@
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="images/Untitled.png" alt="Profile Image" /></span>
                         <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
+                          <span>Manel Ammara</span>
+                          <span class="time">Il y a 3 minutes</span>
                         </span>
                         <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                          mettre la notification ici
                         </span>
                       </a>
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="images/Untitled.png" alt="Profile Image" /></span>
                         <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
+                          <span>Manel Ammara</span>
+                          <span class="time">Il y a 3 minutes</span>
                         </span>
                         <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                          mettre la notification ici
                         </span>
                       </a>
                     </li>
                     <li>
                       <div class="text-center">
                         <a>
-                          <strong>See All Alerts</strong>
+                          <strong>voir tous</strong>
                           <i class="fa fa-angle-right"></i>
                         </a>
                       </div>
@@ -278,10 +254,7 @@
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>
+                    <a href="">FASHION MAKEUP</a>
                   </div>
                 </div>
               </div>
@@ -343,20 +316,20 @@
                                     </td>
                                     <td>
                                       
+                                      <form method="POST" action="supprimer image.php">
                                       <?php
                                         foreach ($listeimage as $row) {
                                       ?>
-                                        <form method="POST" action="supprimer image.php">
+                                        
                                         <img src="images/<?php echo($row['chemin']); ?>" style="width: 50px; height: 150px;">
                                         <input type="text" name="chemin"  value="<?php echo($row['chemin']) ; ?>" hidden>
                                         <input type="image" type="submit" name="sup" src="images/1420471234085Supprimer.png" style="width: 20px; height: 20px; position: relative; top: 60px; right: 80px ">
-                                       </form>
-                                        
+                                       
                                       <?php
-                                        
                                         }
                                         ?>
-                                         
+                                       </form>
+
                                     </td>
                                     <td>
                                       <center>

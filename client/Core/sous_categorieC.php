@@ -1,5 +1,5 @@
 <?php
-	include_once "../../config.php";
+	include_once "../config.php";
 	include_once "categorieC.php";
 	/**
 	* 
@@ -8,9 +8,9 @@
 	{
 		function recuperer($reference_categorie){
 			$db = config::getConnexion();
-			$sql = "SELECT * FROM sous_categorie WHERE reference_categorie = $reference_categorie";
-			$liste = $db->query($sql);
-			return $liste;
+			$sql = "SELECT * FROM sous_categorie WHERE reference_categorie=$reference_categorie";
+			$l = $db->query($sql);
+			return $l;
 		}
 
 		function ajouter($sous_categorie,$reference_categorie){
@@ -36,6 +36,13 @@
 			$db = config::getConnexion();
 			$sql = "SELECT reference FROM sous_categorie";
 			$req=$db->prepare($sql);
+			return $req;
+		}
+
+		function afficher1(){
+			$db = config::getConnexion();
+			$sql = "SELECT nom FROM sous_categorie";
+			$req = $db->query($sql);
 			return $req;
 		}
 		/*function recuperer1($reference){
