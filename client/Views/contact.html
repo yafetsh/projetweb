@@ -689,9 +689,9 @@
 var map;
 function initialize_map() {
 if ($('#map').length) {
-	var myLatLng = new google.maps.LatLng(-37.814199, 144.961560);
+	var myLatLng = new google.maps.LatLng(36.8346589,10.2426542);
 	var mapOptions = {
-		zoom: 17,
+		zoom: 10,
 		center: myLatLng,
 		scrollwheel: false,
 		panControl: false,
@@ -704,8 +704,7 @@ if ($('#map').length) {
 	var marker = new google.maps.Marker({
 		position: myLatLng,
 		map: map,
-		tittle: 'Envato',
-		icon: './images/map-locator-1.png'
+		tittle: 'Hi'
 	});
 } else {
 	return false;
