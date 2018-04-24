@@ -479,7 +479,10 @@
                     <li class="col-md-12"> 
                       <!-- ADRESSE -->
                       <label>*ADRESSE
-                        <input type="text" name="rue" >
+                        <input type="text" name="rue" value="<?php echo !empty($rue)?$rue:'';?>" >
+                         <?php if (!empty($rueError)): ?>
+                              <span class="help-inline" style="color:Red"><?php echo $rueError;?></span>
+                          <?php endif; ?>
                       </label>
                     </li>
                     <!-- Telephone -->

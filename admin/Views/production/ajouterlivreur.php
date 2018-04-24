@@ -2,18 +2,69 @@
 
     include_once "../../Core/livreurcore.php";
     include_once "../../Entities/livreur.php";
-
-    if(isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['tel']) and isset($_POST['email'])){
+if ( !empty($_POST)) { 
+    $nomError = null; 
+     $prenomError = null;
+     $telError =  null;
+     $emailError = null;
+    $nom = $_POST['nom']; 
+     $prenom = $_POST['prenom'];
+    $tel = $_POST['tel']; 
+    $email= $_POST['email']; 
+    $valid = true;
+    $nom = test_input($_POST["nom"]);
+    $prenom = test_input($_POST["prenom"]);
+    // check if name only contains letters and whitespace
+    if(!preg_match("/^[5-9]{1}[0-9]{7}$/", $tel)) {
+  // $phone is valid
+       $telError = "Numero incorrect";
+    }
+    if (!preg_match("/^[a-zA-Z ]*$/",$nom)) {
+      $nomError = "Seuls les lettres sont autorisées"; 
+    }
+     if (!preg_match("/^[a-zA-Z ]*$/",$prenom)) {
+      $prenomError = "Seuls les lettres sont autorisées"; 
+    }
+    if (empty($nom)) {
+        $nomError = '*Champs requis';
+        $valid = false;
+    }
+    if (empty($prenom)) {
+        $prenomError = '*Champs requis';
+        $valid = false;
+    }
+    if (empty($tel)) {
+        $telError = '*Champs requis';
+        $valid = false;
+    }
+    
+$email = test_input($_POST["email"]);
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  if (empty($email)) {
+        $emailError = '*Champs requis';
+        $valid = false;
+    }
+  else $emailError = "Invalid email format"; 
+}
+else if(isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['tel']) and isset($_POST['email'])){
+     // if (($_POST['nom'] !="")&&($_POST['prenom'] !="")&&($_POST['tel'] !="")&&($_POST['email'] !="")) {
+        # code...
+      
         $livreur1=new livreur($_POST['pseudo'],$_POST['nom'],$_POST['prenom'],$_POST['tel'],$_POST['email']);
         $livreur1c=new livreurcore();
         $livreur1c->ajouterlivreur($livreur1);
-         header("Location: afficherlivreurs.php");
+        header("Location: afficherlivreurs.php");
 
     }
-    else {
-        echo "Verifier les champs";
+    //else {
+      //  echo "Verifier les champs";
     }
-
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
   ?>
 
   <!DOCTYPE html>
@@ -341,7 +392,10 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nom <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nom" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nom" required="required" type="text">
+                          <input id="nom" class="form-control col-md-7 col-xs-12" name="nom"  type="text" value="<?php echo !empty($nom)?$nom:'';?>">
+                           <?php if (!empty($nomError)): ?>
+                              <span class="help-inline" style="color:Red"><?php echo $nomError;?></span>
+                          <?php endif; ?>
                         </div>
                       </div>
 
@@ -350,21 +404,30 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Prenom<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input  id="prenom" name="prenom" required="required" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis">
+                          <input  id="prenom" name="prenom"  class="form-control col-md-7 col-xs-12" value="<?php echo !empty($prenom)?$prenom:'';?>">
+                           <?php if (!empty($prenomError)): ?>
+                              <span class="help-inline" style="color:Red"><?php echo $prenomError;?></span>
+                          <?php endif; ?>
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Telephone<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis"  data-phonenumber-rule="^((([0-9]{8})|((\+)[0-9]{7})))$" data-phonenumber-msg="Merci d'entrer un numéro de téléphone valide" name="tel" id="tel" type="text">
+                          <input placeholder="00 000 000" class="form-control col-md-7 col-xs-12" name="tel" id="tel" type="text" value="<?php echo !empty($tel)?$tel:'';?>">
+                           <?php if (!empty($telError)): ?>
+                              <span class="help-inline" style="color:Red"><?php echo $telError;?></span>
+                          <?php endif; ?>
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Email<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" name="email" data-rule-email="true" required="required" class="form-control col-md-7 col-xs-12" required="1" data-msg-required="Champs requis">
+                          <input id="email" name="email"  class="form-control col-md-7 col-xs-12" value="<?php echo !empty($email)?$email:'';?>">
+                           <?php if (!empty($emailError)): ?>
+                              <span class="help-inline" style="color:Red"><?php echo $emailError;?></span>
+                          <?php endif; ?>
                         </div>
                       </div>
                       <div class="ln_solid"></div>
