@@ -72,22 +72,23 @@ function supprimerReservation($id){
 
 }
 function modifierReservation($reservation,$id){
-  $sql="UPDATE reservation SET ID=:ID, nom=:nom,prenom=:prenom,telephone=:telephone,type=:type,date:=date, WHERE ID=:ID";
+
+  $sql="UPDATE reservation SET id=:idd, nom=:nom,prenom=:prenom,telephone=:telephone,type=:type,date=:date, WHERE id=:id";
 
   $db = config::getConnexion();
   //$db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
 try{
       $req=$db->prepare($sql);
-  $idd=$reservation->getId();
+      $idd=$reservation->getId();
       $nom=$reservation->getNom();
       $prenom=$reservation->getPrenom();
       $telephone=$reservation->getTelephone();
       $type=$reservation->getType();
       $date=$reservation->getDate();
+      $datas = array(':idd'=>$idd, ':id'=>$id, ':nom'=>$nom,':prenom'=>$prenom,':telephone'=>$telephone,':type'=>$type,':date'=>$date);
 
-  $datas = array(':ID1'=>$ID1, ':ID'=>$ID, ':nom'=>$nom,':prenom'=>$prenom,':telephone'=>$telephone,':type'=>$type,':date'=>$date);
-  $req->bindValue(':ID1',$ID1);
-  $req->bindValue(':ID',$ID);
+  $req->bindValue(':idd',$idd);
+  $req->bindValue(':id',$id);
   $req->bindValue(':nom',$nom);
   $req->bindValue(':prenom',$prenom);
   $req->bindValue(':telephone',$telephone);

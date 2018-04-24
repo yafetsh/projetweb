@@ -1,58 +1,21 @@
-<?php
+<!DOCTYPE html>
+<?PHP
 include "../Entities/reservation.php";
 include "../Core/ReservationCore.php";
-    if ( !empty($_POST)) {
-        // keep track validation errors
-        $nomError = null;
-        $prenomError = null;
-        $dateError = null;
-        $telephoneError = null;
-        $typeError = null;
 
-        // keep track post values
-        $nom = $_POST['nom'];
-        $prenom = $_POST['prenom'];
-        $telephone = $_POST['telephone'];
-        $type = $_POST['type'];
-        $date = $_POST['date'];
-        // validate input
-        $valid = true;
-        if (empty($nom)) {
-            $nomError = '*Please enter Name';
-            $valid = false;
-        }
+  if(isset($_GET['id'])){
+    $rC=new ReservationCore();
+    $r=$rC->reccupererinformations($_GET["id"]);
+    foreach ($r as $row) {
+      $id=$row['id'];
+      $nom=$row['nom'];
+      $prenom=$row['prenom'];
+      $telephone=$row['telephone'];
+      $type=$row['type'];
+      $date=$row['date'];
 
-        if (empty($prenom)) {
-            $nomError = '*Please enter Surname';
-            $valid = false;
-        }
-        if (empty($telephone)) {
-            $telephoneError = '*Please enter Phone number';
-            $valid = false;
-        }
-        if (empty($date)) {
-            $dateError = '*Please enter Date';
-            $valid = false;
-        }
-    }
-
-
-if (isset($_GET['id'])){
-	$reservationC=new ReservationCore();
-    $result=$reservationC->reccupererinformations($_GET['id']);
-	foreach($result as $row){
-		$idd=$row['id'];
-		$nomm=$row['nom'];
-		$prenomm=$row['prenom'];
-		$telephonee=$row['telephone'];
-		$typee=$row['type'];
-    $datee=$row['date'];
 
 ?>
-
-
-
-<!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/02-shop-sidebar-right.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:47:06 GMT -->
@@ -94,19 +57,7 @@ if (isset($_GET['id'])){
 </head>
 <body>
 <!-- LOADER ===========================================-->
-<div id="loader">
-  <div class="loader">
-    <div class="position-center-center"> <img src="images/logo-dark.png" alt="">
 
-      <p class="font-playfair text-center">Please Wait...</p>
-      <div class="loading">
-        <div class="ball"></div>
-        <div class="ball"></div>
-        <div class="ball"></div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Page Wrap -->
 <div id="wrap">
@@ -251,7 +202,7 @@ if (isset($_GET['id'])){
                     <ul class="row">
                       <li class="col-sm-12">
                         <label> Nom:*
-                          <input type="text" class="form-control" name="nom" value="<?PHP echo $nomm ?>">
+                          <input type="text" class="form-control" name="nom" value="<?PHP echo $nom ?>">
                           <?php if (!empty($nomError)): ?>
                               <span class="help-inline" style="color:Red"><?php echo $nomError;?></span>
                           <?php endif; ?>
@@ -259,7 +210,7 @@ if (isset($_GET['id'])){
                       </li>
                       <li class="col-sm-12">
                         <label> Prénom:*
-                          <input type="text" class="form-control" name="prenom" value="<?PHP echo $prenomm ?>" >
+                          <input type="text" class="form-control" name="prenom" value="<?PHP echo $prenom ?>" >
                           <?php if (!empty($prenomError)): ?>
                               <span class="help-inline" style="color:Red"><?php echo $prenomError;?></span>
                           <?php endif; ?>
@@ -267,7 +218,7 @@ if (isset($_GET['id'])){
                       </li>
                       <li class="col-sm-12">
                         <label> Numéro téléphone:*
-                          <input type="text" class="form-control" name="telephone" value="<?PHP echo $telephonee ?>">
+                          <input type="text" class="form-control" name="telephone" value="<?PHP echo $telephone ?>">
                           <?php if (!empty($telephoneError)): ?>
                               <span class="help-inline" style="color:Red"><?php echo $telephoneError;?></span>
                           <?php endif; ?>
@@ -279,14 +230,15 @@ if (isset($_GET['id'])){
                     <ul class="row">
                       <li class="col-sm-12">
                         <label>
-                    Type de maquillage sélectionné: <?PHP echo $typee ?>
+                    Type de maquillage:
                     <select  class="form-control" name="type" >
+                      <option value="<?PHP echo $type ?>" selected="selected"><?PHP echo $type ?></option>
                       <option value="Maquillage de jour">Maquillage de jour</option>
                       <option value="Maquillage de soirée">Maquillage de soirée</option>
                     <option value="Maquillage de mariage">Maquillage de mariage</option></select></label>  </li>
                       <li class="col-sm-12">
                         <label>Date et l'heure:*
-                          <input type="datetime-local" class="form-control" name="date" value="<?PHP echo $datee ?>" >
+                          <input type="datetime" class="form-control" name="date" value="<?PHP echo $date ?>" >
                           <?php if (!empty($dateError)): ?>
                               <span class="help-inline" style="color:Red"><?php echo $dateError;?></span>
                           <?php endif; ?>
@@ -298,7 +250,7 @@ if (isset($_GET['id'])){
                       <li class="col-sm-12 no-margin">
                         <input type="submit" value="Modifier" name="modifier" class="btn" id="btn_submit"></button> <p>
                       </li>
-                      <td><input type="hidden" name="cin_ini" value="<?PHP echo $_GET['id'];?>"></td>
+                      <td><input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>"></td>
 
                     </ul>
                   </div>
@@ -306,18 +258,19 @@ if (isset($_GET['id'])){
 
             </form>
             <?PHP
-  	}
-  }
-  if (isset($_POST['modifier'])){
-  	$reservation=new Reservation($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['telephone'],$_POST['type'],$_POST['date']);
-  	$reservationC->modifierReservation($reservation,$_POST['cin_ini']);
-  	echo $_POST['cin_ini'];
-  	header('Location: afficherReservation.php');
-  }
-  ?>
+}
+}
+            if (isset($_POST['modifier'])){
+              $reservation=new ReservationCore($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['telephone'],$_POST['type'],$_POST['date']);
+            $rC->modifierReservation($reservation,$_POST['id_ini']);
+              echo $_POST['id_ini'];
+             header("Location: afficherReservation.php");
+            }
+            ?>
           </div>
         </div>
       </div>
+
     </section>
     <br>
 

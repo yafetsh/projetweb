@@ -1,4 +1,9 @@
+<?PHP
+include "../../Core/ReclamationCore.php";
+$reclamation1C=new ReclamationCore();
+$listeReclamations=$reclamation1C->afficherReclamations();
 
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -292,10 +297,8 @@
                     </thead>
                     <tbody>
                     <?php
-                     include 'config.php';
-                     $pdo = Database::connect();
-                     $sql = 'SELECT * FROM reclamation ORDER BY id DESC';
-                     foreach ($pdo->query($sql) as $row) {
+
+                     foreach ($listeReclamations as $row) {
                               echo '<tr>';
                               echo '<td>'. $row['id'] . '</td>';
                               echo '<td>'. $row['nom'] . '</td>';
@@ -314,7 +317,6 @@
                                  echo '</td>';
                                     echo '</tr>';
                      }
-                     Database::disconnect();
                     ?>
                     </tbody>
               </table>

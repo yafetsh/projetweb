@@ -26,6 +26,7 @@ function getId(){
   function setNom($nom){
     $this->nom=$nom;
   }
+
   function getPrenom(){
     return $this->prenom;
   }

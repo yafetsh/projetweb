@@ -3,7 +3,42 @@
 include "../Entities/reclamation.php";
 include "../Core/ReclamationCore.php";
 
-
+if ( !empty($_POST)) {
+    // keep track validation errors
+    $nomError = null;
+    $prenomError = null;
+    $mailError = null;
+    $telephoneError = null;
+    $typeError = null;
+    $causeError = null;
+    // keep track post values
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $mail = $_POST['mail'];
+    $telephone = $_POST['telephone'];
+    $type = $_POST['type'];
+    $cause = $_POST['cause'];
+    // validate input
+    if (empty($nom)) {
+        $nomError = '*Please enter Name';
+        $valid = false;
+    }
+    if (empty($prenom)) {
+        $prenomError = '*Please enter Surname';
+        $valid = false;
+    }
+    if (empty($telephone)) {
+        $telephoneError = '*Please enter Phone number';
+        $valid = false;
+    }
+  if (empty($mail)) {
+        $mailError = '*Please enter Adresse mail';
+        $valid = false;
+    }
+    if (empty($cause)) {
+        $causeError = '*Please enter Cause';
+        $valid = false;
+    }
 
     if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['cause']) ){
     $reclamation1=new Reclamation($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause'],$_POST['etat']);
@@ -11,53 +46,6 @@ include "../Core/ReclamationCore.php";
     $reclamation1C->ajouterReclamation($reclamation1);
     header('Location: afficherReclamation.php');
     }
-    if ( !empty($_POST)) {
-        // keep track validation errors
-        $nomError = null;
-        $prenomError = null;
-        $mailError = null;
-        $telephoneError = null;
-        $typeError = null;
-        $causeError = null;
-
-
-        // keep track post values
-        $nom = $_POST['nom'];
-        $prenom = $_POST['prenom'];
-        $mail = $_POST['mail'];
-        $telephone = $_POST['telephone'];
-        $type = $_POST['type'];
-        $cause = $_POST['cause'];
-
-
-
-        // validate input
-        $valid = true;
-        if (empty($nom)) {
-            $nomError = '*Please enter Name';
-            $valid = false;
-        }
-        if (empty($prenom)) {
-            $prenomError = '*Please enter Surname';
-            $valid = false;
-        }
-        if (empty($telephone)) {
-            $telephoneError = '*Please enter Phone number';
-            $valid = false;
-        }
-      if (empty($mail)) {
-            $mailError = '*Please enter Adresse mail';
-            $valid = false;
-        }
-        if (empty($cause)) {
-            $causeError = '*Please enter Cause';
-            $valid = false;
-        }
-        if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
-          $maillError = '*Please enter Valid Adress mail';
-}
-
-
     }
     ?>
 <!DOCTYPE html>
@@ -91,6 +79,8 @@ include "../Core/ReclamationCore.php";
 
 <!-- JavaScripts -->
 <script src="js/modernizr.js"></script>
+<script src="saisie.js"></script>
+
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -256,13 +246,13 @@ include "../Core/ReclamationCore.php";
 		    <!--======= FORM  =========-->
 
 
-            <form role="form" id="contact_form" class="contact-form" method="POST" novalidate >
+            <form name="ajout" onSubmit="return verif()" role="form" id="contact_form" class="contact-form" method="POST" novalidate >
               <div class="row">
                 <div class="col-md-6">
                   <ul class="row">
                     <li class="col-sm-12">
                       <label> Nom:*
-                        <input type="text" class="form-control" name="nom"  value="<?php echo !empty($nom)?$nom:'';?>">
+                        <input type="text" class="form-control" name="nom"  onblur="verifNom(this)" value="<?php echo !empty($nom)?$nom:'';?>">
                         <?php if (!empty($nomError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $nomError;?></span>
                         <?php endif; ?>
@@ -270,7 +260,7 @@ include "../Core/ReclamationCore.php";
                     </li>
                     <li class="col-sm-12">
                       <label> Prénom:*
-                        <input type="text" class="form-control" name="prenom" value="<?php echo !empty($prenom)?$prenom:'';?>">
+                        <input type="text" class="form-control" name="prenom" onblur="verifPrenom(this)" value="<?php echo !empty($prenom)?$prenom:'';?>">
                         <?php if (!empty($prenomError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $prenomError;?></span>
                         <?php endif; ?>
@@ -317,7 +307,7 @@ include "../Core/ReclamationCore.php";
 
 
                     <li class="col-sm-12 no-margin">
-                      <input type="submit"  value="Passez la réclamation" name="ajouter" class="btn" id="btn_submit" formaction="send"> <p>
+                      <input type="submit"  value="Passez la réclamation" name="ajouter" class="btn" id="btn_submit"> <p>
                     </li>
                   </ul>
                 </div>

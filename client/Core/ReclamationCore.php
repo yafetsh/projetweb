@@ -78,40 +78,18 @@ function supprimerReclamation($id){
   }
 
 }
-function modifierReclamation($reclamation,$id){
-  $sql="UPDATE reservation SET ID=:ID, nom=:nom,prenom=:prenom,mail=:mail,telephone=:telephone,type=:type,cause:=cause WHERE ID=:ID";
-
+/*function validerReclamation(,$id){
+  $n='validé';
+  $sql = "UPDATE reclamation  set etat ='$n' WHERE id = $id";
   $db = config::getConnexion();
   //$db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
-try{
+
       $req=$db->prepare($sql);
-  $idd=$reservation->getId();
-      $nom=$reclamation->getNom();
-      $prenom=$reclamation->getPrenom();
-      $mail=$reclamation->getMail();
-      $telephone=$reclamation->getTelephone();
-      $type=$reclamation->getType();
-      $cause=$reclamation->getCause();
 
-
-  $datas = array(':ID1'=>$ID1, ':ID'=>$ID, ':nom'=>$nom,':prenom'=>$prenom,':mail'=>$mail,':telephone'=>$telephone,':type'=>$type,':cause'=>$cause);
-  $req->bindValue(':ID1',$ID1);
-  $req->bindValue(':ID',$ID);
-  $req->bindValue(':nom',$nom);
-  $req->bindValue(':prenom',$prenom);
-  $req->bindValue(':mail',$mail);
-  $req->bindValue(':telephone',$telephone);
-  $req->bindValue(':type',$type);
-  $req->bindValue(':cause',$cause);
           $s=$req->execute();
 
-         // header('Location: index.php');
-      }
-      catch (Exception $e){
-          echo " Erreur ! ".$e->getMessage();
- echo " Les datas : " ;
-print_r($datas);
-}}
+
+}*/
       function reccupererinformations($id){
         $db = config::getConnexion();
         $sql="SELECT * from reclamation where id=$id";

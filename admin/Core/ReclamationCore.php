@@ -1,5 +1,5 @@
 <?php
-include_once "../Config.php";
+include_once "../../Config.php";
 class ReclamationCore
 {
 function afficherReclamation($rec){
@@ -56,21 +56,23 @@ die('Erreur :'.$r.getMessage());
       }
 
 }*/
-function supprimerReservation($nom){
-  $sql="DELETE FROM reservation where nom= :nom";
-      $req=$db->prepare($sql);
-  $req->bindValue(':nom',$nom);
+function supprimerReclamation($id){
+  $sql="DELETE FROM reclamation where id= :id";
+  $db = config::getConnexion();
+    $req=$db->prepare($sql);
+  $req->bindValue(':id',$id);
   try{
-          $req->execute();
-         // header('Location: index.php');
-      }
-      catch (Exception $e){
-          die('Erreur: '.$e->getMessage());
-      }
+      $req->execute();
+     // header('Location: index.php');
+    }
+    catch (Exception $e){
+      die('Erreur: '.$e->getMessage());
+  }
+
 }
 function validerReclamation()
 {
-  
+
 }
 }
 
