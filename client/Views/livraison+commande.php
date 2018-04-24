@@ -1,3 +1,46 @@
+<?PHP
+include "../Entities/livraison.php";
+include "../Core/livraisoncore.php";
+    if ( !empty($_POST)) { 
+        $rueError = null; 
+        $numeroError = null;
+        $regionError =  null;
+        $villeError = null;
+        $rue = $_POST['rue']; 
+        $numero = $_POST['numero'];
+        $region = $_POST['region']; 
+        $ville= $_POST['ville']; 
+        $valid = true;
+         if (empty($rue)) {
+        $rueError = '*Champs requis';
+        $valid = false;
+    }
+    if (empty($numero)) {
+        $numeroError = '*Champs requis';
+        $valid = false;
+    }
+    if (empty($region)) {
+        $regionError = '*Champs requis';
+        $valid = false;
+    }
+    if (empty($ville)) {
+        $villeError = '*Champs requis';
+        $valid = false;
+    }
+ else if (isset($_POST['rue']) and isset($_POST['numero']) and isset($_POST['region']) and isset($_POST['ville']) ){
+$livraison1=new livraison($_POST['id'],$_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
+$livraison1c=new livraisoncore();
+$livraison1c->ajouterlivraison($livraison1);
+header('Location: livraisonclient.php');
+  
+}
+}
+//*/
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -463,7 +506,7 @@
             </li>
           </ul>
         </div>
-        
+        <form method="POST" class="form-horizontal form-label-left" >
         <!-- Payments Steps -->
         <div class="shopping-cart"> 
           
@@ -474,7 +517,7 @@
               <!-- ESTIMATE SHIPPING & TAX -->
               <div class="col-sm-7">
                 <h6> DETAILS</h6>
-                <form method="POST" class="form-horizontal form-label-left" action="ajoutLivraison.php">
+                
                   <ul class="row">
                     <li class="col-md-12"> 
                       <!-- ADRESSE -->
@@ -488,13 +531,16 @@
                     <!-- Telephone -->
                     <li class="col-md-6">
                       <label> *TELEPHONE
-                        <input type="number" name="numero">
+                        <input type="number" name="numero" value="<?php echo !empty($numero)?$numero:'';?>">
+                          <?php if (!empty($numeroError)): ?>
+                              <span class="help-inline" style="color:Red"><?php echo $numeroError;?></span>
+                          <?php endif; ?>
                       </label>
                     </li>
                     <!-- *Region -->
                     <li class="col-md-12">
                       <label> *REGION
-                        <select name="region" class="selectpicker">
+                        <select name="region" class="selectpicker" value="<?php echo !empty($region)?$region:'';?>">
                           <option value="" selected="selected">Sélectionner...</option>
                           <option value="Ariana">Ariana</option>
                           <option value="Ben arous">Ben Arous</option>
@@ -521,19 +567,25 @@
                           <option value="Tunis">Tunis</option>
                           <option value="Zaghouan">Zaghouan</option>
                         </select>
+                         <?php if (!empty($regionError)): ?>
+                              <span class="help-inline" style="color:Red"><?php echo $regionError;?></span>
+                          <?php endif; ?>
                       </label>
                     </li>
                       <!-- VILLE -->
                       <li class="col-md-12"> 
                       <label>*VILLE
-                        <input type="text" name="ville" >
+                        <input type="text" name="ville" value="<?php echo !empty($ville)?$ville:'';?>">
+                           <?php if (!empty($villeError)): ?>
+                              <span class="help-inline" style="color:Red"><?php echo $villeError;?></span>
+                          <?php endif; ?>
                       </label>
                     </li>
 
                     <!--  -->
-                    <input type="submit" value="PASSER MA COMMANDE" class="btn" id="btn_submit">
+               
                   </ul>
-                </form>
+                
               </div>
               
               <!-- SUB TOTAL -->
@@ -580,14 +632,14 @@
                         </div>
                       </li>
                     </ul>
-                    <a href="#." class="btn btn-small btn-dark pull-right">PLACE ORDER</a> </div>
+                   <input type="submit" value="PASSER MA COMMANDE" class="btn btn-small btn-dark pull-right" id="btn_submit"> </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+      </form>
       <!--======= RELATED PRODUCTS =========-->
       <section class="section-p-60px new-arrival new-arri-w-slide">
         <div class="container"> 
