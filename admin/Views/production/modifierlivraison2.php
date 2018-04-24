@@ -321,11 +321,11 @@
       foreach ($l as $row) {
         $id=$row['id'];
         $etat=$row['etat'];
-    
+    }}
   ?>
 
 
-                    <form method="POST">
+                    <form method="GET" action="modif_livraison.php">
                      <li class="col-md-12"> 
 <label>*Id_livraison
 <input disabled type="number" name="id" value="<?PHP echo $id ?>">
@@ -346,21 +346,14 @@
 </li>
  <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-<input  class="btn btn-success" type="submit" name="modifier" value="modifier"></td>
-<input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>"></td>
+<input  class="btn btn-success" type="submit" name="modif" value="modifier">
+<input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>">
+
 </div>
 </div>
 </form>
-<?PHP
-  }
-}
-if (isset($_POST['modifier'])){
-  $livraison=new livraison($_POST['id'],'','','','',$_POST['etat']);
-  $lC->modifierlivraison($livraison,$_POST['id_ini']);
-  echo $_POST['id_ini'];
- header("Location: afficherlivraisons.php");
-}
-?>
+
+
 
                   </div>
                 </div>

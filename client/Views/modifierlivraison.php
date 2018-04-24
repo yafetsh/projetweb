@@ -479,7 +479,7 @@
         $numero=$row['numero'];
         $region=$row['region'];
         $ville=$row['ville'];
-    
+    }}
   ?>
     
    <!-- Payments Steps -->
@@ -492,7 +492,7 @@
               <!-- ESTIMATE SHIPPING & TAX -->
               <div class="col-sm-7">
                 <h6> DETAILS</h6>
-  <form method="POST">
+  <form method="GET" action="modif_livraison.php">
 <ul class="row">
                     <li class="col-md-12"> 
                       <!-- ADRESSE -->
@@ -546,8 +546,8 @@
                     </li>
 
                     <!--  -->
-                   <input class="btn" id="btn_submit" type="submit" name="modifier" value="modifier">
-<input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>">
+                   <input class="btn" id="btn_submit" type="submit" name="modif" value="modifier">
+                   <input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>">
                   </ul>
                   </form>
 </div>
@@ -605,18 +605,6 @@
           </div>
         </div>
       </div>
-      
-<?PHP
-  }
-}
-if (isset($_POST['modifier'])){
-  $livraison=new livraison($_POST['id'],$_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
-  $lC->modifierlivraison($livraison,$_POST['id_ini']);
-  echo $_POST['id_ini'];
- header("Location: livraisonclient.php");
-}
-?>
-
 
   
       <!--======= RELATED PRODUCTS =========-->

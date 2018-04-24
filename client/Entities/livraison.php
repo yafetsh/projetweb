@@ -11,7 +11,6 @@ class livraison
   function __construct($id,$rue,$numero,$region,$ville)
   {
 $this->id=$id;
-$this->etat=$etat;
 $this->region=$region;
 $this->ville=$ville;
 $this->rue=$rue;

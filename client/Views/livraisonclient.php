@@ -256,8 +256,7 @@
                                 <input type="submit" name="supprimer" value="Supprimer"> </div>
                                 <input type="hidden" value="<?PHP echo $row['id']; ?>" name="id">
                             <meta name="viewport" content="width=device-width, initial-scale=1">
-                            <p id="demo" style="text-align: center; font-size: 15px; margin-top: 0px;"></p> 
-                            
+                            <p id="demo"  style="text-align: center; font-size: 15px; margin-top: 0px;"></p> 
 
                           </td>
                          
