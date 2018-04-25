@@ -1,5 +1,5 @@
 <?php
-include "../../config.php";
+include_once "../../config.php";
 class livreurcore
 	{
 		function afficherLivreur($l){
@@ -16,6 +16,19 @@ class livreurcore
 		echo "Tel: " .$tel. "<br>";
 		echo "Email: " .$email. "<br>";
 	}
+		function afficherPseudoslivreurs(){
+		$c=Config::getConnexion();
+		$sql="SELECT pseudo FROM livreur where etat like 'disponible'";
+		try{
+			$liste=$c->query($sql);
+			return $liste;
+
+		}catch(Exception $e){
+			die('Erreur : ' .$e->getMessage());
+		}
+	}
+	
+
 	function afficherLivreurs(){
 		$c=Config::getConnexion();
 		$sql="SELECT * FROM livreur";
@@ -27,17 +40,6 @@ class livreurcore
 			die('Erreur : ' .$e->getMessage());
 		}
 
-	}
-	function afficherPseudoslivreurs(){
-		$c=Config::getConnexion();
-		$sql="SELECT pseudo FROM livreur";
-		try{
-			$liste=$c->query($sql);
-			return $liste;
-
-		}catch(Exception $e){
-			die('Erreur : ' .$e->getMessage());
-		}
 	}
 	function afficherLivreursselondisponibilité(){
 		$c=Config::getConnexion();

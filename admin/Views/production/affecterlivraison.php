@@ -1,9 +1,8 @@
- <?PHP
+<?PHP
 include "../../Core/livraisoncore.php";
 $livraison1C=new livraisoncore();
 $listeLivraisons=$livraison1C->afficherLivraisonssansLivreurs();
 $livraison2C=new livraisoncore();
-
 ?>
 
 
@@ -327,6 +326,8 @@ $livraison2C=new livraisoncore();
                           <th>Region</th>
                           <th>Ville</th>
                           <th>Etat</th>
+                          <th>Date</th>
+                          <th>Date livraison</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -341,9 +342,12 @@ $livraison2C=new livraisoncore();
                           <td><?PHP echo $row['region']; ?></td>
                           <td><?PHP echo $row['ville']; ?></td>
                           <td><?PHP echo $row['etat']; ?></td>
+                          <td><?PHP echo $row['date']; ?></td>
+                          <td><?PHP echo $row['datelivraison']; ?></td>
                           
                           <td>
-                              <a  href="affecterlivraison2.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="height: 33px ;width:120px">
+                            <a href="affecterlivraison2.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="background-color: blue; width:120px">Choisir une date </a>
+                              <a  href="affecterlivraison3.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="height: 33px ;width:120px">
                             Choisir un livreur</a>
                           </td>
                           </tr>
@@ -385,3 +389,4 @@ $livraison2C=new livraisoncore();
     <script src="../build/js/custom.min.js"></script>
   </body>
 </html>
+

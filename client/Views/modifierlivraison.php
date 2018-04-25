@@ -492,7 +492,7 @@
               <!-- ESTIMATE SHIPPING & TAX -->
               <div class="col-sm-7">
                 <h6> DETAILS</h6>
-  <form method="GET" action="modif_livraison.php">
+  <form method="GET" action="aff_livraison.php">
 <ul class="row">
                     <li class="col-md-12"> 
                       <!-- ADRESSE -->

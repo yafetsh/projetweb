@@ -28,7 +28,7 @@ class livraisoncore
 		}
 
 	}
-  function afficherLivraisonssanslivreurs(){
+   function afficherLivraisonssanslivreurs(){
     $c=Config::getConnexion();
     $sql="SELECT * FROM livraison where pseudoLivreur is NULL";
     try{
@@ -56,16 +56,17 @@ function supprimerlivraison($id){
 }
 function modifierlivraison($livraison,$idd){
       $db = config::getConnexion();
-      $sql="UPDATE livraison SET etat=:etat WHERE id=:idd";
+      $sql="UPDATE livraison SET etat=:etat,pseudoLivreur=:pseudoLivreur WHERE id=:idd";
       try{
       $req=$db->prepare($sql);
 
     
-        
-        $etat=$livraison->getEtat();
-    
+      $pseudoLivreur=$livraison->getPseudoLivreur();
+  
+      $etat=$livraison->getEtat();
+      $req->bindValue(':pseudoLivreur',$pseudoLivreur);
       $req->bindValue(':idd',$idd);
-
+   
       $req->bindValue(':etat',$etat);
       $s=$req->execute();
     }

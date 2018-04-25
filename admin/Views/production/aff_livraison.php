@@ -4,7 +4,7 @@
 $lC=new livraisoncore();
 if (isset($_GET['modif'])) {
   $lC=new livraisoncore();
-  $livraison=new livraison($_GET['id'],'','','','',$_GET['etat'],$_GET['pseudoLivreur']);
+  $livraison=new livraison($_GET['id'],'','','','','',$_GET['pseudoLivreur']);
   $lC->modifierlivraison($livraison,$_GET['id_ini']);
   header('location: afficherlivraisons.php');
 

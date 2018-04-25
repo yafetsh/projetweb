@@ -7,9 +7,9 @@ class livraison
   private $ville;
   private $rue;
   private $numero;
+  private $pseudoLivreur;
 
-
-  function __construct($id,$rue,$numero,$region,$ville,$etat)
+  function __construct($id,$rue,$numero,$region,$ville,$etat,$pseudoLivreur)
   {
 $this->id=$id;
 $this->etat=$etat;
@@ -17,7 +17,7 @@ $this->region=$region;
 $this->ville=$ville;
 $this->rue=$rue;
 $this->numero=$numero;
-
+$this->pseudoLivreur=$pseudoLivreur;
 
 }
 
