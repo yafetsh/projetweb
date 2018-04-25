@@ -11,7 +11,11 @@ include "../Core/livraisoncore.php";
         $region = $_POST['region']; 
         $ville= $_POST['ville']; 
         $valid = true;
-         if (empty($rue)) {
+    if(!preg_match("/^[5-9]{1}[0-9]{7}$/", $numero)) {
+  // $phone is valid
+       $numeroError = "Numero incorrect";
+    }
+    if (empty($rue)) {
         $rueError = '*Champs requis';
         $valid = false;
     }
@@ -27,13 +31,14 @@ include "../Core/livraisoncore.php";
         $villeError = '*Champs requis';
         $valid = false;
     }
+    }
  else if (isset($_POST['rue']) and isset($_POST['numero']) and isset($_POST['region']) and isset($_POST['ville']) ){
 $livraison1=new livraison($_POST['id'],$_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
 $livraison1c=new livraisoncore();
 $livraison1c->ajouterlivraison($livraison1);
 header('Location: livraisonclient.php');
   
-}
+
 }
 //*/
 
@@ -540,8 +545,11 @@ header('Location: livraisonclient.php');
                     <!-- *Region -->
                     <li class="col-md-12">
                       <label> *REGION
-                        <select name="region" class="selectpicker" value="<?php echo !empty($region)?$region:'';?>">
-                          <option value="" selected="selected">Sélectionner...</option>
+                        <select id="optionA" onchange="update(this.value)" name="region" class="selectpicker" value="<?php echo !empty($region)?$region:'';?>">
+                                                  <?php if (!empty($regionError)): ?>
+                              <span class="help-inline" style="color:Red"><?php echo $regionError;?></span>
+                          <?php endif; ?>
+                          <option value="Select">Sélectionner...</option>
                           <option value="Ariana">Ariana</option>
                           <option value="Ben arous">Ben Arous</option>
                           <option value="Bizerte">Bizerte</option>
@@ -567,16 +575,16 @@ header('Location: livraisonclient.php');
                           <option value="Tunis">Tunis</option>
                           <option value="Zaghouan">Zaghouan</option>
                         </select>
-                         <?php if (!empty($regionError)): ?>
-                              <span class="help-inline" style="color:Red"><?php echo $regionError;?></span>
-                          <?php endif; ?>
                       </label>
                     </li>
                       <!-- VILLE -->
                       <li class="col-md-12"> 
-                      <label>*VILLE
-                        <input type="text" name="ville" value="<?php echo !empty($ville)?$ville:'';?>">
-                           <?php if (!empty($villeError)): ?>
+                      <label>*VILLE 
+                      <br><br> <select id="data" name="ville" style="width: 400px; height: 30px">
+    <option>Select an Option...</option>
+  </select>
+   </select>
+                         <?php if (!empty($villeError)): ?>
                               <span class="help-inline" style="color:Red"><?php echo $villeError;?></span>
                           <?php endif; ?>
                       </label>
@@ -832,3 +840,29 @@ header('Location: livraisonclient.php');
 
 <!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/03-pay-checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:48:06 GMT -->
 </html>
+
+<script type="text/javascript">
+   function update(str)
+   {
+      var xmlhttp;
+
+      if (window.XMLHttpRequest)
+      {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+      }
+      else
+      {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      } 
+
+      xmlhttp.onreadystatechange = function() {
+        if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
+        {
+          document.getElementById("data").innerHTML = xmlhttp.responseText;
+        }
+      }
+
+      xmlhttp.open("GET","ville.php?opt="+str, true);
+      xmlhttp.send();
+  }
+</script>
