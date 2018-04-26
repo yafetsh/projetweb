@@ -44,10 +44,7 @@ $reservation1C=new ReservationCore();
 $reservation1C->ajouterReservation($reservation1);
 header('Location: afficherReservation.php');
 }
-else {
-  echo "vérifier les champs";
 
-}
 
     ?>
 <!DOCTYPE html>
@@ -81,6 +78,8 @@ else {
 
 <!-- JavaScripts -->
 <script src="js/modernizr.js"></script>
+<script src="saisieres.js"></script>
+
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -243,7 +242,7 @@ else {
 		 <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
 		    <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="POST" novalidate>
+            <form role="form" name="ajout" onSubmit="return verif()" id="contact_form" class="contact-form" method="POST" novalidate>
                 <div class="row">
                   <div class="col-md-6">
                     <ul class="row">

@@ -96,19 +96,7 @@ include "../Core/ReclamationCore.php";
 </head>
 <body>
 <!-- LOADER ===========================================-->
-<div id="loader">
-  <div class="loader">
-    <div class="position-center-center"> <img src="images/logo-dark.png" alt="">
 
-      <p class="font-playfair text-center">Please Wait...</p>
-      <div class="loading">
-        <div class="ball"></div>
-        <div class="ball"></div>
-        <div class="ball"></div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Page Wrap -->
 <div id="wrap">
@@ -298,7 +286,8 @@ include "../Core/ReclamationCore.php";
                   <select  class="form-control" name="type" >
                   <option value="Fonctionnalité de site">Fonctionnalité de site</option>
                   <option value="Prix">Prix</option>
-                  <option value="Produit">Produit</option></select></label>  </li>
+                  <option value="Produit">Produit</option>
+                  <option value="Autre">Autre</option></select></label>  </li>
                     <li class="col-sm-12">
                       <label> Cause de réclamation:*
                         <textarea class="form-control" name="cause" rows="5" ><?php echo $causee ?></textarea>
@@ -322,10 +311,10 @@ include "../Core/ReclamationCore.php";
     }
   }
   if (isset($_POST['modifier'])){
-    $reclamation=new Reclamation($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause']);
+    $reclamation=new Reclamation($_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause']);
     $reclamationC->modifierReclamation($reclamation,$_POST['cin_ini']);
     echo $_POST['cin_ini'];
-    header('Location: afficherReclamation.php');
+//    header('Location: afficherReclamation.php');
   }
   ?>
           </div>

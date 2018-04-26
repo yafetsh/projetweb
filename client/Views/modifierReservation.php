@@ -1,20 +1,44 @@
 <!DOCTYPE html>
-<?PHP
-include "../Entities/reservation.php";
-include "../Core/ReservationCore.php";
+<?php/*
+// including the database connection file
+include_once("db.php");
 
-  if(isset($_GET['id'])){
-    $rC=new ReservationCore();
-    $r=$rC->reccupererinformations($_GET["id"]);
-    foreach ($r as $row) {
-      $id=$row['id'];
-      $nom=$row['nom'];
-      $prenom=$row['prenom'];
-      $telephone=$row['telephone'];
-      $type=$row['type'];
-      $date=$row['date'];
+if(isset($_POST['modifier']))
+{
+    $id = $_POST['id'];
+    $nom=$_POST['nom'];
+    $prenom=$_POST['prenom'];
+    $telephone=$_POST['telephone'];
+    $type=$_POST['type'];
+    $date=$_POST['date'];
+
+    // checking empty fields
+
+        //updating the table
+        $result = mysqli_query($mysqli, "UPDATE reservation SET nom='$nom',prenom='$prenom',telephone='$telephone',type='$type',date='$date' WHERE id=$id");
+
+        //redirectig to the display page. In our case, it is index.php
+        header("Location: afficherReservation.php");
+
+}*/
+?>
+<?php/*
+//getting id from url
+$id = $_GET['id'];
+
+//selecting data associated with this particular id
+$result = mysqli_query($mysqli, "SELECT * FROM reservation WHERE id=$id");
+
+while($res = mysqli_fetch_array($result))
+{
+    $nom = $res['nom'];
+    $prenom = $res['prenom'];
+    $telephone = $res['telephone'];
+    $type = $res['type'];
+    $date = $res['date'];
 
 
+}*/
 ?>
 <html lang="en">
 
@@ -188,6 +212,22 @@ include "../Core/ReservationCore.php";
     <section class="section-p-30px conact-us no-padding-b animate fadeInUp" data-wow-delay="0.4s">
       <!--======= Réclamation =========-->
       <div class="container">
+        <?PHP
+        include "../Entities/reservation.php";
+        include "../Core/ReservationCore.php";
+        if (isset($_GET['id'])){
+          $rC=new ReservationCore();
+          $r=$rC->reccupererinformations($_GET["id"]);
+          foreach($r as $row){
+            $id=$row['id'];
+            $nom=$row['nom'];
+            $prenom=$row['prenom'];
+            $telephone=$row['telephone'];
+            $type=$row['type'];
+            $date=$row['date'];
+          }}
+
+        ?>
               <!-- Tittle -->
         <div class="tittle">
           <h5>Réservez vous</h5>
@@ -196,7 +236,7 @@ include "../Core/ReservationCore.php";
 		 <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
 		    <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="POST" >
+            <form role="form" id="contact_form" class="contact-form" method="GET" action="modif_res.php" >
                 <div class="row">
                   <div class="col-md-6">
                     <ul class="row">
@@ -248,25 +288,17 @@ include "../Core/ReservationCore.php";
   </li>
 
                       <li class="col-sm-12 no-margin">
-                        <input type="submit" value="Modifier" name="modifier" class="btn" id="btn_submit"></button> <p>
                       </li>
                       <td><input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>"></td>
+                      <input type="submit" value="Modifier" name="modif" class="btn" id="btn_submit"></button> <p>
+
 
                     </ul>
                   </div>
                 </div>
 
             </form>
-            <?PHP
-}
-}
-            if (isset($_POST['modifier'])){
-              $reservation=new ReservationCore($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['telephone'],$_POST['type'],$_POST['date']);
-            $rC->modifierReservation($reservation,$_POST['id_ini']);
-              echo $_POST['id_ini'];
-             header("Location: afficherReservation.php");
-            }
-            ?>
+
           </div>
         </div>
       </div>

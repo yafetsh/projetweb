@@ -118,13 +118,13 @@ $events = $req->fetchAll();
 				  <div class="form-group">
 					<label for="start" class="col-sm-2 control-label">Start date</label>
 					<div class="col-sm-10">
-					  <input type="text" name="start" class="form-control" id="start" readonly>
+					  <input type="text" name="start" class="form-control" id="start" >
 					</div>
 				  </div>
 				  <div class="form-group">
 					<label for="end" class="col-sm-2 control-label">End date</label>
 					<div class="col-sm-10">
-					  <input type="text" name="end" class="form-control" id="end" readonly>
+					  <input type="text" name="end" class="form-control" id="end">
 					</div>
 				  </div>
 

@@ -39,14 +39,14 @@ if ( !empty($_POST)) {
         $causeError = '*Please enter Cause';
         $valid = false;
     }
-
+  }
     if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['cause']) ){
     $reclamation1=new Reclamation($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause'],$_POST['etat']);
     $reclamation1C=new ReclamationCore();
     $reclamation1C->ajouterReclamation($reclamation1);
     header('Location: afficherReclamation.php');
     }
-    }
+
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +79,7 @@ if ( !empty($_POST)) {
 
 <!-- JavaScripts -->
 <script src="js/modernizr.js"></script>
-<script src="saisie.js"></script>
+<script src="saisierec.js"></script>
 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -294,7 +294,8 @@ if ( !empty($_POST)) {
                   <select  class="form-control" name="type">
                   <option value="Fonctionnalité de site">Fonctionnalité de site</option>
                   <option value="Prix">Prix</option>
-                  <option value="Produit">Produit</option></select></label>  </li>
+                  <option value="Produit">Produit</option>
+                  <option value="Autre">Autre</option></select></label>  </li>
                     <li class="col-sm-12">
                       <label> Cause de réclamation:*
                         <textarea class="form-control" name="cause" rows="5" value="<?php echo !empty($cause)?$cause:''; ?>"></textarea>

@@ -1,15 +1,9 @@
-function surligne(champ, erreur)
-{
-   if(erreur)
-      champ.style.backgroundColor = "#fba";
-   else
-      champ.style.backgroundColor = "";
-}
 function verif() {
        erreur = 0;
        with(document.ajout) {
-            if(nom.value == "") {
-               alert("Veuillez remplir votre nom");
+         var re = new RegExp("[0-9-.+*,:;@]");
+         var str= nom.value;
+            if ((nom.value == "") || re.test(str) || (nom.value.length <3)) {
                nom.style.backgroundColor = "#fba";
 
                erreur = 1;
@@ -17,8 +11,9 @@ function verif() {
             else {
               nom.style.backgroundColor = "";
             }
-            if(prenom.value == "") {
-               alert("Veuillez remplir votre prenom");
+            var str= prenom.value;
+
+            if((prenom.value == "") || re.test(str) || (prenom.value.length <3)) {
                prenom.style.backgroundColor = "#fba";
                erreur = 1;
             }
@@ -28,7 +23,6 @@ function verif() {
             var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
   if(!regex.test(mail.value))
   {
-    alert("Entrer une adresse mail valide");
     mail.style.backgroundColor = "#fba";
     erreur = 1;
   }
@@ -36,15 +30,13 @@ function verif() {
   mail.style.backgroundColor = "";
   }
   if (telephone.value.length!=8) {
-    alert("Entrer un numero telephone de 8 chiffre");
     telephone.style.backgroundColor = "#fba";
     erreur = 1;
   }
   else {
     telephone.style.backgroundColor = "";
   }
-  if(cause.value == "") {
-     alert("Veuillez remplir votre cause de réclamation");
+  if((cause.value == "") || (cause.value.length < 20)) {
      cause.style.backgroundColor = "#fba";
 
      erreur = 1;

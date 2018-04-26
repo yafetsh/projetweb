@@ -10,16 +10,15 @@ class Reclamation
   private $cause;
   private $etat;
 
-  function __construct($id,$nom,$prenom,$mail,$telephone,$type,$cause,$etat)
+  function __construct($nom,$prenom,$mail,$telephone,$type,$cause)
   {
-$this->id=$id;
 $this->nom=$nom;
 $this->prenom=$prenom;
 $this->mail=$mail;
 $this->telephone=$telephone;
 $this->type=$type;
 $this->cause=$cause;
-$this->etat=$etat;
+//$this->etat=$etat;
 
 }
 function getId(){
