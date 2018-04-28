@@ -19,14 +19,14 @@ class PanierCore
     {
 
         foreach ($_SESSION['panier'] as $produit_id => $quantite) {
-            echo $produit_id;
             $quan=$this->rechercheprod($produit_id);
             if (isset($_POST['panier']['quantite'][$produit_id]) && $quan[0]->quantite >= $_POST['panier']['quantite'][$produit_id]) {
 
                 $pries=$this->prixprod($produit_id);
-
+if (empty($_SESSION['id']))
                 $paniertable=new Panier(1,$_POST['panier']['quantite'][$produit_id],$pries[0]->prix*($_POST['panier']['quantite'][$produit_id]),1,$produit_id);
-
+else
+    $paniertable=new Panier(1,$_POST['panier']['quantite'][$produit_id],$pries[0]->prix*($_POST['panier']['quantite'][$produit_id]),$_SESSION['id'],$produit_id);
                 $this->ModifierPanier($paniertable);
 
                 $_SESSION['panier'][$produit_id] = $_POST['panier']['quantite'][$produit_id];
@@ -40,12 +40,21 @@ public function count()
 {
     return array_sum($_SESSION['panier']);
 }
+
     public function add($produit_id)
     {
         $pries=$this->prixprod($_GET['reference']);
-        $verif=$this->recherche($_GET['reference'],1);
+
+
         $quantite=$_SESSION['panier'][$produit_id];
-        $paniertable=new Panier(2,$quantite+1,$pries[0]->prix*($quantite+1),1,$_GET['reference']);
+        if (empty($_SESSION['id'])) {
+            $verif = $this->recherche($_GET['reference'], 1);
+            $paniertable = new Panier(2, $quantite + 1, $pries[0]->prix * ($quantite + 1), 1, $_GET['reference']);
+        }
+        else {
+            $verif = $this->recherche($_GET['reference'], $_SESSION['id']);
+            $paniertable = new Panier(2, $quantite + 1, $pries[0]->prix * ($quantite + 1), $_SESSION['id'], $_GET['reference']);
+        }
         if ($verif==array())
             $this->AjouterPanier($paniertable);
         else {
@@ -304,6 +313,36 @@ $total+=$row->prix * $_SESSION['panier'][$row->reference];
             //prepare : preparer une instruction SQL pour l'execution
             $req = $db->prepare($sql);
             $req->bindvalue(':idut', $idut);
+            $req->execute();
+            return $req->fetchAll(PDO::FETCH_OBJ);
+        }
+        catch (Exception $e)
+        {
+            echo 'ERREUR' . $e->getMessage();
+        }
+    }
+    function notif()
+    {
+        $quan=$this->rechercheidprod($_SESSION['id']);
+        $a=0;
+        foreach ($quan as $row)
+        {
+            $a+=$row->quantite;
+
+        }
+        return $a;
+    }
+    function verifcode($p)
+    {
+        $sql = "select * from promotion where code_promo=:code";
+
+        $db = config::getConnexion();
+
+        try
+        {
+            //prepare : preparer une instruction SQL pour l'execution
+            $req = $db->prepare($sql);
+            $req->bindvalue(':code', $p);
             $req->execute();
             return $req->fetchAll(PDO::FETCH_OBJ);
         }

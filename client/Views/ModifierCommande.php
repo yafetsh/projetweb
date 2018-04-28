@@ -4,7 +4,7 @@ require '../Core/CommandeCore.php';
 require '../Entities/commande.php';
 
 $Panier=new PanierCore();
-$produits=$Panier->AfficherPanier(1);
+$produits=$Panier->AfficherPanier($_SESSION['id']);
 $com=new CommandeCore();
 ?>
 <!DOCTYPE html>

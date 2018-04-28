@@ -4,7 +4,7 @@ require '../Core/CommandeCore.php';
 require '../Entities/commande.php';
 $Panier=new PanierCore();
 
-    $idprod1=$Panier->rechercheidprod(1);
+    $idprod1=$Panier->rechercheidprod($_SESSION['id']);
     foreach ($idprod1 as $idprod)
     {
     $commande = new commande($idprod->quantite,$idprod->id);
@@ -15,7 +15,7 @@ $Panier=new PanierCore();
            $quantite = $Panier->rechercheprod($idprod->idProduit);
            $Panier->Modifierquantite($quantite[0]->quantite - $idprod->quantite, $idprod->idProduit);
 }
-header("Location:AfficherCommande.php");
+header("Location:Checkout.php");
 
 
 ?>

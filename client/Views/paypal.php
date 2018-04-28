@@ -446,51 +446,26 @@ $idprod1=$Panier->rechercheidprod(1);
 
 
 
-
-
-
-
-
-
-
-<?php
-foreach ($idprod1 as $idprod)
-{
-$com = new CommandeCore();
-$prod=$com->commandenonpayer($idprod->id);
-
-$a=0;
-foreach($prod as $row) {
-$a++;
-?>
-
-<img src="images/new-item-<?php echo $idprod->idProduit; ?>.jpg" alt="">
-
+    <div class="content">
+<h5>Paypal</h5>
 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 
     <input type="hidden" name="cmd" value="_xclick">
     <input type="hidden" name="business" value="Amine@makeup.com">
 
-    <input type="hidden" name="item_name[<?php echo $a; ?>]" value="<?php echo $row->id; ?>">
-    <input type="hidden" name="return[<?php echo $a; ?>]" value="http://localhost/projetweb/client/Views/successpaypal.php">
-    <input type="hidden" name="notify_url[<?php echo $a; ?>]">
-    <input type="hidden" name="item_number[<?php echo $a; ?>]" value="MEM32507725">
-    <input type="hidden" name="amount[<?php echo $a; ?>]" value="<?php echo $idprod->prix / $row->quantite; ?>">
-    <input type="hidden" name="tax[<?php echo $a; ?>]" value="0.00">
-    <input type="hidden" name="quantity[<?php echo $a; ?>]" value="<?php echo $row->quantite; ?>">
-    <input type="hidden" name="currency_code[<?php echo $a; ?>]" value="USD">
+    <input type="hidden" name="item_name" value="makeup">
+    <input type="hidden" name="return" value="http://localhost/projetweb/client/Views/successpaypal.php">
+    <input type="hidden" name="notify_url">
+    <input type="hidden" name="amount" value="<?php echo $Panier->total(); ?>">
+    <input type="hidden" name="tax" value="0.00">
+    <input type="hidden" name="currency_code" value="USD">
 
     <input type="image" name="submit"
            src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
            alt="PayPal - The safer, easier way to pay online">
 
 </form>
-    <?php
-}
-}
-?>
-
-
+    </div>
     <!--======= Footer =========-->
     <footer>
         <div class="container">

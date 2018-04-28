@@ -5,7 +5,7 @@ require '../Entities/commande.php';
 
 $Panier=new PanierCore();
 $commande=new CommandeCore();
-$p=$Panier->rechercheidprod(1);
+$p=$Panier->rechercheidprod($_SESSION['id']);
 
 ?>
     <!DOCTYPE html>

@@ -1,12 +1,15 @@
 <?php
 require '../Core/PanierCore.php' ;
 require '../Core/CommandeCore.php';
+require '../Entities/panier.php';
 $com = new CommandeCore();
 $Panier=new PanierCore();
-$idprod1=$Panier->rechercheidprod(1);
+$idprod1=$Panier->rechercheidprod($_SESSION['id']);
 unset($_SESSION['panier']);
 foreach ($idprod1 as $idprod)
 {
+    $paniertable = new Panier(2,0,0,$_SESSION['id'],$idprod->idProduit);
+    $Panier->ModifierPanier($paniertable);
     $com->modifieretat($idprod->id);
 }
 ?>

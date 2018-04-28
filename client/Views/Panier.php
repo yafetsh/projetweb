@@ -3,6 +3,11 @@ require '../Core/PanierCore.php' ;
 require '../Entities/panier.php';
 $Panier=new PanierCore();
 
+if (isset($_GET['code']))
+{
+
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -71,8 +76,12 @@ $Panier=new PanierCore();
             <div class="container">
                 <div class="top-links">
                     <ul>
-                        <li><a href="#.">MOM COMPTE</a></li>
-                        <li><a href="#.">MES FAVORIS</a></li>
+                        <?php if (isset($_SESSION['id'])){ ?>
+                            <li><a href="#.">Bonjour <?php echo $_SESSION['pseudo']; ?></a></li>
+                            <li><a href="disconnect.php">Se deconnecter</a></li>
+                        <?php } else { ?>
+                            <li><a href="connexion.php">Se connecter</a></li>
+                        <?php } ?>
                     </ul>
                     <!-- Social Icons -->
                     <ul class="social_icons">
@@ -154,9 +163,14 @@ $Panier=new PanierCore();
                             </li>
 
                             <!--======= Shopping Cart =========-->
-                            <li class="shop-cart"><a href="#."><i class="fa fa-shopping-cart"></i></a> <span class="numb"><?php echo $Panier->count();?></span>
+                            <?php if (empty($_SESSION['id'])){?>
+                            <li class="shop-cart"><a href="Panier.php"><i class="fa fa-shopping-cart"></i></a> <span class="numb"><?php echo $Panier->count();?></span>
+                                <?php } else { ?>
+                            <li class="shop-cart"><a href="Panier.php"><i class="fa fa-shopping-cart"></i></a> <span class="numb"><?php echo $Panier->notif();?></span>
+                                <?php } ?>
                                 <ul class="dropdown">
                                     <?php
+
                                     $ids=array_keys($_SESSION['panier']);
                                     if(empty($ids))
                                     {
@@ -191,7 +205,7 @@ $Panier=new PanierCore();
                                     <li class="no-padding no-border">
                                         <div class="row">
 
-                                            <div class="col-xs-6 "> <a href="AddCommande.php" class="btn btn-1 btn-small">VALIDER</a></div>
+                                            <div class="col-xs-6 "> <a href="connexioncommande.php" class="btn btn-1 btn-small">VALIDER</a></div>
                                         </div>
                                     </li>
                                 </ul>
@@ -342,7 +356,8 @@ $Panier=new PanierCore();
                             </li>
                         </ul>
                         <?php }
-                        }?>
+                        }
+                         ?>
 
                         <!-- BTN INFO -->
                         <div class="btn-sec">
@@ -364,8 +379,8 @@ $Panier=new PanierCore();
                                 <!-- DISCOUNT CODE -->
                                 <div class="col-sm-4">
                                     <h6>DISCOUNT CODE</h6>
-                                    <form>
-                                        <input type="text" value="" placeholder="ENTER YOUR CODE IF YOU HAVE ONE">
+                                    <form action="Panier.php" method="get">
+                                        <input type="text" name="code" value="" placeholder="ENTER YOUR CODE IF YOU HAVE ONE">
                                         <button type="submit" class="btn btn-small btn-dark">APPLY CODE</button>
                                     </form>
                                 </div>
@@ -399,7 +414,7 @@ $Panier=new PanierCore();
                                 <div class="col-sm-4">
                                     <div class="grand-total"> <span><?php echo number_format($Panier->total(), 2, ',', ''); ?> TND</span>
                                         <h4>GRAND: <span><?php echo number_format($Panier->total(), 2, ',', ''); ?> TND</span></h4>
-                                        <a href="connexion.php" class="btn">PASSER À LA CAISSE</a>
+                                        <a href="connexioncommande.php" class="btn">PASSER À LA CAISSE</a>
                                         <p>Commander avec plusieurs adresses</p>
                                     </div>
                                 </div>

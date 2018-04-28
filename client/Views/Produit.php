@@ -71,8 +71,12 @@ $products=$Panier->AfficherProduits();
             <div class="container">
                 <div class="top-links">
                     <ul>
-                        <li><a href="#.">MOM COMPTE</a></li>
-                        <li><a href="#.">MES FAVORIS</a></li>
+                        <?php if (isset($_SESSION['id'])){ ?>
+                            <li><a href="#.">Bonjour <?php echo $_SESSION['pseudo']; ?></a></li>
+                            <li><a href="disconnect.php">Se deconnecter</a></li>
+                        <?php } else { ?>
+                            <li><a href="connexion.php">Se connecter</a></li>
+                        <?php } ?>
                     </ul>
                     <!-- Social Icons -->
                     <ul class="social_icons">
@@ -93,9 +97,9 @@ $products=$Panier->AfficherProduits();
                 <div class="container" style="visibility: initial;">
                     <nav>
                         <ul id="ownmenu" class="ownmenu">
-                            <li class="active"><a href="index.html">ACCUEIL</a>
+                            <li class="active"><a href="index.php">ACCUEIL</a>
                             </li>
-                            <li><a href="Produit.html">PRODUITS</a>
+                            <li><a href="Produit.php">PRODUITS</a>
                                 <!--======= MEGA MENU =========-->
                                 <div class="megamenu full-width">
                                     <div class="row nav-post">
@@ -154,9 +158,14 @@ $products=$Panier->AfficherProduits();
                             </li>
 
                             <!--======= Shopping Cart =========-->
+                            <?php if (empty($_SESSION['id'])){?>
                             <li class="shop-cart"><a href="Panier.php"><i class="fa fa-shopping-cart"></i></a> <span class="numb"><?php echo $Panier->count();?></span>
+                                <?php } else { ?>
+                            <li class="shop-cart"><a href="Panier.php"><i class="fa fa-shopping-cart"></i></a> <span class="numb"><?php echo $Panier->notif();?></span>
+                                <?php } ?>
                                 <ul class="dropdown">
                                     <?php
+
                                     $ids=array_keys($_SESSION['panier']);
                                     if(empty($ids))
                                     {
@@ -164,25 +173,25 @@ $products=$Panier->AfficherProduits();
 
                                     }
                                     else {
-                                    $prod = $Panier->AfficherPanierSession("select * from produit where reference IN (" . implode(",", $ids) . ")");
-                                    foreach($prod as $row) {
-                                        ?>
-                                        <li>
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <div class="cart-img"><a href="#"> <img
-                                                                    class="media-object img-responsive"
-                                                                    src="images/new-item-<?php echo $row->reference; ?>.jpg"
-                                                                    alt="..."> </a></div>
+                                        $prod = $Panier->AfficherPanierSession("select * from produit where reference IN (" . implode(",", $ids) . ")");
+                                        foreach($prod as $row) {
+                                            ?>
+                                            <li>
+                                                <div class="media">
+                                                    <div class="media-left">
+                                                        <div class="cart-img"><a href="#"> <img
+                                                                        class="media-object img-responsive"
+                                                                        src="images/new-item-<?php echo $row->reference; ?>.jpg"
+                                                                        alt="..."> </a></div>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="media-heading"><?php echo $row->description; ?></h6>
+                                                        <span class="price"><?php echo number_format($row->prix, 2, ',', ''); ?>
+                                                            TND </span> <span class="qty">Quantité: <?php echo $_SESSION['panier'][$row->reference]; ?></span></div>
                                                 </div>
-                                                <div class="media-body">
-                                                    <h6 class="media-heading"><?php echo $row->description; ?></h6>
-                                                    <span class="price"><?php echo number_format($row->prix, 2, ',', ''); ?>
-                                                        TND </span> <span class="qty">Quantité: <?php echo $_SESSION['panier'][$row->reference]; ?></span></div>
-                                            </div>
-                                        </li>
-                                        <?php
-                                    }
+                                            </li>
+                                            <?php
+                                        }
                                     }
                                     ?>
                                     <li class="no-padding no-border">
@@ -190,7 +199,8 @@ $products=$Panier->AfficherProduits();
                                     </li>
                                     <li class="no-padding no-border">
                                         <div class="row">
-                                            <div class="col-xs-6 "> <a href="#." class="btn btn-1 btn-small">VALIDER</a></div>
+
+                                            <div class="col-xs-6 "> <a href="connexioncommande.php" class="btn btn-1 btn-small">VALIDER</a></div>
                                         </div>
                                     </li>
                                 </ul>

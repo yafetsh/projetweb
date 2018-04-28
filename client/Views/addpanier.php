@@ -3,13 +3,11 @@ require '../Core/PanierCore.php';
 require '../Entities/panier.php';
 $Panier=new PanierCore();
 
-
-
 if (isset($_GET['reference']))
 {
     $quan=$Panier->rechercheprod($_GET['reference']);
 $product=$Panier->AfficherPanierSession("select reference from produit where reference=:reference",array('reference' => $_GET['reference']));
-echo $_SESSION['panier'][$product[0]->reference];
+
     $quantite=$_SESSION['panier'][$product[0]->reference];
 
 if(empty($product))
