@@ -327,9 +327,9 @@
 
 
 
-  <form method="POST" action="modif_livreur.php">
+  <form method="POST" action="modif_livreur.php" onsubmit="return validateForm()" name="myForm">
 <table>
-<caption>Modifier Livreur</caption>
+<caption></caption>
 <tr>
 <td>Pseudo</td>
 <td><input disabled type="number" name="pseudo" value="<?PHP echo $pseudo ?>"></td>
@@ -337,7 +337,7 @@
 </tr>
 <tr>
 <td>Nom</td>
-<td><input type="text" name="nom" value="<?PHP echo $nom ?>"></td>
+<td><input id="n" type="text" name="nom" value="<?PHP echo $nom ?>"></td>
 </tr>
 <tr>
 <td>Prenom</td>
@@ -394,3 +394,12 @@
     <script src="../build/js/custom.min.js"></script>
   </body>
 </html>
+<script>
+  function validateForm() {
+    var x = document.forms["myForm"]["nom"].value;
+    if (x == "") {
+       document.getElementById('n').style.borderColor='red'; 
+        return false;
+    }
+}
+</script>

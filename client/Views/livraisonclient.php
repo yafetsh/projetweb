@@ -256,7 +256,7 @@
                                 <input type="submit" name="supprimer" value="Supprimer"> </div>
                                 <input type="hidden" value="<?PHP echo $row['id']; ?>" name="id">
                             <meta name="viewport" content="width=device-width, initial-scale=1">
-                            <p id="demo"  style="text-align: center; font-size: 15px; margin-top: 0px;"></p> 
+                            <p id="demo" style="text-align: center; font-size: 15px; margin-top: 0px;"></p> 
 
                           </td>
                          
@@ -376,15 +376,15 @@ var x = setInterval(function() {
     
     // Find the distance between now an the count down date
     var distance =  now-countDownDate ;
-    
+    var diff =  2*60*60*1000-distance ; 
     // Time calculations for days, hours, minutes and seconds
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((diff % (1000 * 60)) / 1000);
     
     // Output the result in an element with id="demo"
-    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+    document.getElementById("demo").innerHTML =  hours + "h "
     + minutes + "m " + seconds + "s ";
 
     
@@ -395,6 +395,7 @@ var x = setInterval(function() {
         document.getElementById("demo").innerHTML = "Désolé,le temps de modification ou de suppression de la commande est expriré";
     }
 }, 1000);
+
 </script>
 
 </body>

@@ -8,8 +8,8 @@ class livraison
   private $rue;
   private $numero;
   private $pseudoLivreur;
-
-  function __construct($id,$rue,$numero,$region,$ville,$etat,$pseudoLivreur)
+  private $datelivraison;
+  function __construct($id,$rue,$numero,$region,$ville,$etat,$pseudoLivreur,$datelivraison)
   {
 $this->id=$id;
 $this->etat=$etat;
@@ -18,6 +18,7 @@ $this->ville=$ville;
 $this->rue=$rue;
 $this->numero=$numero;
 $this->pseudoLivreur=$pseudoLivreur;
+$this->datelivraison=$datelivraison;
 
 }
 
@@ -57,11 +58,11 @@ $this->pseudoLivreur=$pseudoLivreur;
   function setPseudoLivreur($pseudoLivreur){
     $this->pseudoLivreur=$pseudoLivreur;
   }
-  function getIdUtilisateur(){
-    return $this->idUtilisateur;
+  function getdateLivraison(){
+    return $this->datelivraison;
   }
-  function setIdUtilisateur($idUtilisateur){
-    $this->idUtilisateur=$idUtilisateur;
+  function setdateLivraison($datelivraison){
+    $this->datelivraison=$datelivraison;
   }
 }
 

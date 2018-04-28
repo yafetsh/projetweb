@@ -11,7 +11,7 @@ include "../Core/livraisoncore.php";
         $region = $_POST['region']; 
         $ville= $_POST['ville']; 
         $valid = true;
-    if(!preg_match("/^[5-9]{1}[0-9]{7}$/", $numero)) {
+    if(!preg_match("/^[2-9]{1}[0-9]{7}$/", $numero)) {
   // $phone is valid
        $numeroError = "Numero incorrect";
     }
@@ -31,17 +31,16 @@ include "../Core/livraisoncore.php";
         $villeError = '*Champs requis';
         $valid = false;
     }
-    }
- else if (isset($_POST['rue']) and isset($_POST['numero']) and isset($_POST['region']) and isset($_POST['ville']) ){
-$livraison1=new livraison($_POST['id'],$_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
+    
+ else  if (isset($_POST['rue']) and isset($_POST['numero']) and isset($_POST['region']) and isset($_POST['ville']) ){
+$livraison1=new livraison('',$_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
 $livraison1c=new livraisoncore();
 $livraison1c->ajouterlivraison($livraison1);
 header('Location: livraisonclient.php');
   
-
+}
 }
 //*/
-
 ?>
 
 
@@ -94,7 +93,7 @@ header('Location: livraisonclient.php');
       
       <p class="font-playfair text-center">Please Wait...</p>
       <div class="loading">
-      	<div class="ball"></div>
+        <div class="ball"></div>
         <div class="ball"></div>
         <div class="ball"></div>
       </div>
@@ -580,13 +579,13 @@ header('Location: livraisonclient.php');
                       <!-- VILLE -->
                       <li class="col-md-12"> 
                       <label>*VILLE 
-                      <br><br> <select id="data" name="ville" style="width: 400px; height: 30px">
+                        <br><br> <select id="data" name="ville" style="width: 400px; height: 30px">
     <option>Select an Option...</option>
   </select>
    </select>
-                         <?php if (!empty($villeError)): ?>
-                              <span class="help-inline" style="color:Red"><?php echo $villeError;?></span>
-                          <?php endif; ?>
+                        <?php if (!empty($villeError)): ?>
+                               <span class="help-inline" style="color:Red"><?php echo $villeError;?></span>
+                           <?php endif; ?>
                       </label>
                     </li>
 
@@ -819,7 +818,7 @@ header('Location: livraisonclient.php');
     </div>
   </footer>  
   <!-- GO TO TOP --> 
-  	<a href="#" class="cd-top"><i class="fa fa-angle-up"></i></a> 
+    <a href="#" class="cd-top"><i class="fa fa-angle-up"></i></a> 
   <!-- GO TO TOP End -->
 </div>
 <!-- Wrap End --> 
@@ -845,7 +844,6 @@ header('Location: livraisonclient.php');
    function update(str)
    {
       var xmlhttp;
-
       if (window.XMLHttpRequest)
       {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
@@ -854,14 +852,12 @@ header('Location: livraisonclient.php');
       {// code for IE6, IE5
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
       } 
-
       xmlhttp.onreadystatechange = function() {
         if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
         {
           document.getElementById("data").innerHTML = xmlhttp.responseText;
         }
       }
-
       xmlhttp.open("GET","ville.php?opt="+str, true);
       xmlhttp.send();
   }

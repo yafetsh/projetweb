@@ -346,8 +346,8 @@ $livraison2C=new livraisoncore();
                           <td><?PHP echo $row['datelivraison']; ?></td>
                           
                           <td>
-                            <a href="affecterlivraison2.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="background-color: blue; width:120px">Choisir une date </a>
-                              <a  href="affecterlivraison3.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="height: 33px ;width:120px">
+                            <a href="testdate.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="background-color: blue; width:120px">Choisir une date </a>
+                              <a id=livr" href="affecterlivraison3.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="height: 33px ;width:120px">
                             Choisir un livreur</a>
                           </td>
                           </tr>

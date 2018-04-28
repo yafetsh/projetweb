@@ -1,6 +1,5 @@
 <?php
   $opt = $_GET['opt'];
-
   switch($opt)
   {
     case "Select":

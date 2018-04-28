@@ -77,8 +77,49 @@ function modifierlivraison($livraison,$idd){
         }
     
   }
+function modifierlivraison1($livraison,$idd){
+      $db = config::getConnexion();
+      $sql="UPDATE livraison SET pseudoLivreur=:pseudoLivreur,dateLivraison=:dateLivraison WHERE id=:idd";
+      try{
+      $req=$db->prepare($sql);
 
+    
+      $pseudoLivreur=$livraison->getPseudoLivreur();
+      $dateLivraison=$livraison->getdateLivraison();
+      $req->bindValue(':dateLivraison',$dateLivraison);
+      $req->bindValue(':pseudoLivreur',$pseudoLivreur);
+      $req->bindValue(':idd',$idd);
+   
+      $s=$req->execute();
+    }
+        catch (Exception $e){
+            echo " Erreur ! ".$e->getMessage();
+   echo " Les datas : " ;
+  print_r($datas);
+        }
+    
+  }
+function modifierlivraison2($livraison,$idd){
+      $db = config::getConnexion();
+      $sql="UPDATE livraison SET dateLivraison=:dateLivraison WHERE id=:idd";
+      try{
+      $req=$db->prepare($sql);
 
+    
+      $dateLivraison=$livraison->getdateLivraison();
+
+      $req->bindValue(':dateLivraison',$dateLivraison);
+      $req->bindValue(':idd',$idd);
+   
+      $s=$req->execute();
+    }
+        catch (Exception $e){
+            echo " Erreur ! ".$e->getMessage();
+   echo " Les datas : " ;
+  print_r($datas);
+        }
+    
+  }
  function ajouterlivraison($l){
  		$sql="insert into livraison (rue,numero,region,ville) values (:rue,:numero,:region,:ville)";
         $db = config::getConnexion();
