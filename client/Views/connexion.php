@@ -1,6 +1,6 @@
 <?php 
-include "../entities/utilisateur.php";
-include "../core/utilisateurCore.php";
+include "../Entities/utilisateur.php";
+include "../Core/utilisateurCore.php";
 
 session_start();
 
@@ -33,9 +33,14 @@ echo $userexist;
          $_SESSION['pseudo'] = $userinfo['pseudo'];
          $_SESSION['mail'] = $userinfo['mail'];
          $_SESSION['confirme'] = $userinfo['confirme'];
-         if ($_SESSION['confirme'] == 1) {
+         $_SESSION['role'] = $userinfo['role'];
+
+         if ($_SESSION['confirme'] == 1 && $_SESSION['role'] == NULL ) {
          header("Location:userProfile.php?id=".$_SESSION['id']);
-         }else{
+         }else if($_SESSION['confirme'] == 1 && $_SESSION['role'] == 1 ){
+         header("Location: ../../admin/Views/production/index.php?id=".$_SESSION['id']);
+         }
+         else{
            $erreur ="votre compte n'est pas encore confirmé";
          }
       } else {

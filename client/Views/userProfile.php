@@ -1,7 +1,6 @@
 <?php
 include "../config.php";
 session_start();
-
 $bdd = config::getConnexion();
 
 if(isset($_GET['id']) AND $_GET['id'] > 0) {
