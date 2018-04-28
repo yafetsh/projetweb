@@ -83,7 +83,7 @@ function supprimerReclamation($id){
 }
 function modifierReclamation($reclamation,$idd){
 
-  $sql="UPDATE reclamation SET nom=:nom,prenom=:prenom,mail=:mail,telephone=:telephone,type=:type,cause=:cause,etat=:etat WHERE id=:idd";
+  $sql="UPDATE reclamation SET nom=:nom,prenom=:prenom,mail=:mail,telephone=:telephone,type=:type,cause=:cause WHERE id=:idd";
 
   $db = config::getConnexion();
   //$db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
@@ -96,7 +96,7 @@ try{
       $telephone=$reclamation->getTelephone();
       $type=$reclamation->getType();
       $cause=$reclamation->getCause();
-      $etat=$reclamation->getEtat();
+    //  $etat=$reclamation->getEtat();
     //  $datas = array(':idd'=>$idd, ':id'=>$id,':nom'=>$nom,':prenom'=>$prenom,':mail'=>$mail,':telephone'=>$telephone,':type'=>$type,':cause'=>$cause);
 
   $req->bindValue(':idd',$idd);
@@ -107,7 +107,7 @@ try{
   $req->bindValue(':telephone',$telephone);
   $req->bindValue(':type',$type);
   $req->bindValue(':cause',$cause);
-  $req->bindValue(':etat',$etat);
+  //$req->bindValue(':etat',$etat);
 
           $s=$req->execute();
       }
