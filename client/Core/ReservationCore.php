@@ -73,7 +73,7 @@ function supprimerReservation($id){
 }
 function modifierReservation($reservation,$idd){
   $db = config::getConnexion();
-  $sql="UPDATE reservation SET  nom=:nom,prenom=:prenom,telephone=:telephone,type=:type,date=:date, WHERE id=:idd";
+  $sql="UPDATE reservation SET  nom=:nom,prenom=:prenom,telephone=:telephone,type=:type,date=:date WHERE id=:idd";
 
 
   //$db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
@@ -98,7 +98,7 @@ try{
       catch (Exception $e){
           echo " Erreur ! ".$e->getMessage();
  echo " Les datas : " ;
-print_r($datas);
+//print_r($datas);
 }}
 
 

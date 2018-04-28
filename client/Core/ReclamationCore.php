@@ -42,12 +42,15 @@ function ajouterReclamation($reclamation){
   $db = config::getConnexion();
   try{
       $req=$db->prepare($sql);
+      //$id=$reclamation->getId();
+
       $nom=$reclamation->getNom();
       $prenom=$reclamation->getPrenom();
       $mail=$reclamation->getMail();
       $telephone=$reclamation->getTelephone();
       $type=$reclamation->getType();
-      $cause=$reclamation->getCause();
+   $cause=$reclamation->getCause();
+    //  $req->bindValue(':id',$id);
 
   $req->bindValue(':nom',$nom);
   $req->bindValue(':prenom',$prenom);
@@ -80,35 +83,38 @@ function supprimerReclamation($id){
 }
 function modifierReclamation($reclamation,$idd){
 
-  $sql="UPDATE reclamation SET id=:idd,nom=:nom,prenom=:prenom,mail=:mail,telephone=:telephone,type=:type,cause=:cause, WHERE id=:id";
+  $sql="UPDATE reclamation SET nom=:nom,prenom=:prenom,mail=:mail,telephone=:telephone,type=:type,cause=:cause,etat=:etat WHERE id=:idd";
 
   $db = config::getConnexion();
   //$db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
 try{
       $req=$db->prepare($sql);
-      $idd=$reclamation->getId();
+    //  $idd=$reclamation->getId();
       $nom=$reclamation->getNom();
       $prenom=$reclamation->getPrenom();
       $mail=$reclamation->getMail();
       $telephone=$reclamation->getTelephone();
       $type=$reclamation->getType();
       $cause=$reclamation->getCause();
-      $datas = array(':idd'=>$idd, ':id'=>$id,':nom'=>$nom,':prenom'=>$prenom,':mail'=>$mail,':telephone'=>$telephone,':type'=>$type,':cause'=>$cause);
+      $etat=$reclamation->getEtat();
+    //  $datas = array(':idd'=>$idd, ':id'=>$id,':nom'=>$nom,':prenom'=>$prenom,':mail'=>$mail,':telephone'=>$telephone,':type'=>$type,':cause'=>$cause);
 
   $req->bindValue(':idd',$idd);
-  $req->bindValue(':id',$id);
+//  $req->bindValue(':id',$id);
   $req->bindValue(':nom',$nom);
   $req->bindValue(':prenom',$prenom);
   $req->bindValue(':mail',$prenom);
   $req->bindValue(':telephone',$telephone);
   $req->bindValue(':type',$type);
   $req->bindValue(':cause',$cause);
+  $req->bindValue(':etat',$etat);
+
           $s=$req->execute();
       }
       catch (Exception $e){
           echo " Erreur ! ".$e->getMessage();
  echo " Les datas : " ;
-print_r($datas);
+//print_r($datas);
 }}
 
       function reccupererinformations($id){

@@ -1,59 +1,4 @@
-<?php
-include "../Entities/reclamation.php";
-include "../Core/ReclamationCore.php";
-    if ( !empty($_POST)) {
-        // keep track validation errors
-        $nomError = null;
-        $prenomError = null;
-        $mailError = null;
-        $telephoneError = null;
-        $typeError = null;
-        $causeError = null;
 
-
-        // keep track post values
-        $nom = $_POST['nom'];
-        $prenom = $_POST['prenom'];
-        $mail = $_POST['mail'];
-        $telephone = $_POST['telephone'];
-        $type = $_POST['type'];
-        $cause = $_POST['cause'];
-
-        $valid = true;
-        if (empty($nom)) {
-            $nomError = '*Please enter Name';
-            $valid = false;
-        }
-        if (empty($prenom)) {
-            $prenomError = '*Please enter Surname';
-            $valid = false;
-        }
-        if (empty($telephone)) {
-            $telephoneError = '*Please enter Phone number';
-            $valid = false;
-        }
-      /*  if (empty($mail)) {
-            $mailError = '*Please enter Adresse mail';
-            $valid = false;
-        }*/
-        if (empty($cause)) {
-            $causeError = '*Please enter Cause';
-            $valid = false;
-        }
-    }
-    if (isset($_GET['id'])){
-    	$reclamationC=new ReclamationCore();
-        $result=$reclamationC->reccupererinformations($_GET['id']);
-    	foreach($result as $row){
-    		$idd=$row['id'];
-    		$nomm=$row['nom'];
-    		$prenomm=$row['prenom'];
-        $maill=$row['mail'];
-    		$telephonee=$row['telephone'];
-    		$typee=$row['type'];
-        $causee=$row['cause'];
-
-    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -227,6 +172,24 @@ include "../Core/ReclamationCore.php";
     <section class="section-p-30px conact-us no-padding-b animate fadeInUp" data-wow-delay="0.4s">
       <!--======= Réclamation =========-->
       <div class="container">
+        <?php
+        include "../Entities/reclamation.php";
+        include "../Core/ReclamationCore.php";
+
+            if (isset($_GET['id'])){
+            	$rC=new ReclamationCore();
+                $r=$rC->reccupererinformations($_GET['id']);
+            	foreach($r as $row){
+            		$id=$row['id'];
+            		$nom=$row['nom'];
+            		$prenom=$row['prenom'];
+                $mail=$row['mail'];
+            		$telephone=$row['telephone'];
+            		$type=$row['type'];
+                $cause=$row['cause'];
+                $etat=$row['etat'];}}
+
+            ?>
               <!-- Tittle -->
         <div class="tittle">
           <h5>Réclamez vous</h5>
@@ -236,13 +199,13 @@ include "../Core/ReclamationCore.php";
 		 <div class="contact section-p-30px no-padding-b">
           <div class="contact-form">
 		    <!--======= FORM  =========-->
-            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="ajouterReclamation.php">
+            <form role="form" id="contact_form" class="contact-form" method="GET" action="modif_rec.php" >
               <div class="row">
                 <div class="col-md-6">
                   <ul class="row">
                     <li class="col-sm-12">
                       <label> Nom:*
-                        <input type="text" class="form-control" name="nom"  value="<?php echo $nomm ?>">
+                        <input type="text" class="form-control" name="nom"  value="<?php echo $nom ?>">
                         <?php if (!empty($nomError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $nomError;?></span>
                         <?php endif; ?>
@@ -250,7 +213,7 @@ include "../Core/ReclamationCore.php";
                     </li>
                     <li class="col-sm-12">
                       <label> Prénom:*
-                        <input type="text" class="form-control" name="prenom" value="<?php  echo $prenomm ?>">
+                        <input type="text" class="form-control" name="prenom" value="<?php  echo $prenom ?>">
                         <?php if (!empty($prenomError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $prenomError;?></span>
                         <?php endif; ?>
@@ -258,7 +221,7 @@ include "../Core/ReclamationCore.php";
                     </li>
                     <li class="col-sm-12">
                       <label> Adresse mail:*
-                        <input type="text" class="form-control" name="mail" value="<?php  echo $maill ?>">
+                        <input type="text" class="form-control" name="mail" value="<?php  echo $mail ?>">
                         <?php if (!empty($mailError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $mailError;?></span>
                         <?php endif; ?>
@@ -268,7 +231,7 @@ include "../Core/ReclamationCore.php";
                     </li>
                     <li class="col-sm-12">
                       <label> Numéro téléphone:*
-                        <input type="text" class="form-control" name="telephone" value="<?php  echo $telephonee ?>">
+                        <input type="text" class="form-control" name="telephone" value="<?php  echo $telephone ?>">
                         <?php if (!empty($telephoneError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $telephoneError;?></span>
                         <?php endif; ?>
@@ -284,13 +247,14 @@ include "../Core/ReclamationCore.php";
                       <label>
                   Type de réclamation:*
                   <select  class="form-control" name="type" >
+                    <option value="<?PHP echo $type ?>" selected="selected" hidden><?PHP echo $type ?></option>
                   <option value="Fonctionnalité de site">Fonctionnalité de site</option>
                   <option value="Prix">Prix</option>
                   <option value="Produit">Produit</option>
                   <option value="Autre">Autre</option></select></label>  </li>
                     <li class="col-sm-12">
                       <label> Cause de réclamation:*
-                        <textarea class="form-control" name="cause" rows="5" ><?php echo $causee ?></textarea>
+                        <textarea class="form-control" name="cause" rows="5" ><?php echo $cause ?></textarea>
                         <?php if (!empty($causeError)): ?>
                             <span class="help-inline" style="color:Red"><?php echo $causeError;?></span>
                         <?php endif; ?>
@@ -299,24 +263,15 @@ include "../Core/ReclamationCore.php";
                     </li>
 
                     <li class="col-sm-12 no-margin">
-                      <input type="submit" value="Modifier" name="modifier" class="btn" id="btn_submit"></button> <p>
+                      <input type="submit" value="Modifier" name="modif" class="btn" id="btn_submit"></button> <p>
                     </li>
-                    <td><input type="hidden" name="cin_ini" value="<?PHP echo $_GET['id'];?>"></td>
+                    <td><input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>"></td>
 
                   </ul>
                 </div>
               </div>
             </form>
-            <?PHP
-    }
-  }
-  if (isset($_POST['modifier'])){
-    $reclamation=new Reclamation($_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause']);
-    $reclamationC->modifierReclamation($reclamation,$_POST['cin_ini']);
-    echo $_POST['cin_ini'];
-//    header('Location: afficherReclamation.php');
-  }
-  ?>
+
           </div>
         </div>
       </div>

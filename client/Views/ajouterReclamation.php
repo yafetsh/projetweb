@@ -40,11 +40,11 @@ if ( !empty($_POST)) {
         $valid = false;
     }
   }
-    if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['cause']) ){
-    $reclamation1=new Reclamation($_POST['id'],$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause'],$_POST['etat']);
+    if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['cause'])  ){
+    $reclamation1=new Reclamation($_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause']);
     $reclamation1C=new ReclamationCore();
     $reclamation1C->ajouterReclamation($reclamation1);
-    header('Location: afficherReclamation.php');
+ header('Location: afficherReclamation.php');
     }
 
     ?>

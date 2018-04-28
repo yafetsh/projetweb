@@ -272,7 +272,7 @@ while($res = mysqli_fetch_array($result))
                         <label>
                     Type de maquillage:
                     <select  class="form-control" name="type" >
-                      <option value="<?PHP echo $type ?>" selected="selected"><?PHP echo $type ?></option>
+                      <option value="<?PHP echo $type ?>" selected="selected" hidden><?PHP echo $type ?></option>
                       <option value="Maquillage de jour">Maquillage de jour</option>
                       <option value="Maquillage de soirée">Maquillage de soirée</option>
                     <option value="Maquillage de mariage">Maquillage de mariage</option></select></label>  </li>
@@ -289,8 +289,10 @@ while($res = mysqli_fetch_array($result))
 
                       <li class="col-sm-12 no-margin">
                       </li>
-                      <td><input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>"></td>
                       <input type="submit" value="Modifier" name="modif" class="btn" id="btn_submit"></button> <p>
+
+                        <td><input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>"></td>
+                        <td><input type="hidden" name="etat_ini" value="<?PHP echo $_GET['etat'];?>"></td>
 
 
                     </ul>

@@ -12,6 +12,8 @@ class Reclamation
 
   function __construct($nom,$prenom,$mail,$telephone,$type,$cause)
   {
+  //  $this->id=$id;
+
 $this->nom=$nom;
 $this->prenom=$prenom;
 $this->mail=$mail;

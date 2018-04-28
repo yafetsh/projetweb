@@ -7,5 +7,6 @@ if (isset($_GET['modif'])) {
   $rC->modifierReservation($reservation,$_GET['id_ini']);
   echo $_GET['id_ini'];
   header('location:afficherReservation.php');
+
 }
   ?>
