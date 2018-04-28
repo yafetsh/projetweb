@@ -25,10 +25,11 @@
 
 		function recuperer($reference_sous_categorie){
 			$db = config::getConnexion();
-			$sql = "SELECT reference FROM produit WHERE reference_sous_categorie = $reference_sous_categorie";
+			$sql = "SELECT * FROM produit WHERE reference_sous_categorie = $reference_sous_categorie";
 			$liste=$db->query($sql);
 			return $liste;
 		}
+
 		
 		function afficherproduitavecimg(){
 			$db = config::getConnexion();
@@ -83,6 +84,8 @@
 			$liste=$db->query($sql);
 			return $liste;
 		}
+
+
 
 		function recup_produit(){
 			$db = config::getConnexion();

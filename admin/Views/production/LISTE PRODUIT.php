@@ -434,7 +434,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" >Reference sous categorie
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input  name="sous"  class="form-control col-md-7 col-xs-12" value="<?PHP echo $sous ?>" hidden>
+                          <input  name="sous"  class="form-control col-md-7 col-xs-12" value="<?PHP echo $sous ?>" disabled>
                         </div>
                       </div>
                       <div class="item form-group">

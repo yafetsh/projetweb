@@ -207,7 +207,7 @@
                       <a>
                         <span class="image"><img src="images/Untitled.png" alt="Profile Image" /></span>
                         <span>
-                          <span>Manel Ammara</span>
+                          <span>Manel Amara</span>
                           <span class="time">Il y a 3 minutes</span>
                         </span>
                         <span class="message">
@@ -323,7 +323,7 @@
                                         
                                         <img src="images/<?php echo($row['chemin']); ?>" style="width: 50px; height: 150px;">
                                         <input type="text" name="chemin"  value="<?php echo($row['chemin']) ; ?>" hidden>
-                                        <input type="image" type="submit" name="sup" src="images/1420471234085Supprimer.png" style="width: 20px; height: 20px; position: relative; top: 60px; right: 80px ">
+                                        <input type="image" type="submit" name="sup" src="images/clear.png" style="width: 20px; height: 20px; position: relative; top: 60px; right: 80px ">
                                        
                                       <?php
                                         }

@@ -24,11 +24,18 @@
 			$req->execute();
 		}
 
-		function recuperer($nom){
+		/*function recuperer($nom){
 			$db = config::getConnexion();
 			$sql = "SELECT * FROM categorie WHERE nom=:nom";
 			$req=$db->prepare($sql);
 			$req->bindValue(':nom',$nom);
+			return $req;
+		}*/
+
+		function recuperer1($ref){
+			$db = config::getConnexion();
+			$sql = "SELECT * FROM categorie WHERE reference=$ref";
+			$req=$db->query($sql);
 			return $req;
 		}
 

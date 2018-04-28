@@ -7,7 +7,6 @@
   ?>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -293,7 +292,7 @@
                   </div>
                   <div class="x_content">
 
-                    <form method="POST" action="AJOUTER_PRODUIT.php" class="form-horizontal form-label-left" novalidate>
+                    <form id="myform" method="POST" action="AJOUTER_PRODUIT.php" class="form-horizontal form-label-left" novalidate>
 
                       <span class="section"> Produit  </span>
 
@@ -399,7 +398,7 @@
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
                           <button type="RESET" class="btn btn-primary">RESET</button>
-                          <button id="send" type="submit" class="btn btn-success" >VALIDER</button>
+                          <button id="send" type="submit" class="btn btn-success">VALIDER</button>
                         </div>
                       </div>
                     </form>

@@ -342,7 +342,14 @@
                                                     </ul>
                                                 </div>
                                                 <!-- Item Name -->
-                                                <div class="details-sec"> <a href="#."><?php echo $key['nom']; ?></a> <span class="font-montserrat"><?php echo $key['prix']."DT" ?></span></div>
+                                                    <form id="myform" method="POST" action="details_produit.php">
+                                                    <input type="text" name="reference_p" value="<?php echo $key['reference'];?>" hidden>
+                                                    <div class="details-sec">
+                                                        <input type="submit" value="<?php echo $key['nom']; ?>" style="border: none; background-color: white; font-weight: solid;" class="font-montserrat"><hr>
+                                                        <span class="font-montserrat"><?php echo $key['prix']."DT" ?></span>
+                                                    </div>
+                                                </form>
+                                                
                                             </div>
                                         </li>
 
