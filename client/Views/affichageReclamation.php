@@ -1,3 +1,4 @@
+
 <?php
 include "../config.php";
 session_start();
@@ -9,6 +10,12 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
    $requser->execute(array($getid));
    $userinfo = $requser->fetch();
 }
+
+?>
+<?PHP
+include "../Core/ReclamationCore.php";
+$reclamation1C=new ReclamationCore();
+$listeReclamations=$reclamation1C->afficherReclamations();
 
 ?>
 
@@ -465,65 +472,23 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                 <li><a href="edit.php">EDITER MON COMPTE</a></li>
                 <li><a href="#."> CONSULTER PANIER</a></li>
                 <li><a href="#."> CONSULTER LIVRAISON</a></li>
-                <li><a href="affichageReclamation.php" style="text-transform:uppercase"> CONSULTER mes réclamations</a></li>
+                <li><a href="#." style="text-transform:uppercase"> CONSULTER mes réclamations</a></li>
                 <li><a href="#." style="text-transform:uppercase"> CONSULTER mes réservations</a></li>
                 <li><a href="#.">MESSAGERIE</a></li>
                 <li><a href="chat.php">FORUM</a></li>
                 <li><a href="disconnect.php">DÉCONNEXION</a></li>
 
               </ul>
-              <ul>
-                
-              </ul>
+<ul>
+
+</ul>
+              <!-- HEADING -->
+
 
               <!-- HEADING -->
-              <div class="heading">
-                <h4>DERNIERS ACHATS</h4>
-              </div>
-              <!-- CATEGORIES -->
-              <ul class="cate latest-post">
 
-                <!-- Post Small -->
-                <li>
-                  <div class="media">
-                    <div class="media-left"> <a href="#."><img src="images/post-left-1.jpg" alt=""></a></div>
-                    <div class="media-body"> <a href="#.">Pretty in pink</a>
-                      <p>86 View - 03 Comment</p>
-                    </div>
-                  </div>
-                </li>
-                <!-- Post Small -->
-                <li>
-                  <div class="media">
-                    <div class="media-left"> <a href="#."><img src="images/post-left-2.jpg" alt=""></a></div>
-                    <div class="media-body"> <a href="#.">Casual in grey</a>
-                      <p>86 View - 03 Comment</p>
-                    </div>
-                  </div>
-                </li>
-                <!-- Post Small -->
-                <li>
-                  <div class="media">
-                    <div class="media-left"> <a href="#."><img src="images/post-left-3.jpg" alt=""></a></div>
-                    <div class="media-body"> <a href="#.">BANDAGE SET</a>
-                      <p>86 View - 03 Comment</p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-
-              <!-- HEADING -->
-              <div class="heading">
-                <h4>ARCHIVE</h4>
-              </div>
               <!-- CATEGORIES -->
-              <ul class="cate">
-                <li><a href="#.">March 2015
-                  Jan 2015</a></li>
-                <li><a href="#."> December 2014</a></li>
-                <li><a href="#."> November 2014</a></li>
-                <li><a href="#."> July 2014</a></li>
-              </ul>
+
 
               <!-- TAGS -->
               <h4 class="margin-t-40">PRODUIT TAGS</h4>
@@ -548,7 +513,59 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                 <li class="animate fadeInUp" data-wow-delay="0.4s">
                   <!--  Image -->
                   <img class="img-responsive" src="http://www.femmesmaghrebines.com/wp-content/uploads/manel-3-676x400.jpg" alt="">
+                  <fieldset style="margin:auto">
+      						  <legend style="border=2px;text-transform:uppercase;">
+      Mes réclamations
+      						  </legend>
+      							<a href="ajouterReclamation.php" class="menu_section" style="text-transform:uppercase;"> Passer une réclamation</a>
+      							<br>
+      							<br>
+      						<div >
 
+
+      						<div >
+
+      								<table class="table table-striped table-bordered">
+      									<thead>
+      										<tr>
+      											<th>Nom</th>
+      											<th>Prénom</th>
+      											<th>Adresse mail</th>
+      											<th>Téléphone</th>
+      											<th>Type</th>
+                            <th>Cause</th>
+                            <th>Etat</th>
+      											<th>Action</th>
+
+      										</tr>
+      									</thead>
+      									<tbody>
+      									<?php
+      									 foreach ($listeReclamations as $row) {
+      														echo '<tr>';
+      														echo '<td width="10%">'. $row['nom'] . '</td>';
+      														echo '<td width="10%">'. $row['prenom'] . '</td>';
+                                  echo '<td width="10%">'. $row['mail'] . '</td>';
+      														echo '<td width="10%">'. $row['telephone'] . '</td>';
+      														echo '<td width="10%">'. $row['type'] . '</td>';
+      														echo '<td width="10%">'. $row['cause'] . '</td>';
+                                  echo '<td width="10%">'. $row['etat'] . '</td>';
+      														echo '<td width="30%">';
+
+      																							 echo '<a  href="modifierReclamation.php?id='.$row['id'].'">Modifier</a>';
+      																			echo ' ';
+      																			echo '<a href="suppressionReclamation.php?id='.$row['id'].'">Annuler</a>';
+      															 echo '</td>';
+      																	echo '</tr>';
+      									 }
+      									?>
+      									</tbody>
+      						</table>
+      						</div>
+
+      	</div>
+
+      </fieldset>
                   <!-- Tag Icon -->
                   <div class="blog-tag-icon"> <i class="fa fa-pencil"></i> </div>
                   <span class="tags">CONSEILS ET DÉMONSTRATION</span> <a href="#." class="tittle-post font-playfair">OMBRES À PAUPIÉRES FASHION MAKEUP</a>

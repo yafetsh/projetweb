@@ -1,3 +1,4 @@
+
 <?php
 include "../config.php";
 session_start();
@@ -10,6 +11,14 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
    $userinfo = $requser->fetch();
 }
 
+?>
+<?php
+include "../Core/ReclamationCore.php";
+$reclamationC=new ReclamationCore();
+if (isset($_POST["id"])){
+  $reclamationC->supprimerReclamation($_POST['id']);
+  header('Location: afficherReclamation.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -465,65 +474,23 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                 <li><a href="edit.php">EDITER MON COMPTE</a></li>
                 <li><a href="#."> CONSULTER PANIER</a></li>
                 <li><a href="#."> CONSULTER LIVRAISON</a></li>
-                <li><a href="affichageReclamation.php" style="text-transform:uppercase"> CONSULTER mes réclamations</a></li>
+                <li><a href="#." style="text-transform:uppercase"> CONSULTER mes réclamations</a></li>
                 <li><a href="#." style="text-transform:uppercase"> CONSULTER mes réservations</a></li>
                 <li><a href="#.">MESSAGERIE</a></li>
                 <li><a href="chat.php">FORUM</a></li>
                 <li><a href="disconnect.php">DÉCONNEXION</a></li>
 
               </ul>
-              <ul>
-                
-              </ul>
+<ul>
+
+</ul>
+              <!-- HEADING -->
+
 
               <!-- HEADING -->
-              <div class="heading">
-                <h4>DERNIERS ACHATS</h4>
-              </div>
-              <!-- CATEGORIES -->
-              <ul class="cate latest-post">
 
-                <!-- Post Small -->
-                <li>
-                  <div class="media">
-                    <div class="media-left"> <a href="#."><img src="images/post-left-1.jpg" alt=""></a></div>
-                    <div class="media-body"> <a href="#.">Pretty in pink</a>
-                      <p>86 View - 03 Comment</p>
-                    </div>
-                  </div>
-                </li>
-                <!-- Post Small -->
-                <li>
-                  <div class="media">
-                    <div class="media-left"> <a href="#."><img src="images/post-left-2.jpg" alt=""></a></div>
-                    <div class="media-body"> <a href="#.">Casual in grey</a>
-                      <p>86 View - 03 Comment</p>
-                    </div>
-                  </div>
-                </li>
-                <!-- Post Small -->
-                <li>
-                  <div class="media">
-                    <div class="media-left"> <a href="#."><img src="images/post-left-3.jpg" alt=""></a></div>
-                    <div class="media-body"> <a href="#.">BANDAGE SET</a>
-                      <p>86 View - 03 Comment</p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-
-              <!-- HEADING -->
-              <div class="heading">
-                <h4>ARCHIVE</h4>
-              </div>
               <!-- CATEGORIES -->
-              <ul class="cate">
-                <li><a href="#.">March 2015
-                  Jan 2015</a></li>
-                <li><a href="#."> December 2014</a></li>
-                <li><a href="#."> November 2014</a></li>
-                <li><a href="#."> July 2014</a></li>
-              </ul>
+
 
               <!-- TAGS -->
               <h4 class="margin-t-40">PRODUIT TAGS</h4>
@@ -548,7 +515,29 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                 <li class="animate fadeInUp" data-wow-delay="0.4s">
                   <!--  Image -->
                   <img class="img-responsive" src="http://www.femmesmaghrebines.com/wp-content/uploads/manel-3-676x400.jpg" alt="">
+                  <fieldset style="margin:auto">
 
+
+                    <div  role="main" method="POST" action="affichageReclamation.php">
+
+                                    <div >
+                                    </div>
+                  Supprimer cette réclamation
+                                    <div >
+                  										<div class="span10 offset1">
+
+                  												<form class="form-horizontal" action="suppressionReclamation.php" method="post">
+                  													<input type="hidden" name="id" value="<?php echo $_GET['id'];;?>"/>
+                  													<p class="alert alert-error">Vous êtes sûr de supprimer?</p>
+                  													<div class="form-actions">
+                  															<button type="submit" >OUI</button>
+                  															<a  href="affichageReclamation.php">NON</a>
+                  														</div>
+                  												</form>
+                  										</div>
+                                </div>
+                                      </div>
+                  </fieldset>
                   <!-- Tag Icon -->
                   <div class="blog-tag-icon"> <i class="fa fa-pencil"></i> </div>
                   <span class="tags">CONSEILS ET DÉMONSTRATION</span> <a href="#." class="tittle-post font-playfair">OMBRES À PAUPIÉRES FASHION MAKEUP</a>
