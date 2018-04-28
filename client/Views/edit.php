@@ -1,30 +1,64 @@
 <?PHP
 include "../entities/utilisateur.php";
 include "../core/utilisateurCore.php";
-$bdd = new PDO('mysql:host=127.0.0.1;dbname=projet', 'root', '');
+
 session_start();
+include_once('cookieconnect.php');
+
+$bdd = config::getConnexion(); 
+$condition;
+
 if(isset($_SESSION['id'])) {
 
-$requser = $bdd->prepare("SELECT * FROM membres WHERE id = ?");
+$requser = $bdd->prepare("SELECT * FROM membre WHERE id = ?");
 $requser->execute(array($_SESSION['id']));
 $user = $requser->fetch();
-}
-$id=$_SESSION['id'];
-if (isset($_POST['modifier']))
-{
-   
-    if ($_POST['pseudo']!=$user['pseudo'] AND $_POST['mail']!=$user['mail'] AND $_POST['motdepasse1']==$_POST['motdepasse2']) {
-        # code...
- $pseudo=$_POST['pseudo'];
-    $mail=$_POST['mail'];
-    $motdepasse=$_POST['motdepasse1'];
-    $utilisateur1=new utilisateur($pseudo,$mail,$motdepasse);
-    $utilisateurC=new utilisateurCore();
-    $utilisateurC->modifierUser($utilisateur1,$id);
-    }
+
+if(isset($_POST['newpseudo']) AND !empty($_POST['newpseudo']) AND $_POST['newpseudo'] != $user['pseudo'])
+{    //condition1
+     $newpseudo = htmlspecialchars($_POST['newpseudo']);
+     $utilisateur1C = new utilisateurCore();
+     $utilisateur1C->modifierUser($newpseudo,1,$_SESSION['id']);
+     header("Location: userProfile.php?id=".$_SESSION['id']);     
 }
 
+if(isset($_POST['newmail']) AND !empty($_POST['newmail']) AND $_POST['newmail'] != $user['mail'])
+{    
+  //condition 2
+     $newmail = htmlspecialchars($_POST['newmail']);
+     $utilisateur2C = new utilisateurCore();
+     $utilisateur2C->modifierUser($newmail,2,$_SESSION['id']);
+     header("Location: userProfile.php?id=".$_SESSION['id']);
+}
+
+
+if(isset($_POST['newmdp1']) AND !empty($_POST['newmdp1']) AND isset($_POST['newmdp2']) AND !empty($_POST['newmdp2']))
+{    
+   //condition 3
+   $mdp1 = sha1($_POST['newmdp1']);
+   $mdp2 = sha1($_POST['newmdp2']);
+
+   if($mdp1 == $mdp2)
+   {
+      $utilisateur2C = new utilisateurCore();
+      $utilisateur2C->modifierUser($mdp1,3,$_SESSION['id']);
+      header("Location: userProfile.php?id=".$_SESSION['id']);
+   }
+   else{
+      $msg = "les mot de passes ne correspond pas !" ;
+   }
+
+}
+
+if (isset($_POST['supprimer'])) {
+
+$deleteMbr = $bdd->prepare('DELETE FROM membre where id=?');
+$deleteMbr->execute(array($_SESSION['id'])); 
+}
+
+
 ?>
+
 
 
 <!DOCTYPE html>
@@ -479,30 +513,35 @@ if (isset($_POST['modifier']))
                         <div class="contact">
                             <div class="contact-form">
                                 <!--======= FORM  =========-->
-                                <form role="form" id="contact_form" class="contact-form" method="post">
+                                <form role="form" id="contact_form" class="contact-form" method="post" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <ul class="row">
                                                 <li class="col-sm-12">
                                                     <label>
-                          <input type="text" class="form-control" name="pseudo" id="name" placeholder="*PSEUDO">
+                          <input type="text" class="form-control" name="newpseudo" id="name" placeholder="*PSEUDO">
                         </label>
                                                 </li>
                                                 <li class="col-sm-12">
                                                     <label>
-                          <input type="email" class="form-control" name="mail" id="email" placeholder="*EMAIL">
+                          <input type="email" class="form-control" name="newmail" id="email" placeholder="*EMAIL">
                         </label>
                                                 </li>
                                                 <li class="col-sm-12">
                                                     <label>
-                          <input type="text" class="form-control" name="motdepasse1" id="company" placeholder="*MOT DE PASSE">
+                          <input type="password" class="form-control" name="newmdp1" id="company" placeholder="*MOT DE PASSE">
                         </label>
                                                 </li>
                                                 <li class="col-sm-12">
                                                     <label>
-                          <input type="text" class="form-control" name="motdepasse2" id="company" placeholder="*CONFIRMER VOTRE MOT DE PASSE">
+                          <input type="password" class="form-control" name="newmdp2" id="company" placeholder="*CONFIRMER VOTRE MOT DE PASSE">
                         </label>
                                                 </li>
+
+                                                       <li class="col-sm-12">
+                                      <input type="submit" name="supprimer" value="supprimer mon compte">
+                                                    </li>
+
                                             </ul>
                                         </div>
                                         <div class="col-md-12">
@@ -514,6 +553,9 @@ if (isset($_POST['modifier']))
                                         </div>
                                     </div>
                                 </form>
+
+                                         <?php if(isset($msg)){ echo $msg;} ?>
+
  
                             </div>
                         </div>
@@ -554,3 +596,11 @@ if (isset($_POST['modifier']))
 <!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/04-contact-03.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:48:06 GMT -->
 
 </html>
+<?php   
+}
+else
+{
+  echo "string";
+header("Location: connexion.php");
+}
+?>

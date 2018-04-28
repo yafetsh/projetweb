@@ -1,6 +1,10 @@
 <?php
-require '../Core/PanierCore.php' ;
-$Panier=new PanierCore();
+	session_start();
+
+	if (!isset($_SESSION['access_token'])) {
+		header('Location: login.php');
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +53,7 @@ $Panier=new PanierCore();
 <!-- LOADER ===========================================-->
 <div id="loader">
   <div class="loader">
-    <div class="position-center-center"> <img src="images/logo-dark.png" alt="">
+    <div class="position-center-center"> <img src="images/fashionmakeup.png" alt="">
       <p class="font-playfair text-center">Please Wait...</p>
       <div class="loading">
         <div class="ball"></div>
@@ -71,8 +75,11 @@ $Panier=new PanierCore();
 
         <div class="top-links">
           <ul>
-            <li><a href="#.">MY ACCOUNT</a></li>
-            <li><a href="#.">MY WISHLIST</a></li>
+            <li><a href="#.">
+            	<?php echo $_SESSION['email'] ?>
+
+            </a></li>
+            <li><a href="logout.<?php  ?>">SE DÉCONNECTER</a></li>
           </ul>
           <!-- Social Icons -->
           <ul class="social_icons">
@@ -151,9 +158,9 @@ $Panier=new PanierCore();
                 <div class="col-sm-2">
                   <h6>Shop</h6>
                   <ul>
-                    <li><a href="#."> MEN�S</a></li>
+                    <li><a href="#."> MEN?S</a></li>
                     <li><a href="#."> WOMAN</a></li>
-                    <li><a href="#."> KID�S</a></li>
+                    <li><a href="#."> KID?S</a></li>
                     <li><a href="#."> BAGS & SHOES</a></li>
                     <li><a href="#."> SEASONAL</a></li>
                     <li><a href="#."> LOOKBOOK</a></li>
@@ -758,14 +765,14 @@ $Panier=new PanierCore();
         <ul class="nav nav-tabs animate fadeInUp" data-wow-delay="0.4s" role="tablist">
           <li role="presentation" class="active"><a href="#men" aria-controls="men" role="tab" data-toggle="tab">Visage</a></li>
           <li role="presentation"><a href="#women" aria-controls="women" role="tab" data-toggle="tab">Yeux</a></li>
-          <li role="presentation"><a href="#access" aria-controls="access" role="tab" data-toggle="tab">L�vres</a></li>
+          <li role="presentation"><a href="#access" aria-controls="access" role="tab" data-toggle="tab">L?vres</a></li>
           <li role="presentation"><a href="#shoes" aria-controls="shoes" role="tab" data-toggle="tab">Ongles</a></li>
           <li role="presentation"><a href="#bags" aria-controls="bags" role="tab" data-toggle="tab">Accessoires</a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content animate fadeInUp" data-wow-delay="0.4s">
-          <!-- MEN�S  -->
+          <!-- MEN?S  -->
           <div role="tabpanel" class="tab-pane fade in active" id="men">
 
             <!--  New Arrival Tabs Products  -->
@@ -1331,8 +1338,8 @@ $Panier=new PanierCore();
                 </div>
                 <!--  Text -->
                 <div class="media-body">
-                  <p>�Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua.�</p>
+                  <p>?Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.?</p>
                   <hr>
                   <h6>TYRION LANNISTER</h6>
                   <span>Founder-Ceo. Dell Corp</span> </div>
@@ -1346,8 +1353,8 @@ $Panier=new PanierCore();
                 </div>
                 <!--  Text -->
                 <div class="media-body">
-                  <p>�Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua.�</p>
+                  <p>?Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.?</p>
                   <hr>
                   <h6>SANSA STARK</h6>
                   <span>Founder-Ceo. Dell Corp</span> </div>
@@ -1361,8 +1368,8 @@ $Panier=new PanierCore();
                 </div>
                 <!--  Text -->
                 <div class="media-body">
-                  <p>�Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua.�</p>
+                  <p>?Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.?</p>
                   <hr>
                   <h6>john now</h6>
                   <span>Founder-Ceo. Dell Corp</span> </div>
@@ -1510,7 +1517,7 @@ $Panier=new PanierCore();
 
       <!-- Rights -->
       <div class="rights">
-        <p>� 2018 HTML5 TEMPLATE ARTVISION. All Rights Reserved. </p>
+        <p>? 2018 HTML5 TEMPLATE ARTVISION. All Rights Reserved. </p>
       </div>
     </div>
   </footer>

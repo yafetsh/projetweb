@@ -1,8 +1,7 @@
 <?php
 include "../entities/utilisateur.php";
 include "../core/utilisateurCore.php";
-
-
+require_once "GoogleC.php";
 global $erreur;
 if(isset($_POST['forminscription']))
 {
@@ -18,25 +17,70 @@ if(isset($_POST['forminscription']))
 
       $pseudolength =strlen($pseudo);
       if($pseudolength<=255)
-        {
+        { 
             if($mail == $mail2)
-            {
+            {   
 
         if(filter_var($mail,FILTER_VALIDATE_EMAIL))
            {
-
-                if($mdp == $mdp2)
+                     $utilisateur2C = new utilisateurCore();
+                     $mailexist=$utilisateur2C->VerifierEmail($mail);
+                if($mailexist==0)
                 {
+                if($mdp == $mdp2)
+                {  
+
+      //hne yebda el controle de saisie level 2
+
+       //longuer de mot de passe >8             
+     if (strlen($_POST['mdp'])>=8) {
+      
+                if (ctype_lower ($_POST['mdp'])) {
+                                  $erreur="votre mot de passe doit contenir au moins une caractére en  majuscule !" ; 
+                                  echo "ekteb majuscule";
+                            }else{  
+                               
+                                  $longueurKey = 12;
+                    $key = "";
+                    for ($i=1; $i<$longueurKey; $i++) { 
+                        $key .= mt_rand(0,9);
+                    }    
+
+
+
+                    if (isset($_POST['captcha'])) {
+    
+    if ($_POST['captcha'] == $_SESSION['captcha']) {
+       
                         $utilisateur1 = new utilisateur($pseudo,$mail,$mdp);
                         $utilisateur1C = new utilisateurCore();
-                        $utilisateur1C->inscritption($utilisateur1);
-
+                        $utilisateur1C->inscritption($utilisateur1,$key);
+                        $utilisateur1C->EnvoyerMail($mail,$pseudo,$key);
 
                         $erreur="votre comptre à était bien crée";
+    }else{
+        $erreur="captcha invalide";
+    }
+}
+
+                            }
+
+
+//strlen
+} else{
+    $erreur="votre mot de passe doit etre plus que 8 caractéres !";
+}
+  //Hne youfa el controle de siasie 2
+
+
 
                 }
                 else{
                     $erreur="vos mot de passes ne correspond pas";
+                }
+                }
+                else{
+                    $erreur="email déja utilisé , veuillez utiliser une autre adresse !";
                 }
              }
              else{
@@ -60,6 +104,16 @@ if(isset($_POST['forminscription']))
 
     }
 }
+
+//google APIs
+    if (isset($_SESSION['access_token'])) {
+        header('Location: index.php');
+        exit();
+    }
+
+    $loginURL = $gClient->createAuthUrl();
+
+//google APis
 
 ?>
 <!DOCTYPE html>
@@ -336,11 +390,30 @@ if(isset($_POST['forminscription']))
                                         </li>
                                         <li class="col-sm-12">
                                             <label>
-                        <input type="text" class="form-control" name="website" id="website" placeholder="*AGE">
+                        <input type="hidden" class="form-control" name="website" id="website" placeholder="*AGE">
                       </label>
                                         </li>
+                                        <!-- captcha -->
+                                          <li class="col-sm-12">
+                   
+  <table>
+      <td><img src="captcha.php"> </td>
+      <td><input type="text" name="captcha" class="form-control"></td>
+  </table>
+
+
+                                        </li>
+                                        <!-- captcha -->
                                         <li class="col-sm-12 no-margin">
-                                        <input type="submit" value="submit" class="btn" id="btn_submit" onClick="proceed();" name="forminscription">
+                                        <table>
+                                            <td>
+                                           <input type="button" onclick="window.location = '<?php echo $loginURL ?>';" value="Log In With Google" class="btn btn-danger" name="googleButton">
+
+                                            </td>
+                                            <td>
+                                                <input type="submit" value="S'INSCRIRE" class="btn" id="btn_submit" onClick="proceed();" name="forminscription">
+                                            </td>
+                                        </table>
                                         </li>
                                     </ul>
                                 </div>

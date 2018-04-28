@@ -4,6 +4,8 @@ include "../core/utilisateurCore.php";
 
 session_start();
 
+include_once('cookieconnect.php');
+
 if(isset($_POST['formconnexion'])) {
    $mailconnect = $_POST['mailconnect'];
    $mdpconnect = $_POST['mdpconnect'];
@@ -15,13 +17,27 @@ if(isset($_POST['formconnexion'])) {
                         $tab=$utilisateur1C->connection($utilisateur1);
                         $userexist=$tab[0];
                         $requser=$tab[1];
-
+echo $userexist;
       if($userexist == 1) {
+
+                if (isset($_POST['rememberme'])) {
+                
+                setcookie('email',$mailconnect,time()+365*24*3600,null,null,false,true);
+                setcookie('password',$mdpconnect,time()+365*24*3600,null,null,false,true);
+
+            }
+
+
          $userinfo = $requser->fetch();
          $_SESSION['id'] = $userinfo['id'];
          $_SESSION['pseudo'] = $userinfo['pseudo'];
          $_SESSION['mail'] = $userinfo['mail'];
+         $_SESSION['confirme'] = $userinfo['confirme'];
+         if ($_SESSION['confirme'] == 1) {
          header("Location:userProfile.php?id=".$_SESSION['id']);
+         }else{
+           $erreur ="votre compte n'est pas encore confirmé";
+         }
       } else {
          $erreur = "Mauvais mail ou mot de passe !";
       }
@@ -1679,9 +1695,15 @@ if(isset($_POST['formconnexion'])) {
                                                         //]]>
 
                                                     </script>
-                                                
-                                                    <p class="required">* Required Fields</p>
-                                                </div>
+                       <?php                         
+         if(isset($erreur))
+             {
+                echo '<font color="red">'.$erreur."</font>";
+             }       
+
+           ?>  
+
+                                                      </div>
                                             </div>
                                         </div>
                                         <div class="col2-set">
@@ -1692,11 +1714,14 @@ if(isset($_POST['formconnexion'])) {
                                             </div>
                                             <div class="col-2 registered-users">
                                                 <div class="buttons-set">
-                                                    <a href="http://sebian.demo.arw.tf/fashion/customer/account/forgotpassword/" class="f-left">Forgot Your Password?</a>
+                                                    <a href="recuperer.php" class="f-left">Forgot Your Password?</a>
                     <button type="submit" class="button" title="Login" name="formconnexion" id="send2"><span><span>Login</span></span></button>
-
+                    <br> <br> <br> 
+                     <input type="checkbox" name="rememberme" id="remembercheckbox"> <label for="remembercheckbox"> se souvenir de moi </label>  
                                                 </div>
                                             </div>
+
+
                                         </div>
                                     </form>
                                     <script type="text/javascript">
