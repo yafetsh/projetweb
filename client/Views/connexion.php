@@ -37,13 +37,21 @@ echo $userexist;
 
          if ($_SESSION['confirme'] == 1 && $_SESSION['role'] == 0 ) {
          header("Location:userProfile.php?id=".$_SESSION['id']);
+<<<<<<< HEAD
          }else{
+=======
+         }
+         else{
+>>>>>>> 48caa3e0bbaadcc5103b4f8a5d266b602067e568
            $erreur ="votre compte n'est pas encore confirmé";
          }
          if($_SESSION['role'] == 1 ){
          header("Location: ../../admin/Views/production/index.php?id=".$_SESSION['id']);
          }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 48caa3e0bbaadcc5103b4f8a5d266b602067e568
       } else {
          $erreur = "Mauvais mail ou mot de passe !";
       }
