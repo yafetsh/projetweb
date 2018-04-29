@@ -13,8 +13,8 @@
     $C = new categorieC();
     $SC = new sous_categorieC();
     $categorie = $C->afficher();
-    $categorie2 = $C->recuperer1($_POST['ref_sc']);
-    $liste_SC = $SC->recuperer($_POST['ref_sc']);
+    $categorie2 = $C->recuperer1($_GET['ref_sc']);
+    $liste_SC = $SC->recuperer($_GET['ref_sc']);
     
 
     
@@ -109,7 +109,7 @@
                     <div class="container" style="visibility: initial;">
                         <nav>
                             <ul id="ownmenu" class="ownmenu">
-                                <li class="active"><a href="index.html">ACCUEIL</a>
+                                <li class="active"><a href="index1.php">ACCUEIL</a>
                                 </li>
                                 <li><a href="Produit1.php">PRODUITS</a>
                                     <!--======= MEGA MENU =========-->
@@ -305,7 +305,7 @@
 
                             <!--======= Products =========-->
                             <div class="popurlar_product">
-                                <h1 style="font-weight: normal; color: #333333; font-family: 'Montserrat', sans-serif; font-size: 24px "><?php echo $_POST['f']; ?></h1>
+                                <h1 style="font-weight: normal; color: #333333; font-family: 'Montserrat', sans-serif; font-size: 24px "><?php echo $_GET['f']; ?></h1>
                                 <ul class="row">
                                     <!--NOUVEAU-->
                                     <?php
