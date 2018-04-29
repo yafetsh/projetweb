@@ -35,13 +35,14 @@ echo $userexist;
          $_SESSION['confirme'] = $userinfo['confirme'];
          $_SESSION['role'] = $userinfo['role'];
 
-         if ($_SESSION['confirme'] == 1 && $_SESSION['role'] == NULL ) {
+         if ($_SESSION['confirme'] == 1 && $_SESSION['role'] == 0 ) {
          header("Location:userProfile.php?id=".$_SESSION['id']);
-         }else if($_SESSION['confirme'] == 1 && $_SESSION['role'] == 1 ){
-         header("Location: ../../admin/Views/production/index.php?id=".$_SESSION['id']);
          }
          else{
            $erreur ="votre compte n'est pas encore confirmé";
+         }
+         if($_SESSION['role'] == 1 ){
+         header("Location: ../../admin/Views/production/index.php?id=".$_SESSION['id']);
          }
       } else {
          $erreur = "Mauvais mail ou mot de passe !";
