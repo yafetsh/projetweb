@@ -44,7 +44,7 @@ if ( !empty($_POST)) {
     $reclamation1=new Reclamation($_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause']);
     $reclamation1C=new ReclamationCore();
     $reclamation1C->ajouterReclamation($reclamation1);
- header('Location: afficherReclamation.php');
+ header('Location: affichageReclamation.php');
     }
 
     ?>
