@@ -1,10 +1,10 @@
 <?php  
   include_once "../Core/livraisoncore.php";
   include_once "../Entities/livraison.php";
-
+session_start();
 
   $livraisonC=new livraisoncore();
-  $listeLivraisons=$livraisonC->afficherLivraisons();
+  $listeLivraisons=$livraisonC->afficherLivraisons($_SESSION['id']);
   $lC=new livraisoncore();
   if(isset($_GET['supprimer'])){
     $lC->supprimerlivraison($_GET["id"]);

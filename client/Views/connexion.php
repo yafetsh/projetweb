@@ -4,7 +4,7 @@ include "../Core/utilisateurCore.php";
 
 session_start();
 
-include_once('cookieconnect.php');
+
 
 if(isset($_POST['formconnexion'])) {
    $mailconnect = $_POST['mailconnect'];

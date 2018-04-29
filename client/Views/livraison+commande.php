@@ -1,6 +1,7 @@
 <?PHP
 include "../Entities/livraison.php";
 include "../Core/livraisoncore.php";
+session_start();
     if ( !empty($_POST)) { 
         $rueError = null; 
         $numeroError = null;
@@ -35,7 +36,7 @@ include "../Core/livraisoncore.php";
  else  if (isset($_POST['rue']) and isset($_POST['numero']) and isset($_POST['region']) and isset($_POST['ville']) ){
 $livraison1=new livraison('',$_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
 $livraison1c=new livraisoncore();
-$livraison1c->ajouterlivraison($livraison1);
+$livraison1c->ajouterlivraison($livraison1,$_SESSION['id']);
 header('Location: livraisonclient.php');
   
 }
