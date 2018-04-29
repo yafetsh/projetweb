@@ -15,7 +15,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
 <?PHP
 include "../Core/ReclamationCore.php";
 $reclamation1C=new ReclamationCore();
-$listeReclamations=$reclamation1C->afficherReclamations();
+$listeReclamations=$reclamation1C->afficherReclamations($_SESSION['id']);
 
 ?>
 
@@ -439,8 +439,8 @@ $listeReclamations=$reclamation1C->afficherReclamations();
         <h4>PROFIL FASHION MAKE UP</h4>
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
-          <li><a href="#"><?php echo $userinfo['pseudo']; ?></a></li>
-          <li class="active"><?php echo $userinfo['mail']; ?></li>
+          <li><a href="#"><?php echo $_SESSION['pseudo']; ?></a></li>
+          <li class="active"><?php echo $_SESSION['mail']; ?></li>
         </ol>
       </div>
     </section>

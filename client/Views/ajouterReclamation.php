@@ -2,48 +2,11 @@
 
 include "../Entities/reclamation.php";
 include "../Core/ReclamationCore.php";
-
-if ( !empty($_POST)) {
-    // keep track validation errors
-    $nomError = null;
-    $prenomError = null;
-    $mailError = null;
-    $telephoneError = null;
-    $typeError = null;
-    $causeError = null;
-    // keep track post values
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $mail = $_POST['mail'];
-    $telephone = $_POST['telephone'];
-    $type = $_POST['type'];
-    $cause = $_POST['cause'];
-    // validate input
-    if (empty($nom)) {
-        $nomError = '*Please enter Name';
-        $valid = false;
-    }
-    if (empty($prenom)) {
-        $prenomError = '*Please enter Surname';
-        $valid = false;
-    }
-    if (empty($telephone)) {
-        $telephoneError = '*Please enter Phone number';
-        $valid = false;
-    }
-  if (empty($mail)) {
-        $mailError = '*Please enter Adresse mail';
-        $valid = false;
-    }
-    if (empty($cause)) {
-        $causeError = '*Please enter Cause';
-        $valid = false;
-    }
-  }
+session_start();
     if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['cause'])  ){
     $reclamation1=new Reclamation($_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause']);
     $reclamation1C=new ReclamationCore();
-    $reclamation1C->ajouterReclamation($reclamation1);
+    $reclamation1C->ajouterReclamation($reclamation1,$_SESSION['id']);
  header('Location: affichageReclamation.php');
     }
 

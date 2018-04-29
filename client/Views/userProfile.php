@@ -473,7 +473,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
 
               </ul>
               <ul>
-                
+
               </ul>
 
               <!-- HEADING -->

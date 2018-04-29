@@ -22,9 +22,9 @@ class ReclamationCore
     echo "Etat de la réclamation: " .$etat. "<br>";
 
   }
-function afficherReclamations(){
+function afficherReclamations($id){
   $c=Config::getConnexion();
-  $sql="SELECT * FROM reclamation";
+  $sql="SELECT * FROM reclamation WHERE id_utilisateur=$id";
   try{
     $liste=$c->query($sql);
     return $liste;
@@ -35,10 +35,8 @@ function afficherReclamations(){
 
          }
 
-
-
-function ajouterReclamation($reclamation){
-  $sql="insert into reclamation (nom,prenom,mail,telephone,type,cause) values (:nom, :prenom,:mail,:telephone,:type,:cause)";
+function ajouterReclamation($reclamation,$id){
+  $sql="insert into reclamation (nom,prenom,mail,telephone,type,cause,id_utilisateur) values (:nom, :prenom,:mail,:telephone,:type,:cause,$id)";
   $db = config::getConnexion();
   try{
       $req=$db->prepare($sql);

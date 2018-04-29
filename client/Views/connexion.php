@@ -1,4 +1,4 @@
-<?php 
+<?php
 include "../Entities/utilisateur.php";
 include "../Core/utilisateurCore.php";
 
@@ -11,7 +11,7 @@ if(isset($_POST['formconnexion'])) {
    $mdpconnect = $_POST['mdpconnect'];
    $empty="test";
    if(!empty($mailconnect) AND !empty($mdpconnect)) {
- 
+
   $utilisateur1 = new utilisateur($mailconnect,$mdpconnect,$empty);
                         $utilisateur1C = new utilisateurCore();
                         $tab=$utilisateur1C->connection($utilisateur1);
@@ -21,7 +21,7 @@ echo $userexist;
       if($userexist == 1) {
 
                 if (isset($_POST['rememberme'])) {
-                
+
                 setcookie('email',$mailconnect,time()+365*24*3600,null,null,false,true);
                 setcookie('password',$mdpconnect,time()+365*24*3600,null,null,false,true);
 
@@ -35,14 +35,15 @@ echo $userexist;
          $_SESSION['confirme'] = $userinfo['confirme'];
          $_SESSION['role'] = $userinfo['role'];
 
-         if ($_SESSION['confirme'] == 1 && $_SESSION['role'] == NULL ) {
+         if ($_SESSION['confirme'] == 1 && $_SESSION['role'] == 0 ) {
          header("Location:userProfile.php?id=".$_SESSION['id']);
-         }else if($_SESSION['confirme'] == 1 && $_SESSION['role'] == 1 ){
-         header("Location: ../../admin/Views/production/index.php?id=".$_SESSION['id']);
-         }
-         else{
+         }else{
            $erreur ="votre compte n'est pas encore confirmé";
          }
+         if($_SESSION['role'] == 1 ){
+         header("Location: ../../admin/Views/production/index.php?id=".$_SESSION['id']);
+         }
+
       } else {
          $erreur = "Mauvais mail ou mot de passe !";
       }
@@ -1700,13 +1701,13 @@ echo $userexist;
                                                         //]]>
 
                                                     </script>
-                       <?php                         
+                       <?php
          if(isset($erreur))
              {
                 echo '<font color="red">'.$erreur."</font>";
-             }       
+             }
 
-           ?>  
+           ?>
 
                                                       </div>
                                             </div>
@@ -1721,8 +1722,8 @@ echo $userexist;
                                                 <div class="buttons-set">
                                                     <a href="recuperer.php" class="f-left">Forgot Your Password?</a>
                     <button type="submit" class="button" title="Login" name="formconnexion" id="send2"><span><span>Login</span></span></button>
-                    <br> <br> <br> 
-                     <input type="checkbox" name="rememberme" id="remembercheckbox"> <label for="remembercheckbox"> se souvenir de moi </label>  
+                    <br> <br> <br>
+                     <input type="checkbox" name="rememberme" id="remembercheckbox"> <label for="remembercheckbox"> se souvenir de moi </label>
                                                 </div>
                                             </div>
 
@@ -1734,7 +1735,7 @@ echo $userexist;
                                         var dataForm = new VarienForm('login-form', true);
                                         //]]>
 
-                                    </script> 
+                                    </script>
                                 </div>
                             </div>
                         </div>

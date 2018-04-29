@@ -441,8 +441,8 @@ if (isset($_POST["id"])){
         <h4>PROFIL FASHION MAKE UP</h4>
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
-          <li><a href="#"><?php echo $userinfo['pseudo']; ?></a></li>
-          <li class="active"><?php echo $userinfo['mail']; ?></li>
+          <li><a href="#"><?php echo $_SESSION['pseudo']; ?></a></li>
+          <li class="active"><?php echo $_SESSION['mail']; ?></li>
         </ol>
       </div>
     </section>
