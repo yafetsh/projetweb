@@ -1,17 +1,30 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Explore
+ @fou11
+Sign out
+4
+1 1 yafetsh/projetweb
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
+projetweb/client/Views/connexion.php
+182036a  10 hours ago
+@yafetsh yafetsh Merge branch 'master' of https://github.com/yafetsh/projetweb
+@yafetsh @yassine113 @achrafchetoui
+      
+1910 lines (1853 sloc)  129 KB
 <?php
 include "../Entities/utilisateur.php";
 include "../Core/utilisateurCore.php";
-
 session_start();
-
-
-
 if(isset($_POST['formconnexion'])) {
    $mailconnect = $_POST['mailconnect'];
    $mdpconnect = $_POST['mdpconnect'];
    $empty="test";
    if(!empty($mailconnect) AND !empty($mdpconnect)) {
-
   $utilisateur1 = new utilisateur($mailconnect,$mdpconnect,$empty);
                         $utilisateur1C = new utilisateurCore();
                         $tab=$utilisateur1C->connection($utilisateur1);
@@ -19,39 +32,24 @@ if(isset($_POST['formconnexion'])) {
                         $requser=$tab[1];
 echo $userexist;
       if($userexist == 1) {
-
                 if (isset($_POST['rememberme'])) {
-
                 setcookie('email',$mailconnect,time()+365*24*3600,null,null,false,true);
                 setcookie('password',$mdpconnect,time()+365*24*3600,null,null,false,true);
-
             }
-
-
          $userinfo = $requser->fetch();
          $_SESSION['id'] = $userinfo['id'];
          $_SESSION['pseudo'] = $userinfo['pseudo'];
          $_SESSION['mail'] = $userinfo['mail'];
          $_SESSION['confirme'] = $userinfo['confirme'];
          $_SESSION['role'] = $userinfo['role'];
-
          if ($_SESSION['confirme'] == 1 && $_SESSION['role'] == 0 ) {
          header("Location:userProfile.php?id=".$_SESSION['id']);
-<<<<<<< HEAD
          }else{
-=======
-         }
-         else{
->>>>>>> 48caa3e0bbaadcc5103b4f8a5d266b602067e568
            $erreur ="votre compte n'est pas encore confirmé";
          }
          if($_SESSION['role'] == 1 ){
          header("Location: ../../admin/Views/production/index.php?id=".$_SESSION['id']);
          }
-<<<<<<< HEAD
-
-=======
->>>>>>> 48caa3e0bbaadcc5103b4f8a5d266b602067e568
       } else {
          $erreur = "Mauvais mail ou mot de passe !";
       }
@@ -59,7 +57,6 @@ echo $userexist;
       $erreur = "Tous les champs doivent être complétés !";
    }
 }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -156,24 +153,19 @@ echo $userexist;
         Mage.Cookies.path = '/fashion';
         Mage.Cookies.domain = '.sebian.demo.arw.tf';
         //]]>
-
     </script>
 
     <script type="text/javascript">
         //<![CDATA[
         optionalZipCountries = ["HK", "IE", "MO", "PA"];
         //]]>
-
     </script>
     <!-- BEGIN GOOGLE ANALYTICS CODE -->
     <script type="text/javascript">
         //<![CDATA[
         var _gaq = _gaq || [];
-
         _gaq.push(['_setAccount', 'UA-46749110-8']);
-
         _gaq.push(['_trackPageview']);
-
         (function() {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
@@ -182,20 +174,16 @@ echo $userexist;
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(ga, s);
         })();
-
         //]]>
-
     </script>
     <!-- END GOOGLE ANALYTICS CODE -->
     <script type="text/javascript">
         //<![CDATA[
         var Translator = new Translate([]);
         //]]>
-
     </script>
     <script type="text/javascript">
         var grid_equal_height = true;
-
     </script>
     <link href='//fonts.googleapis.com/css?family=Montserrat:100italic,100,200italic,200,300italic,300,400,400italic,500italic,500,600,600italic,700,700italic,800italic,800,900,900italic&amp;subset=all' rel='stylesheet' type='text/css' />
     <link href='//fonts.googleapis.com/css?family=Montserrat:100italic,100,200italic,200,300italic,300,400,400italic,500italic,500,600,600italic,700,700italic,800italic,800,900,900italic&subset=all' rel='stylesheet' type='text/css' />
@@ -548,7 +536,6 @@ echo $userexist;
                         easing: 'easeInOutQuad'
                     });
                 });
-
             </script>
         </div>
     </div>
@@ -563,7 +550,6 @@ echo $userexist;
             "is_product_view": 0
         });
         //]]>
-
     </script>
     <script type="text/javascript">
         //<![CDATA[
@@ -582,7 +568,6 @@ echo $userexist;
             Slide.run();
         });
         //]]
-
     </script>
     <div class="wrapper">
         <noscript>
@@ -1084,39 +1069,39 @@ echo $userexist;
                                                         <ul class="level0">
                                                             <li class="level1 groups item nav-1-1 first">
                                                                 <a href="#" class="title-group">
-				<span>Shop</span>
-			</a>
+                <span>Shop</span>
+            </a>
                                                                 <div class="groups-wrapper">
                                                                     <ul class="level1">
                                                                         <li class="level2">
                                                                             <a href="#" class="">
-							<span>Menu Item</span>
-						</a>
+                            <span>Menu Item</span>
+                        </a>
                                                                         </li>
                                                                         <li class="level2">
                                                                             <a href="#" class="">
-							<span>Menu Item</span>
-						</a>
+                            <span>Menu Item</span>
+                        </a>
                                                                         </li>
                                                                         <li class="level2">
                                                                             <a href="#" class="">
-							<span>Menu Item</span>
-						</a>
+                            <span>Menu Item</span>
+                        </a>
                                                                         </li>
                                                                         <li class="level2">
                                                                             <a href="#" class="">
-							<span>Menu Item</span>
-						</a>
+                            <span>Menu Item</span>
+                        </a>
                                                                         </li>
                                                                         <li class="level2">
                                                                             <a href="#" class="">
-							<span>Menu Item</span>
-						</a>
+                            <span>Menu Item</span>
+                        </a>
                                                                         </li>
                                                                         <li class="level2">
                                                                             <a href="#" class="">
-							<span>Menu Item</span>
-						</a>
+                            <span>Menu Item</span>
+                        </a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -1129,8 +1114,8 @@ echo $userexist;
                                                                 <div class="lookbook-item row">
                                                                     <div class="lookbook-image col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                                                         <a href="#">
-					<img class="img-responsive" src="http://sebian.demo.arw.tf/media/wysiwyg/arw/_lookbook/lookbook1.jpg" alt="" />
-				</a>
+                    <img class="img-responsive" src="http://sebian.demo.arw.tf/media/wysiwyg/arw/_lookbook/lookbook1.jpg" alt="" />
+                </a>
                                                                     </div>
                                                                     <div class="lookbook-content col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                                                         <div class="lookbook-title"><a href="#">Oversized T-Shirt Dress</a></div>
@@ -1143,8 +1128,8 @@ echo $userexist;
                                                                 <div class="lookbook-item row">
                                                                     <div class="lookbook-image col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                                                         <a href="#">
-					<img class="img-responsive" src="http://sebian.demo.arw.tf/media/wysiwyg/arw/_lookbook/lookbook2.jpg" alt="" />
-				</a>
+                    <img class="img-responsive" src="http://sebian.demo.arw.tf/media/wysiwyg/arw/_lookbook/lookbook2.jpg" alt="" />
+                </a>
                                                                     </div>
                                                                     <div class="lookbook-content col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                                                         <div class="lookbook-title"><a href="#">Today's look</a></div>
@@ -1159,8 +1144,8 @@ echo $userexist;
                                                                 <div class="lookbook-item row">
                                                                     <div class="lookbook-image col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                                                         <a href="#">
-					<img class="img-responsive" src="http://sebian.demo.arw.tf/media/wysiwyg/arw/_lookbook/lookbook3.jpg" alt="" />
-				</a>
+                    <img class="img-responsive" src="http://sebian.demo.arw.tf/media/wysiwyg/arw/_lookbook/lookbook3.jpg" alt="" />
+                </a>
                                                                     </div>
                                                                     <div class="lookbook-content col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                                                         <div class="lookbook-title"><a href="#">White on white on white</a></div>
@@ -1173,8 +1158,8 @@ echo $userexist;
                                                                 <div class="lookbook-item row">
                                                                     <div class="lookbook-image col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                                                         <a href="#">
-					<img class="img-responsive" src="http://sebian.demo.arw.tf/media/wysiwyg/arw/_lookbook/lookbook4.jpg" alt="" />
-				</a>
+                    <img class="img-responsive" src="http://sebian.demo.arw.tf/media/wysiwyg/arw/_lookbook/lookbook4.jpg" alt="" />
+                </a>
                                                                     </div>
                                                                     <div class="lookbook-content col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                                                         <div class="lookbook-title"><a href="#">After The Moment</a></div>
@@ -1212,7 +1197,6 @@ echo $userexist;
                                                 'mm_timeout': 0
                                             });
                                         });
-
                                     </script>
 
                                     <!-- navigation EOF -->
@@ -1264,7 +1248,6 @@ echo $userexist;
                                                             var searchForm_436507210 = new Varien.searchForm('search_mini_form_436507210', 'search_436507210', 'Search entire store here...');
                                                             searchForm_436507210.initAutocomplete('http://sebian.demo.arw.tf/fashion/catalogsearch/ajax/suggest/', 'search_autocomplete_436507210');
                                                             //]]>
-
                                                         </script>
                                                     </div>
                                                 </form>
@@ -1616,7 +1599,6 @@ echo $userexist;
                                                         easing: 'easeInOutQuad'
                                                     });
                                                 });
-
                                             </script>
                                         </div>
                                     </div>
@@ -1694,11 +1676,9 @@ echo $userexist;
                                                             }
                                                             Event.stop(event);
                                                         }
-
                                                         document.observe("dom:loaded", function() {
                                                             new Insertion.Bottom($$('body')[0], $('window-overlay'));
                                                             new Insertion.Bottom($$('body')[0], $('remember-me-popup'));
-
                                                             $$('.remember-me-popup-close').each(function(element) {
                                                                 Event.observe(element, 'click', toggleRememberMepopup);
                                                             })
@@ -1707,14 +1687,12 @@ echo $userexist;
                                                             });
                                                         });
                                                         //]]>
-
                                                     </script>
                        <?php
          if(isset($erreur))
              {
                 echo '<font color="red">'.$erreur."</font>";
              }
-
            ?>
 
                                                       </div>
@@ -1742,7 +1720,6 @@ echo $userexist;
                                         //<![CDATA[
                                         var dataForm = new VarienForm('login-form', true);
                                         //]]>
-
                                     </script>
                                 </div>
                             </div>
@@ -1759,8 +1736,8 @@ echo $userexist;
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="footer-logo text-center">
                                             <a href="#" title="ARW Sebian">
-						<img src="images/fashionmakeup_dark.PNG" alt="ARW Sebian"/>
-					</a>
+                        <img src="images/fashionmakeup_dark.PNG" alt="ARW Sebian"/>
+                    </a>
                                         </div>
                                         <div class="footer-sub-logo text-center">
                                             <img src="http://sebian.demo.arw.tf/media/wysiwyg/arw/custom_icon_1.png" alt="ARW Sebian" />
@@ -1898,7 +1875,6 @@ echo $userexist;
                     new Date(new Date().getTime() + 3600 * 1000)
                 );
                 //]]>
-
             </script>
             <script type="text/javascript">
                 if (document.cookie.length && (document.cookie.indexOf('PAGECACHE_FORMKEY=') == -1)) {
@@ -1908,10 +1884,22 @@ echo $userexist;
                         new Date(new Date().getTime() + 3600000)
                     );
                 }
-
             </script>
         </div>
     </div>
 </body>
 
 </html>
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About
+Press h to open a hovercard with more details.
