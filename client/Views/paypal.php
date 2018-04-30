@@ -454,7 +454,7 @@ $idprod1=$Panier->rechercheidprod(1);
     <input type="hidden" name="business" value="Amine@makeup.com">
 
     <input type="hidden" name="item_name" value="makeup">
-    <input type="hidden" name="return" value="http://localhost/projetweb/client/Views/successpaypal.php">
+    <input type="hidden" name="return" value="http://localhost/integration/projetweb/client/Views/successpaypal.php">
     <input type="hidden" name="notify_url">
     <input type="hidden" name="amount" value="<?php echo $Panier->total(); ?>">
     <input type="hidden" name="tax" value="0.00">

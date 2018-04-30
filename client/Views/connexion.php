@@ -36,6 +36,7 @@ echo $userexist;
                 setcookie('email',$mailconnect,time()+365*24*3600,null,null,false,true);
                 setcookie('password',$mdpconnect,time()+365*24*3600,null,null,false,true);
             }
+            unset($_SESSION['panier']);
          $userinfo = $requser->fetch();
          $_SESSION['id'] = $userinfo['id'];
          $_SESSION['pseudo'] = $userinfo['pseudo'];
