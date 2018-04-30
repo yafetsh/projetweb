@@ -1,6 +1,7 @@
 <?php 
-
-$bdd = new PDO('mysql:host=127.0.0.1;dbname=espace_membre', 'root', '');
+session_start();
+include "../config.php";
+$bdd = config::getConnexion();
 $articles = $bdd->query('SELECT * FROM articles ORDER BY date_time_publication DESC');
 
 ?>
@@ -303,11 +304,11 @@ $articles = $bdd->query('SELECT * FROM articles ORDER BY date_time_publication D
   <!--======= SUB BANNER =========-->
   <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
     <div class="container">
-      <h4>LIVE CHAT</h4>
+      <h4>ESPACE CONSEIL FASHIONMAKEUP</h4>
       <!-- Breadcrumb -->
       <ol class="breadcrumb">
         <li><a href="#">ACCEUIL</a></li>
-        <li class="active">CHAT</li>
+        <li class="active">ESPACE CONSEIL</li>
       </ol>
     </div>
   </section>
@@ -321,9 +322,12 @@ $articles = $bdd->query('SELECT * FROM articles ORDER BY date_time_publication D
     <ul>
   <?php  while($a = $articles->fetch()){?>
   <li>
-  <img src="miniatures/<?= $a['id'] ?>.jpg" width="100"/> <br>
-  <a href="article.php?id=<?= $a['id'] ?>"><?= $a['titre']?></a></li>
+    <hr>
+  <img src="miniatures/<?= $a['id'] ?>.jpg" width="150"/> <br> <br>
+  <a href="article.php?id=<?= $a['id'] ?>"><?= $a['titre']?> <div style="color: red">>> continuer à lire</div></a> <hr></li>
   <?php } ?>
+  <br>
+  author : <?php echo $_SESSION['pseudo']; ?>
 </ul>
 
     <!--======= BOXES =========-->
