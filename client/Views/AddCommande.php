@@ -13,7 +13,7 @@ $Panier=new PanierCore();
 
            $com->AjouterCommande($commande);
            $quantite = $Panier->rechercheprod($idprod->idProduit);
-           $Panier->Modifierquantite($quantite[0]->quantite - $idprod->quantite, $idprod->idProduit);
+           $Panier->Modifierquantite($quantite[0]->quantite_total - $idprod->quantite, $idprod->idProduit);
 }
 header("Location:Checkout.php");
 

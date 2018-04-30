@@ -185,7 +185,7 @@ $products=$Panier->AfficherProduits();
                                                                         alt="..."> </a></div>
                                                     </div>
                                                     <div class="media-body">
-                                                        <h6 class="media-heading"><?php echo $row->description; ?></h6>
+                                                        <h6 class="media-heading"><?php echo $row->nom; ?></h6>
                                                         <span class="price"><?php echo number_format($row->prix, 2, ',', ''); ?>
                                                             TND </span> <span class="qty">Quantité: <?php echo $_SESSION['panier'][$row->reference]; ?></span></div>
                                                 </div>
@@ -321,7 +321,7 @@ $products=$Panier->AfficherProduits();
                                     <div class="items-in" style="width: 150px">
 
                                         <!-- Image -->
-                                        <img src="images/new-item-<?php echo $product->reference;?>.jpg" alt="">
+                                        <img src="images/new-item-1.jpg" alt="">
                                         <!-- Hover Details -->
                                         <div class="over-item">
                                             <ul class="animated fadeIn">
