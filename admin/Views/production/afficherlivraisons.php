@@ -258,11 +258,12 @@ if(isset($_GET['supprimer'])){
                       <thead>
                         <tr>
                           <th>ID_livraison</th>
+                          <th>Pseudo_Livreur</th>
                           <th>Rue</th>
                           <th>Numero de telephone</th>
-                          <th>Region</th>
-                          <th>Ville</th>
-                          <th>Pseudo_Livreur</th>
+                          <th>Region/Ville</th>                                                   
+                          <th>Date passage du commande</th>
+                          <th>Date livraison</th>
                           <th>Etat</th>
                           <th>Action</th>
                         </tr>
@@ -273,13 +274,13 @@ if(isset($_GET['supprimer'])){
                           ?>
                           <tr>
                           <td><?PHP echo $row['id']; ?></td>
+                           <td><?PHP if($row['pseudoLivreur']==null){echo "Pas encore affecté" ;} echo $row['pseudoLivreur'];  ?></td>
                           <td><?PHP echo $row['rue']; ?></td>
                           <td><?PHP echo $row['numero']; ?></td>
-                          <td><?PHP echo $row['region']; ?></td>
-                          <td><?PHP echo $row['ville']; ?></td>
-                          <td><?PHP echo $row['pseudoLivreur']; ?></td>
+                          <td><?PHP echo $row['region'];?> / <br><?php echo $row['ville']; ?></td>                         
+                          <th><?PHP echo $row['date']; ?></th>
+                          <th><?PHP if($row['datelivraison']==null){echo "Pas encore affectée" ;} echo $row['datelivraison']; ?></th>
                           <td><?PHP echo $row['etat']; ?></td>
-                          
                           <td>
                               <a  href="modifierlivraison2.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="height: 33px ;width:90px">
                             Modifier etat</a>

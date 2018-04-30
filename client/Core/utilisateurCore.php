@@ -111,7 +111,6 @@ function VerifierEmail($mail){
 return $mailexist;
 }
 //verifier unicité de mail
-//Envoie de mail
 function EnvoyerMail($mail,$pseudo,$key)
 {
    $header="MIME-Version: 1.0\r\n";
@@ -123,11 +122,7 @@ $message='
 <html>
     <body>
         <div align="center">
-<<<<<<< HEAD
          <a href="http://localhost/integration/projetweb/client/views/confirmation.php?pseudo='.$pseudo.'&key='.$key.'">Confirmer votre compte</a>
-=======
-         <a href="http://localhost/integration/projetweb/client/Views/confirmation.php?pseudo='.$pseudo.'&key='.$key.'">Confirmer votre compte</a>
->>>>>>> 5f6e46bc7e320f0bef3fe427d4b0ceccfa163f6b
         </div>
     </body>
 </html>
@@ -160,11 +155,7 @@ function RecupererMail($pseudo,$recup_code,$recup_mail){
                    <td>
                      
                      <div align="center">Bonjour <b>'.$pseudo.'</b>,</div>
-<<<<<<< HEAD
                      cliquer <a href="http://localhost/integration/projetweb/client/views/recupererMdp.php?section=code&code='.$recup_code.'">ici</a> pour rénitialiser votre mot de passe 
-=======
-                     cliquer <a href="http://localhost/integration/projetweb/client/Views/recupererMdp.php?section=code&code='.$recup_code.'">ici</a> pour rénitialiser votre mot de passe 
->>>>>>> 5f6e46bc7e320f0bef3fe427d4b0ceccfa163f6b
                      A bientôt !
                      
                    </td>
@@ -185,6 +176,7 @@ function RecupererMail($pseudo,$recup_code,$recup_mail){
          mail($recup_mail, "Récupération de mot de passe - fashionmakeup.com", $message, $header);
 }
 //Envoie de mail de rénitialisation de mot de passe
+
 
 //Newsletter
  function VerifierNewsletter($mail){

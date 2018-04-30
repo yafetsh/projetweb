@@ -1,21 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Marketplace
-Explore
- @fou11
-Sign out
-4
-1 1 yafetsh/projetweb
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
-projetweb/client/Views/connexion.php
-182036a  10 hours ago
-@yafetsh yafetsh Merge branch 'master' of https://github.com/yafetsh/projetweb
-@yafetsh @yassine113 @achrafchetoui
-      
-1910 lines (1853 sloc)  129 KB
 <?php
 include "../Entities/utilisateur.php";
 include "../Core/utilisateurCore.php";
@@ -43,7 +25,6 @@ echo $userexist;
          $_SESSION['mail'] = $userinfo['mail'];
          $_SESSION['confirme'] = $userinfo['confirme'];
          $_SESSION['role'] = $userinfo['role'];
-<<<<<<< HEAD
 
          if ($_SESSION['confirme'] == 1 && $_SESSION['role'] == 0 ) {
          header("Location:userProfile.php?id=".$_SESSION['id']);
@@ -56,7 +37,6 @@ echo $userexist;
          header("Location: ../../admin/Views/production/index.php?id=".$_SESSION['id']);
          }
 
-=======
          if ($_SESSION['confirme'] == 1 && $_SESSION['role'] == 0 ) {
          header("Location:userProfile.php?id=".$_SESSION['id']);
          }else{
@@ -65,7 +45,6 @@ echo $userexist;
          if($_SESSION['role'] == 1 ){
          header("Location: ../../admin/Views/production/index.php?id=".$_SESSION['id']);
          }
->>>>>>> 5f6e46bc7e320f0bef3fe427d4b0ceccfa163f6b
       } else {
          $erreur = "Mauvais mail ou mot de passe !";
       }
