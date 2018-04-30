@@ -2,11 +2,21 @@
 
 include "../Entities/reclamation.php";
 include "../Core/ReclamationCore.php";
+// Import PHPMailer classes into the global namespace
+// These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
 session_start();
     if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail']) and isset($_POST['telephone']) and isset($_POST['type']) and isset($_POST['cause'])  ){
     $reclamation1=new Reclamation($_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['telephone'],$_POST['type'],$_POST['cause']);
     $reclamation1C=new ReclamationCore();
     $reclamation1C->ajouterReclamation($reclamation1,$_SESSION['id']);
+
+
+
  header('Location: affichageReclamation.php');
     }
 
@@ -277,6 +287,39 @@ session_start();
                 </div>
               </div>
             </form>
+            <?php
+            $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+            try {
+                //Server settings
+                $mail->SMTPDebug = 1;                                 // Enable verbose debug output
+                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->Host = 'smtp.sendgrid.net';  // Specify main and backup SMTP servers
+                $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                $mail->Username = 'yafettest';                 // SMTP username
+                $mail->Password = 'yafetsh1995';                           // SMTP password
+                $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+                $mail->Port = 587;                                    // TCP port to connect to
+
+                //Recipients
+                $mail->setFrom('yafet.shil@esprit.tn', 'FASHION MAKEUP');
+                $mail->addAddress($_POST["mail"]);     // Add a recipient
+
+
+            $body='Votre reclamation a ete ajoutes avec succes! MERCI';
+                //Content
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->Subject = 'FASHION MAKEUP';
+                $mail->Body    = $body;
+                $mail->AltBody = strip_tags($body);
+
+                $mail->send();
+                echo 'Message has been sent';
+            } catch (Exception $e) {
+                echo 'Message could not be sent';
+                echo ' Mailer Error: ' .$mail->ErrorInfo;
+            }
+
+             ?>
           </div>
         </div>
       </div>
