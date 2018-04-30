@@ -226,7 +226,7 @@ $livraison2C=new livraisoncore();
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-10 col-sm-6 col-xs-12">
+              <div class="col-md-8 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Liste des livraisons pas encore affectées par des livreurs</h2>
@@ -255,10 +255,8 @@ $livraison2C=new livraisoncore();
                           <th>ID_livraison</th>
                           <th>Rue</th>
                           <th>Numero de telephone</th>
-                          <th>Region</th>
-                          <th>Ville</th>
-                          <th>Etat</th>
-                          <th>Date</th>
+                          <th>Region/Ville</th>                          
+                          <th>Date passage du commande</th>
                           <th>Date livraison</th>
                           <th>Action</th>
                         </tr>
@@ -271,16 +269,12 @@ $livraison2C=new livraisoncore();
                           <td><?PHP echo $row['id']; ?></td>
                           <td><?PHP echo $row['rue']; ?></td>
                           <td><?PHP echo $row['numero']; ?></td>
-                          <td><?PHP echo $row['region']; ?></td>
-                          <td><?PHP echo $row['ville']; ?></td>
-                          <td><?PHP echo $row['etat']; ?></td>
+                          <td><?PHP echo $row['region']; ?> / <br><?php echo $row['ville']; ?></td> 
                           <td><?PHP echo $row['date']; ?></td>
-                          <td><?PHP echo $row['datelivraison']; ?></td>
+                          <td>Pas encore affectée</td>
                           
                           <td>
-                            <a href="testdate.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="background-color: blue; width:120px">Choisir une date </a>
-                              <a id=livr" href="affecterlivraison3.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="height: 33px ;width:120px">
-                            Choisir un livreur</a>
+                            <a href="affecterlivraison3.php?id=<?PHP echo $row['id']; ?>" class="btn btn-success" style="background-color: blue; width:120px">Choisir une date </a>
                           </td>
                           </tr>
   <?PHP
