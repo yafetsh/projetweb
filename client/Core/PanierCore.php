@@ -18,9 +18,9 @@ class PanierCore
     public function actualiser()
     {
 
-        foreach ($_SESSION['panier'] as $produit_id => $quantite) {
+        foreach ($_SESSION['panier'] as $produit_id => $quantite_total) {
             $quan=$this->rechercheprod($produit_id);
-            if (isset($_POST['panier']['quantite'][$produit_id]) && $quan[0]->quantite >= $_POST['panier']['quantite'][$produit_id]) {
+            if (isset($_POST['panier']['quantite'][$produit_id]) && $quan[0]->quantite_total >= $_POST['panier']['quantite'][$produit_id] && $_POST['panier']['quantite'][$produit_id]>=0) {
 
                 $pries=$this->prixprod($produit_id);
 if (empty($_SESSION['id']))
@@ -32,7 +32,7 @@ else
                 $_SESSION['panier'][$produit_id] = $_POST['panier']['quantite'][$produit_id];
 
             }
-            else echo '<script>alert("Stock epuiser");</script>';
+            else echo '<script>alert("Stock epuiser ou quantite non valide");</script>';
 
         }
     }
@@ -47,6 +47,7 @@ public function count()
 
 
         $quantite=$_SESSION['panier'][$produit_id];
+
         if (empty($_SESSION['id'])) {
             $verif = $this->recherche($_GET['reference'], 1);
             $paniertable = new Panier(2, $quantite + 1, $pries[0]->prix * ($quantite + 1), 1, $_GET['reference']);
@@ -289,7 +290,7 @@ $total+=$row->prix * $_SESSION['panier'][$row->reference];
     public function Modifierquantite($q,$prod)
     {
         $c = config::getConnexion();
-        $req = "UPDATE produit SET quantite=:quantite WHERE reference=:idProd";
+        $req = "UPDATE produit SET quantite_total=:quantite WHERE reference=:idProd";
         try {
             $req = $c->prepare($req);
 

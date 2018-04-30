@@ -15,8 +15,8 @@ if (isset($_POST['quantite'])) {
             $prod = $com->afficherquantite($_POST['id']);
             $produit = $Panier->recherchequantite($prod[0]->idpanier);
             $quantite = $Panier->rechercheprod($produit[0]->idProduit);
-            echo $prod[0]->quantite + $quantite[0]->quantite - $_POST['quantite'];
-            $Panier->Modifierquantite($prod[0]->quantite + $quantite[0]->quantite - $_POST['quantite'], $produit[0]->idProduit);
+
+            $Panier->Modifierquantite($prod[0]->quantite + $quantite[0]->quantite_total - $_POST['quantite'], $produit[0]->idProduit);
             $com->ModifierCommande($commande, $_POST['id']);
         } else {
             ?>

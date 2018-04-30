@@ -10,7 +10,7 @@ $Panier=new PanierCore();
     $produit=$Panier->recherchequantite($prod[0]->idpanier);
 
         $quantite = $Panier->rechercheprod($produit[0]->idProduit);
-        $Panier->Modifierquantite($prod[0]->quantite + $quantite[0]->quantite,$produit[0]->idProduit);
+        $Panier->Modifierquantite($prod[0]->quantite + $quantite[0]->quantite_total,$produit[0]->idProduit);
     $com->SupprimerCommande($_GET['id']);
     header("Location:AfficherCommande.php");
 

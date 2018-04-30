@@ -17,9 +17,9 @@ class livraisoncore
 		echo "Rue: " .$rue. "<br>";
 		echo "Numero: " .$numero. "<br>";
 	}
-	function afficherLivraisons(){
+	function afficherLivraisons($id){
 		$c=Config::getConnexion();
-		$sql="SELECT * FROM livraison";
+		$sql="SELECT * FROM livraison where id_utilisateur=$id";
 		try{
 			$liste=$c->query($sql);
 			return $liste;
@@ -78,9 +78,9 @@ function modifierlivraison($livraison,$idd){
     
   }
 
- function ajouterlivraison($l){
+ function ajouterlivraison($l,$id){
         $db = config::getConnexion();
- 		    $sql="insert into livraison (rue,numero,region,ville) values (:rue,:numero,:region,:ville)";
+ 		    $sql="insert into livraison (rue,numero,region,ville,id_utilisateur) values (:rue,:numero,:region,:ville,$id) ";
         try{
         $req=$db->prepare($sql);
 

@@ -1,55 +1,27 @@
-<?PHP
-include "../Entities/livraison.php";
-include "../Core/livraisoncore.php";
+
+<?php
+include "../config.php";
 session_start();
-    if ( !empty($_POST)) { 
-        $rueError = null; 
-        $numeroError = null;
-        $regionError =  null;
-        $villeError = null;
-        $rue = $_POST['rue']; 
-        $numero = $_POST['numero'];
-        $region = $_POST['region']; 
-        $ville= $_POST['ville']; 
-        $valid = true;
-    if(!preg_match("/^[2-9]{1}[0-9]{7}$/", $numero)) {
-  // $phone is valid
-       $numeroError = "Numero incorrect";
-    }
-    if (empty($rue)) {
-        $rueError = '*Champs requis';
-        $valid = false;
-    }
-    if (empty($numero)) {
-        $numeroError = '*Champs requis';
-        $valid = false;
-    }
-    if (empty($region)) {
-        $regionError = '*Champs requis';
-        $valid = false;
-    }
-    if (empty($ville)) {
-        $villeError = '*Champs requis';
-        $valid = false;
-    }
-    
- else  if (isset($_POST['rue']) and isset($_POST['numero']) and isset($_POST['region']) and isset($_POST['ville']) ){
-$livraison1=new livraison('',$_POST['rue'],$_POST['numero'],$_POST['region'],$_POST['ville']);
-$livraison1c=new livraisoncore();
-$livraison1c->ajouterlivraison($livraison1,$_SESSION['id']);
-header('Location: livraisonclient.php');
-  
+$bdd = config::getConnexion();
+
+if(isset($_GET['id']) AND $_GET['id'] > 0) {
+   $getid = intval($_GET['id']);
+   $requser = $bdd->prepare('SELECT * FROM membre WHERE id = ?');
+   $requser->execute(array($getid));
+   $userinfo = $requser->fetch();
 }
-}
-//*/
+
 ?>
+<?PHP
+include "../Core/ReclamationCore.php";
+$reclamation1C=new ReclamationCore();
+$listeReclamations=$reclamation1C->afficherReclamations($_SESSION['id']);
 
-
+?>
 
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/03-pay-checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:48:06 GMT -->
+<!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/08-02-blog-left-side-bar.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:48:10 GMT -->
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -87,29 +59,14 @@ header('Location: livraisonclient.php');
 
 </head>
 <body>
-<!-- LOADER ===========================================-->
-<div id="loader">
-  <div class="loader">
-    <div class="position-center-center"> <img src="images/logo-dark.png" alt="">
-      
-      <p class="font-playfair text-center">Please Wait...</p>
-      <div class="loading">
-        <div class="ball"></div>
-        <div class="ball"></div>
-        <div class="ball"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Page Wrap -->
 <div id="wrap">
-  
+
   <!-- Header -->
-  <header class="header-style-2"> 
+  <header class="header-style-2">
     <!-- Top Bar -->
     <div class="top-bar">
-      <div class="container"> 
+      <div class="container">
         <!-- Language -->
         <div class="language"> <a href="#." class="active">EN</a> <a href="#.">FR</a> <a href="#.">GE</a> </div>
         <div class="top-links">
@@ -134,12 +91,12 @@ header('Location: livraisonclient.php');
         </div>
       </div>
     </div>
-    
+
     <!-- Logo -->
     <div class="container">
-      <div class="logo"> <a href="#."><img src="images/logo-dark.png" alt=""></a> </div>
+      <div class="logo"> <a href="#."><img src="images/fashionmakeup.PNG" alt=""></a> </div>
     </div>
-    
+
     <!-- Nav -->
     <div class="sticky">
       <div class="container">
@@ -236,7 +193,7 @@ header('Location: livraisonclient.php');
                 <li><a href="10-coming-soon.html">Coming Soon</a></li>
               </ul>
             </li>
-            <li><a href="02-shop-sidebar-right.html">SHOP</a> 
+            <li><a href="02-shop-sidebar-right.html">SHOP</a>
               <!--======= MEGA MENU =========-->
               <div class="megamenu full-width">
                 <div class="row nav-post">
@@ -295,7 +252,7 @@ header('Location: livraisonclient.php');
                 </div>
               </div>
             </li>
-            <li><a href="index.html">LOOKBOOK</a> 
+            <li><a href="index.html">LOOKBOOK</a>
               <!--======= MEGA MENU =========-->
               <div class="megamenu full-width look-book">
                 <div class="row nav-post">
@@ -396,7 +353,7 @@ header('Location: livraisonclient.php');
                 <li><a href="04-contact-03.html">Contact US 03</a></li>
               </ul>
             </li>
-            
+
             <!--======= Shopping Cart =========-->
             <li class="shop-cart"><a href="#."><i class="fa fa-shopping-cart"></i></a> <span class="numb">2</span>
               <ul class="dropdown">
@@ -471,282 +428,237 @@ header('Location: livraisonclient.php');
       </div>
     </div>
   </header>
-  <!-- Header End --> 
-  
+  <!-- Header End -->
+
   <!-- CONTENT START -->
-  <div class="content"> 
-    
+  <div class="content">
+
     <!--======= SUB BANNER =========-->
     <section class="sub-banner">
       <div class="container">
-        <h4>SHOPPING CART</h4>
+        <h4>PROFIL FASHION MAKE UP</h4>
         <!-- Breadcrumb -->
         <ol class="breadcrumb">
-          <li><a href="#">Home</a></li>
-          <li class="active">SHOPPING CART</li>
+          <li><a href="#"><?php echo $_SESSION['pseudo']; ?></a></li>
+          <li class="active"><?php echo $_SESSION['mail']; ?></li>
         </ol>
       </div>
     </section>
-    
-    <!--======= PAGES INNER =========-->
-    <section class="section-p-30px pages-in chart-page">
-      <div class="container"> 
-        
-        <!-- Payments Steps -->
-        <div class="payment_steps">
-          <ul class="row">
-            <!-- SHOPPING CART -->
-            <li class="col-sm-4"> <i class="fa fa-shopping-cart"></i>
-              <h6>SHOPPING CART</h6>
-            </li>
-            
-            <!-- CHECK OUT DETAIL -->
-            <li class="col-sm-4 current"> <i class="fa fa-align-left"></i>
-              <h6>CHECK OUT DETAIL</h6>
-            </li>
-            
-            <!-- ORDER COMPLETE -->
-            <li class="col-sm-4"> <i class="fa fa-check"></i>
-              <h6>ORDER COMPLETE</h6>
-            </li>
-          </ul>
-        </div>
-        <form method="POST" class="form-horizontal form-label-left" >
-        <!-- Payments Steps -->
-        <div class="shopping-cart"> 
-          
-          <!-- SHOPPING INFORMATION -->
-          <div class="cart-ship-info">
-            <div class="row"> 
-              
-              <!-- ESTIMATE SHIPPING & TAX -->
-              <div class="col-sm-7">
-                <h6> DETAILS</h6>
-                
-                  <ul class="row">
-                    <li class="col-md-12"> 
-                      <!-- ADRESSE -->
-                      <label>*ADRESSE
-                        <input type="text" name="rue" value="<?php echo !empty($rue)?$rue:'';?>" >
-                         <?php if (!empty($rueError)): ?>
-                              <span class="help-inline" style="color:Red"><?php echo $rueError;?></span>
-                          <?php endif; ?>
-                      </label>
-                    </li>
-                    <!-- Telephone -->
-                    <li class="col-md-6">
-                      <label> *TELEPHONE
-                        <input type="number" name="numero" value="<?php echo !empty($numero)?$numero:'';?>">
-                          <?php if (!empty($numeroError)): ?>
-                              <span class="help-inline" style="color:Red"><?php echo $numeroError;?></span>
-                          <?php endif; ?>
-                      </label>
-                    </li>
-                    <!-- *Region -->
-                    <li class="col-md-12">
-                      <label> *REGION
-                        <select id="optionA" onchange="update(this.value)" name="region" class="selectpicker" value="<?php echo !empty($region)?$region:'';?>">
-                                                  <?php if (!empty($regionError)): ?>
-                              <span class="help-inline" style="color:Red"><?php echo $regionError;?></span>
-                          <?php endif; ?>
-                          <option value="Select">Sélectionner...</option>
-                          <option value="Ariana">Ariana</option>
-                          <option value="Ben arous">Ben Arous</option>
-                          <option value="Bizerte">Bizerte</option>
-                          <option value="Béja">Béja</option>
-                          <option value="Gabes">Gabes</option>
-                          <option value="Gafsa">Gafsa</option>
-                          <option value="Jendouba">Jendouba</option>
-                          <option value="Kairouan">Kairouan</option>
-                          <option value="Kasserine">Kasserine</option>
-                          <option value="Kebili">Kebili</option>
-                          <option value="La Manouba">La Manouba</option>
-                          <option value="Le Kef">Le Kef</option>
-                          <option value="Mahdia">Mahdia</option>
-                          <option value="Monastir">Monastir</option>  
-                          <option value="Médenine">Médenine</option>
-                          <option value="Nabeul">Nabeul</option>
-                          <option value="Sfax">Sfax</option>
-                          <option value="Sidi Bouzid">Sidi Bouzid</option>
-                          <option value="Siliana">Siliana</option>
-                          <option value="Sousse">Sousse</option>
-                          <option value="Tataouine">Tataouine</option>
-                          <option value="Tozeur">Tozeur</option>
-                          <option value="Tunis">Tunis</option>
-                          <option value="Zaghouan">Zaghouan</option>
-                        </select>
-                      </label>
-                    </li>
-                      <!-- VILLE -->
-                      <li class="col-md-12"> 
-                      <label>*VILLE 
-                        <br><br> <select id="data" name="ville" style="width: 400px; height: 30px">
-    <option>Select an Option...</option>
-  </select>
-   </select>
-                        <?php if (!empty($villeError)): ?>
-                               <span class="help-inline" style="color:Red"><?php echo $villeError;?></span>
-                           <?php endif; ?>
-                      </label>
-                    </li>
 
-                    <!--  -->
-               
-                  </ul>
-                
+    <!-- Blog -->
+    <section class="section-p-30px blog-page">
+      <div class="container">
+        <div class="row">
+
+          <!-- Left Side Bar -->
+          <div class="col-sm-3 animate fadeInLeft" data-wow-delay="0.4s">
+            <div class="side-bar">
+
+              <!--  SEARCH -->
+              <div class="search">
+                <form>
+                  <input type="text" placeholder="SEARCH FAQ">
+                  <button type="submit"> <i class="fa fa-search"></i></button>
+                </form>
               </div>
-              
-              <!-- SUB TOTAL -->
-              <div class="col-sm-5">
-                <div class="order-place">
-                  <h5>YOUR ORDER</h5>
-                  <div class="order-detail">
-                    <p>PRODUCT <span>TOTAL</span></p>
-                    <div class="item-order">
-                      <p>DRAEY TRENCH COAT <span class="color"> x1 </span></p>
-                      <p>COLOR: BLACK </p>
-                      <p class="text-right">250.00 USD</p>
-                    </div>
-                    <p>CART SUBTOTAL <span>250.00 USD</span></p>
-                    <p>SHIPPING AND HANDLING <span>FREE SHIPPING</span></p>
-                    <p>ORDER TOTAL <span>250.00 USD</span></p>
-                  </div>
-                  <div class="pay-meth">
-                    <h5>PAYMENT METHODS</h5>
-                    <ul>
-                      <li>
-                        <div class="checkbox">
-                          <input id="checkbox3-1" class="styled" type="checkbox">
-                          <label for="checkbox3-1"> DIRECT BANK TRANSFER </label>
-                        </div>
-                        <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                      </li>
-                      <li>
-                        <div class="checkbox">
-                          <input id="checkbox3-2" class="styled" type="checkbox">
-                          <label for="checkbox3-2"> CHEQUE PAYMENT </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="checkbox">
-                          <input id="checkbox3-3" class="styled" type="checkbox">
-                          <label for="checkbox3-3"> PAYPAL </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="checkbox">
-                          <input id="checkbox3-4" class="styled" type="checkbox">
-                          <label for="checkbox3-4"> I’VE READ AND ACCEPT THE <span class="color"> TERMS & CONDITIONS </span> </label>
-                        </div>
-                      </li>
-                    </ul>
-                   <input type="submit" value="PASSER MA COMMANDE" class="btn btn-small btn-dark pull-right" id="btn_submit"> </div>
-                </div>
+
+              <!-- HEADING -->
+              <div class="heading">
+                <h4>MON COMPTE</h4>
               </div>
+
+              <!-- CATEGORIES -->
+              <ul class="cate">
+                <li><a href="edit.php">EDITER MON COMPTE</a></li>
+                <li><a href="#."> CONSULTER PANIER</a></li>
+                <li><a href="#."> CONSULTER LIVRAISON</a></li>
+                <li><a href="#." style="text-transform:uppercase"> CONSULTER mes réclamations</a></li>
+                <li><a href="#." style="text-transform:uppercase"> CONSULTER mes réservations</a></li>
+                <li><a href="#.">MESSAGERIE</a></li>
+                <li><a href="chat.php">FORUM</a></li>
+                <li><a href="disconnect.php">DÉCONNEXION</a></li>
+
+              </ul>
+<ul>
+
+</ul>
+              <!-- HEADING -->
+
+
+              <!-- HEADING -->
+
+              <!-- CATEGORIES -->
+
+
+              <!-- TAGS -->
+              <h4 class="margin-t-40">PRODUIT TAGS</h4>
+              <ul class="tags">
+                <li><a href="#.">FASHION</a></li>
+                <li><a href="#.">BAGS</a></li>
+                <li><a href="#.">TABLET</a></li>
+                <li><a href="#.">ELECTRONIC</a></li>
+                <li><a href="#.">BEAUTY</a></li>
+                <li><a href="#.">TRtENDING</a></li>
+                <li><a href="#.">SHOES</a></li>
+              </ul>
             </div>
+          </div>
+
+          <!-- Right Bar -->
+          <div class="col-sm-9 animate fadeInRight" data-wow-delay="0.4s">
+            <!--  Blog Posts -->
+            <div class="blog-posts">
+              <ul>
+                <!--  Posts 1 -->
+                <li class="animate fadeInUp" data-wow-delay="0.4s">
+                  <!--  Image -->
+                  <img class="img-responsive" src="http://www.femmesmaghrebines.com/wp-content/uploads/manel-3-676x400.jpg" alt="">
+                  <fieldset style="margin:auto">
+      						  <legend style="border=2px;text-transform:uppercase;">
+      Mes réclamations
+      						  </legend>
+      							<a href="ajouterReclamation.php" class="menu_section" style="text-transform:uppercase;"> Passer une réclamation</a>
+      							<br>
+      							<br>
+      						<div >
+
+
+      						<div >
+
+      								<table class="table table-striped table-bordered">
+      									<thead>
+      										<tr>
+      											<th>Nom</th>
+      											<th>Prénom</th>
+      											<th>Adresse mail</th>
+      											<th>Téléphone</th>
+      											<th>Type</th>
+                            <th>Cause</th>
+                            <th>Etat</th>
+      											<th>Action</th>
+
+      										</tr>
+      									</thead>
+      									<tbody>
+      									<?php
+      									 foreach ($listeReclamations as $row) {
+      														echo '<tr>';
+      														echo '<td width="10%">'. $row['nom'] . '</td>';
+      														echo '<td width="10%">'. $row['prenom'] . '</td>';
+                                  echo '<td width="10%">'. $row['mail'] . '</td>';
+      														echo '<td width="10%">'. $row['telephone'] . '</td>';
+      														echo '<td width="10%">'. $row['type'] . '</td>';
+      														echo '<td width="10%">'. $row['cause'] . '</td>';
+                                  echo '<td width="10%">'. $row['etat'] . '</td>';
+      														echo '<td width="30%">';
+
+      																							 echo '<a  href="modifierReclamation.php?id='.$row['id'].'">Modifier</a>';
+      																			echo ' ';
+      																			echo '<a href="suppressionReclamation.php?id='.$row['id'].'">Annuler</a>';
+      															 echo '</td>';
+      																	echo '</tr>';
+      									 }
+      									?>
+      									</tbody>
+      						</table>
+      						</div>
+
+      	</div>
+
+      </fieldset>
+                  <!-- Tag Icon -->
+                  <div class="blog-tag-icon"> <i class="fa fa-pencil"></i> </div>
+                  <span class="tags">CONSEILS ET DÉMONSTRATION</span> <a href="#." class="tittle-post font-playfair">OMBRES À PAUPIÉRES FASHION MAKEUP</a>
+                  <p> Plus qu'une tendance, le maquillage nude est devenu le look beauté à maitriser quelle que soit la saison. De jour comme de nuit, il sublime nos traits tout en restant discret. Alors pour maitriser vous aussi ce maquillage et arborer une mine de poupée, suivez pas à pas comment faire un maquillage nude.</p>
+                  <!--  Post Info -->
+                  <ul class="info">
+                    <li><i class="fa fa-user"></i> admin</li>
+                    <li><i class="fa fa-calendar-o"></i> 12 JULY</li>
+                    <li><i class="fa fa-eye"></i> 325</li>
+                    <li class="read-right"><a class="btn btn-small btn-dark" href="#.">READ MORE</a></li>
+                  </ul>
+                </li>
+
+                <!--  Posts 2 -->
+                <li class="animate fadeInUp" data-wow-delay="0.4s">
+                  <!--  Image -->
+
+                  <!--  Video Section -->
+
+                  <section class="vid"> <img class="img-responsive" src="https://i.ytimg.com/vi/jzxPOwgpVFs/maxresdefault.jpg" alt="">
+                    <div class="position-center-center"> <a href="#." class="video-btn"></a> </div>
+                  </section>
+
+                  <!-- Tag Icon -->
+                  <div class="blog-tag-icon"> <i class="fa fa-film"></i> </div>
+                  <span class="tags">TRENDING NEWS</span> <a href="#." class="tittle-post font-playfair"> Standard post with featured video</a>
+                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
+                    expedita distinctio. <br>
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non </p>
+                  <!--  Post Info -->
+                  <ul class="info">
+                    <li><i class="fa fa-user"></i> admin</li>
+                    <li><i class="fa fa-calendar-o"></i> 12 JULY</li>
+                    <li><i class="fa fa-eye"></i> 325</li>
+                  </ul>
+                </li>
+
+                <!--  Posts 3 -->
+                <li class="animate fadeInUp" data-wow-delay="0.4s">
+                  <!--  Image -->
+                  <div class="product-slides">
+                    <div><img class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-v2I1ykOpVwHjm1aZpbjjz8OwP_4Wv6tei0BVokYcmOYCLNdq" alt=""></div>
+                    <div><img class="img-responsive" src="images/blog-large-2.jpg" alt=""></div>
+                    <div><img class="img-responsive" src="images/blog-large-1.jpg" alt=""></div>
+                  </div>
+                  <!-- Tag Icon -->
+                  <div class="blog-tag-icon"> <i class="fa fa-picture-o"></i></div>
+                  <span class="tags">MOTION GRAPHIC</span> <a href="#." class="tittle-post font-playfair">Standard post with slide images</a>
+                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
+                    expedita distinctio. <br>
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non </p>
+                  <!--  Post Info -->
+                  <ul class="info">
+                    <li><i class="fa fa-user"></i> admin</li>
+                    <li><i class="fa fa-calendar-o"></i> 12 JULY</li>
+                    <li><i class="fa fa-eye"></i> 325</li>
+                  </ul>
+                </li>
+
+                <!--  Posts 4 -->
+                <li class="animate fadeInUp" data-wow-delay="0.4s">
+                  <!-- Image -->
+                  <a href="#." class="link-post"> http://fortawesome.github.io/Font-Awesome </a>
+
+                  <!-- Tag Icon -->
+                  <div class="blog-tag-icon"> <i class="fa fa-link"></i></div>
+                  <span class="tags">MOTION GRAPHIC</span> <a href="#." class="tittle-post font-playfair">Standard post with Link</a>
+                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
+                    expedita distinctio. <br>
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non </p>
+                  <!--  Post Info -->
+                  <ul class="info">
+                    <li><i class="fa fa-user"></i> admin</li>
+                    <li><i class="fa fa-calendar-o"></i> 12 JULY</li>
+                    <li><i class="fa fa-eye"></i> 325</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <!--======= PAGINATION =========-->
+            <ul class="pagination animate fadeInUp" data-wow-delay="0.4s">
+              <li><a href="#.">Fb</a></li>
+              <li><a href="#.">insta</a></li>
+              <li><a href="#.">snap</a></li>
+              <li><a href="#."><i class="fa fa-angle-right"></i></a></li>
+            </ul>
           </div>
         </div>
       </div>
-      </form>
-      <!--======= RELATED PRODUCTS =========-->
-      <section class="section-p-60px new-arrival new-arri-w-slide">
-        <div class="container"> 
-          
-          <!--  Tittle -->
-          <div class="tittle tittle-2">
-            <h5>RELATED PRODUCTS</h5>
-            <p class="font-playfair">Most haver in your Shop </p>
-          </div>
-          
-          <!--  New Arrival Tabs Products  -->
-          <div class="popurlar_product client-slide"> 
-            
-            <!--  New Arrival  -->
-            <div class="items-in"> 
-              <!-- Image --> 
-              <img src="images/new-item-1.jpg" alt=""> 
-              <!-- Hover Details -->
-              <div class="over-item">
-                <ul class="animated fadeIn">
-                  <li> <a href="images/new-item-1.jpg" data-lighter><i class="ion-search"></i></a></li>
-                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                  <!-- Rating Stars -->
-                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                </ul>
-              </div>
-              <!-- Item Name -->
-              <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-            </div>
-            
-            <!--  New Arrival  -->
-            <div class="items-in"> 
-              <!-- Image --> 
-              <img src="images/new-item-2.jpg" alt=""> 
-              <!-- Hover Details -->
-              <div class="over-item">
-                <ul class="animated fadeIn">
-                  <li> <a href="images/new-item-2.jpg" data-lighter><i class="ion-search"></i></a></li>
-                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                  <!-- Rating Stars -->
-                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                </ul>
-              </div>
-              <!-- Item Name -->
-              <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-            </div>
-            
-            <!--  New Arrival  -->
-            <div class="items-in"> 
-              <!--  Tags  -->
-              <div class="new-tag"> NEW </div>
-              
-              <!-- Image --> 
-              <img src="images/new-item-3.jpg" alt=""> 
-              <!-- Hover Details -->
-              <div class="over-item">
-                <ul class="animated fadeIn">
-                  <li> <a href="images/new-item-3.jpg" data-lighter><i class="ion-search"></i></a></li>
-                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                  <!-- Rating Stars -->
-                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                </ul>
-              </div>
-              <!-- Item Name -->
-              <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-            </div>
-            
-            <!--  New Arrival  -->
-            <div class="items-in"> 
-              <!--  Tags  -->
-              <div class="hot-tag"> HOT </div>
-              <!-- Image --> 
-              <img src="images/new-item-4.jpg" alt=""> 
-              <!-- Hover Details -->
-              <div class="over-item">
-                <ul class="animated fadeIn">
-                  <li> <a href="images/new-item-4.jpg" data-lighter><i class="ion-search"></i></a></li>
-                  <li> <a href="#."><i class="ion-shuffle"></i></a></li>
-                  <li> <a href="#."><i class="fa fa-heart-o"></i></a></li>
-                  <li class="full-w"> <a href="#." class="btn">ADD TO CART</a></li>
-                  <!-- Rating Stars -->
-                  <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                </ul>
-              </div>
-              <!-- Item Name -->
-              <div class="details-sec"> <a href="#.">LOOSE-FIT TRENCH COAT</a> <span class="font-montserrat">129.00 USD</span> </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </section>
   </div>
-  
+
   <!--======= Footer =========-->
   <footer>
     <div class="container">
@@ -754,12 +666,12 @@ header('Location: livraisonclient.php');
         <img class="margin-t-40" src="images/hammer.png" alt="">
         <p class="intro-small margin-t-40">Multipurpose E-Commerce Theme is suitable for furniture store, fashion shop, accessories, electric shop. We have included multiple layouts for home page to give you best selections in customization.</p>
       </div>
-      
+
       <!--  Footer Links -->
       <div class="footer-link row">
         <div class="col-md-6">
           <ul>
-            
+
             <!--  INFOMATION -->
             <li class="col-sm-6">
               <h5>INFOMATION</h5>
@@ -771,7 +683,7 @@ header('Location: livraisonclient.php');
                 <li><a href="#."> MANUFACTURES</a></li>
               </ul>
             </li>
-            
+
             <!-- MY ACCOUNT -->
             <li class="col-sm-6">
               <h5>MY ACCOUNT</h5>
@@ -785,17 +697,17 @@ header('Location: livraisonclient.php');
             </li>
           </ul>
         </div>
-        
+
         <!-- Second Row -->
         <div class="col-md-6">
           <ul class="row">
-            
+
             <!-- TWITTER -->
             <li class="col-sm-6">
               <h5>TWITTER</h5>
               <p>Check out new work on my @Behance portfolio: "BCreative_Multipurpose Theme" http://on.be.net/1zOOfBQ </p>
             </li>
-            
+
             <!-- FLICKR PHOTO -->
             <li class="col-sm-6">
               <h5>FLICKR PHOTO</h5>
@@ -811,55 +723,32 @@ header('Location: livraisonclient.php');
           </ul>
         </div>
       </div>
-      
+
       <!-- Rights -->
       <div class="rights">
         <p>© 2015 HTML5 TEMPLATE SEBIAN. All Rights Reserved. Powered By WPELITE</p>
       </div>
     </div>
-  </footer>  
-  <!-- GO TO TOP --> 
-    <a href="#" class="cd-top"><i class="fa fa-angle-up"></i></a> 
+  </footer>
+  <!-- GO TO TOP -->
+    <a href="#" class="cd-top"><i class="fa fa-angle-up"></i></a>
   <!-- GO TO TOP End -->
 </div>
-<!-- Wrap End --> 
-<script src="js/jquery-1.11.3.js"></script> 
-<script src="js/wow.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/own-menu.js"></script> 
-<script src="js/owl.carousel.min.js"></script> 
-<script src="js/jquery.magnific-popup.min.js"></script> 
-<script src="js/jquery.isotope.min.js"></script> 
-<script src="js/jquery.flexslider-min.js"></script> 
+<!-- Wrap End -->
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/own-menu.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/jquery.flexslider-min.js"></script>
 
-<!-- SLIDER REVOLUTION 4.x SCRIPTS  --> 
-<script type="text/javascript" src="rs-plugin/js/jquery.themepunch.tools.min.js"></script> 
-<script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script> 
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+<script type="text/javascript" src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 
-<!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/03-pay-checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:48:06 GMT -->
+<!-- Mirrored from uouapps.a2hosted.com/dhani-html/html/sebian-intro/sebian/08-02-blog-left-side-bar.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Feb 2017 13:48:14 GMT -->
 </html>
-
-<script type="text/javascript">
-   function update(str)
-   {
-      var xmlhttp;
-      if (window.XMLHttpRequest)
-      {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-      }
-      else
-      {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-      } 
-      xmlhttp.onreadystatechange = function() {
-        if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
-        {
-          document.getElementById("data").innerHTML = xmlhttp.responseText;
-        }
-      }
-      xmlhttp.open("GET","ville.php?opt="+str, true);
-      xmlhttp.send();
-  }
-</script>

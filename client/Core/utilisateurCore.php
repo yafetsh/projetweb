@@ -81,7 +81,7 @@ function SupprimerAdmin($pseudo){
     $req->bindValue(':pseudo',$pseudo);
     try{
             $req->execute();
-            header('Location:TabClients.php');
+            header('Location:../Views/TabClients.php');
         }
         catch (Exception $e){
             die('Erreur: '.$e->getMessage());
@@ -123,7 +123,11 @@ $message='
 <html>
     <body>
         <div align="center">
+<<<<<<< HEAD
          <a href="http://localhost/integration/projetweb/client/views/confirmation.php?pseudo='.$pseudo.'&key='.$key.'">Confirmer votre compte</a>
+=======
+         <a href="http://localhost/integration/projetweb/client/Views/confirmation.php?pseudo='.$pseudo.'&key='.$key.'">Confirmer votre compte</a>
+>>>>>>> 5f6e46bc7e320f0bef3fe427d4b0ceccfa163f6b
         </div>
     </body>
 </html>
@@ -156,7 +160,11 @@ function RecupererMail($pseudo,$recup_code,$recup_mail){
                    <td>
                      
                      <div align="center">Bonjour <b>'.$pseudo.'</b>,</div>
+<<<<<<< HEAD
                      cliquer <a href="http://localhost/integration/projetweb/client/views/recupererMdp.php?section=code&code='.$recup_code.'">ici</a> pour rénitialiser votre mot de passe 
+=======
+                     cliquer <a href="http://localhost/integration/projetweb/client/Views/recupererMdp.php?section=code&code='.$recup_code.'">ici</a> pour rénitialiser votre mot de passe 
+>>>>>>> 5f6e46bc7e320f0bef3fe427d4b0ceccfa163f6b
                      A bientôt !
                      
                    </td>

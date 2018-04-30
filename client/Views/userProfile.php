@@ -54,12 +54,12 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
 <body>
 <!-- Page Wrap -->
 <div id="wrap">
-  
+
   <!-- Header -->
-  <header class="header-style-2"> 
+  <header class="header-style-2">
     <!-- Top Bar -->
     <div class="top-bar">
-      <div class="container"> 
+      <div class="container">
         <!-- Language -->
         <div class="language"> <a href="#." class="active">EN</a> <a href="#.">FR</a> <a href="#.">GE</a> </div>
         <div class="top-links">
@@ -84,12 +84,12 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
         </div>
       </div>
     </div>
-    
+
     <!-- Logo -->
     <div class="container">
       <div class="logo"> <a href="#."><img src="images/fashionmakeup.PNG" alt=""></a> </div>
     </div>
-    
+
     <!-- Nav -->
     <div class="sticky">
       <div class="container">
@@ -186,7 +186,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                 <li><a href="10-coming-soon.html">Coming Soon</a></li>
               </ul>
             </li>
-            <li><a href="02-shop-sidebar-right.html">SHOP</a> 
+            <li><a href="02-shop-sidebar-right.html">SHOP</a>
               <!--======= MEGA MENU =========-->
               <div class="megamenu full-width">
                 <div class="row nav-post">
@@ -245,7 +245,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                 </div>
               </div>
             </li>
-            <li><a href="index.html">LOOKBOOK</a> 
+            <li><a href="index.html">LOOKBOOK</a>
               <!--======= MEGA MENU =========-->
               <div class="megamenu full-width look-book">
                 <div class="row nav-post">
@@ -346,7 +346,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                 <li><a href="04-contact-03.html">Contact US 03</a></li>
               </ul>
             </li>
-            
+
             <!--======= Shopping Cart =========-->
             <li class="shop-cart"><a href="#."><i class="fa fa-shopping-cart"></i></a> <span class="numb">2</span>
               <ul class="dropdown">
@@ -421,11 +421,11 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
       </div>
     </div>
   </header>
-  <!-- Header End --> 
-  
+  <!-- Header End -->
+
   <!-- CONTENT START -->
-  <div class="content"> 
-    
+  <div class="content">
+
     <!--======= SUB BANNER =========-->
     <section class="sub-banner">
       <div class="container">
@@ -437,16 +437,16 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
         </ol>
       </div>
     </section>
-    
+
     <!-- Blog -->
     <section class="section-p-30px blog-page">
       <div class="container">
-        <div class="row"> 
-          
+        <div class="row">
+
           <!-- Left Side Bar -->
           <div class="col-sm-3 animate fadeInLeft" data-wow-delay="0.4s">
-            <div class="side-bar"> 
-              
+            <div class="side-bar">
+
               <!--  SEARCH -->
               <div class="search">
                 <form>
@@ -454,30 +454,35 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                   <button type="submit"> <i class="fa fa-search"></i></button>
                 </form>
               </div>
-              
+
               <!-- HEADING -->
               <div class="heading">
                 <h4>MON COMPTE</h4>
               </div>
-              
+
               <!-- CATEGORIES -->
               <ul class="cate">
                 <li><a href="edit.php">EDITER MON COMPTE</a></li>
                 <li><a href="#."> CONSULTER PANIER</a></li>
                 <li><a href="#."> CONSULTER LIVRAISON</a></li>
+                <li><a href="affichageReclamation.php" style="text-transform:uppercase"> CONSULTER mes réclamations</a></li>
+                <li><a href="#." style="text-transform:uppercase"> CONSULTER mes réservations</a></li>
                 <li><a href="#.">MESSAGERIE</a></li>
                 <li><a href="chat.php">FORUM</a></li>
                 <li><a href="disconnect.php">DÉCONNEXION</a></li>
-              
+
               </ul>
-              
+              <ul>
+
+              </ul>
+
               <!-- HEADING -->
               <div class="heading">
                 <h4>DERNIERS ACHATS</h4>
               </div>
               <!-- CATEGORIES -->
               <ul class="cate latest-post">
-                
+
                 <!-- Post Small -->
                 <li>
                   <div class="media">
@@ -506,7 +511,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                   </div>
                 </li>
               </ul>
-              
+
               <!-- HEADING -->
               <div class="heading">
                 <h4>ARCHIVE</h4>
@@ -519,7 +524,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                 <li><a href="#."> November 2014</a></li>
                 <li><a href="#."> July 2014</a></li>
               </ul>
-              
+
               <!-- TAGS -->
               <h4 class="margin-t-40">PRODUIT TAGS</h4>
               <ul class="tags">
@@ -533,17 +538,17 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
               </ul>
             </div>
           </div>
-          
+
           <!-- Right Bar -->
-          <div class="col-sm-9 animate fadeInRight" data-wow-delay="0.4s"> 
+          <div class="col-sm-9 animate fadeInRight" data-wow-delay="0.4s">
             <!--  Blog Posts -->
             <div class="blog-posts">
               <ul>
                 <!--  Posts 1 -->
-                <li class="animate fadeInUp" data-wow-delay="0.4s"> 
-                  <!--  Image --> 
-                  <img class="img-responsive" src="http://www.femmesmaghrebines.com/wp-content/uploads/manel-3-676x400.jpg" alt=""> 
-                  
+                <li class="animate fadeInUp" data-wow-delay="0.4s">
+                  <!--  Image -->
+                  <img class="img-responsive" src="http://www.femmesmaghrebines.com/wp-content/uploads/manel-3-676x400.jpg" alt="">
+
                   <!-- Tag Icon -->
                   <div class="blog-tag-icon"> <i class="fa fa-pencil"></i> </div>
                   <span class="tags">CONSEILS ET DÉMONSTRATION</span> <a href="#." class="tittle-post font-playfair">OMBRES À PAUPIÉRES FASHION MAKEUP</a>
@@ -556,21 +561,21 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                     <li class="read-right"><a class="btn btn-small btn-dark" href="#.">READ MORE</a></li>
                   </ul>
                 </li>
-                
+
                 <!--  Posts 2 -->
-                <li class="animate fadeInUp" data-wow-delay="0.4s"> 
-                  <!--  Image --> 
-                  
+                <li class="animate fadeInUp" data-wow-delay="0.4s">
+                  <!--  Image -->
+
                   <!--  Video Section -->
-                  
+
                   <section class="vid"> <img class="img-responsive" src="https://i.ytimg.com/vi/jzxPOwgpVFs/maxresdefault.jpg" alt="">
                     <div class="position-center-center"> <a href="#." class="video-btn"></a> </div>
                   </section>
-                  
+
                   <!-- Tag Icon -->
                   <div class="blog-tag-icon"> <i class="fa fa-film"></i> </div>
                   <span class="tags">TRENDING NEWS</span> <a href="#." class="tittle-post font-playfair"> Standard post with featured video</a>
-                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et 
+                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
                     expedita distinctio. <br>
                     At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non </p>
                   <!--  Post Info -->
@@ -580,9 +585,9 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                     <li><i class="fa fa-eye"></i> 325</li>
                   </ul>
                 </li>
-                
+
                 <!--  Posts 3 -->
-                <li class="animate fadeInUp" data-wow-delay="0.4s"> 
+                <li class="animate fadeInUp" data-wow-delay="0.4s">
                   <!--  Image -->
                   <div class="product-slides">
                     <div><img class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-v2I1ykOpVwHjm1aZpbjjz8OwP_4Wv6tei0BVokYcmOYCLNdq" alt=""></div>
@@ -592,7 +597,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                   <!-- Tag Icon -->
                   <div class="blog-tag-icon"> <i class="fa fa-picture-o"></i></div>
                   <span class="tags">MOTION GRAPHIC</span> <a href="#." class="tittle-post font-playfair">Standard post with slide images</a>
-                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et 
+                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
                     expedita distinctio. <br>
                     At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non </p>
                   <!--  Post Info -->
@@ -602,16 +607,16 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                     <li><i class="fa fa-eye"></i> 325</li>
                   </ul>
                 </li>
-                
+
                 <!--  Posts 4 -->
-                <li class="animate fadeInUp" data-wow-delay="0.4s"> 
-                  <!-- Image --> 
-                  <a href="#." class="link-post"> http://fortawesome.github.io/Font-Awesome </a> 
-                  
+                <li class="animate fadeInUp" data-wow-delay="0.4s">
+                  <!-- Image -->
+                  <a href="#." class="link-post"> http://fortawesome.github.io/Font-Awesome </a>
+
                   <!-- Tag Icon -->
                   <div class="blog-tag-icon"> <i class="fa fa-link"></i></div>
                   <span class="tags">MOTION GRAPHIC</span> <a href="#." class="tittle-post font-playfair">Standard post with Link</a>
-                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et 
+                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
                     expedita distinctio. <br>
                     At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non </p>
                   <!--  Post Info -->
@@ -623,7 +628,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                 </li>
               </ul>
             </div>
-            
+
             <!--======= PAGINATION =========-->
             <ul class="pagination animate fadeInUp" data-wow-delay="0.4s">
               <li><a href="#.">Fb</a></li>
@@ -636,7 +641,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
       </div>
     </section>
   </div>
-  
+
   <!--======= Footer =========-->
   <footer>
     <div class="container">
@@ -644,12 +649,12 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
         <img class="margin-t-40" src="images/hammer.png" alt="">
         <p class="intro-small margin-t-40">Multipurpose E-Commerce Theme is suitable for furniture store, fashion shop, accessories, electric shop. We have included multiple layouts for home page to give you best selections in customization.</p>
       </div>
-      
+
       <!--  Footer Links -->
       <div class="footer-link row">
         <div class="col-md-6">
           <ul>
-            
+
             <!--  INFOMATION -->
             <li class="col-sm-6">
               <h5>INFOMATION</h5>
@@ -661,7 +666,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                 <li><a href="#."> MANUFACTURES</a></li>
               </ul>
             </li>
-            
+
             <!-- MY ACCOUNT -->
             <li class="col-sm-6">
               <h5>MY ACCOUNT</h5>
@@ -675,17 +680,17 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
             </li>
           </ul>
         </div>
-        
+
         <!-- Second Row -->
         <div class="col-md-6">
           <ul class="row">
-            
+
             <!-- TWITTER -->
             <li class="col-sm-6">
               <h5>TWITTER</h5>
               <p>Check out new work on my @Behance portfolio: "BCreative_Multipurpose Theme" http://on.be.net/1zOOfBQ </p>
             </li>
-            
+
             <!-- FLICKR PHOTO -->
             <li class="col-sm-6">
               <h5>FLICKR PHOTO</h5>
@@ -701,30 +706,30 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
           </ul>
         </div>
       </div>
-      
+
       <!-- Rights -->
       <div class="rights">
         <p>© 2015 HTML5 TEMPLATE SEBIAN. All Rights Reserved. Powered By WPELITE</p>
       </div>
     </div>
-  </footer>  
-  <!-- GO TO TOP --> 
-    <a href="#" class="cd-top"><i class="fa fa-angle-up"></i></a> 
+  </footer>
+  <!-- GO TO TOP -->
+    <a href="#" class="cd-top"><i class="fa fa-angle-up"></i></a>
   <!-- GO TO TOP End -->
 </div>
-<!-- Wrap End --> 
-<script src="js/jquery-1.11.3.js"></script> 
-<script src="js/wow.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/own-menu.js"></script> 
-<script src="js/owl.carousel.min.js"></script> 
-<script src="js/jquery.magnific-popup.min.js"></script> 
-<script src="js/jquery.isotope.min.js"></script> 
-<script src="js/jquery.flexslider-min.js"></script> 
+<!-- Wrap End -->
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/own-menu.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/jquery.flexslider-min.js"></script>
 
-<!-- SLIDER REVOLUTION 4.x SCRIPTS  --> 
-<script type="text/javascript" src="rs-plugin/js/jquery.themepunch.tools.min.js"></script> 
-<script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script> 
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+<script type="text/javascript" src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 
