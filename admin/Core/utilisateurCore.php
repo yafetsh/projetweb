@@ -1,5 +1,5 @@
 <?php 
-include "../config.php";
+include "../../config.php";
 class utilisateurCore{
  function inscritption($utilisateur,$confirmkey)
  {    
@@ -81,7 +81,7 @@ function SupprimerAdmin($pseudo){
     $req->bindValue(':pseudo',$pseudo);
     try{
             $req->execute();
-            header('Location:../Views/TabClients.php');
+            header('Location:TabClients.php');
         }
         catch (Exception $e){
             die('Erreur: '.$e->getMessage());
@@ -111,6 +111,7 @@ function VerifierEmail($mail){
 return $mailexist;
 }
 //verifier unicité de mail
+//Envoie de mail
 function EnvoyerMail($mail,$pseudo,$key)
 {
    $header="MIME-Version: 1.0\r\n";
@@ -176,7 +177,6 @@ function RecupererMail($pseudo,$recup_code,$recup_mail){
          mail($recup_mail, "Récupération de mot de passe - fashionmakeup.com", $message, $header);
 }
 //Envoie de mail de rénitialisation de mot de passe
-
 
 //Newsletter
  function VerifierNewsletter($mail){
