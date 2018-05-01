@@ -13,10 +13,9 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
 
 ?>
 <?PHP
-include "../Core/ReclamationCore.php";
-$reclamation1C=new ReclamationCore();
-$listeReclamations=$reclamation1C->afficherReclamations($_SESSION['id']);
-
+include "../Core/ReservationCore.php";
+$reservation1C=new ReservationCore();
+$listeReservations=$reservation1C->afficherReservations($_SESSION["id"]);
 ?>
 
 <!DOCTYPE html>
@@ -515,9 +514,9 @@ $listeReclamations=$reclamation1C->afficherReclamations($_SESSION['id']);
                   <img class="img-responsive" src="http://www.femmesmaghrebines.com/wp-content/uploads/manel-3-676x400.jpg" alt="">
                   <fieldset style="margin:auto">
       						  <legend style="border=2px;text-transform:uppercase;">
-      Mes réclamations
+      Mes Réservations
       						  </legend>
-      							<a href="ajouterReclamation.php" class="menu_section" style="text-transform:uppercase;"> Passer une réclamation</a>
+      							<a href="ajouterReservation.php" class="menu_section" style="text-transform:uppercase;"> Passer une réclamation</a>
       							<br>
       							<br>
       						<div >
@@ -525,42 +524,40 @@ $listeReclamations=$reclamation1C->afficherReclamations($_SESSION['id']);
 
       						<div >
 
-      								<table class="table table-striped table-bordered">
-      									<thead>
-      										<tr>
-      											<th>Nom</th>
-      											<th>Prénom</th>
-      											<th>Adresse mail</th>
-      											<th>Téléphone</th>
-      											<th>Type</th>
-                            <th>Cause</th>
-                            <th>Etat</th>
-      											<th>Action</th>
+                    <table class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Nom</th>
+                          <th>Prénom</th>
+                          <th>Telephone</th>
+                          <th>Type</th>
+                          <th>Date</th>
+                          <th>Action</th>
 
-      										</tr>
-      									</thead>
-      									<tbody>
-      									<?php
-      									 foreach ($listeReclamations as $row) {
-      														echo '<tr>';
-      														echo '<td width="10%">'. $row['nom'] . '</td>';
-      														echo '<td width="10%">'. $row['prenom'] . '</td>';
-                                  echo '<td width="10%">'. $row['mail'] . '</td>';
-      														echo '<td width="10%">'. $row['telephone'] . '</td>';
-      														echo '<td width="10%">'. $row['type'] . '</td>';
-      														echo '<td width="10%">'. $row['cause'] . '</td>';
-                                  echo '<td width="10%">'. $row['etat'] . '</td>';
-      														echo '<td width="30%">';
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <?php
+                       foreach ($listeReservations as $row) {
+                                echo '<tr>';
+                                echo '<td>'. $row['nom'] . '</td>';
+                                echo '<td>'. $row['prenom'] . '</td>';
+                                echo '<td>'. $row['telephone'] . '</td>';
+                                echo '<td>'. $row['type'] . '</td>';
+                                echo '<td>'. $row['date'] . '</td>';
 
-      																							 echo '<a  href="modifierReclamation.php?id='.$row['id'].'">Modifier</a>';
-      																			echo ' ';
-      																			echo '<a href="suppressionReclamation.php?id='.$row['id'].'">Annuler</a>';
-      															 echo '</td>';
-      																	echo '</tr>';
-      									 }
-      									?>
-      									</tbody>
-      						</table>
+
+                                echo '<td width=auto>';
+
+                                                   echo '<a  href="modifierReservation.php?id='.$row['id'].'">Modifier</a>';
+                                          echo ' ';
+                                          echo '<a href="supprimerReservation.php?id='.$row['id'].'">Annuler</a>';
+                                   echo '</td>';
+                                      echo '</tr>';
+                       }
+                      ?>
+                      </tbody>
+                </table>
       						</div>
 
       	</div>

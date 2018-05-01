@@ -8,9 +8,9 @@ class Reservation
   private $type;
   private $date;
 
-  function __construct($id,$nom,$prenom,$telephone,$type,$date)
+  function __construct($nom,$prenom,$telephone,$type,$date)
   {
-$this->id=$id;
+//$this->id=$id;
 $this->nom=$nom;
 $this->prenom=$prenom;
 $this->telephone=$telephone;

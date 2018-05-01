@@ -16,9 +16,9 @@ class ReservationCore
     echo "Type: " .$type. "<br>";
     echo "Date: " .$date. "<br>";
   }
-function afficherReservations(){
+function afficherReservations($id){
   $c=Config::getConnexion();
-  $sql="SELECT * FROM reservation";
+  $sql="SELECT * FROM reservation where pseudoUtilisateur=$id";
   try{
     $liste=$c->query($sql);
     return $liste;
@@ -31,8 +31,8 @@ function afficherReservations(){
 
 
 
-function ajouterReservation($reservation){
-  $sql="insert into reservation (nom,prenom,telephone,type,date) values (:nom, :prenom,:telephone,:type,:date)";
+function ajouterReservation($reservation,$idu){
+  $sql="insert into reservation (nom,prenom,telephone,type,date,pseudoUtilisateur) values (:nom, :prenom,:telephone,:type,:date,$idu)";
   $db = config::getConnexion();
   try{
       $req=$db->prepare($sql);
@@ -47,15 +47,12 @@ function ajouterReservation($reservation){
   $req->bindValue(':telephone',$telephone);
   $req->bindValue(':type',$type);
   $req->bindValue(':date',$date);
-
           $req->execute();
 
       }
       catch (Exception $e){
           echo 'Erreur: '.$e->getMessage();
       }
-
-
 }
 function supprimerReservation($id){
   $sql="DELETE FROM reservation where id= :id";
