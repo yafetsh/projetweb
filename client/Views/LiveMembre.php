@@ -1,5 +1,5 @@
-<?php  
-$bdd = new PDO('mysql:host=127.0.0.1;dbname=espace_membre','root','');
+<?php 
+$bdd = config::getConnexion(); 
 $temps_session = 15;
 $temps_actuel = date("U");
 $ip_user = $_SERVER['REMOTE_ADDR'];

@@ -2,6 +2,8 @@
 
 include "../config.php";
 $bdd = config::getConnexion();
+session_start();
+if (isset($_SESSION['id'])) {
 
 if (isset($_POST['article_titre'],$_POST['article_contenu'])) {
   if (!empty($_POST['article_titre']) AND $_POST['article_titre']) {
@@ -32,6 +34,9 @@ if (isset($_POST['article_titre'],$_POST['article_contenu'])) {
      $message = " veuillez remplir tout les champs !";
   }
 }
+  }else{
+    header('Location: connexion.php');
+  }
 ?>
 
 
@@ -351,10 +356,10 @@ if (isset($_POST['article_titre'],$_POST['article_contenu'])) {
     <!--======= Contact Us =========-->
     
 <form method="POST" enctype="multipart/form-data">
-<input type="text" name="article_titre" placeholder="Titre"> <br>
-<textarea name="article_contenu" placeholder="Contenu de l'article"></textarea> <br>
+<input type="text" name="article_titre" placeholder="Titre" class="form-control" style="border-color: black;"> <br>
+<textarea name="article_contenu" placeholder="Contenu de l'article" class="form-control" style="border-color: black;"></textarea> <br>
 <input type="file" name="miniature"> <br>  <br>
-<input type="submit" value="Envoyer l'article">
+<input type="submit" value="Envoyer l'article" class="btn" style="border-color: black; color: black;">
 </form>
 <?php if (isset($message)) {
 echo $message;  
