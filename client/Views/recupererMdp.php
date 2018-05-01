@@ -516,11 +516,11 @@ if (isset($_POST['mdpChange1'],$_POST['mdpChange2'])) {
               <div class="contact-form"> 
                 <!--======= FORM  =========-->
                 <form method="POST">
-  <input type="password" name="mdpChange1" class="form-control" style="border-color: red;">
+  <input type="password" name="mdpChange1" class="form-control" style="border-color: black;" placeholder="mot de passe ">
   <br> <br>
-  <input type="password" name="mdpChange2" class="form-control" style="border-color: red;">
+  <input type="password" name="mdpChange2" class="form-control" style="border-color: black;" placeholder="confirmer mot de passe">
   <br><br>
-  <input type="submit" name="changer" value="changer" class="btn" style="color: black;">
+  <input type="submit" name="changer" value="changer" class="btn" style="color: black;" color="black" border="black;">
  </form>
 <?php 
   if (isset($error)) {
