@@ -292,7 +292,6 @@ while($res = mysqli_fetch_array($result))
                       <input type="submit" value="Modifier" name="modif" class="btn" id="btn_submit"></button> <p>
 
                         <td><input type="hidden" name="id_ini" value="<?PHP echo $_GET['id'];?>"></td>
-                        <td><input type="hidden" name="etat_ini" value="<?PHP echo $_GET['etat'];?>"></td>
 
 
                     </ul>

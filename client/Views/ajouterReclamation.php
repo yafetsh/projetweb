@@ -16,6 +16,38 @@ session_start();
     $reclamation1C->ajouterReclamation($reclamation1,$_SESSION['id']);
 
 
+    $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+    try {
+        //Server settings
+        $mail->SMTPDebug = 1;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.sendgrid.net';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'fashionmakeup';                 // SMTP username
+        $mail->Password = 'yafetsh1995';                           // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to
+
+        //Recipients
+        $mail->setFrom('yafet.shil@esprit.tn', 'FASHION MAKEUP');
+        $mail->addAddress($_POST["mail"]);     // Add a recipient
+
+
+    $body='Votre reclamation a ete ajoute avec succes! MERCI';
+        //Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'FASHION MAKEUP';
+        $mail->Body    = $body;
+        $mail->AltBody = strip_tags($body);
+
+        $mail->send();
+        echo 'Message has been sent';
+    } catch (Exception $e) {
+        echo 'Message could not be sent';
+        echo ' Mailer Error: ' .$mail->ErrorInfo;
+    }
+
+
 
  header('Location: affichageReclamation.php');
     }
@@ -287,39 +319,7 @@ session_start();
                 </div>
               </div>
             </form>
-            <?php
-            $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
-            try {
-                //Server settings
-                $mail->SMTPDebug = 1;                                 // Enable verbose debug output
-                $mail->isSMTP();                                      // Set mailer to use SMTP
-                $mail->Host = 'smtp.sendgrid.net';  // Specify main and backup SMTP servers
-                $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                $mail->Username = 'yafettest';                 // SMTP username
-                $mail->Password = 'yafetsh1995';                           // SMTP password
-                $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-                $mail->Port = 587;                                    // TCP port to connect to
 
-                //Recipients
-                $mail->setFrom('yafet.shil@esprit.tn', 'FASHION MAKEUP');
-                $mail->addAddress($_POST["mail"]);     // Add a recipient
-
-
-            $body='Votre reclamation a ete ajoutes avec succes! MERCI';
-                //Content
-                $mail->isHTML(true);                                  // Set email format to HTML
-                $mail->Subject = 'FASHION MAKEUP';
-                $mail->Body    = $body;
-                $mail->AltBody = strip_tags($body);
-
-                $mail->send();
-                echo 'Message has been sent';
-            } catch (Exception $e) {
-                echo 'Message could not be sent';
-                echo ' Mailer Error: ' .$mail->ErrorInfo;
-            }
-
-             ?>
           </div>
         </div>
       </div>

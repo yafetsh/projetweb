@@ -12,11 +12,13 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
 }
 
 ?>
-<?PHP
-include "../Core/ReclamationCore.php";
-$reclamation1C=new ReclamationCore();
-$listeReclamations=$reclamation1C->afficherReclamations($_SESSION['id']);
-
+<?php
+include "../Core/ReservationCore.php";
+$reservationC=new ReservationCore();
+if (isset($_POST["id"])){
+  $reservationC->supprimerReservation($_POST['id']);
+  header('Location: afficherReservation.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -472,8 +474,8 @@ $listeReclamations=$reclamation1C->afficherReclamations($_SESSION['id']);
                 <li><a href="edit.php">EDITER MON COMPTE</a></li>
                 <li><a href="#."> CONSULTER PANIER</a></li>
                 <li><a href="#."> CONSULTER LIVRAISON</a></li>
-                <li><a href="affichageReclamation.php" style="text-transform:uppercase"> CONSULTER mes réclamations</a></li>
-                <li><a href="affichageReservation.php" style="text-transform:uppercase"> CONSULTER mes réservations</a></li>
+                <li><a href="#." style="text-transform:uppercase"> CONSULTER mes réclamations</a></li>
+                <li><a href="#." style="text-transform:uppercase"> CONSULTER mes réservations</a></li>
                 <li><a href="#.">MESSAGERIE</a></li>
                 <li><a href="chat.php">FORUM</a></li>
                 <li><a href="disconnect.php">DÉCONNEXION</a></li>
@@ -514,58 +516,28 @@ $listeReclamations=$reclamation1C->afficherReclamations($_SESSION['id']);
                   <!--  Image -->
                   <img class="img-responsive" src="http://www.femmesmaghrebines.com/wp-content/uploads/manel-3-676x400.jpg" alt="">
                   <fieldset style="margin:auto">
-      						  <legend style="border=2px;text-transform:uppercase;">
-      Mes réclamations
-      						  </legend>
-      							<a href="ajouterReclamation.php" class="menu_section" style="text-transform:uppercase;"> Passer une réclamation</a>
-      							<br>
-      							<br>
-      						<div >
 
 
-      						<div >
+                    <div  role="main" method="POST" action="affichageReclamation.php">
 
-      								<table class="table table-striped table-bordered">
-      									<thead>
-      										<tr>
-      											<th>Nom</th>
-      											<th>Prénom</th>
-      											<th>Adresse mail</th>
-      											<th>Téléphone</th>
-      											<th>Type</th>
-                            <th>Cause</th>
-                            <th>Etat</th>
-      											<th>Action</th>
+                                    <div >
+                                    </div>
+                                    Supprimer cette réservation
+                                                      <div >
+                                    										<div class="span10 offset1">
 
-      										</tr>
-      									</thead>
-      									<tbody>
-      									<?php
-      									 foreach ($listeReclamations as $row) {
-      														echo '<tr>';
-      														echo '<td width="10%">'. $row['nom'] . '</td>';
-      														echo '<td width="10%">'. $row['prenom'] . '</td>';
-                                  echo '<td width="10%">'. $row['mail'] . '</td>';
-      														echo '<td width="10%">'. $row['telephone'] . '</td>';
-      														echo '<td width="10%">'. $row['type'] . '</td>';
-      														echo '<td width="10%">'. $row['cause'] . '</td>';
-                                  echo '<td width="10%">'. $row['etat'] . '</td>';
-      														echo '<td width="30%">';
-
-      																							 echo '<a  href="modifierReclamation.php?id='.$row['id'].'">Modifier</a>';
-      																			echo ' ';
-      																			echo '<a href="suppressionReclamation.php?id='.$row['id'].'">Annuler</a>';
-      															 echo '</td>';
-      																	echo '</tr>';
-      									 }
-      									?>
-      									</tbody>
-      						</table>
-      						</div>
-
-      	</div>
-
-      </fieldset>
+                                    												<form class="form-horizontal" action="suppressionReservation.php" method="post">
+                                    													<input type="hidden" name="id" value="<?php echo $_GET['id'];;?>"/>
+                                    													<p class="alert alert-error">Are you sure to delete ?</p>
+                                    													<div class="form-actions">
+                                    															<button type="submit" >Yes</button>
+                                    															<a  href="affichageReservation.php">No</a>
+                                    														</div>
+                                    												</form>
+                                    										</div>
+                                                  </div>
+                                      </div>
+                  </fieldset>
                   <!-- Tag Icon -->
                   <div class="blog-tag-icon"> <i class="fa fa-pencil"></i> </div>
                   <span class="tags">CONSEILS ET DÉMONSTRATION</span> <a href="#." class="tittle-post font-playfair">OMBRES À PAUPIÉRES FASHION MAKEUP</a>

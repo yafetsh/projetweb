@@ -14,6 +14,8 @@ if ( !empty($_POST)) {
     // keep track validation errors
     // keep track post values
     $etat = $_POST['etat'];
+    $mail = $_POST['mail'];
+
 
     // validate input
     $valid = true;
@@ -297,6 +299,7 @@ if ( !empty($_POST)) {
 												<button type="submit" class="btn btn-success">Yes</button>
 												<a class="btn" href="reclamationAdmin.php">No</a>
 											</div>
+
 									</form>
 							</div>
                 </div>
