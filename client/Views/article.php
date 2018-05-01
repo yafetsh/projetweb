@@ -1,7 +1,8 @@
 <?php 
 
-$bdd = new PDO('mysql:host=127.0.0.1;dbname=espace_membre', 'root', '');
-   
+include "../config.php";
+$bdd = config::getConnexion();
+
    if (isset($_GET['id']) AND !empty($_GET['id'])) {
     $get_id = htmlspecialchars($_GET['id']);
     $article = $bdd->prepare('SELECT * FROM articles WHERE id = ?');
@@ -317,11 +318,11 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=espace_membre', 'root', '');
   <!--======= SUB BANNER =========-->
   <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
     <div class="container">
-      <h4>LIVE CHAT</h4>
+      <h4>ESPACE CONSEIL</h4>
       <!-- Breadcrumb -->
       <ol class="breadcrumb">
         <li><a href="#">ACCEUIL</a></li>
-        <li class="active">CHAT</li>
+        <li class="active">ESPACE CONSEIL</li>
       </ol>
     </div>
   </section>

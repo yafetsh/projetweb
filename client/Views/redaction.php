@@ -1,5 +1,8 @@
 <?php 
-$bdd = new PDO('mysql:host=127.0.0.1;dbname=espace_membre', 'root', '');
+
+include "../config.php";
+$bdd = config::getConnexion();
+
 if (isset($_POST['article_titre'],$_POST['article_contenu'])) {
   if (!empty($_POST['article_titre']) AND $_POST['article_titre']) {
       
@@ -24,7 +27,7 @@ if (isset($_POST['article_titre'],$_POST['article_contenu'])) {
      }
     //miniature
      $message = "votre article a eté bien posté !";
-
+     header('Location: forum.php');
   }else{
      $message = " veuillez remplir tout les champs !";
   }
@@ -331,11 +334,11 @@ if (isset($_POST['article_titre'],$_POST['article_contenu'])) {
   <!--======= SUB BANNER =========-->
   <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
     <div class="container">
-      <h4>LIVE CHAT</h4>
+      <h4>RÉDACTION ARTICLES</h4>
       <!-- Breadcrumb -->
       <ol class="breadcrumb">
         <li><a href="#">ACCEUIL</a></li>
-        <li class="active">CHAT</li>
+        <li class="active">RÉDIGER ARTICLE</li>
       </ol>
     </div>
   </section>
