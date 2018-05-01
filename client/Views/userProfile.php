@@ -464,7 +464,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
               <ul class="cate">
                 <li><a href="edit.php">EDITER MON COMPTE</a></li>
                 <li><a href="#."> CONSULTER PANIER</a></li>
-                <li><a href="#."> CONSULTER LIVRAISON</a></li>
+                <li><a href="livraisonclient.php" style="text-transform:uppercase"> CONSULTER LIVRAISON</a></li>
                 <li><a href="affichageReclamation.php" style="text-transform:uppercase"> CONSULTER mes réclamations</a></li>
                 <li><a href="#." style="text-transform:uppercase"> CONSULTER mes réservations</a></li>
                 <li><a href="#.">MESSAGERIE</a></li>

@@ -97,6 +97,9 @@ session_start();
             <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links">PANIER</a>
             <a href="#" class="w3-bar-item w3-button w3-border-right"class="top-links">DÉCONNEXION</a>
            </div>
+            <div style="float: left">
+                <a href="userprofile.php" class="w3-bar-item w3-button w3-border-right" class="top-links">Retour</a>
+            </div>
           </div>
 
             <!-- Logo -->

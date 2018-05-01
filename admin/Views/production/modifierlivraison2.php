@@ -387,38 +387,3 @@
     <script src="../build/js/custom.min.js"></script>
   </body>
 </html>
-<script >
-function myFunction() {
-    if (document.getElementById("mySelect").value) = "Effectuée"
-{
-<?php
-
-  // Authorisation details.
-  $username = /*$_POST['username']*/"chrifachetoui1998@gmail.com";
-  $hash = /*$_POST['hash']*/"5ed881b2a328375632f1b9d7cb3066aec7723f242956d3aa84f42a39ed99f7ae";
-
-  // Config variables. Consult http://api.txtlocal.com/docs for more info.
-  $test = "0";
-
-  // Data for text message. This is the text message data.
-  $sender = /*$_POST['sender'];*/"Fashion MakeUp"; // This is who the message appears to be from.
-  $numbers = /*$_POST['num']*/ "21651767974"; // A single number or a comma-seperated list of numbers
-  $message = /*$_POST['mess']*/"Votre commande a été bien recue";
-  // 612 chars or less
-  // A single number or a comma-seperated list of numbers
-  $message = urlencode($message);
-  $data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
-  $ch = curl_init('http://api.txtlocal.com/send/?');
-  curl_setopt($ch, CURLOPT_POST, true);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-  $result = curl_exec($ch); // This is the result from the API
-  curl_close($ch);
-  echo($result);
-  
-?>
-
-}
-}
- 
-</script>
