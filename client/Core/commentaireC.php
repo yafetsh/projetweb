@@ -25,6 +25,13 @@
 			return $liste;
 		}
 
+		function afficher1(){
+			$db = config::getConnexion();
+			$sql = "SELECT * FROM commentaire";
+			$liste = $db->query($sql);
+			return $liste;
+		}
+
 		function recuperer($id_membre){
 			$db = config::getConnexion();
 			$sql = "SELECT pseudo FROM membre WHERE id = $id_membre";

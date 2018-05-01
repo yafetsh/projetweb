@@ -103,7 +103,7 @@
                     <div class="container" style="visibility: initial;">
                         <nav>
                             <ul id="ownmenu" class="ownmenu">
-                                <li class="active"><a href="index.html">ACCUEIL</a>
+                                <li class="active"><a href="finalindex.php">ACCUEIL</a>
                                 </li>
                                 <li><a href="Produit1.php">PRODUITS</a>
                                     <!--======= MEGA MENU =========-->
@@ -250,12 +250,16 @@
                                         $l = $cC->afficher();
                                         foreach ($l as $k) {
                                     ?>
-                                            <li><a href="#."><?php echo $k['nom']; ?> <span>
+                                            <form method="GET" action="produit_categorie.php">
+                                                <li><input type="submit" name="f" value="<?php echo $k['nom']; ?> " style="border: none; background-color: white;"><span>
+                                                <input type="text" name="ref_sc" value="<?php echo $k['reference']; ?>" hidden>
                                                 <?php
                                                     $pC = new produitC();
                                                     $compteur = $pC->compter($k['reference']);
                                                   ?>
-                                            </span></a></li>
+                                                </span></li>
+                                            </form> 
+                                            
                                     <?php  
                                         }
                                       ?>
