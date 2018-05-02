@@ -137,7 +137,7 @@ section {
 	background: rgba(49,49,49,0.7);
 }
 .boxedcontainer {
-	max-width: 40px;
+	max-width: 1140px;
 	margin: auto;
 	padding: 0px;
 }
@@ -165,18 +165,6 @@ section {
 .btn-small {
 	font-size: 10px;
 }
-.typerec{
-	box-shadow: none;
-	border: 1px solid #f7f7f7;
-	border-radius: 0px;
-	width: 200px;
-	height:40px;
-	align : right ;
-}
-.typerec:focus {
-	border: none;
-	box-shadow: none;
-}
 .btn-dark {
 	color: #272727;
 	border-color: #272727;
@@ -195,13 +183,6 @@ section {
 	background: none;
 	color: #fff;
 	border: 1px solid #fff;
-}
-.form-reclamation
-{
-	box-shadow: none;
-	border: 1px solid #f7f7f7;
-	border-radius: 0px;
-	height: 20px;
 }
 .form-control {
 	box-shadow: none;
@@ -1240,7 +1221,7 @@ header .ownmenu .look-book .media-body a {
 .popurlar_product .items-in {
 	position: relative;
 	overflow: hidden;
-	margin-top: 0px;
+	margin-top: 40px;
 }
 .popurlar_product .over-item {
 	position: absolute;
@@ -1708,38 +1689,38 @@ header .ownmenu .look-book .media-body a {
     Hot Tags
 ===========================================*/
 .hot-tag {
-	height: 35px;
-	width: 35px;
+	height: 58px;
+	width: 58px;
 	float: right;
 	position: absolute;
 	background: #af5875;
-	line-height: 25px;
+	line-height: 58px;
 	text-align: center;
 	color: #fff;
 	font-size: 11px;
 	font-family: 'Montserrat', sans-serif;
 	z-index: 999;
-	right: 0px;
-	top: 0px;
+	right: 20px;
+	top: 20px;
 	border-radius: 50%;
 }
 /*===========================================
     New Tags
 ===========================================*/
 .new-tag {
-	height: 35px;
-	width: 35px;
+	height: 58px;
+	width: 58px;
 	float: right;
 	position: absolute;
 	background: #ababab;
-	line-height: 25px;
+	line-height: 58px;
 	text-align: center;
 	color: #fff;
 	font-size: 11px;
 	font-family: 'Montserrat', sans-serif;
 	z-index: 999;
-	right: 0px;
-	top: 0px;
+	right: 20px;
+	top: 20px;
 	border-radius: 50%;
 }
 /*===========================================
