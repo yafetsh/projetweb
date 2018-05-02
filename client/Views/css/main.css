@@ -28,7 +28,7 @@
 }
 .ball {
 	border-radius: 50%;
-	background: #af5875;
+	background: black;
 	width: 10px;
 	height: 10px;
 	position: absolute;
@@ -244,6 +244,7 @@ header nav .ownmenu ul.dropdown .indicator {
 	transition: color 0.3s linear;
 }
 .ownmenu li > .megamenu a:hover {
+
 	color: #dedede;
 }
 /* megamenu images */
@@ -1224,6 +1225,8 @@ html[xmlns] .flexslider .slides {
 	width: auto !important;
 }
 .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+}
+.bootstrap-select:not([class*="col-"]):not([class*="form-réclamation"]):not(.input-group-btn) {
 }
 .bootstrap-select .btn:focus {
 	outline: thin dotted #333333 !important;
