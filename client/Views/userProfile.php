@@ -466,7 +466,7 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
                 <li><a href="#."> CONSULTER PANIER</a></li>
                 <li><a href="livraisonclient.php" style="text-transform:uppercase"> CONSULTER LIVRAISON</a></li>
                 <li><a href="affichageReclamation.php" style="text-transform:uppercase"> CONSULTER mes réclamations</a></li>
-                <li><a href="#." style="text-transform:uppercase"> CONSULTER mes réservations</a></li>
+                <li><a href="affichageReservation.php" style="text-transform:uppercase"> CONSULTER mes réservations</a></li>
                 <li><a href="#.">MESSAGERIE</a></li>
                 <li><a href="chat.php">FORUM</a></li>
                 <li><a href="disconnect.php">DÉCONNEXION</a></li>
