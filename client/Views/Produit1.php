@@ -103,7 +103,7 @@
                     <div class="container" style="visibility: initial;">
                         <nav>
                             <ul id="ownmenu" class="ownmenu">
-                                <li class="active"><a href="finalindex.php">ACCUEIL</a>
+                                <li class="active"><a href="index.html">ACCUEIL</a>
                                 </li>
                                 <li><a href="Produit1.php">PRODUITS</a>
                                     <!--======= MEGA MENU =========-->
@@ -250,7 +250,7 @@
                                         $l = $cC->afficher();
                                         foreach ($l as $k) {
                                     ?>
-                                    		<form method="GET" action="produit_categorie.php">
+                                    		<form method="POST" action="produit_categorie.php">
                                     			<li><input type="submit" name="f" value="<?php echo $k['nom']; ?> " style="border: none; background-color: white;"><span>
                                             	<input type="text" name="ref_sc" value="<?php echo $k['reference']; ?>" hidden>
                                                 <?php
@@ -302,75 +302,72 @@
                                 <h1 style="font-weight: normal; color: #333333; font-family: 'Montserrat', sans-serif; font-size: 24px ">NOUVEAU PRODUITS</h1>
                                 <ul class="row">
                                     <!--NOUVEAU-->
+                                    <?php
+                                        $i=0;
+                                        $produitC = new produitC();
+                                        $datePs = $produitC->recupererprodord();
+                                        foreach ($datePs as $key) {
+                                            $imagesC = new imageC();
+                                            $listeimage = $imagesC->recupererimage($key['reference']);
 
+                                        ?>
 
-                                            <?php 
-
-                                                $i=0;
-                                                $produitC = new produitC();
-                                                $datePs = $produitC->recupererprodord();
-                                                foreach ($datePs as $key) {
-                                                $imagesC = new imageC();
-                                                $listeimage = $imagesC->recupererimage($key['reference']);
-                                            ?>
-
-                                            <li class="col-sm-4 animate fadeIn" data-wow-delay="0.5s">
-                                                <div class="items-in" >
-                                                    
-                                                    <!-- Image -->
-                                                    <?php
+                                        <!-- New Products -->
+                                        <li class="col-sm-4 animate fadeIn" data-wow-delay="0.8s">
+                                            <div class="items-in" >
+                                                <!--  Tags  -->
+                                                <div class="new-tag"> NEW </div>
+                                                <!-- Image -->
+                                                <?php 
+                                                    foreach ($listeimage as $row) {
+                                                ?>
+                                                     <img src="../../admin/Views/production/images/<?php echo $row['chemin'] ;?>" alt="" style="max-height: 350px;" >
+                                                 <?php 
+                                                    break; 
+                                                   }
+                                                ?>
+                                                
+                                                
+                                                <!-- Hover Details -->
+                                                <div class="over-item">
+                                                    <ul class="animated fadeIn">
+                                                        <?php 
                                                         foreach ($listeimage as $row) {
-                                                    ?>
-                                                        <!--  Tags  -->
-                                                        <div style="min-height: 350px">
-                                                            <img src="../../admin/Views/production/images/<?php echo $row['chemin'] ;?>" alt="" style="max-height: 350px;">
-                                                        </div>
-                                                        
-                                                    <?php
-                                                        break;
-                                                        }
-
-                                                      ?>
-                                                    
-                                                    <!-- Hover Details -->
-                                                    <div class="over-item">
-                                                        <ul class="animated fadeIn">
-                                                        <?php
-                                                        foreach ($listeimage as $r) {
                                                         ?>
-                                                            <li> <a href="../../admin/Views/production/images/<?php echo $r['chemin'] ;?>" data-lighter><i class="ion-search"></i></a></li>
-                                                        <?php
-                                                        break;
-                                                         }
-
-                                                      ?>
-                                                            
-                                                            <li> <a datalighter><i class="fa fa-heart-o"></i></a></li>
-                                                            <li><a href="#." class="btn-dark"><i class="fa fa-shopping-cart"></i>></a></li><br>
-                                                            <!-- Rating Stars -->
-                                                            <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- Item Name -->
-                                                    <form id="myform" method="POST" action="details_produit.php">
-                                                    <input type="text" name="reference_p" value="<?php echo $key['reference'];?>" hidden>
-                                                    <div class="details-sec">
-                                                        <input type="submit" value="<?php echo $key['nom']; ?>" style="border: none; background-color: white; font-weight: solid;" class="font-montserrat"><hr>
-                                                        <span class="font-montserrat"><?php echo $key['prix']."DT" ?></span>
-                                                    </div>
+                                                            <li> <a href="../../admin/Views/production/images/<?php echo $row['chemin'] ;?>" data-lighter ><i class="ion-search"></i></a></li>
+                                                         <?php 
+                                                            break; 
+                                                           }
+                                                        ?>
+                                                        <li><a datalighter><i class="fa fa-heart-o"></i></a></li>
+                                                        <li><a href="#." class="btn-dark" ><i class="fa fa-shopping-cart"></i>></a></li><br>
+                                                        <!-- Rating Stars -->
+                                                        <li class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <!-- Item Name -->
+                                                <form id="myform" method="POST" action="details_produit.php">
+                                                	<input type="text" name="reference_p" value="<?php echo $key['reference'];?>" hidden>
+                                                	<div class="details-sec">
+                                                		<input type="submit" value="<?php echo $key['nom']; ?>" style="border: none; background-color: white; font-weight: solid;" class="font-montserrat"><hr>
+                                                		<span class="font-montserrat"><?php echo $key['prix']."DT" ?></span>
+                                                	</div>
                                                 </form>
                                                 
                                             </div>
                                         </li>
-                                            <?php
+
+
+                                    <?php
                                             $i++;
                                             if($i==3){
                                                 break;
                                             }
-
                                         }
                                       ?>
+                                    
 
+                                   
                             </div>
                             <div class="popurlar_product">
                                 <h1 style="font-weight: normal; color: #333333; font-family: 'Montserrat', sans-serif; font-size: 24px ">HOT</h1>

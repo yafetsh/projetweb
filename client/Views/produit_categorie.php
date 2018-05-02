@@ -109,7 +109,7 @@
                     <div class="container" style="visibility: initial;">
                         <nav>
                             <ul id="ownmenu" class="ownmenu">
-                                <li class="active"><a href="finalindex.php">ACCUEIL</a>
+                                <li class="active"><a href="index1.php">ACCUEIL</a>
                                 </li>
                                 <li><a href="Produit1.php">PRODUITS</a>
                                     <!--======= MEGA MENU =========-->
