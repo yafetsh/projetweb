@@ -20,7 +20,7 @@ class PanierCore
 
         foreach ($_SESSION['panier'] as $produit_id => $quantite_total) {
             $quan=$this->rechercheprod($produit_id);
-            if (isset($_POST['panier']['quantite'][$produit_id]) && $quan[0]->quantite_total >= $_POST['panier']['quantite'][$produit_id] && $_POST['panier']['quantite'][$produit_id]>=0) {
+            if (isset($_POST['panier']['quantite'][$produit_id]) && $quan[0]->quantite_total >= $_POST['panier']['quantite'][$produit_id] && $_POST['panier']['quantite'][$produit_id]>0) {
 
                 $pries=$this->prixprod($produit_id);
 if (empty($_SESSION['id']))
@@ -335,7 +335,7 @@ $total+=$row->prix * $_SESSION['panier'][$row->reference];
     }
     function verifcode($p)
     {
-        $sql = "select * from promotion where code_promo=:code";
+        $sql = "select * from promotion where code_promo=:code AND etat=0";
 
         $db = config::getConnexion();
 
@@ -346,6 +346,21 @@ $total+=$row->prix * $_SESSION['panier'][$row->reference];
             $req->bindvalue(':code', $p);
             $req->execute();
             return $req->fetchAll(PDO::FETCH_OBJ);
+        }
+        catch (Exception $e)
+        {
+            echo 'ERREUR' . $e->getMessage();
+        }
+    }
+    function modifieretat($p)
+    {
+        $c = config::getConnexion();
+        $req = "UPDATE promotion SET etat=1 WHERE code_promo=:code";
+        try {
+            $req = $c->prepare($req);
+
+            $req->bindvalue(':code', $p);
+            $req->execute();
         }
         catch (Exception $e)
         {

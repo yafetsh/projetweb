@@ -62,8 +62,12 @@ $p=$Panier->rechercheidprod($_SESSION['id']);
             <div class="container">
                 <div class="top-links">
                     <ul>
-                        <li><a href="#.">MOM COMPTE</a></li>
-                        <li><a href="#.">MES FAVORIS</a></li>
+                        <?php if (isset($_SESSION['id'])){ ?>
+                            <li><a href="#.">Bonjour <?php echo $_SESSION['pseudo']; ?></a></li>
+                            <li><a href="disconnect.php">Se deconnecter</a></li>
+                        <?php } else { ?>
+                            <li><a href="connexion.php">Se connecter</a></li>
+                        <?php } ?>
                     </ul>
                     <!-- Social Icons -->
                     <ul class="social_icons">
@@ -145,9 +149,14 @@ $p=$Panier->rechercheidprod($_SESSION['id']);
                             </li>
 
                             <!--======= Shopping Cart =========-->
-                            <li class="shop-cart"><a href="#."><i class="fa fa-shopping-cart"></i></a> <span class="numb"><?php echo $Panier->count();?></span>
+                            <?php if (empty($_SESSION['id'])){?>
+                            <li class="shop-cart"><a href="Panier.php"><i class="fa fa-shopping-cart"></i></a> <span class="numb"><?php echo $Panier->count();?></span>
+                                <?php } else { ?>
+                            <li class="shop-cart"><a href="Panier.php"><i class="fa fa-shopping-cart"></i></a> <span class="numb"><?php echo $Panier->notif();?></span>
+                                <?php } ?>
                                 <ul class="dropdown">
                                     <?php
+
                                     $ids=array_keys($_SESSION['panier']);
                                     if(empty($ids))
                                     {
@@ -162,12 +171,12 @@ $p=$Panier->rechercheidprod($_SESSION['id']);
                                                 <div class="media">
                                                     <div class="media-left">
                                                         <div class="cart-img"><a href="#"> <img
-                                                                    class="media-object img-responsive"
-                                                                    src="images/new-item-<?php echo $row->reference; ?>.jpg"
-                                                                    alt="..."> </a></div>
+                                                                        class="media-object img-responsive"
+                                                                        src="images/new-item-<?php echo $row->reference; ?>.jpg"
+                                                                        alt="..."> </a></div>
                                                     </div>
                                                     <div class="media-body">
-                                                        <h6 class="media-heading"><?php echo $row->description; ?></h6>
+                                                        <h6 class="media-heading"><?php echo $row->nom; ?></h6>
                                                         <span class="price"><?php echo number_format($row->prix, 2, ',', ''); ?>
                                                             TND </span> <span class="qty">Quantité: <?php echo $_SESSION['panier'][$row->reference]; ?></span></div>
                                                 </div>
@@ -181,8 +190,8 @@ $p=$Panier->rechercheidprod($_SESSION['id']);
                                     </li>
                                     <li class="no-padding no-border">
                                         <div class="row">
-                                            <div class="col-xs-6"> <a href="#." class="btn btn-small">ANNULER</a></div>
-                                            <div class="col-xs-6 "> <a href="#." class="btn btn-1 btn-small">VALIDER</a></div>
+
+                                            <div class="col-xs-6 "> <a href="connexioncommande.php" class="btn btn-1 btn-small">VALIDER</a></div>
                                         </div>
                                     </li>
                                 </ul>
@@ -213,14 +222,121 @@ $p=$Panier->rechercheidprod($_SESSION['id']);
     <div class="content">
 
         <!--======= SUB BANNER =========-->
-
-        <section class="sub-banner animate fadeInUp" data-wow-delay="0.4s">
-
+        <section class="sub-banner">
             <div class="container">
-<?php
+                <h4>Commandes </h4>
+                <!-- Breadcrumb -->
 
-echo "</br>";
-?>
+            </div>
+        </section>
+
+        <!-- Blog -->
+        <section class="section-p-30px blog-page">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Left Side Bar -->
+                    <div class="col-sm-3 animate fadeInLeft" data-wow-delay="0.4s">
+                        <div class="side-bar">
+
+                            <!--  SEARCH -->
+                            <div class="search">
+                                <form>
+                                    <input type="text" placeholder="SEARCH FAQ">
+                                    <button type="submit"> <i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+
+                            <!-- HEADING -->
+                            <div class="heading">
+                                <h4>MON COMPTE</h4>
+                            </div>
+
+                            <!-- CATEGORIES -->
+                            <ul class="cate">
+                                <li><a href="edit.php">EDITER MON COMPTE</a></li>
+                                <li><a href="#."> CONSULTER Commandes</a></li>
+                                <li><a href="livraisonclient.php" style="text-transform:uppercase"> CONSULTER LIVRAISON</a></li>
+                                <li><a href="affichageReclamation.php" style="text-transform:uppercase"> CONSULTER mes réclamations</a></li>
+                                <li><a href="affichageReservation.php" style="text-transform:uppercase"> CONSULTER mes réservations</a></li>
+                                <li><a href="#.">MESSAGERIE</a></li>
+                                <li><a href="chat.php">FORUM</a></li>
+                                <li><a href="disconnect.php">DÉCONNEXION</a></li>
+
+                            </ul>
+                            <ul>
+
+                            </ul>
+
+                            <!-- HEADING -->
+                            <div class="heading">
+                                <h4>DERNIERS ACHATS</h4>
+                            </div>
+                            <!-- CATEGORIES -->
+                            <ul class="cate latest-post">
+
+                                <!-- Post Small -->
+                                <li>
+                                    <div class="media">
+                                        <div class="media-left"> <a href="#."><img src="images/post-left-1.jpg" alt=""></a></div>
+                                        <div class="media-body"> <a href="#.">Pretty in pink</a>
+                                            <p>86 View - 03 Comment</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- Post Small -->
+                                <li>
+                                    <div class="media">
+                                        <div class="media-left"> <a href="#."><img src="images/post-left-2.jpg" alt=""></a></div>
+                                        <div class="media-body"> <a href="#.">Casual in grey</a>
+                                            <p>86 View - 03 Comment</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- Post Small -->
+                                <li>
+                                    <div class="media">
+                                        <div class="media-left"> <a href="#."><img src="images/post-left-3.jpg" alt=""></a></div>
+                                        <div class="media-body"> <a href="#.">BANDAGE SET</a>
+                                            <p>86 View - 03 Comment</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <!-- HEADING -->
+                            <div class="heading">
+                                <h4>ARCHIVE</h4>
+                            </div>
+                            <!-- CATEGORIES -->
+                            <ul class="cate">
+                                <li><a href="#.">March 2015
+                                        Jan 2015</a></li>
+                                <li><a href="#."> December 2014</a></li>
+                                <li><a href="#."> November 2014</a></li>
+                                <li><a href="#."> July 2014</a></li>
+                            </ul>
+
+                            <!-- TAGS -->
+                            <h4 class="margin-t-40">PRODUIT TAGS</h4>
+                            <ul class="tags">
+                                <li><a href="#.">FASHION</a></li>
+                                <li><a href="#.">BAGS</a></li>
+                                <li><a href="#.">TABLET</a></li>
+                                <li><a href="#.">ELECTRONIC</a></li>
+                                <li><a href="#.">BEAUTY</a></li>
+                                <li><a href="#.">TRtENDING</a></li>
+                                <li><a href="#.">SHOES</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Right Bar -->
+                    <div class="col-sm-9 animate fadeInRight" data-wow-delay="0.4s">
+                        <!--  Blog Posts -->
+                        <div class="blog-posts">
+
+<br>
+                <h5>Commandes en cours</h5>
 <table border="1">
 <tr>
 <td>
@@ -274,6 +390,57 @@ foreach ($liste as $row) {
  }
     ?>
 </table>
+
+                            <h5>Historiques</h5>
+                            <table border="1">
+                                <tr>
+                                    <td>
+                                        Id Commande
+                                    </td>
+                                    <td>
+                                        Quantite
+                                    </td>
+                                    <td>
+                                        Id Panier
+                                    </td>
+
+                                </tr>
+                                <?php
+                                foreach ($p as $pro)
+                                {
+                                    $liste=$commande->commandepayer($pro->id);
+                                    foreach ($liste as $row) {
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <?php
+                                                echo $row->id;
+
+                                                ?>
+
+                                            </td>
+                                            <td>
+                                                <?php
+                                                echo $row->quantite;
+
+                                                ?>
+
+                                            </td>
+                                            <td>
+                                                <?php
+                                                echo $row->idpanier;
+
+                                                ?>
+                                            </td>
+
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </table>
+                        </div>
+                    </div>
             </div>
         </section>
     </div>

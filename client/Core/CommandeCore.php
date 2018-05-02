@@ -132,6 +132,20 @@ class CommandeCore
             die('Erreur : ' . $c->getMessage());
         }
     }
+    function commandepayer($p)
+    {
+        $c = config::getConnexion();
+        $sql = "SELECT * FROM commande where etat=1 and idpanier=:id";
+        try {
+            $req = $c->prepare($sql);
+
+            $req->bindValue(':id', $p);
+            $req->execute();
+            return $req->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $c) {
+            die('Erreur : ' . $c->getMessage());
+        }
+    }
 
     function modifieretat($p)
     {

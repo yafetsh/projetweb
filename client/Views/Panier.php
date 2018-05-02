@@ -3,10 +3,29 @@ require '../Core/PanierCore.php' ;
 require '../Entities/panier.php';
 $Panier=new PanierCore();
 
-if (isset($_GET['code']))
-{
+if (isset($_GET['code'])) {
+    $Promo = $Panier->verifcode($_GET['code']);
 
 
+        foreach ($_SESSION['panier'] as $produit_id => $prix) {
+            if (!empty($Promo)) {
+                $Panier->modifieretat($_GET['code']);
+                if (empty($_SESSION['promo']))
+                    $_SESSION['panier'][$produit_id] = $_SESSION['panier'][$produit_id] - ($_SESSION['panier'][$produit_id]*($Promo[0]->promotion/100));
+                else
+                    $_SESSION['panier'][$produit_id] = ($_SESSION['panier'][$produit_id] + ($_SESSION['panier'][$produit_id]*($_SESSION['promo']/100))) - ($_SESSION['panier'][$produit_id]*(($Promo[0]->promotion + $_SESSION['promo'])/100));
+
+                $_SESSION['promo'] = $Promo[0]->promotion;
+                $paniertable=new Panier (1,$_POST['panier']['quantite'][$produit_id],$_SESSION['panier'][$produit_id],$_SESSION['id'],$produit_id);
+                $Panier->ModifierPanier($paniertable);
+            }
+            else
+                {
+                    ?>
+                <script>alert('code invalide ou utiliser')</script>
+                <?php
+            }
+        }
 }
 ?>
 <!DOCTYPE html>
